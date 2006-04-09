@@ -39,7 +39,7 @@ MainWindow::MainWindow(QWidget* parent, Qt::WFlags f)
 
     {
         QPalette pal = palette();
-	    pal.setBrush( backgroundRole(), QBrush(QColor("#888")) );
+        pal.setBrush( backgroundRole(), QBrush(QColor("#888")) );
         setPalette( pal );
     }
     

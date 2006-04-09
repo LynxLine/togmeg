@@ -10,6 +10,7 @@ public:
     {;}
 
     TimeoutPanel * self;
+    QProgressBar * progressBar;
 };
 
 /*!
@@ -42,6 +43,16 @@ TimeoutPanel::TimeoutPanel(QWidget * parent)
         setAutoFillBackground(true);
         setPalette( pal );
     }
+
+    setContentsMargins(h/2, h/4, h/2, h/4);
+
+    d->progressBar = new QProgressBar(this);
+    d->progressBar->setFixedHeight((h *40) /100);
+    
+    QHBoxLayout * hbox = new QHBoxLayout;
+    hbox->addWidget(d->progressBar);
+    hbox->setMargin(0);
+    setLayout(hbox);
 }
 
 /*!
