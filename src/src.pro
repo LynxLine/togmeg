@@ -22,8 +22,12 @@ precompile_header {
 QT += xml
 QT += network
 
+HEADERS += \
+    mainwindow.h \
+
 SOURCES += \
     main.cpp \
+    mainwindow.cpp \
 
 RESOURCES += images.qrc
 
