@@ -25,6 +25,7 @@ QT += network
 HEADERS += \
     boxwindow.h \
     mainwindow.h \
+    movingwidget.h \
     answerwindow.h \
     questionwindow.h \
 
@@ -32,6 +33,7 @@ SOURCES += \
     main.cpp \
     boxwindow.cpp \
     mainwindow.cpp \
+    movingwidget.cpp \
     answerwindow.cpp \
     questionwindow.cpp \
 

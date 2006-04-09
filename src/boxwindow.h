@@ -4,30 +4,21 @@
 #ifndef BOXWINDOW_H
 #define BOXWINDOW_H
 
-#include <QWidget>
+#include "movingwidget.h"
 
 /*!
  \class BoxWindow
  */
-class BoxWindow : public QWidget
+class BoxWindow : public MovingWidget
 {
 Q_OBJECT
 public:
-    enum Style { Question = 0, Answer };
+    //enum Style { Question = 0, Answer };
     BoxWindow(QWidget * parent = 0);
     ~BoxWindow();
     
-    void setMovingEffect(QPoint from, QPoint to);
-    
-public slots:
-    void moveForward();
-    void moveBackward();
-    
 protected:
     virtual void paintEvent(QPaintEvent * pe);
-
-private slots:
-    void moving();
     
 private:
     class Private;
