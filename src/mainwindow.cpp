@@ -5,12 +5,17 @@
 #include <QtCore>
 
 #include "mainwindow.h"
+#include "answerwindow.h"
+#include "questionwindow.h"
 
 class MainWindow::Private
 {
 public:
     Private(MainWindow * mw) {self=mw;}
     static MainWindow * self;
+
+    AnswerWindow * answerWindow;
+    QuestionWindow * questionWindow;
 };
 
 MainWindow * MainWindow::Private::self = 0L;
@@ -30,9 +35,18 @@ MainWindow::MainWindow(QWidget* parent, Qt::WFlags f)
     QCoreApplication::setOrganizationDomain("uael.com.ua");
     QCoreApplication::setApplicationName("aLesson");
 
+    {
+        QPalette pal = palette();
+	    pal.setBrush( backgroundRole(), QBrush(QColor("#888")) );
+        setPalette( pal );
+    }
+    
 	statusBar()->hide();
     menuBar()->hide();
 
+    d->answerWindow = new AnswerWindow(this);
+    d->questionWindow = new QuestionWindow(this);
+    
     showFullScreen();
 }
 
@@ -51,5 +65,12 @@ MainWindow::~MainWindow()
 MainWindow * MainWindow::self()
 {
     return MainWindow::Private::self;
+}
+
+void MainWindow::showEvent(QShowEvent * se)
+{
+    QMainWindow::showEvent(se);
+    QTimer::singleShot(100, d->answerWindow, SLOT(show()));
+    QTimer::singleShot(100, d->questionWindow, SLOT(show()));
 }
 

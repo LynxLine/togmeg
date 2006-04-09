@@ -23,11 +23,17 @@ QT += xml
 QT += network
 
 HEADERS += \
+    boxwindow.h \
     mainwindow.h \
+    answerwindow.h \
+    questionwindow.h \
 
 SOURCES += \
     main.cpp \
+    boxwindow.cpp \
     mainwindow.cpp \
+    answerwindow.cpp \
+    questionwindow.cpp \
 
 RESOURCES += images.qrc
 

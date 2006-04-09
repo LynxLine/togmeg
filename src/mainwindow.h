@@ -25,6 +25,7 @@ private slots:
 private:
 
 protected:
+    virtual void showEvent(QShowEvent *);
 
 private:
     class Private;
