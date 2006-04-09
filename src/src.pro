@@ -26,6 +26,7 @@ HEADERS += \
     boxwindow.h \
     mainwindow.h \
     movingwidget.h \
+    timeoutpanel.h \
     answerwindow.h \
     questionwindow.h \
 
@@ -34,6 +35,7 @@ SOURCES += \
     boxwindow.cpp \
     mainwindow.cpp \
     movingwidget.cpp \
+    timeoutpanel.cpp \
     answerwindow.cpp \
     questionwindow.cpp \
 

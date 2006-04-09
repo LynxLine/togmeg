@@ -5,6 +5,7 @@
 #include <QtCore>
 
 #include "mainwindow.h"
+#include "timeoutpanel.h"
 #include "answerwindow.h"
 #include "questionwindow.h"
 
@@ -14,6 +15,7 @@ public:
     Private(MainWindow * mw) {self=mw;}
     static MainWindow * self;
 
+    TimeoutPanel * timeoutPanel;
     AnswerWindow * answerWindow;
     QuestionWindow * questionWindow;
 };
@@ -44,6 +46,7 @@ MainWindow::MainWindow(QWidget* parent, Qt::WFlags f)
 	statusBar()->hide();
     menuBar()->hide();
 
+    d->timeoutPanel = new TimeoutPanel(this);
     d->answerWindow = new AnswerWindow(this);
     d->questionWindow = new QuestionWindow(this);
     
@@ -70,6 +73,7 @@ MainWindow * MainWindow::self()
 void MainWindow::showEvent(QShowEvent * se)
 {
     QMainWindow::showEvent(se);
+    QTimer::singleShot(200, d->timeoutPanel, SLOT(showWindow()));
     QTimer::singleShot(100, d->answerWindow, SLOT(showWindow()));
     QTimer::singleShot(100, d->questionWindow, SLOT(showWindow()));
 }
@@ -78,6 +82,7 @@ void MainWindow::mousePressEvent(QMouseEvent * me)
 {
     QMainWindow::mousePressEvent(me);
     
+    QTimer::singleShot( 10, d->timeoutPanel, SLOT(hideWindow()));
     QTimer::singleShot(100, d->answerWindow, SLOT(hideWindow()));
     QTimer::singleShot(100, d->questionWindow, SLOT(hideWindow()));
     QTimer::singleShot(300, qApp, SLOT(quit()));

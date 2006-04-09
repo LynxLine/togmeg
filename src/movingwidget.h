@@ -16,6 +16,7 @@ public:
     MovingWidget(QWidget * parent = 0);
     ~MovingWidget();
 
+    void setMovingTime(int msecs);
     void setMovingEffect(QPoint from, QPoint to);
     
 public slots:

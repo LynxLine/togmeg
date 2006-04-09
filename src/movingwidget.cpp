@@ -3,12 +3,14 @@
 
 #include <QtGui>
 #include "movingwidget.h"
-#define SCROLL_MSECS 200
 
 class MovingWidget::Private {
 public:
     enum Moving { Showing, Hiding, Stop };
-    Private(MovingWidget * p):self(p) {;}
+    Private(MovingWidget * p)
+    :self(p),
+     movingMsecs(180)
+    {;}
 
     MovingWidget * self;
     
@@ -20,6 +22,7 @@ public:
     Moving moving;
     int movingPercent;
     QTime movingStartTime;
+    int movingMsecs;
 };
 
 /*!
@@ -37,6 +40,11 @@ MovingWidget::MovingWidget(QWidget * parent)
 MovingWidget::~MovingWidget()
 {
     delete d;
+}
+
+void MovingWidget::setMovingTime(int msecs)
+{
+    d->movingMsecs = msecs;
 }
 
 void MovingWidget::setMovingEffect(QPoint from, QPoint to)
@@ -69,7 +77,7 @@ void MovingWidget::moving()
     int y = this->y();
 
     int msecs = d->movingStartTime.msecsTo(QTime::currentTime());
-    d->movingPercent = msecs * 100 / SCROLL_MSECS; 
+    d->movingPercent = msecs * 100 / d->movingMsecs; 
     
     if ( d->movingPercent > 100) {
         if (d->moving == Private::Hiding)  {
