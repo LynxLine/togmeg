@@ -1,6 +1,16 @@
 <!DOCTYPE RCC><RCC version="1.0">
     <qresource>
         <file>images/alesson.ico</file>
+
+        <file>yellow-box/top.png</file>
+        <file>yellow-box/left.png</file>
+        <file>yellow-box/right.png</file>
+        <file>yellow-box/bottom.png</file>
+        <file>yellow-box/top-left.png</file>
+        <file>yellow-box/top-right.png</file>
+        <file>yellow-box/bottom-left.png</file>
+        <file>yellow-box/bottom-right.png</file>
+
     </qresource>
 </RCC>
 
