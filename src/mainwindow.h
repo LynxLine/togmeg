@@ -26,6 +26,7 @@ private:
 
 protected:
     virtual void showEvent(QShowEvent *);
+    virtual void mousePressEvent(QMouseEvent *);
 
 private:
     class Private;

@@ -70,7 +70,16 @@ MainWindow * MainWindow::self()
 void MainWindow::showEvent(QShowEvent * se)
 {
     QMainWindow::showEvent(se);
-    QTimer::singleShot(100, d->answerWindow, SLOT(show()));
-    QTimer::singleShot(100, d->questionWindow, SLOT(show()));
+    QTimer::singleShot(100, d->answerWindow, SLOT(showWindow()));
+    QTimer::singleShot(100, d->questionWindow, SLOT(showWindow()));
+}
+
+void MainWindow::mousePressEvent(QMouseEvent * me)
+{
+    QMainWindow::mousePressEvent(me);
+    
+    QTimer::singleShot(100, d->answerWindow, SLOT(hideWindow()));
+    QTimer::singleShot(100, d->questionWindow, SLOT(hideWindow()));
+    QTimer::singleShot(300, qApp, SLOT(quit()));
 }
 

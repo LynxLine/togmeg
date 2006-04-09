@@ -17,8 +17,17 @@ public:
     BoxWindow(QWidget * parent = 0);
     ~BoxWindow();
     
+    void setMovingEffect(QPoint from, QPoint to);
+    
+public slots:
+    void moveForward();
+    void moveBackward();
+    
 protected:
     virtual void paintEvent(QPaintEvent * pe);
+
+private slots:
+    void moving();
     
 private:
     class Private;

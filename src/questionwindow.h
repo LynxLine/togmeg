@@ -16,12 +16,10 @@ public:
     QuestionWindow(QWidget * parent = 0);
     ~QuestionWindow();
 
-protected:
-    virtual void showEvent(QShowEvent *);
+public slots:
+    void showWindow();
+    void hideWindow();
 
-private slots:
-    void moving();
-    
 private:
     class Private;
     Private * d;

@@ -3,10 +3,12 @@
 
 #include <QtGui>
 #include "boxwindow.h"
+#define SCROLL_MSECS 200
 
 class BoxWindow::Private {
 public:
-    Private():
+    enum Moving { Showing, Hiding, Stop };
+    Private(BoxWindow * p):
         pmTop        (":/images/yellow-box/top.png"),
         pmLeft       (":/images/yellow-box/left.png"),
         pmRight      (":/images/yellow-box/right.png"),
@@ -14,7 +16,8 @@ public:
         pmLeftTop    (":/images/yellow-box/top-left.png"),
         pmRightTop   (":/images/yellow-box/top-right.png"),
         pmLeftBottom (":/images/yellow-box/bottom-left.png"),
-        pmRightBottom(":/images/yellow-box/bottom-right.png")
+        pmRightBottom(":/images/yellow-box/bottom-right.png"),
+        self(p)
     {}
 
     QPixmap pmTop;
@@ -25,6 +28,19 @@ public:
     QPixmap pmRightTop;
     QPixmap pmLeftBottom;
     QPixmap pmRightBottom;
+
+    BoxWindow * self;
+    
+    int showX;
+    int showY;
+    int hideX;
+    int hideY;
+    
+    Moving moving;
+    int movingPercent;
+    QTime movingStartTime;
+    
+    void calculateSize();
 };
 
 /*!
@@ -33,7 +49,7 @@ public:
 BoxWindow::BoxWindow(QWidget * parent)
 :QWidget(parent)
 {
-    d = new Private;
+    d = new Private(this);
     
     setContentsMargins(d->pmLeftTop.width(),     d->pmLeftTop.height(), 
                        d->pmRightBottom.width(), d->pmRightBottom.height());
@@ -80,5 +96,63 @@ void BoxWindow::paintEvent(QPaintEvent * pe)
     p.end();
     
     QWidget::paintEvent(pe);
+}
+
+void BoxWindow::setMovingEffect(QPoint from, QPoint to)
+{
+    d->hideX = from.x();
+    d->hideY = from.y();
+    d->showX = to.x();
+    d->showY = to.y();
+}
+
+void BoxWindow::moveForward()
+{
+    d->movingPercent = 0;
+    d->moving = Private::Showing;
+    d->movingStartTime = QTime::currentTime();
+    QTimer::singleShot(0, this, SLOT(moving()));
+}
+
+void BoxWindow::moveBackward()
+{
+    d->movingPercent = 0;
+    d->moving = Private::Hiding;
+    d->movingStartTime = QTime::currentTime();
+    QTimer::singleShot(0, this, SLOT(moving()));
+}
+
+void BoxWindow::moving()
+{
+    int x = this->x();
+    int y = this->y();
+
+    int msecs = d->movingStartTime.msecsTo(QTime::currentTime());
+    d->movingPercent = msecs * 100 / SCROLL_MSECS; 
+    
+    if ( d->movingPercent > 100) {
+        if (d->moving == Private::Hiding)  {
+            x = d->hideX;
+            y = d->hideY;
+        }
+        if (d->moving == Private::Showing) {
+            x = d->showX;
+            y = d->showY;
+        }
+        d->moving = Private::Stop;
+    }
+    else {
+        if (d->moving == Private::Hiding)  {
+            x = d->hideX + ((d->showX - d->hideX) * (100 - d->movingPercent)) /100;
+            y = d->hideY + ((d->showY - d->hideY) * (100 - d->movingPercent)) /100;
+        }
+        if (d->moving == Private::Showing) {
+            y = d->hideX + ((d->showX - d->hideX) * d->movingPercent) /100;
+            y = d->hideY + ((d->showY - d->hideY) * d->movingPercent) /100;
+        }
+    }
+    
+    move( x, y);
+    if ( d->moving != Private::Stop) QTimer::singleShot(1, this, SLOT(moving()));
 }
 
