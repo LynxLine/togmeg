@@ -8,6 +8,7 @@
 
 #include "timeoutpanel.h"
 #include "answerwindow.h"
+#include "mistakewindow.h"
 #include "questionwindow.h"
 
 class StudyProcessor::Private {
@@ -23,6 +24,7 @@ public:
     StudyStorage * storage;
     StudyEntry * currentEntry;
 
+    bool stopWaiting;
     int timeoutMsecs;
     QTime progressTime;
 };
@@ -72,18 +74,25 @@ void StudyProcessor::startAsking()
 
     d->mainWindow->questionWindow()->setQuestion( d->currentEntry->question );
     d->mainWindow->answerWindow()->setAnswer( d->currentEntry->answer );
+    d->mainWindow->answerWindow()->clear();
 
     startProgress();
 }
 
 void StudyProcessor::startProgress()
 {
+    d->stopWaiting = false;
     d->progressTime = QTime::currentTime();
     QTimer::singleShot(50, this, SLOT(waitingForAnswer()));
 }
 
 void StudyProcessor::waitingForAnswer()
 {
+    if (d->stopWaiting) {
+        d->mainWindow->timeoutPanel()->setProgress(100);
+        return;
+    }
+
     int msecs = d->progressTime.msecsTo(QTime::currentTime());
     int percent = msecs * 100 / d->timeoutMsecs;
 
@@ -91,7 +100,7 @@ void StudyProcessor::waitingForAnswer()
         QTimer::singleShot(50, this, SLOT(waitingForAnswer()));
     else {
         percent = 100;
-        startAsking();
+        checkAnswer();
     }
 
     d->mainWindow->timeoutPanel()->setProgress(percent);
@@ -99,8 +108,21 @@ void StudyProcessor::waitingForAnswer()
 
 void StudyProcessor::checkAnswer()
 {
-    qDebug() << d->mainWindow->answerWindow()->isAnswerCorrect();
-    startAsking();
+    bool correct = d->mainWindow->answerWindow()->isAnswerCorrect();
+    d->stopWaiting = true;
+
+    if (correct) {
+        startAsking();
+    }
+    else {
+        QString answer = d->mainWindow->answerWindow()->answer();
+        d->mainWindow->mistakeWindow()->show();
+        d->mainWindow->mistakeWindow()->raise();
+        d->mainWindow->mistakeWindow()->setText(
+            tr("<p align='center'>The correct answer is:<br><font color='#080'>%1</font></p>").arg(answer));
+        QTimer::singleShot(1000, d->mainWindow->mistakeWindow(), SLOT(hide()));
+        QTimer::singleShot(1100, this, SLOT(startAsking()));
+    }
 }
 
 StudyStorage * StudyProcessor::storage()

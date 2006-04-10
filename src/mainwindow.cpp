@@ -7,6 +7,7 @@
 #include "mainwindow.h"
 #include "timeoutpanel.h"
 #include "answerwindow.h"
+#include "mistakewindow.h"
 #include "questionwindow.h"
 #include "studyprocessor.h"
 
@@ -18,6 +19,7 @@ public:
 
     TimeoutPanel * timeoutPanel;
     AnswerWindow * answerWindow;
+    MistakeWindow * mistakeWindow;
     QuestionWindow * questionWindow;
 
     StudyProcessor * studyProcessor;
@@ -51,6 +53,7 @@ MainWindow::MainWindow(QWidget* parent, Qt::WFlags f)
 
     d->timeoutPanel = new TimeoutPanel(this);
     d->answerWindow = new AnswerWindow(this);
+    d->mistakeWindow = new MistakeWindow(this);
     d->questionWindow = new QuestionWindow(this);
     
     d->studyProcessor = new StudyProcessor(this);
@@ -97,6 +100,11 @@ TimeoutPanel * MainWindow::timeoutPanel()
 AnswerWindow * MainWindow::answerWindow()
 {
     return d->answerWindow;
+}
+
+MistakeWindow * MainWindow::mistakeWindow()
+{
+    return d->mistakeWindow;
 }
 
 QuestionWindow * MainWindow::questionWindow()

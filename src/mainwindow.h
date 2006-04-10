@@ -8,6 +8,7 @@
 
 class TimeoutPanel;
 class AnswerWindow;
+class MistakeWindow;
 class QuestionWindow;
 
 /*!
@@ -24,6 +25,7 @@ public:
 
     TimeoutPanel * timeoutPanel();
     AnswerWindow * answerWindow();
+    MistakeWindow * mistakeWindow();
     QuestionWindow * questionWindow();
     
 public slots:

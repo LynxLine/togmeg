@@ -16,12 +16,14 @@ public:
     AnswerWindow(QWidget * parent = 0);
     ~AnswerWindow();
 
+    QString answer();
     bool isAnswerCorrect();
     
 public slots:
     void showWindow();
     void hideWindow();
 
+    void clear();
     void setAnswer(QString);
 
 signals:

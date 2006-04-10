@@ -72,7 +72,6 @@ AnswerWindow::AnswerWindow(QWidget * parent)
     hbox->setSpacing(h/4);
     hbox->setMargin(0);
     setLayout(hbox);
-
 }
 
 /*!
@@ -98,8 +97,18 @@ void AnswerWindow::setAnswer(QString answer)
     d->answer = answer;
 }
 
+QString AnswerWindow::answer()
+{
+    return d->answer;
+}
+
 bool AnswerWindow::isAnswerCorrect()
 {
     return d->lineEdit->text() == d->answer;
+}
+
+void AnswerWindow::clear()
+{
+    d->lineEdit->clear();
 }
 

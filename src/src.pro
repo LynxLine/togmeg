@@ -30,6 +30,7 @@ HEADERS += \
     movingwidget.h \
     timeoutpanel.h \
     answerwindow.h \
+    mistakewindow.h \
     questionwindow.h \
     studyprocessor.h \
 
@@ -41,6 +42,7 @@ SOURCES += \
     movingwidget.cpp \
     timeoutpanel.cpp \
     answerwindow.cpp \
+    mistakewindow.cpp \
     questionwindow.cpp \
     studyprocessor.cpp \
 
