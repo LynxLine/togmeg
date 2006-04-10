@@ -81,7 +81,7 @@ MainWindow * MainWindow::self()
 void MainWindow::showEvent(QShowEvent * se)
 {
     QMainWindow::showEvent(se);
-    d->studyProcessor->start();
+    QTimer::singleShot(1000, d->studyProcessor, SLOT(start()));
 }
 
 void MainWindow::mousePressEvent(QMouseEvent * me)
@@ -89,7 +89,7 @@ void MainWindow::mousePressEvent(QMouseEvent * me)
     QMainWindow::mousePressEvent(me);
     d->studyProcessor->stop();
     
-    QTimer::singleShot(300, qApp, SLOT(quit()));
+    QTimer::singleShot(1000, qApp, SLOT(quit()));
 }
 
 TimeoutPanel * MainWindow::timeoutPanel()
