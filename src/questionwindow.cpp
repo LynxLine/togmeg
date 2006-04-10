@@ -99,3 +99,8 @@ void QuestionWindow::hideWindow()
     moveBackward();
 }
 
+void QuestionWindow::setQuestion(QString question)
+{
+    d->textEdit->setText(question);
+}
+

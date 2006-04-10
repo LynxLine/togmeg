@@ -20,6 +20,8 @@ public slots:
     void showWindow();
     void hideWindow();
 
+    void setQuestion(QString);
+
 private:
     class Private;
     Private * d;

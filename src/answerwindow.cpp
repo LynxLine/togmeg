@@ -13,6 +13,7 @@ public:
 
     AnswerWindow * self;
     QLineEdit * lineEdit;
+    QString answer;
 };
 
 /*!
@@ -62,6 +63,9 @@ AnswerWindow::AnswerWindow(QWidget * parent)
     d->lineEdit->setFixedHeight(h/2);
     d->lineEdit->setFont(font);
     
+    connect(d->lineEdit, SIGNAL(returnPressed()),
+            this,        SIGNAL(returnPressed()));
+    
     QHBoxLayout * hbox = new QHBoxLayout;
     hbox->addWidget(l_answer);
     hbox->addWidget(d->lineEdit);
@@ -87,5 +91,15 @@ void AnswerWindow::showWindow()
 void AnswerWindow::hideWindow()
 {
     moveBackward();
+}
+
+void AnswerWindow::setAnswer(QString answer)
+{
+    d->answer = answer;
+}
+
+bool AnswerWindow::isAnswerCorrect()
+{
+    return d->lineEdit->text() == d->answer;
 }
 

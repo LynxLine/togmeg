@@ -73,3 +73,8 @@ void TimeoutPanel::hideWindow()
     moveBackward();
 }
 
+void TimeoutPanel::setProgress(int percent)
+{
+    d->progressBar->setValue(percent);
+}
+

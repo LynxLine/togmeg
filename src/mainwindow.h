@@ -6,6 +6,10 @@
 
 #include <QMainWindow>
 
+class TimeoutPanel;
+class AnswerWindow;
+class QuestionWindow;
+
 /*!
  The Main Window of aplication.
  */
@@ -18,6 +22,10 @@ public:
     static MainWindow * self();
     ~MainWindow();
 
+    TimeoutPanel * timeoutPanel();
+    AnswerWindow * answerWindow();
+    QuestionWindow * questionWindow();
+    
 public slots:
 
 private slots:

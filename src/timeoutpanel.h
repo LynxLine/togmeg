@@ -20,6 +20,8 @@ public slots:
     void showWindow();
     void hideWindow();
 
+    void setProgress(int);
+
 private:
     class Private;
     Private * d;

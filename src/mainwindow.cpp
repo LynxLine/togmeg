@@ -8,6 +8,7 @@
 #include "timeoutpanel.h"
 #include "answerwindow.h"
 #include "questionwindow.h"
+#include "studyprocessor.h"
 
 class MainWindow::Private
 {
@@ -18,6 +19,8 @@ public:
     TimeoutPanel * timeoutPanel;
     AnswerWindow * answerWindow;
     QuestionWindow * questionWindow;
+
+    StudyProcessor * studyProcessor;
 };
 
 MainWindow * MainWindow::Private::self = 0L;
@@ -50,6 +53,8 @@ MainWindow::MainWindow(QWidget* parent, Qt::WFlags f)
     d->answerWindow = new AnswerWindow(this);
     d->questionWindow = new QuestionWindow(this);
     
+    d->studyProcessor = new StudyProcessor(this);
+    
     showFullScreen();
 }
 
@@ -73,18 +78,29 @@ MainWindow * MainWindow::self()
 void MainWindow::showEvent(QShowEvent * se)
 {
     QMainWindow::showEvent(se);
-    QTimer::singleShot(200, d->timeoutPanel, SLOT(showWindow()));
-    QTimer::singleShot(100, d->answerWindow, SLOT(showWindow()));
-    QTimer::singleShot(100, d->questionWindow, SLOT(showWindow()));
+    d->studyProcessor->start();
 }
 
 void MainWindow::mousePressEvent(QMouseEvent * me)
 {
     QMainWindow::mousePressEvent(me);
+    d->studyProcessor->stop();
     
-    QTimer::singleShot( 10, d->timeoutPanel, SLOT(hideWindow()));
-    QTimer::singleShot(100, d->answerWindow, SLOT(hideWindow()));
-    QTimer::singleShot(100, d->questionWindow, SLOT(hideWindow()));
     QTimer::singleShot(300, qApp, SLOT(quit()));
+}
+
+TimeoutPanel * MainWindow::timeoutPanel()
+{
+    return d->timeoutPanel;
+}
+
+AnswerWindow * MainWindow::answerWindow()
+{
+    return d->answerWindow;
+}
+
+QuestionWindow * MainWindow::questionWindow()
+{
+    return d->questionWindow;
 }
 

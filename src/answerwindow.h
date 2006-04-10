@@ -16,10 +16,17 @@ public:
     AnswerWindow(QWidget * parent = 0);
     ~AnswerWindow();
 
+    bool isAnswerCorrect();
+    
 public slots:
     void showWindow();
     void hideWindow();
 
+    void setAnswer(QString);
+
+signals:
+    void returnPressed();
+    
 private:
     class Private;
     Private * d;
