@@ -12,7 +12,8 @@ public:
     {;}
 
     QuestionWindow * self;
-    QLabel * textEdit;
+    QLabel * l_header;
+    QLabel * l_question;
 };
 
 /*!
@@ -48,34 +49,32 @@ QuestionWindow::QuestionWindow(QWidget * parent)
     float pointSize = ( font.pointSizeF() * pixelSize )/ 10;
     font.setPointSizeF(pointSize);
     
-    QLabel * l_question = new QLabel(tr("Question:"), this);
-    l_question->setFixedHeight(b);
-    l_question->setFont(font);
+    d->l_header = new QLabel(tr("Question:"), this);
+    d->l_header->setFixedHeight(b);
+    d->l_header->setFont(font);
     
-    d->textEdit = new QLabel(this);
+    d->l_question = new QLabel(this);
 
     {
-        //d->textEdit->setReadOnly(true);
-        d->textEdit->setFrameStyle(QFrame::NoFrame);
-        d->textEdit->setLineWidth(0);
-        d->textEdit->setAlignment(Qt::AlignCenter);
-        d->textEdit->setText("Question...");
+        d->l_question->setFrameStyle(QFrame::NoFrame);
+        d->l_question->setLineWidth(0);
+        d->l_question->setAlignment(Qt::AlignCenter);
 
         QPalette pal = palette();
         pal.setBrush( QPalette::Base, QBrush(QColor("#ffffd0")) );
-        d->textEdit->setPalette( pal );
+        d->l_question->setPalette( pal );
 
         pal.setBrush( QPalette::Foreground, QBrush(QColor("#888")) );
-        l_question->setPalette( pal );
+        d->l_header->setPalette( pal );
 
         QFont teFont = font;
         teFont.setPointSizeF(font.pointSizeF()*1.5);
-        d->textEdit->setFont(teFont);
+        d->l_question->setFont(teFont);
     }
     
     QGridLayout * grid = new QGridLayout;
-    grid->addWidget(l_question,  0,0);
-    grid->addWidget(d->textEdit, 1,0);
+    grid->addWidget(d->l_header,  0,0);
+    grid->addWidget(d->l_question, 1,0);
     grid->setSpacing(0);
     grid->setMargin(0);
     setLayout(grid);
@@ -101,6 +100,11 @@ void QuestionWindow::hideWindow()
 
 void QuestionWindow::setQuestion(QString question)
 {
-    d->textEdit->setText(question);
+    d->l_question->setText(question);
+}
+
+void QuestionWindow::setHeader(QString header)
+{
+    d->l_header->setText(header);
 }
 

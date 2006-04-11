@@ -12,7 +12,9 @@ public:
     {;}
 
     AnswerWindow * self;
-    QLineEdit * lineEdit;
+
+    QLabel * l_answer;
+    QLineEdit * le_answer;
     QString answer;
 };
 
@@ -49,26 +51,26 @@ AnswerWindow::AnswerWindow(QWidget * parent)
     float pointSize = ( font.pointSizeF() * pixelSize )/ 10;
     font.setPointSizeF(pointSize);
     
-    QLabel * l_answer = new QLabel(tr("Answer:"), this);
-    l_answer->setFixedHeight(h/2);
-    l_answer->setFont(font);
+    d->l_answer = new QLabel(tr("Answer:"), this);
+    d->l_answer->setFixedHeight(h/2);
+    d->l_answer->setFont(font);
 
     {
         QPalette pal = palette();
         pal.setBrush( QPalette::Foreground, QBrush(QColor("#888")) );
-        l_answer->setPalette( pal );
+        d->l_answer->setPalette( pal );
     }
     
-    d->lineEdit = new QLineEdit(this);
-    d->lineEdit->setFixedHeight(h/2);
-    d->lineEdit->setFont(font);
+    d->le_answer = new QLineEdit(this);
+    d->le_answer->setFixedHeight(h/2);
+    d->le_answer->setFont(font);
     
-    connect(d->lineEdit, SIGNAL(returnPressed()),
+    connect(d->le_answer, SIGNAL(returnPressed()),
             this,        SIGNAL(returnPressed()));
     
     QHBoxLayout * hbox = new QHBoxLayout;
-    hbox->addWidget(l_answer);
-    hbox->addWidget(d->lineEdit);
+    hbox->addWidget(d->l_answer);
+    hbox->addWidget(d->le_answer);
     hbox->setSpacing(h/4);
     hbox->setMargin(0);
     setLayout(hbox);
@@ -104,11 +106,20 @@ QString AnswerWindow::answer()
 
 bool AnswerWindow::isAnswerCorrect()
 {
-    return d->lineEdit->text() == d->answer;
+    return d->le_answer->text() == d->answer;
 }
 
 void AnswerWindow::clear()
 {
-    d->lineEdit->clear();
+    d->le_answer->clear();
+}
+
+void AnswerWindow::setState(State state)
+{
+    QPalette pal = d->le_answer->palette();
+    if      (state == AnswerWindow::Default) pal.setBrush( QPalette::Base, QBrush(QColor("#fff")) );
+    else if (state == AnswerWindow::Mistake) pal.setBrush( QPalette::Base, QBrush(QColor("#faa")) );
+    
+    d->le_answer->setPalette( pal );
 }
 

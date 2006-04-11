@@ -13,11 +13,13 @@ class AnswerWindow : public BoxWindow
 {
 Q_OBJECT
 public:
+    enum State { Default, Mistake };
     AnswerWindow(QWidget * parent = 0);
     ~AnswerWindow();
 
     QString answer();
     bool isAnswerCorrect();
+    void setState(State);
     
 public slots:
     void showWindow();

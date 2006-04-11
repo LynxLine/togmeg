@@ -20,6 +20,7 @@ public slots:
     void showWindow();
     void hideWindow();
 
+    void setHeader(QString);
     void setQuestion(QString);
 
 private:

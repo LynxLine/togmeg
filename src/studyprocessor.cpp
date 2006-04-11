@@ -72,8 +72,10 @@ void StudyProcessor::startAsking()
     
     d->currentEntry = d->storage->nextEntry();
 
+    d->mainWindow->questionWindow()->setHeader( tr("Question:") );
     d->mainWindow->questionWindow()->setQuestion( d->currentEntry->question );
     d->mainWindow->answerWindow()->setAnswer( d->currentEntry->answer );
+    d->mainWindow->answerWindow()->setState(AnswerWindow::Default);
     d->mainWindow->answerWindow()->clear();
 
     startProgress();
@@ -116,12 +118,12 @@ void StudyProcessor::checkAnswer()
     }
     else {
         QString answer = d->mainWindow->answerWindow()->answer();
-        d->mainWindow->mistakeWindow()->show();
-        d->mainWindow->mistakeWindow()->raise();
-        d->mainWindow->mistakeWindow()->setText(
-            tr("<p align='center'>The correct answer is:<br><font color='#080'>%1</font></p>").arg(answer));
-        QTimer::singleShot(1000, d->mainWindow->mistakeWindow(), SLOT(hide()));
-        QTimer::singleShot(1100, this, SLOT(startAsking()));
+    
+        d->mainWindow->questionWindow()->setHeader( tr("The correct answer is:") );
+        d->mainWindow->questionWindow()->setQuestion( tr("<p align='center'><font color='#080'>%1</font></p>").arg(answer) );
+        d->mainWindow->answerWindow()->setState(AnswerWindow::Mistake);
+
+        QTimer::singleShot(1500, this, SLOT(startAsking()));
     }
 }
 
