@@ -17,7 +17,7 @@ public:
     {
         storage = new StudyStorage(p);
         currentEntry = 0L;
-        timeoutMsecs = 5000;
+        timeoutMsecs = 10000;
     }
         
     MainWindow * mainWindow;

@@ -2,6 +2,7 @@
 // Copyright (C) 2006
 
 #include <QtGui>
+#include <QtSql>
 #include <QtCore>
 
 #include "mainwindow.h"
@@ -51,6 +52,11 @@ MainWindow::MainWindow(QWidget* parent, Qt::WFlags f)
 	statusBar()->hide();
     menuBar()->hide();
 
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(QCoreApplication::applicationDirPath()+"/aLesson.db");
+    bool ok = db.open();
+    if (!ok) qDebug() << tr("Cannot open default database.");
+    
     d->timeoutPanel = new TimeoutPanel(this);
     d->answerWindow = new AnswerWindow(this);
     d->mistakeWindow = new MistakeWindow(this);

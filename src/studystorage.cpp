@@ -15,6 +15,12 @@ StudyStorage::StudyStorage(QObject * parent)
 :QObject(parent)
 {
     d = new Private;
+    QSqlQuery query;
+    query.exec("create table test( "\
+               " id          integer primary key autoincrement, "\
+               " question    varchar(400), "\
+               " answer      varchar(400) "\
+               ")");
 }
 
 /*!
@@ -27,9 +33,20 @@ StudyStorage::~StudyStorage()
 
 StudyEntry * StudyStorage::nextEntry()
 {
+    QSqlQuery query;
+
+    query.exec("SELECT count() from test");
+    query.first();
+    int count = query.value(0).toInt();    
+    
+    query.exec("SELECT question, answer FROM test");
+    int pos = random() % count;
+    
     StudyEntry * entry = new StudyEntry;
-    entry->question = "question1";
-    entry->answer = "answer1";
+    if (query.seek(pos)) {
+        entry->question = query.value(0).toString();
+        entry->answer = query.value(1).toString();
+    }
 
     return entry;
 }
