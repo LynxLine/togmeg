@@ -1,5 +1,5 @@
 // vim:tabstop=4:shiftwidth=4:foldmethod=marker:expandtab:cinoptions=(s,U1,m1
-// Copyright (C) 2005
+// Copyright (C) 2006
 
 #ifndef CLASS_H
 #define CLASS_H

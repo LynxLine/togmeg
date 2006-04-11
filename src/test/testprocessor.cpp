@@ -2,17 +2,17 @@
 // Copyright (C) 2006
 
 #include <QtGui>
-#include "with_private.h"
+#include "testprocessor.h"
 
-class Class::Private {
+class TestProcessor::Private {
 public:
 };
 
 /*!
  * Creates the object.
  */
-Class::Class(QWidget * parent)
-:QWidget(parent)
+TestProcessor::TestProcessor(QObject * parent)
+:QObject(parent)
 {
     d = new Private;
 }
@@ -20,8 +20,16 @@ Class::Class(QWidget * parent)
 /*!
  * Deletes it.
  */
-Class::~Class()
+TestProcessor::~TestProcessor()
 {
     delete d;
+}
+
+void TestProcessor::start()
+{
+}
+
+void TestProcessor::stop()
+{
 }
 

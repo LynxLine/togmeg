@@ -20,6 +20,15 @@
         <file>images/yellow-box/bottom-left.png</file>
         <file>images/yellow-box/bottom-right.png</file>
 
+        <file>images/yellow-small-box/top.png</file>
+        <file>images/yellow-small-box/left.png</file>
+        <file>images/yellow-small-box/right.png</file>
+        <file>images/yellow-small-box/bottom.png</file>
+        <file>images/yellow-small-box/top-left.png</file>
+        <file>images/yellow-small-box/top-right.png</file>
+        <file>images/yellow-small-box/bottom-left.png</file>
+        <file>images/yellow-small-box/bottom-right.png</file>
+
     </qresource>
 </RCC>
 
