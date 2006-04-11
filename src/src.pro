@@ -23,28 +23,20 @@ QT += xml
 QT += sql
 QT += network
 
+include('study/study.pri')
+
 HEADERS += \
     boxwindow.h \
     mainwindow.h \
-    studystorage.h \
     movingwidget.h \
     timeoutpanel.h \
-    answerwindow.h \
-    mistakewindow.h \
-    questionwindow.h \
-    studyprocessor.h \
 
 SOURCES += \
     main.cpp \
     boxwindow.cpp \
     mainwindow.cpp \
-    studystorage.cpp \
     movingwidget.cpp \
     timeoutpanel.cpp \
-    answerwindow.cpp \
-    mistakewindow.cpp \
-    questionwindow.cpp \
-    studyprocessor.cpp \
 
 RESOURCES += images.qrc
 

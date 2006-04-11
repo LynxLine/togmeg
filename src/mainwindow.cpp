@@ -8,7 +8,6 @@
 #include "mainwindow.h"
 #include "timeoutpanel.h"
 #include "answerwindow.h"
-#include "mistakewindow.h"
 #include "questionwindow.h"
 #include "studyprocessor.h"
 
@@ -20,7 +19,6 @@ public:
 
     TimeoutPanel * timeoutPanel;
     AnswerWindow * answerWindow;
-    MistakeWindow * mistakeWindow;
     QuestionWindow * questionWindow;
 
     StudyProcessor * studyProcessor;
@@ -59,7 +57,6 @@ MainWindow::MainWindow(QWidget* parent, Qt::WFlags f)
     
     d->timeoutPanel = new TimeoutPanel(this);
     d->answerWindow = new AnswerWindow(this);
-    d->mistakeWindow = new MistakeWindow(this);
     d->questionWindow = new QuestionWindow(this);
     
     d->studyProcessor = new StudyProcessor(this);
@@ -87,7 +84,7 @@ MainWindow * MainWindow::self()
 void MainWindow::showEvent(QShowEvent * se)
 {
     QMainWindow::showEvent(se);
-    QTimer::singleShot(1000, d->studyProcessor, SLOT(start()));
+    QTimer::singleShot(500, d->studyProcessor, SLOT(start()));
 }
 
 void MainWindow::mousePressEvent(QMouseEvent * me)
@@ -95,7 +92,7 @@ void MainWindow::mousePressEvent(QMouseEvent * me)
     QMainWindow::mousePressEvent(me);
     d->studyProcessor->stop();
     
-    QTimer::singleShot(1000, qApp, SLOT(quit()));
+    QTimer::singleShot(500, qApp, SLOT(quit()));
 }
 
 TimeoutPanel * MainWindow::timeoutPanel()
@@ -106,11 +103,6 @@ TimeoutPanel * MainWindow::timeoutPanel()
 AnswerWindow * MainWindow::answerWindow()
 {
     return d->answerWindow;
-}
-
-MistakeWindow * MainWindow::mistakeWindow()
-{
-    return d->mistakeWindow;
 }
 
 QuestionWindow * MainWindow::questionWindow()

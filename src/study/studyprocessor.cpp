@@ -8,7 +8,6 @@
 
 #include "timeoutpanel.h"
 #include "answerwindow.h"
-#include "mistakewindow.h"
 #include "questionwindow.h"
 
 class StudyProcessor::Private {
