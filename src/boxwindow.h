@@ -13,9 +13,12 @@ class BoxWindow : public MovingWidget
 {
 Q_OBJECT
 public:
-    //enum Style { Question = 0, Answer };
+    enum Style { Round25, Round10 };
     BoxWindow(QWidget * parent = 0);
     ~BoxWindow();
+
+public slots:
+    void setStyle(BoxWindow::Style);
     
 protected:
     virtual void paintEvent(QPaintEvent * pe);

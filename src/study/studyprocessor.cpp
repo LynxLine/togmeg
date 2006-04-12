@@ -47,17 +47,20 @@ StudyProcessor::~StudyProcessor()
 
 void StudyProcessor::start()
 {
-    QTimer::singleShot(200, d->mainWindow->timeoutPanel(), SLOT(showWindow()));
-    QTimer::singleShot(100, d->mainWindow->answerWindow(), SLOT(showWindow()));
-    QTimer::singleShot(100, d->mainWindow->questionWindow(), SLOT(showWindow()));
+    QTimer::singleShot(600, d->mainWindow->timeoutPanel(), SLOT(showWindow()));
+    QTimer::singleShot(500, d->mainWindow->answerWindow(), SLOT(showWindow()));
+    QTimer::singleShot(500, d->mainWindow->questionWindow(), SLOT(showWindow()));
 
-    QTimer::singleShot(500, this, SLOT(startAsking()));
+    QTimer::singleShot(700, this, SLOT(startAsking()));
     connect(d->mainWindow->answerWindow(), SIGNAL(returnPressed()),
             this, SLOT(checkAnswer()));
 }
 
 void StudyProcessor::stop()
 {
+    d->stopWaiting = true;
+    d->mainWindow->timeoutPanel()->setProgress(0);
+    
     QTimer::singleShot( 10, d->mainWindow->timeoutPanel(), SLOT(hideWindow()));
     QTimer::singleShot(100, d->mainWindow->answerWindow(), SLOT(hideWindow()));
     QTimer::singleShot(100, d->mainWindow->questionWindow(), SLOT(hideWindow()));
@@ -117,6 +120,7 @@ void StudyProcessor::checkAnswer()
     }
     else {
         QString answer = d->mainWindow->answerWindow()->answer();
+        qDebug() << answer;
     
         d->mainWindow->questionWindow()->setHeader( tr("The correct answer is:") );
         d->mainWindow->questionWindow()->setQuestion( tr("<p align='center'><font color='#080'>%1</font></p>").arg(answer) );

@@ -11,17 +11,29 @@
 #include "questionwindow.h"
 #include "studyprocessor.h"
 
+#include "testprocessor.h"
+#include "testeditorwindow.h"
+#include "testdescriptionwindow.h"
+
 class MainWindow::Private
 {
 public:
-    Private(MainWindow * mw) {self=mw;}
+    Private(MainWindow * mw) {
+        self=mw;
+        viewMode = MainWindow::ViewMode(0); //undefined
+    }
     static MainWindow * self;
 
     TimeoutPanel * timeoutPanel;
     AnswerWindow * answerWindow;
     QuestionWindow * questionWindow;
+    TestEditorWindow * testEditorWindow;
+    TestDescriptionWindow * testDescriptionWindow;
 
+    TestProcessor * testProcessor;
     StudyProcessor * studyProcessor;
+
+    MainWindow::ViewMode viewMode;
 };
 
 MainWindow * MainWindow::Private::self = 0L;
@@ -58,7 +70,10 @@ MainWindow::MainWindow(QWidget* parent, Qt::WFlags f)
     d->timeoutPanel = new TimeoutPanel(this);
     d->answerWindow = new AnswerWindow(this);
     d->questionWindow = new QuestionWindow(this);
+    d->testEditorWindow = new TestEditorWindow(this);
+    d->testDescriptionWindow = new TestDescriptionWindow(this);
     
+    d->testProcessor = new TestProcessor(this);
     d->studyProcessor = new StudyProcessor(this);
     
     showFullScreen();
@@ -84,15 +99,27 @@ MainWindow * MainWindow::self()
 void MainWindow::showEvent(QShowEvent * se)
 {
     QMainWindow::showEvent(se);
-    QTimer::singleShot(500, d->studyProcessor, SLOT(start()));
+    
+    //QTimer::singleShot(500, d->studyProcessor, SLOT(start()));
+    setViewMode( TestPropertiesMode );
 }
 
 void MainWindow::mousePressEvent(QMouseEvent * me)
 {
     QMainWindow::mousePressEvent(me);
-    d->studyProcessor->stop();
     
-    QTimer::singleShot(500, qApp, SLOT(quit()));
+    if (viewMode() == StudyingMode) setViewMode(TestPropertiesMode);
+    else if (viewMode() == TestPropertiesMode) setViewMode(StudyingMode);
+}
+
+void MainWindow::keyPressEvent(QKeyEvent * ke)
+{
+    if (ke->key() == Qt::Key_Escape) {
+        if (viewMode() == StudyingMode) d->studyProcessor->stop();
+        else if (viewMode() == TestPropertiesMode) d->testProcessor->stop();
+    
+        QTimer::singleShot(500, qApp, SLOT(quit()));
+    }
 }
 
 TimeoutPanel * MainWindow::timeoutPanel()
@@ -108,5 +135,33 @@ AnswerWindow * MainWindow::answerWindow()
 QuestionWindow * MainWindow::questionWindow()
 {
     return d->questionWindow;
+}
+
+TestEditorWindow * MainWindow::testEditorWindow()
+{
+    return d->testEditorWindow;
+}
+
+TestDescriptionWindow * MainWindow::testDescriptionWindow()
+{
+    return d->testDescriptionWindow;
+}
+
+MainWindow::ViewMode MainWindow::viewMode()
+{
+    return d->viewMode;
+}
+
+void MainWindow::setViewMode(MainWindow::ViewMode mode)
+{
+    if (mode == d->viewMode) return;
+
+    if (d->viewMode == StudyingMode) d->studyProcessor->stop();
+    if (d->viewMode == TestPropertiesMode) d->testProcessor->stop();
+    
+    if (mode == StudyingMode) d->studyProcessor->start();
+    if (mode == TestPropertiesMode) d->testProcessor->start();
+
+    d->viewMode = mode;
 }
 

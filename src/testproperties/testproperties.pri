@@ -1,9 +1,13 @@
 
-INCLUDEPATH += test
+INCLUDEPATH += testproperties
 
 HEADERS += \
-    test/testprocessor.h \
+    testproperties/testprocessor.h \
+    testproperties/testeditorwindow.h \
+    testproperties/testdescriptionwindow.h \
 
 SOURCES += \
-    test/testprocessor.cpp \
+    testproperties/testprocessor.cpp \
+    testproperties/testeditorwindow.cpp \
+    testproperties/testdescriptionwindow.cpp \
 

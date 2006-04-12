@@ -6,6 +6,8 @@
 
 #include <QObject>
 
+class MainWindow;
+
 /*!
  * \class TestProcessor
  */
@@ -13,7 +15,7 @@ class TestProcessor : public QObject
 {
 Q_OBJECT
 public:
-    TestProcessor(QObject * parent = 0);
+    TestProcessor(MainWindow * parent = 0);
     ~TestProcessor();
     
 public slots:

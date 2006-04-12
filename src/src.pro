@@ -23,8 +23,8 @@ QT += xml
 QT += sql
 QT += network
 
-include('test/test.pri')
 include('study/study.pri')
+include('testproperties/testproperties.pri')
 
 HEADERS += \
     boxwindow.h \

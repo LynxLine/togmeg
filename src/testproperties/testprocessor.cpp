@@ -2,19 +2,25 @@
 // Copyright (C) 2006
 
 #include <QtGui>
+#include "mainwindow.h"
 #include "testprocessor.h"
+#include "testeditorwindow.h"
+#include "testdescriptionwindow.h"
 
 class TestProcessor::Private {
 public:
+    Private(MainWindow * p):mainWindow(p) {;}
+
+    MainWindow * mainWindow;
 };
 
 /*!
  * Creates the object.
  */
-TestProcessor::TestProcessor(QObject * parent)
+TestProcessor::TestProcessor(MainWindow * parent)
 :QObject(parent)
 {
-    d = new Private;
+    d = new Private(parent);
 }
 
 /*!
@@ -27,9 +33,13 @@ TestProcessor::~TestProcessor()
 
 void TestProcessor::start()
 {
+    QTimer::singleShot(500, d->mainWindow->testEditorWindow(), SLOT(showWindow()));
+    QTimer::singleShot(500, d->mainWindow->testDescriptionWindow(), SLOT(showWindow()));
 }
 
 void TestProcessor::stop()
 {
+    QTimer::singleShot(0, d->mainWindow->testEditorWindow(), SLOT(hideWindow()));
+    QTimer::singleShot(0, d->mainWindow->testDescriptionWindow(), SLOT(hideWindow()));
 }
 

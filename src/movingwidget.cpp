@@ -96,12 +96,12 @@ void MovingWidget::moving()
             y = d->hideY + ((d->showY - d->hideY) * (100 - d->movingPercent)) /100;
         }
         if (d->moving == Private::Showing) {
-            y = d->hideX + ((d->showX - d->hideX) * d->movingPercent) /100;
+            x = d->hideX + ((d->showX - d->hideX) * d->movingPercent) /100;
             y = d->hideY + ((d->showY - d->hideY) * d->movingPercent) /100;
         }
     }
     
-    move( x, y);
+    move(x, y);
     if ( d->moving != Private::Stop) QTimer::singleShot(1, this, SLOT(moving()));
 }
 

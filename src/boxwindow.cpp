@@ -7,7 +7,6 @@
 
 class BoxWindow::Private {
 public:
-    enum Moving { Showing, Hiding, Stop };
     Private(BoxWindow * p):
         pmTop        (":/images/yellow-box/top.png"),
         pmLeft       (":/images/yellow-box/left.png"),
@@ -40,14 +39,8 @@ BoxWindow::BoxWindow(QWidget * parent)
 :MovingWidget(parent)
 {
     d = new Private(this);
-    
-    setContentsMargins(d->pmLeftTop.width(),     d->pmLeftTop.height(), 
-                       d->pmRightBottom.width(), d->pmRightBottom.height());
-    
     setAutoFillBackground(true);
-
-    setMinimumWidth ( d->pmLeftTop.width() +1+d->pmRightBottom.width() );
-    setMinimumHeight( d->pmLeftTop.height()+1+d->pmRightBottom.height() );
+    setStyle(Round25);
 }
 
 /*!
@@ -86,5 +79,35 @@ void BoxWindow::paintEvent(QPaintEvent * pe)
     p.end();
     
     QWidget::paintEvent(pe);
+}
+
+void BoxWindow::setStyle(BoxWindow::Style style)
+{
+    if (style == Round25) {
+        d->pmTop        = QPixmap(":/images/yellow-box/top.png");
+        d->pmLeft       = QPixmap(":/images/yellow-box/left.png");
+        d->pmRight      = QPixmap(":/images/yellow-box/right.png");
+        d->pmBottom     = QPixmap(":/images/yellow-box/bottom.png");
+        d->pmLeftTop    = QPixmap(":/images/yellow-box/top-left.png");
+        d->pmRightTop   = QPixmap(":/images/yellow-box/top-right.png");
+        d->pmLeftBottom = QPixmap(":/images/yellow-box/bottom-left.png");
+        d->pmRightBottom= QPixmap(":/images/yellow-box/bottom-right.png");
+    }
+    else if (style == Round10) {
+        d->pmTop        = QPixmap(":/images/yellow-small-box/top.png");
+        d->pmLeft       = QPixmap(":/images/yellow-small-box/left.png");
+        d->pmRight      = QPixmap(":/images/yellow-small-box/right.png");
+        d->pmBottom     = QPixmap(":/images/yellow-small-box/bottom.png");
+        d->pmLeftTop    = QPixmap(":/images/yellow-small-box/top-left.png");
+        d->pmRightTop   = QPixmap(":/images/yellow-small-box/top-right.png");
+        d->pmLeftBottom = QPixmap(":/images/yellow-small-box/bottom-left.png");
+        d->pmRightBottom= QPixmap(":/images/yellow-small-box/bottom-right.png");
+    }
+    
+    setContentsMargins(d->pmLeftTop.width(),     d->pmLeftTop.height(), 
+                       d->pmRightBottom.width(), d->pmRightBottom.height());
+
+    setMinimumWidth ( d->pmLeftTop.width() +1+d->pmRightBottom.width() );
+    setMinimumHeight( d->pmLeftTop.height()+1+d->pmRightBottom.height() );
 }
 
