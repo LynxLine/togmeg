@@ -6,6 +6,8 @@
 
 #include "boxwindow.h"
 
+class QSqlRecord;
+
 /*!
  * \class TestEditorWindow
  */
@@ -19,9 +21,15 @@ public:
 public slots:
     void showWindow();
     void hideWindow();
+    void submitAll();
 
 private slots:
+    void newRow();
     void loadData();
+    void primeInsertContinue();
+    void primeInsert(int, QSqlRecord &);
+    void closeEditorContinue();
+    void closeEditor(QWidget *, QAbstractItemDelegate::EndEditHint);
 
 protected:
     virtual void keyPressEvent(QKeyEvent * ke);

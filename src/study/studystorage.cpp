@@ -19,7 +19,8 @@ StudyStorage::StudyStorage(QObject * parent)
     query.exec("create table test( "\
                " id          integer primary key autoincrement, "\
                " question    varchar(400), "\
-               " answer      varchar(400) "\
+               " answer      varchar(400), "\
+               " msecs       integer "\
                ")");
 }
 

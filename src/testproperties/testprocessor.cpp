@@ -39,6 +39,7 @@ void TestProcessor::start()
 
 void TestProcessor::stop()
 {
+    d->mainWindow->testEditorWindow()->submitAll();
     QTimer::singleShot(0, d->mainWindow->testEditorWindow(), SLOT(hideWindow()));
     QTimer::singleShot(0, d->mainWindow->testDescriptionWindow(), SLOT(hideWindow()));
 }

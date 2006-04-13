@@ -5,12 +5,21 @@
 #include <QtSql>
 #include "testeditorwindow.h"
 
+#define COL_ID          0
+#define COL_QUESTION    1
+#define COL_ANSWER      2
+#define COL_MSECS       3
+#define ROW_APPEND      -1
+
 class TestEditorWindow::Private {
 public:
     QLabel * l_header;
     QTableView * tv_editor;
 
     QPointer<QSqlTableModel> model;
+
+    int insertRow;
+    QSqlRecord insertRecord;
 };
 
 /*!
@@ -53,11 +62,9 @@ TestEditorWindow::TestEditorWindow(QWidget * parent)
     d->tv_editor = new QTableView(this);
 
     {
-        //d->tv_editor->setFrameStyle(QFrame::NoFrame);
-        //d->tv_editor->setLineWidth(0);
-        //
-
         d->tv_editor->verticalHeader()->hide();
+        d->tv_editor->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+        d->tv_editor->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         
         QPalette pal = palette();
         pal.setBrush( QPalette::Base, QBrush(QColor("#ffffd0")) );
@@ -109,25 +116,140 @@ void TestEditorWindow::loadData()
     d->model = new QSqlTableModel(this);
     
     d->model->setTable("test");
-    d->model->setEditStrategy(QSqlTableModel::OnFieldChange);
+    d->model->setEditStrategy(QSqlTableModel::OnManualSubmit);
     d->model->select();
     
-    d->model->setHeaderData(1, Qt::Horizontal, tr("Question"));
-    d->model->setHeaderData(2, Qt::Horizontal, tr("Answer"));
+    d->model->setHeaderData(COL_QUESTION, Qt::Horizontal, tr("Question"));
+    d->model->setHeaderData(COL_ANSWER,   Qt::Horizontal, tr("Answer"));
 
     d->tv_editor->setModel(d->model);
-    d->tv_editor->setColumnHidden(0, true);
+    d->tv_editor->setColumnHidden(COL_ID, true);
+    d->tv_editor->setColumnHidden(COL_MSECS, true);
+    d->tv_editor->setSelectionMode(QAbstractItemView::NoSelection);
+    
+    int vScrollWidth = d->tv_editor->verticalScrollBar()->width();
+    d->tv_editor->setColumnWidth(COL_QUESTION, (width()-vScrollWidth -25)/2 );
+    d->tv_editor->setColumnWidth(COL_ANSWER,   (width()-vScrollWidth -25)/2 );
+    
+    d->tv_editor->setEditTriggers(QAbstractItemView::AllEditTriggers);
+    
+    connect(d->model, SIGNAL(primeInsert(int, QSqlRecord &)),
+            this,       SLOT(primeInsert(int, QSqlRecord &)));
+    connect(d->tv_editor->itemDelegate(), SIGNAL(closeEditor(QWidget *, QAbstractItemDelegate::EndEditHint)),
+            this, SLOT(closeEditor(QWidget *, QAbstractItemDelegate::EndEditHint)));
 
-    d->tv_editor->setColumnWidth(1, (width()-25)/2 );
-    d->tv_editor->setColumnWidth(2, (width()-25)/2 );
+    if (d->model->rowCount()) {
+        QModelIndex index = d->model->index(0, COL_QUESTION);
+        d->tv_editor->setCurrentIndex(index);
+    }
 }
 
 void TestEditorWindow::keyPressEvent(QKeyEvent * ke)
 {
+    if (ke->key() == Qt::Key_Escape) {
+        ke->ignore();
+        return;
+    }
+    
     if (ke->key() == Qt::Key_Insert) {
-        d->model->insertRow( d->model->rowCount() );
+        ke->accept();
+        newRow();
+        return;
     }
     
     BoxWindow::keyPressEvent(ke);
+}
+
+void TestEditorWindow::primeInsert(int row, QSqlRecord & record)
+{
+    d->insertRow = row;
+    d->insertRecord = record;
+    QTimer::singleShot(10, this, SLOT(primeInsertContinue()));
+}
+    
+void TestEditorWindow::primeInsertContinue()
+{
+    QModelIndex index = d->model->index(d->insertRow, COL_QUESTION);
+    QString text = d->model->data(index).toString();
+    
+    d->tv_editor->scrollTo(index, QAbstractItemView::PositionAtBottom);
+    d->tv_editor->setCurrentIndex(index);
+}
+
+void TestEditorWindow::newRow()
+{
+    QSqlRecord newRecord( d->model->record() );
+    
+    newRecord.setGenerated("id", true);
+    newRecord.setValue("question", "");
+    newRecord.setValue("answer", "");
+    newRecord.setValue("msecs", 10* 1000);
+
+    bool ok = d->model->insertRecord( -1,  newRecord);
+
+    if (!ok) {
+       qDebug() << d->model->lastError().text();
+       qDebug() << d->model->query().lastQuery();
+       return;
+    } 
+}
+
+void TestEditorWindow::closeEditor(QWidget *, QAbstractItemDelegate::EndEditHint hint)
+{
+    if (hint == QAbstractItemDelegate::NoHint ||
+        hint == QAbstractItemDelegate::RevertModelCache) return;
+    QTimer::singleShot(10, this, SLOT(closeEditorContinue()));
+}
+    
+void TestEditorWindow::closeEditorContinue()
+{
+    QModelIndex index = d->tv_editor->currentIndex();
+    QModelIndex answerIndex = d->model->index(index.row(), COL_ANSWER );
+    QModelIndex questionIndex = d->model->index(index.row(), COL_QUESTION );
+    
+    QString answer = d->model->data(answerIndex).toString();
+    QString question = d->model->data(questionIndex).toString();
+    
+    if (index.column() == COL_QUESTION) {
+        index = d->model->index(index.row(), COL_ANSWER );
+        d->tv_editor->setCurrentIndex(index);
+        
+        return;
+    }
+    else if (index.column() == COL_ANSWER) {
+        
+        if (index.row() == d->model->rowCount()-1) {
+            if ( !question.isEmpty() && !answer.isEmpty() ) {
+                newRow();
+                return;
+            }
+
+            if (question.isEmpty()) d->tv_editor->setCurrentIndex(questionIndex);
+            else if (answer.isEmpty()) {
+                d->tv_editor->setCurrentIndex(answerIndex);
+                d->tv_editor->edit(index);
+            }
+        }
+        else {
+            index = d->model->index(index.row()+1, COL_QUESTION );
+            d->tv_editor->setCurrentIndex(index);
+        }
+    }
+}
+
+void TestEditorWindow::submitAll()
+{
+    for (int row=0;row < d->model->rowCount();row++) {
+        QSqlRecord record = d->model->record(row);
+
+        QString answer = record.value("answer").toString();
+        QString question = record.value("question").toString();
+
+        if (answer.isEmpty() && question.isEmpty()) {
+            d->model->removeRows(row, 1);
+        }
+    }
+    
+    d->model->submitAll();
 }
 
