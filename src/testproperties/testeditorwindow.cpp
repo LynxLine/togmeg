@@ -74,11 +74,9 @@ TestEditorWindow::TestEditorWindow(QWidget * parent)
         pal.setBrush( QPalette::Foreground, QBrush(QColor("#888")) );
         d->l_header->setPalette( pal );
 
-        /*
         QFont teFont = font;
-        teFont.setPointSizeF(font.pointSizeF()*1.5);
-        d->tw_edior->setFont(teFont);
-        */
+        teFont.setPointSizeF(font.pointSizeF()*1.2);
+        d->tv_editor->setFont(teFont);
     }
     
     QGridLayout * grid = new QGridLayout;
