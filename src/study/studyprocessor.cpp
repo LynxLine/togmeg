@@ -53,7 +53,7 @@ void StudyProcessor::start()
 
     QTimer::singleShot(700, this, SLOT(startAsking()));
     connect(d->mainWindow->answerWindow(), SIGNAL(returnPressed()),
-            this, SLOT(checkAnswer()));
+            this, SLOT(returnPressed()));
 }
 
 void StudyProcessor::stop()
@@ -73,6 +73,7 @@ void StudyProcessor::startAsking()
         d->storage->closeEntry( d->currentEntry );
     
     d->currentEntry = d->storage->nextEntry();
+    if ( !d->currentEntry ) return;
 
     d->mainWindow->questionWindow()->setHeader( tr("Question:") );
     d->mainWindow->questionWindow()->setQuestion( d->currentEntry->question );
@@ -111,6 +112,13 @@ void StudyProcessor::waitingForAnswer()
     d->mainWindow->timeoutPanel()->setProgress(percent);
 }
 
+void StudyProcessor::returnPressed()
+{
+    QString answer = d->mainWindow->answerWindow()->enteredAnswer();
+    if ( answer.isEmpty() ) return;
+    checkAnswer();
+}
+
 void StudyProcessor::checkAnswer()
 {
     bool correct = d->mainWindow->answerWindow()->isAnswerCorrect();
@@ -121,7 +129,6 @@ void StudyProcessor::checkAnswer()
     }
     else {
         QString answer = d->mainWindow->answerWindow()->answer();
-        qDebug() << answer;
     
         d->mainWindow->questionWindow()->setHeader( tr("The correct answer is:") );
         d->mainWindow->questionWindow()->setQuestion( tr("<p align='center'><font color='#080'>%1</font></p>").arg(answer) );

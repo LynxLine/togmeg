@@ -18,6 +18,7 @@ StudyStorage::StudyStorage(QObject * parent)
     QSqlQuery query;
     query.exec("create table test( "\
                " id          integer primary key autoincrement, "\
+               " tid         integer, "\
                " question    varchar(400), "\
                " answer      varchar(400), "\
                " msecs       integer "\
@@ -38,7 +39,8 @@ StudyEntry * StudyStorage::nextEntry()
 
     query.exec("SELECT count() from test");
     query.first();
-    int count = query.value(0).toInt();    
+    int count = query.value(0).toInt(); 
+    if ( !count ) return 0L;
     
     query.exec("SELECT question, answer FROM test");
     int pos = random() % count;

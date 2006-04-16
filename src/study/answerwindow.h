@@ -18,6 +18,7 @@ public:
     ~AnswerWindow();
 
     QString answer();
+    QString enteredAnswer();
     bool isAnswerCorrect();
     void setState(State);
     

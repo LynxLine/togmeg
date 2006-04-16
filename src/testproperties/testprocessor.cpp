@@ -21,6 +21,9 @@ TestProcessor::TestProcessor(MainWindow * parent)
 :QObject(parent)
 {
     d = new Private(parent);
+
+    connect(d->mainWindow->testDescriptionWindow(), SIGNAL(testSelected(int)),
+            d->mainWindow->testEditorWindow(),        SLOT(loadData(int)));
 }
 
 /*!
@@ -35,7 +38,7 @@ void TestProcessor::start()
 {
     QTimer::singleShot(500, d->mainWindow->testEditorWindow(), SLOT(showWindow()));
     QTimer::singleShot(500, d->mainWindow->testDescriptionWindow(), SLOT(showWindow()));
-    d->mainWindow->testEditorWindow()->setFocus();
+    d->mainWindow->testDescriptionWindow()->setFocus();
 }
 
 void TestProcessor::stop()

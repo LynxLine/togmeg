@@ -111,6 +111,11 @@ bool AnswerWindow::isAnswerCorrect()
     return d->le_answer->text() == d->answer;
 }
 
+QString AnswerWindow::enteredAnswer()
+{
+    return d->le_answer->text();
+}
+
 void AnswerWindow::clear()
 {
     d->le_answer->clear();

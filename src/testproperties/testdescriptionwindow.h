@@ -20,9 +20,14 @@ public slots:
     void showWindow();
     void hideWindow();
 
+signals:
+    void testSelected(int);
+
 private slots:
     void newTest();
-    void loadData();
+    void updateTestName();
+    void currentItemChanged(QListWidgetItem *);
+    void loadData(int selectID=1, bool edit=false);
 
 protected:
     virtual void keyPressEvent(QKeyEvent *);

@@ -2,6 +2,10 @@
     <qresource>
         <file>images/alesson.ico</file>
 
+        <file>images/actions/add.png</file>
+        <file>images/actions/edit.png</file>
+        <file>images/actions/remove.png</file>
+
         <file>images/red-box/top.png</file>
         <file>images/red-box/left.png</file>
         <file>images/red-box/right.png</file>

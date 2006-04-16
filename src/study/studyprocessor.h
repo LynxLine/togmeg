@@ -29,6 +29,7 @@ private slots:
     void startAsking();
     void startProgress();
     void waitingForAnswer();
+    void returnPressed();
     void checkAnswer();
     
 private:

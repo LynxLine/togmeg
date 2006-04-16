@@ -22,10 +22,10 @@ public slots:
     void showWindow();
     void hideWindow();
     void submitAll();
+    void loadData(int testID);
 
 private slots:
     void newRow();
-    void loadData();
     void primeInsertContinue();
     void primeInsert(int, QSqlRecord &);
     void closeEditorContinue();
