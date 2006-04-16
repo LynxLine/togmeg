@@ -279,8 +279,10 @@ void TestDescriptionWindow::removeTest()
     int row =  d->lw_repository->currentRow();
     QListWidgetItem * item = d->lw_repository->currentItem();
     int id = item->data(Qt::UserRole).toInt();
-    d->lw_repository->setCurrentRow(row);
     delete item;
+    
+    if (row < d->lw_repository->count()) d->lw_repository->setCurrentRow(row);
+    else                                 d->lw_repository->setCurrentRow(row-1);
 
     QSqlQuery query;
     query.prepare(QString("UPDATE repository SET active = :active WHERE id = '%1'").arg(id));
