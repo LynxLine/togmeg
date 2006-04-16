@@ -90,18 +90,18 @@ TestDescriptionWindow::TestDescriptionWindow(QWidget * parent)
     tb_mod->setAutoRaise(true);
     tb_del->setAutoRaise(true);
 
-    tb_add->setText(tr("Add"));
-    tb_mod->setText(tr("Edit"));
-    tb_del->setText(tr("Delete"));
+    tb_add->setText(tr("Add (INS)"));
+    tb_mod->setText(tr("Edit (F2)"));
+    tb_del->setText(tr("Delete (DEL)"));
 
     tb_add->setIcon( QPixmap(":/images/actions/add.png") );
     tb_mod->setIcon( QPixmap(":/images/actions/edit.png") );
     tb_del->setIcon( QPixmap(":/images/actions/remove.png") );
 
     connect(tb_add, SIGNAL(clicked()),
-            this, SLOT(addTest()));
+            this, SLOT(newTest()));
     connect(tb_mod, SIGNAL(clicked()),
-            this, SLOT(editTest()));
+            this, SLOT(modifyCurrentItem()));
     connect(tb_del, SIGNAL(clicked()),
             this, SLOT(removeTest()));
 
@@ -181,10 +181,10 @@ void TestDescriptionWindow::loadData(int selectID, bool edit)
                    ")");
         d->init = true;
     }
-    
+
     QListWidgetItem * selectedItem = 0L;
     d->lw_repository->clear();
-    QSqlQuery query("SELECT id, name FROM repository");
+    QSqlQuery query("SELECT id, name FROM repository WHERE active='true'");
     while (query.next()) {
         int     id   = query.value(COL_REP_ID).toInt();
         QString name = query.value(COL_REP_NAME).toString();
@@ -206,8 +206,9 @@ void TestDescriptionWindow::loadData(int selectID, bool edit)
 void TestDescriptionWindow::newTest()
 {
     QSqlQuery query;
-    query.prepare("INSERT INTO repository (name) VALUES (:name)");
+    query.prepare("INSERT INTO repository (name, active) VALUES (:name, :active)");
     query.bindValue(":name", "");
+    query.bindValue(":active", true);
     query.exec();
 
     loadData(query.lastInsertId().toInt(), true);
@@ -223,6 +224,12 @@ void TestDescriptionWindow::keyPressEvent(QKeyEvent * ke)
     if (ke->key() == Qt::Key_Insert) {
         ke->accept();
         newTest();
+        return;
+    }
+
+    if (ke->key() == Qt::Key_Delete) {
+        ke->accept();
+        removeTest();
         return;
     }
 
@@ -242,7 +249,10 @@ void TestDescriptionWindow::updateTestName()
     
     QString newName = d->lw_repository->currentItem()->text();
     int id = d->lw_repository->currentItem()->data(Qt::UserRole).toInt();
-
+    if ( newName.isEmpty() ) {
+        newName = tr("Test %1").arg(id);
+    }
+    
     QSqlQuery query;
     query.prepare(QString("UPDATE repository SET name = :name WHERE id = '%1'").arg(id));
     query.bindValue(":name", newName);
@@ -255,5 +265,26 @@ void TestDescriptionWindow::currentItemChanged(QListWidgetItem * current)
     int id = current->data(Qt::UserRole).toInt();
     emit testSelected(id);
     setFocus();
+}
+
+void TestDescriptionWindow::modifyCurrentItem()
+{
+    if ( !d->lw_repository->currentItem() ) return;
+    d->lw_repository->editItem( d->lw_repository->currentItem() );
+}
+
+void TestDescriptionWindow::removeTest()
+{
+    if ( !d->lw_repository->currentItem() ) return;
+    int row =  d->lw_repository->currentRow();
+    QListWidgetItem * item = d->lw_repository->currentItem();
+    int id = item->data(Qt::UserRole).toInt();
+    d->lw_repository->setCurrentRow(row);
+    delete item;
+
+    QSqlQuery query;
+    query.prepare(QString("UPDATE repository SET active = :active WHERE id = '%1'").arg(id));
+    query.bindValue(":active", false);
+    query.exec();
 }
 

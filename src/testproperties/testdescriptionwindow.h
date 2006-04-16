@@ -25,7 +25,9 @@ signals:
 
 private slots:
     void newTest();
+    void removeTest();
     void updateTestName();
+    void modifyCurrentItem();
     void currentItemChanged(QListWidgetItem *);
     void loadData(int selectID=1, bool edit=false);
 
