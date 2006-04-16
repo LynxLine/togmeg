@@ -20,6 +20,13 @@ public slots:
     void showWindow();
     void hideWindow();
 
+private slots:
+    void newTest();
+    void loadData();
+
+protected:
+    virtual void keyPressEvent(QKeyEvent *);
+
 private:
     class Private;
     Private * d;

@@ -47,6 +47,8 @@ TestEditorWindow::TestEditorWindow(QWidget * parent)
 
     int b = (height*  10) / 600;
 
+    setContentsMargins(1, b, 1, b);
+
     QFont font("Verdana", 10);
     font.setStyleStrategy(QFont::PreferAntialias);
     font.setBold(true);
@@ -55,14 +57,20 @@ TestEditorWindow::TestEditorWindow(QWidget * parent)
     float pointSize = ( font.pointSizeF() * pixelSize )/ 10;
     font.setPointSizeF(pointSize);
     
+    /*
     d->l_header = new QLabel(tr("Questions/Answers Editor:"), this);
     d->l_header->setFixedHeight(b);
     d->l_header->setFont(font);
+    */
     
     d->tv_editor = new QTableView(this);
 
     {
+        d->tv_editor->setFrameStyle(QFrame::StyledPanel | QFrame::Plain);
+        d->tv_editor->setLineWidth(1);
+        
         d->tv_editor->verticalHeader()->hide();
+        d->tv_editor->horizontalHeader()->hide();
         d->tv_editor->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
         d->tv_editor->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         
@@ -71,17 +79,19 @@ TestEditorWindow::TestEditorWindow(QWidget * parent)
         pal.setBrush( QPalette::Window, QBrush(QColor("#f0f0d0")) );
         d->tv_editor->setPalette( pal );
 
-        pal.setBrush( QPalette::Foreground, QBrush(QColor("#888")) );
-        d->l_header->setPalette( pal );
+        //pal.setBrush( QPalette::Foreground, QBrush(QColor("#888")) );
+        //d->l_header->setPalette( pal );
 
         QFont teFont = font;
         teFont.setPointSizeF(font.pointSizeF()*1.2);
         d->tv_editor->setFont(teFont);
     }
+
+    setFocusProxy( d->tv_editor );
     
     QGridLayout * grid = new QGridLayout;
-    grid->addWidget(d->l_header,  0,0);
-    grid->addWidget(d->tv_editor, 1,0);
+    //grid->addWidget(d->l_header,  0,0);
+    grid->addWidget(d->tv_editor, 0,0);
     grid->setSpacing(5);
     grid->setMargin(0);
     setLayout(grid);
@@ -126,8 +136,8 @@ void TestEditorWindow::loadData()
     d->tv_editor->setSelectionMode(QAbstractItemView::NoSelection);
     
     int vScrollWidth = d->tv_editor->verticalScrollBar()->width();
-    d->tv_editor->setColumnWidth(COL_QUESTION, (width()-vScrollWidth -25)/2 );
-    d->tv_editor->setColumnWidth(COL_ANSWER,   (width()-vScrollWidth -25)/2 );
+    d->tv_editor->setColumnWidth(COL_QUESTION, (width()-vScrollWidth -4)/2 );
+    d->tv_editor->setColumnWidth(COL_ANSWER,   (width()-vScrollWidth -4)/2 );
     
     d->tv_editor->setEditTriggers(QAbstractItemView::AllEditTriggers);
     

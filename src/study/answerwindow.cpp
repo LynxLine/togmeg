@@ -65,6 +65,8 @@ AnswerWindow::AnswerWindow(QWidget * parent)
     d->le_answer->setFixedHeight(h/2);
     d->le_answer->setFont(font);
     
+    setFocusProxy( d->le_answer );
+    
     connect(d->le_answer, SIGNAL(returnPressed()),
             this,        SIGNAL(returnPressed()));
     

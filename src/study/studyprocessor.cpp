@@ -78,8 +78,9 @@ void StudyProcessor::startAsking()
     d->mainWindow->questionWindow()->setQuestion( d->currentEntry->question );
     d->mainWindow->answerWindow()->setAnswer( d->currentEntry->answer );
     d->mainWindow->answerWindow()->setState(AnswerWindow::Default);
+    d->mainWindow->answerWindow()->setFocus();
     d->mainWindow->answerWindow()->clear();
-
+    
     startProgress();
 }
 

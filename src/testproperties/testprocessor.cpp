@@ -35,6 +35,7 @@ void TestProcessor::start()
 {
     QTimer::singleShot(500, d->mainWindow->testEditorWindow(), SLOT(showWindow()));
     QTimer::singleShot(500, d->mainWindow->testDescriptionWindow(), SLOT(showWindow()));
+    d->mainWindow->testEditorWindow()->setFocus();
 }
 
 void TestProcessor::stop()
