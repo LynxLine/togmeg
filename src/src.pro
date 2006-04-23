@@ -24,6 +24,7 @@ QT += sql
 QT += network
 
 include('study/study.pri')
+include('storage/storage.pri')
 include('testproperties/testproperties.pri')
 
 HEADERS += \

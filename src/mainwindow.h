@@ -43,7 +43,6 @@ private:
 protected:
     virtual void showEvent(QShowEvent *);
     virtual void keyPressEvent(QKeyEvent *);
-    virtual void mousePressEvent(QMouseEvent *);
 
 private:
     class Private;

@@ -67,6 +67,9 @@ MainWindow::MainWindow(QWidget* parent, Qt::WFlags f)
     bool ok = db.open();
     if (!ok) qDebug() << tr("Cannot open default database.");
     
+    qApp->setActiveWindow(this);
+    resize(800, 600);
+    
     d->timeoutPanel = new TimeoutPanel(this);
     d->answerWindow = new AnswerWindow(this);
     d->questionWindow = new QuestionWindow(this);
@@ -76,7 +79,8 @@ MainWindow::MainWindow(QWidget* parent, Qt::WFlags f)
     d->testProcessor = new TestProcessor(this);
     d->studyProcessor = new StudyProcessor(this);
     
-    showFullScreen();
+    //showFullScreen();
+    resize(800, 600);
 }
 
 /*!
@@ -102,14 +106,6 @@ void MainWindow::showEvent(QShowEvent * se)
     
     //QTimer::singleShot(500, d->studyProcessor, SLOT(start()));
     setViewMode( TestPropertiesMode );
-}
-
-void MainWindow::mousePressEvent(QMouseEvent * me)
-{
-    QMainWindow::mousePressEvent(me);
-    
-    if (viewMode() == StudyingMode) setViewMode(TestPropertiesMode);
-    else if (viewMode() == TestPropertiesMode) setViewMode(StudyingMode);
 }
 
 void MainWindow::keyPressEvent(QKeyEvent * ke)

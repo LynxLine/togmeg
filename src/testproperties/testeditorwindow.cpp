@@ -10,6 +10,9 @@
 #define COL_QUESTION    2
 #define COL_ANSWER      3
 #define COL_MSECS       4
+#define COL_HITS        5
+#define COL_MISSES      6
+#define COL_SCORE       7
 #define ROW_APPEND      -1
 
 class TestEditorWindow::Private {
@@ -32,7 +35,7 @@ TestEditorWindow::TestEditorWindow(QWidget * parent)
 {
     d = new Private;
 
-    QDesktopWidget *desktop = QApplication::desktop();
+    QWidget *desktop = qApp->activeWindow();
     int height = desktop->height();
     int width = desktop->width();
 
@@ -140,6 +143,9 @@ void TestEditorWindow::loadData(int testID)
     d->tv_editor->setColumnHidden(COL_ID, true);
     d->tv_editor->setColumnHidden(COL_TID, true);
     d->tv_editor->setColumnHidden(COL_MSECS, true);
+    d->tv_editor->setColumnHidden(COL_HITS,   true);
+    d->tv_editor->setColumnHidden(COL_MISSES, true);
+    d->tv_editor->setColumnHidden(COL_SCORE,  true);
     d->tv_editor->setSelectionMode(QAbstractItemView::NoSelection);
     
     int vScrollWidth = d->tv_editor->verticalScrollBar()->width();

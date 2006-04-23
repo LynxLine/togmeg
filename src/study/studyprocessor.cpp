@@ -26,6 +26,8 @@ public:
     bool stopWaiting;
     int timeoutMsecs;
     QTime progressTime;
+
+    QPushButton * exitButton;
 };
 
 /*!
@@ -35,6 +37,30 @@ StudyProcessor::StudyProcessor(MainWindow * parent)
 :QObject(parent)
 {
     d = new Private(parent);
+
+    QWidget *desktop = qApp->activeWindow();
+    int height = desktop->height();
+    int width = desktop->width();
+
+    int w = (width * 150) / 800;
+    int h = (height*  30) / 600;
+
+    int b = (height*  10) / 600;
+    QFont font("Verdana", 10);
+    font.setStyleStrategy(QFont::PreferAntialias);
+    font.setBold(true);
+    
+    int pixelSize = (b * 100 )/100;
+    float pointSize = ( font.pointSizeF() * pixelSize )/ 10;
+    font.setPointSizeF(pointSize);
+    
+    d->exitButton = new QPushButton(tr("Stop Testing"), d->mainWindow);
+    d->exitButton->setFont(font);
+    d->exitButton->move(width-w,0);
+    d->exitButton->resize(w,h);
+    d->exitButton->hide();
+
+    connect(d->exitButton, SIGNAL(clicked()), this, SLOT(stopTesting()));
 }
 
 /*!
@@ -56,9 +82,16 @@ void StudyProcessor::start()
             this, SLOT(returnPressed()));
 }
 
+void StudyProcessor::stopTesting()
+{
+    if (d->mainWindow->viewMode() == MainWindow::StudyingMode) 
+        d->mainWindow->setViewMode(MainWindow::TestPropertiesMode);
+}
+
 void StudyProcessor::stop()
 {
     d->stopWaiting = true;
+    d->exitButton->hide();
     d->mainWindow->timeoutPanel()->setProgress(0);
     
     QTimer::singleShot( 10, d->mainWindow->timeoutPanel(), SLOT(hideWindow()));
@@ -69,6 +102,8 @@ void StudyProcessor::stop()
 
 void StudyProcessor::startAsking()
 {
+    d->exitButton->show();
+
     if (d->currentEntry) 
         d->storage->closeEntry( d->currentEntry );
     

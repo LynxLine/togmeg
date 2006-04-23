@@ -28,6 +28,7 @@ public slots:
 private slots:
     void startAsking();
     void startProgress();
+    void stopTesting();
     void waitingForAnswer();
     void returnPressed();
     void checkAnswer();

@@ -22,7 +22,7 @@ TestDescriptionWindow::TestDescriptionWindow(QWidget * parent)
     d = new Private;
     d->init = false;
 
-    QDesktopWidget *desktop = QApplication::desktop();
+    QWidget *desktop = qApp->activeWindow();
     int height = desktop->height();
     int width = desktop->width();
 

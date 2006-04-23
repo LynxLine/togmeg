@@ -38,7 +38,7 @@ MistakeWindow::MistakeWindow(QWidget * parent)
     d = new Private;
     setVisible(false);
 
-    QDesktopWidget *desktop = QApplication::desktop();
+    QWidget *desktop = qApp->activeWindow();
     int height = desktop->height();
     int width = desktop->width();
 

@@ -22,6 +22,10 @@ public slots:
     void start();
     void stop();
 
+private slots:
+    void exit();
+    void startTesting();
+
 private:
     class Private;
     Private * d;

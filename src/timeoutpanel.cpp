@@ -21,7 +21,7 @@ TimeoutPanel::TimeoutPanel(QWidget * parent)
 {
     d = new Private(this);
 
-    QDesktopWidget *desktop = QApplication::desktop();
+    QWidget *desktop = qApp->activeWindow();
     int height = desktop->height();
     int width = desktop->width();
 

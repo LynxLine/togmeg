@@ -21,7 +21,10 @@ StudyStorage::StudyStorage(QObject * parent)
                " tid         integer, "\
                " question    varchar(400), "\
                " answer      varchar(400), "\
-               " msecs       integer "\
+               " msecs       integer, "\
+               " hits        integer, "\
+               " misses      integer, "\
+               " score       integer "\
                ")");
 }
 
