@@ -68,7 +68,11 @@ MainWindow::MainWindow(QWidget* parent, Qt::WFlags f)
     if (!ok) qDebug() << tr("Cannot open default database.");
     
     qApp->setActiveWindow(this);
-    resize(800, 600);
+    {
+        QDesktopWidget * desktop = QApplication::desktop();
+        resize( desktop->size() );
+    }
+    //resize(800, 600);
     
     d->timeoutPanel = new TimeoutPanel(this);
     d->answerWindow = new AnswerWindow(this);
@@ -79,8 +83,7 @@ MainWindow::MainWindow(QWidget* parent, Qt::WFlags f)
     d->testProcessor = new TestProcessor(this);
     d->studyProcessor = new StudyProcessor(this);
     
-    //showFullScreen();
-    resize(800, 600);
+    showFullScreen();
 }
 
 /*!
