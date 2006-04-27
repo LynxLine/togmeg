@@ -24,9 +24,6 @@ TestProcessor::TestProcessor(MainWindow * parent)
 {
     d = new Private(parent);
 
-    connect(d->mainWindow->testDescriptionWindow(), SIGNAL(testSelected(int)),
-            d->mainWindow->testEditorWindow(),        SLOT(loadData(int)));
-
     QWidget *desktop = qApp->activeWindow();
     int height = desktop->height();
     int width = desktop->width();
@@ -60,6 +57,12 @@ TestProcessor::TestProcessor(MainWindow * parent)
     
     connect(d->exitButton, SIGNAL(clicked()), this, SLOT(exit()));
     connect(d->startButton, SIGNAL(clicked()), this, SLOT(startTesting()));
+
+    connect(d->mainWindow->testDescriptionWindow(), SIGNAL(testSelected(int)),
+            d->mainWindow->testEditorWindow(),        SLOT(loadData(int)));
+    
+    connect(d->mainWindow->testDescriptionWindow(), SIGNAL(testSelected(int)),
+            this,                                   SIGNAL(changedTestId(int)));
 }
 
 /*!

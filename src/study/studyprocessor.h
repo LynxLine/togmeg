@@ -24,6 +24,7 @@ public:
 public slots:
     void start();
     void stop();
+    void setTestId(int testID);
 
 private slots:
     void startAsking();

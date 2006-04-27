@@ -83,6 +83,9 @@ MainWindow::MainWindow(QWidget* parent, Qt::WFlags f)
     d->testProcessor = new TestProcessor(this);
     d->studyProcessor = new StudyProcessor(this);
     
+    connect(d->testProcessor, SIGNAL(changedTestId(int)),
+            d->studyProcessor, SLOT(setTestId(int)));
+    
     showFullScreen();
 }
 

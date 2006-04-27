@@ -22,6 +22,9 @@ public slots:
     void start();
     void stop();
 
+signals:
+    void changedTestId(int);
+    
 private slots:
     void exit();
     void startTesting();

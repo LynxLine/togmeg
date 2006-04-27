@@ -11,8 +11,13 @@
  */
 class StudyEntry {
 public:
+    int id;
     QString question;
     QString answer;
+
+    int score;
+    int misses;
+    int hits;
 };
 
 /*!
@@ -25,8 +30,10 @@ public:
     StudyStorage(QObject * parent = 0);
     ~StudyStorage();
 
-    StudyEntry * nextEntry();
+    StudyEntry * nextEntry(int testID);
+    void updateEntry(StudyEntry *);
     void closeEntry(StudyEntry *);
+
 
 private:
     class Private;

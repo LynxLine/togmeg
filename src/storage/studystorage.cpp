@@ -36,25 +36,49 @@ StudyStorage::~StudyStorage()
     delete d;
 }
 
-StudyEntry * StudyStorage::nextEntry()
+StudyEntry * StudyStorage::nextEntry(int testID)
 {
     QSqlQuery query;
 
-    query.exec("SELECT count() from test");
+    query.exec("SELECT count() FROM test WHERE tid="+QString::number(testID));
     query.first();
     int count = query.value(0).toInt(); 
     if ( !count ) return 0L;
+
+    query.exec("SELECT min(score) FROM test WHERE tid="+QString::number(testID));
+    query.first();
+    int min = query.value(0).toInt(); 
     
-    query.exec("SELECT question, answer FROM test");
+    query.exec("SELECT max(score) FROM test WHERE tid="+QString::number(testID));
+    query.first();
+    int max = query.value(0).toInt(); 
+
+    qDebug() << min << max;
+    
+    query.exec("SELECT id, question, answer, score, misses, hits FROM test WHERE tid="+QString::number(testID));
     int pos = random() % count;
     
     StudyEntry * entry = new StudyEntry;
     if (query.seek(pos)) {
-        entry->question = query.value(0).toString();
-        entry->answer = query.value(1).toString();
+        entry->id = query.value(0).toInt();
+        entry->question = query.value(1).toString();
+        entry->answer   = query.value(2).toString();
+        entry->score    = query.value(3).toInt();
+        entry->misses   = query.value(4).toInt();
+        entry->hits     = query.value(5).toInt();
     }
 
     return entry;
+}
+
+void StudyStorage::updateEntry(StudyEntry * entry)
+{
+    QSqlQuery query;
+    query.prepare("UPDATE test SET score=:score, hits=:hits, misses=:misses WHERE id="+QString::number(entry->id));
+    query.bindValue(":score",  entry->score);
+    query.bindValue(":misses", entry->misses);
+    query.bindValue(":hits",   entry->hits);
+    query.exec();
 }
 
 void StudyStorage::closeEntry(StudyEntry * entry)

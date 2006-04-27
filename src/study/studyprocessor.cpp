@@ -28,6 +28,7 @@ public:
     QTime progressTime;
 
     QPushButton * exitButton;
+    int testID;
 };
 
 /*!
@@ -107,7 +108,7 @@ void StudyProcessor::startAsking()
     if (d->currentEntry) 
         d->storage->closeEntry( d->currentEntry );
     
-    d->currentEntry = d->storage->nextEntry();
+    d->currentEntry = d->storage->nextEntry(d->testID);
     if ( !d->currentEntry ) return;
 
     d->mainWindow->questionWindow()->setHeader( tr("Question:") );
@@ -160,6 +161,7 @@ void StudyProcessor::checkAnswer()
     d->stopWaiting = true;
 
     if (correct) {
+        d->currentEntry->hits++;
         startAsking();
     }
     else {
@@ -176,5 +178,10 @@ void StudyProcessor::checkAnswer()
 StudyStorage * StudyProcessor::storage()
 {
     return d->storage;
+}
+
+void StudyProcessor::setTestId(int testID)
+{
+    d->testID = testID;
 }
 
