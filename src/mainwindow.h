@@ -1,9 +1,9 @@
 //
-// Copyright (C) 2006 Oleksandr Yakovlyev <yshurik@gmail.com>
+// Copyright (C) 2007 Oleksandr Yakovlyev <yshurik@gmail.com>
 //
 
-#ifndef F4MAINWINDOW_H
-#define F4MAINWINDOW_H
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
 #include <QAction>
 #include <QMainWindow>
@@ -16,22 +16,40 @@ class MainWindow : public QMainWindow
 Q_OBJECT
 
 public:
-	MainWindow();
+    enum ViewMode {
+        CatalogMode = 1,
+        ExamineMode
+    };
+	
+    MainWindow();
     virtual ~MainWindow();
     static MainWindow * instance();
 
     QAction * action(QString name);
 
+    MainWindow::ViewMode viewMode();
     static QFont baseFont(qreal multiplier = 1.0, int weight = 20);
 
 public slots:
+    void importFile();
+    void exportFile();
+
+    void runDemo();
+    void runStudy();
+    void runExamine();
+    void stop();
+
     void quit();
-    void openTask();
     void openHelp();
     void openAbout();
+
     void switchFullScreen();
 
     void messageReceived(const QString &);
+    void setViewMode(MainWindow::ViewMode);
+
+signals:
+    void viewModeChanged(MainWindow::ViewMode);
 
 private:
 	void createActions();
@@ -47,4 +65,4 @@ private:
 
 };
 
-#endif
+#endif // MAINWINDOW_H

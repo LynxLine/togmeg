@@ -31,6 +31,8 @@ unix:CONFIG += precompile_header
 }
 
 QT += xml
+QT += svg
+QT += opengl
 QT += network
 
 
@@ -44,7 +46,11 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
 
+
+include("svg/svg.pri")
 include("logger/logger.pri")
+include("catalog/catalog.pri")
+include("examine/examine.pri")
 include("qtsingleapplication/qtsingleapplication.pri")
 
 RESOURCES += images.qrc

@@ -1,11 +1,13 @@
 //
-// Copyright (C) 2006 Oleksandr Yakovlyev <yshurik@gmail.com>
+// Copyright (C) 2007 Oleksandr Yakovlyev <yshurik@gmail.com>
 //
 
 #include <QtGui>
 #include <QtCore>
 
 #include "mainwindow.h"
+#include "catalogwidget.h"
+#include "examinewidget.h"
 
 #ifdef Q_WS_WIN
 #include "qt_windows.h"
@@ -18,19 +20,27 @@ void logMessageHandler(QtMsgType type, const char *msg);
 class MainWindow::Private
 {
 public:
-    Private(MainWindow * p){
+    Private(MainWindow * p)
+    :viewMode(MainWindow::ViewMode(-1))
+    {
         instance = p;
     }
 
     static MainWindow * instance;
 
     QMap<QString, QAction *> actions;
-
+    MainWindow::ViewMode viewMode;
+    
+    //gui
+    QStackedWidget * stack;
+    CatalogWidget * catalogWidget;
+    ExamineWidget * examineWidget;
 };
 
 MainWindow * MainWindow::Private::instance = 0L;
 
 /*!
+ Creates new MainWindow
  */
 MainWindow::MainWindow()
 :QMainWindow(0L, Qt::Window)
@@ -69,6 +79,17 @@ MainWindow::MainWindow()
     createMenuBar();
 	
 	statusBar()->hide();
+
+    d->stack = new QStackedWidget(this);
+    setCentralWidget( d->stack );
+
+    d->catalogWidget = new CatalogWidget( d->stack );
+    d->stack->addWidget( d->catalogWidget );
+
+    d->examineWidget = new ExamineWidget( d->stack );
+    d->stack->addWidget( d->examineWidget );
+
+    setViewMode(MainWindow::CatalogMode);
 }
 
 /*!
@@ -109,87 +130,8 @@ QAction * MainWindow::action(QString name)
 }
 
 /*!
- Creates main actions for the application.
+ Returns current build number
  */
-void MainWindow::createActions()
-{
-	d->actions["ad/exit"]           = new QAction (tr("E&xit"), this);
-	d->actions["ad/open"]           = new QAction (tr("&Open a task..."), this);
-    d->actions["ad/close"]          = new QAction (tr("&Close the task"), this);
-    d->actions["ad/close_all"]      = new QAction (tr("Close &all tasks"), this);
-
-    d->actions["ad/help"]                 = new QAction (tr("eLinker &Help"), this);
-    d->actions["ad/check_updates"]        = new QAction (tr("Check for Updates Now"), this);
-    d->actions["ad/about"]                = new QAction (tr("&About"), this);
-}
-
-/*!
- Creates menubar and add actions.
- */
-void MainWindow::createMenuBar()
-{
-	QMenu * menu = menuBar()->addMenu(tr("&File"));
-	menu->addAction( action("ad/open") );
-	menu->addAction( action("ad/close") );
-	menu->addAction( action("ad/close_all") );
-	menu->addSeparator();
-	menu->addAction( action("ad/exit") );
-
-    menu = menuBar()->addMenu(tr("&Help"));
-	menu->addAction( action("ad/about") );
-	menu->addAction( action("ad/help") );
-    menu->addSeparator();
-    menu->addAction( action("ad/check_updates") );
-}
-
-/*!
- Creates action shortcuts.
- */
-void MainWindow::createShortcuts()
-{
-    // shortcuts
-	action("ad/open")       ->setShortcut(tr("Ctrl+O"));
-	action("ad/close")      ->setShortcut(tr("Ctrl+W"));
-    action("ad/exit")       ->setShortcut(tr("Ctrl+Q"));
-    action("ad/help")       ->setShortcut(tr("F1"));
-}
-
-/*!
- Connects actions to appropriate slots.
- */
-void MainWindow::connectActions()
-{
-    connect( action("ad/exit"), SIGNAL(triggered()), this, SLOT(quit()));
-    connect( action("ad/open"), SIGNAL(triggered()), this, SLOT(openTask()));
-    connect( action("ad/close"), SIGNAL(triggered()), this, SLOT(closeTask()));
-    connect( action("ad/close_all"), SIGNAL(triggered()), this, SLOT(closeAllTasks()));
-    connect( action("ad/about"), SIGNAL(triggered()), this, SLOT(openAbout()));
-    connect( action("ad/help"), SIGNAL(triggered()), this, SLOT(openHelp()));
-}
-
-/*!
- Shows file open dialog.
- */
-void MainWindow::openTask()
-{
-	QString filePath = QFileDialog::getOpenFileName(this,
-        "Choose a file to open", ".", "Tasks (*.zip)" );
-
-    if ( !filePath.isEmpty() ) {
-        QFileInfo fi(filePath);
-    }
-}
-
-/*!
- * Opens default browser directed to help page
- */
-void MainWindow::openHelp()
-{
-    QString url = QString("http://www.serrater.com");
-    QDesktopServices::openUrl(url);
-}
-
-
 QString MainWindow::release() const
 {
     QString date(__DATE__);
@@ -204,6 +146,161 @@ QString MainWindow::release() const
     return QString::number(year*10000+month*100+day);
 }
 
+/*!
+ Creates main actions for the application.
+ */
+void MainWindow::createActions()
+{
+	d->actions["ad/exit"]   = new QAction (tr("E&xit"), this);
+	d->actions["ad/import"] = new QAction (tr("&Import..."), this);
+    d->actions["ad/export"] = new QAction (tr("&Export..."), this);
+    d->actions["ad/print"]  = new QAction (tr("&Print..."), this);
+
+	d->actions["ad/undo" ] = new QAction (tr("&Undo"), this);
+	d->actions["ad/redo" ] = new QAction (tr("&Redo"), this);
+    d->actions["ad/cut"  ] = new QAction (tr("Cu&t"), this);
+    d->actions["ad/copy" ] = new QAction (tr("&Copy"), this);
+    d->actions["ad/paste"] = new QAction (tr("&Paste"), this);
+
+	d->actions["ad/demo" ] = new QAction (tr("&Demo"), this);
+    d->actions["ad/study"] = new QAction (tr("&Study"), this);
+    d->actions["ad/exam" ] = new QAction (tr("&Examinate"), this);
+    d->actions["ad/stop" ] = new QAction (tr("&Stop"), this);
+
+    d->actions["ad/about"]         = new QAction (tr("&About"), this);
+    d->actions["ad/help"]          = new QAction (tr("Serrater &Help"), this);
+    d->actions["ad/check_updates"] = new QAction (tr("Check for Updates Now"), this);
+}
+
+/*!
+ Creates menubar and add actions.
+ */
+void MainWindow::createMenuBar()
+{
+    QMenu * menu;
+	menu = menuBar()->addMenu(tr("&File"));
+	menu->addAction( action("ad/import") );
+	menu->addAction( action("ad/export") );
+	menu->addSeparator();
+	menu->addAction( action("ad/print") );
+	menu->addSeparator();
+	menu->addAction( action("ad/exit") );
+
+	menu = menuBar()->addMenu(tr("&Edit"));
+	menu->addAction( action("ad/undo") );
+	menu->addAction( action("ad/redo") );
+	menu->addSeparator();
+	menu->addAction( action("ad/cut") );
+	menu->addAction( action("ad/copy") );
+	menu->addAction( action("ad/paste") );
+
+	menu = menuBar()->addMenu(tr("&Run"));
+	menu->addAction( action("ad/demo") );
+	menu->addAction( action("ad/study") );
+	menu->addAction( action("ad/exam") );
+	menu->addSeparator();
+	menu->addAction( action("ad/stop") );
+
+    menu = menuBar()->addMenu(tr("&Help"));
+	menu->addAction( action("ad/about") );
+	menu->addAction( action("ad/help") );
+    menu->addSeparator();
+    menu->addAction( action("ad/check_updates") );
+}
+
+/*!
+ Creates action shortcuts.
+ */
+void MainWindow::createShortcuts()
+{
+    // shortcuts
+    action("ad/print")      ->setShortcut(tr("Ctrl+P"));
+    action("ad/exit")       ->setShortcut(tr("Ctrl+Q"));
+    action("ad/undo")       ->setShortcut(tr("Ctrl+U"));
+    action("ad/redo")       ->setShortcut(tr("Ctrl+Y"));
+    action("ad/cut")        ->setShortcut(tr("Ctrl+X"));
+    action("ad/copy")       ->setShortcut(tr("Ctrl+C"));
+    action("ad/paste")      ->setShortcut(tr("Ctrl+V"));
+    action("ad/help")       ->setShortcut(tr("F1"));
+}
+
+/*!
+ Connects actions to appropriate slots.
+ */
+void MainWindow::connectActions()
+{
+    connect( action("ad/exit"),   SIGNAL(triggered()), this, SLOT(quit()));
+    connect( action("ad/help"),   SIGNAL(triggered()), this, SLOT(openHelp()));
+    connect( action("ad/about"),  SIGNAL(triggered()), this, SLOT(openAbout()));
+
+    connect( action("ad/import"), SIGNAL(triggered()), this, SLOT(importFile()));
+    connect( action("ad/export"), SIGNAL(triggered()), this, SLOT(exportFile()));
+
+   connect( action("ad/demo" ), SIGNAL(triggered()), this, SLOT(runDemo()));
+   connect( action("ad/study"), SIGNAL(triggered()), this, SLOT(runStudy()));
+   connect( action("ad/exam" ), SIGNAL(triggered()), this, SLOT(runExamine()));
+   connect( action("ad/stop" ), SIGNAL(triggered()), this, SLOT(stop()));
+
+}
+
+/*!
+ Shows file open dialog.
+ */
+void MainWindow::importFile()
+{
+    /*
+	QString filePath = QFileDialog::getOpenFileName(this,
+        "Choose a file to open", ".", "Tasks (*.zip)" );
+
+    if ( !filePath.isEmpty() ) {
+        QFileInfo fi(filePath);
+    }
+    */
+}
+
+/*!
+ Shows file save dialog.
+ */
+void MainWindow::exportFile()
+{
+    /*
+	QString filePath = QFileDialog::getSaveFileName(this,
+        "Choose a file to open", ".", "Tasks (*.zip)" );
+
+    if ( !filePath.isEmpty() ) {
+        QFileInfo fi(filePath);
+    }
+    */
+}
+
+void MainWindow::runDemo()
+{
+    setViewMode(MainWindow::ExamineMode);
+}
+
+void MainWindow::runStudy()
+{
+    setViewMode(MainWindow::ExamineMode);
+}
+
+void MainWindow::runExamine()
+{
+    setViewMode(MainWindow::ExamineMode);
+}
+
+void MainWindow::stop()
+{
+    setViewMode(MainWindow::CatalogMode);
+}
+
+/*!
+ * Opens default browser directed to help page
+ */
+void MainWindow::openHelp()
+{
+    QString url = QString("http://www.serrater.com");
+    QDesktopServices::openUrl(url);
+}
 
 void MainWindow::openAbout()
 {
@@ -234,6 +331,29 @@ void MainWindow::messageReceived(const QString & message)
         quit();
         return;
     }
+}
+
+MainWindow::ViewMode MainWindow::viewMode()
+{
+    return d->viewMode;
+}
+
+void MainWindow::setViewMode(MainWindow::ViewMode m)
+{
+    d->viewMode = m;
+    if (m == MainWindow::CatalogMode) {
+        d->stack->setCurrentWidget( d->catalogWidget );
+    }
+    else if (m == MainWindow::ExamineMode) {
+        d->stack->setCurrentWidget( d->examineWidget );
+    }
+
+    action("ad/demo" )->setEnabled( m==MainWindow::CatalogMode );
+    action("ad/study")->setEnabled( m==MainWindow::CatalogMode );
+    action("ad/exam" )->setEnabled( m==MainWindow::CatalogMode );
+    action("ad/stop" )->setEnabled( m==MainWindow::ExamineMode );
+
+    emit viewModeChanged(m);
 }
 
 QFont MainWindow::baseFont(qreal multiplier, int weight)
