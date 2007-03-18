@@ -28,20 +28,20 @@ ExamineWidget::ExamineWidget(QWidget * parent)
     layout->setSpacing(5);
     setLayout(layout);
 
-    QHBoxLayout * manageTestLayout = new QHBoxLayout;
-    manageTestLayout->setMargin(0);
-    manageTestLayout->setSpacing(5);
-    layout->addLayout( manageTestLayout );
+    QHBoxLayout * manageTaskLayout = new QHBoxLayout;
+    manageTaskLayout->setMargin(0);
+    manageTaskLayout->setSpacing(5);
+    layout->addLayout( manageTaskLayout );
 
-    QPushButton * pauseTest = new QPushButton("Pause");
-    QPushButton * stopTest = new QPushButton("Stop");
+    QPushButton * pauseTask = new QPushButton("Pause");
+    QPushButton * stopTask = new QPushButton("Stop");
 
-    connect(pauseTest, SIGNAL(clicked()), _action("ad/stop"), SLOT(trigger()));
-    connect(stopTest,  SIGNAL(clicked()), _action("ad/stop"), SLOT(trigger()));
+    connect(pauseTask, SIGNAL(clicked()), _action("ad/stop"), SLOT(trigger()));
+    connect(stopTask,  SIGNAL(clicked()), _action("ad/stop"), SLOT(trigger()));
 
-    manageTestLayout->addItem(new QSpacerItem(10,10, QSizePolicy::Expanding, QSizePolicy::Minimum) );
-    manageTestLayout->addWidget( pauseTest );
-    manageTestLayout->addWidget( stopTest );
+    manageTaskLayout->addItem(new QSpacerItem(10,10, QSizePolicy::Expanding, QSizePolicy::Minimum) );
+    manageTaskLayout->addWidget( pauseTask );
+    manageTaskLayout->addWidget( stopTask );
 
     d->svgWidget = new SvgWidget(this);
     layout->addWidget( d->svgWidget );

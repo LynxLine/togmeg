@@ -14,8 +14,8 @@
 class CatalogWidget::Private
 {
 public:
-    CatalogView * testCatalogView;
-    QListView * testContentView;
+    CatalogView * taskCatalogView;
+    QListView * taskContentView;
     CatalogModel * catalogModel;
 };
 
@@ -38,18 +38,18 @@ CatalogWidget::CatalogWidget(QWidget * parent)
     layout->addLayout(catalogLayout);
 
     d->catalogModel = new CatalogModel(this);
-    d->testCatalogView = new CatalogView(this);
+    d->taskCatalogView = new CatalogView(this);
 
     {
-        d->testCatalogView->setFixedWidth(200);
-        d->testCatalogView->setModel( d->catalogModel );
-        d->testCatalogView->expand( d->catalogModel->index(0,0) );
-        d->testCatalogView->setRootIsDecorated(false);
-        d->testCatalogView->header()->hide();
-        d->testCatalogView->setCurrentIndex( d->catalogModel->index(0,0) );
+        d->taskCatalogView->setFixedWidth(200);
+        d->taskCatalogView->setModel( d->catalogModel );
+        d->taskCatalogView->expandAll();
+        d->taskCatalogView->setRootIsDecorated(false);
+        d->taskCatalogView->header()->hide();
+        d->taskCatalogView->setCurrentIndex( d->catalogModel->index(0,0) );
     }
 
-    catalogLayout->addWidget( d->testCatalogView );
+    catalogLayout->addWidget( d->taskCatalogView );
 
     QHBoxLayout * manageCatalogLayout = new QHBoxLayout;
     manageCatalogLayout->setMargin(0);
@@ -63,31 +63,31 @@ CatalogWidget::CatalogWidget(QWidget * parent)
     manageCatalogLayout->addWidget( remCategory );
     //manageCatalogLayout->addItem(new QSpacerItem(10,10, QSizePolicy::MinimumExpanding, QSizePolicy::Minimum) );
 
-    QVBoxLayout * testLayout = new QVBoxLayout;
-    testLayout->setMargin(0);
-    testLayout->setSpacing(5);
-    layout->addLayout(testLayout);
+    QVBoxLayout * taskLayout = new QVBoxLayout;
+    taskLayout->setMargin(0);
+    taskLayout->setSpacing(5);
+    layout->addLayout(taskLayout);
 
-    QHBoxLayout * manageTestLayout = new QHBoxLayout;
-    manageTestLayout->setMargin(0);
-    manageTestLayout->setSpacing(5);
-    testLayout->addLayout( manageTestLayout );
+    QHBoxLayout * manageTaskLayout = new QHBoxLayout;
+    manageTaskLayout->setMargin(0);
+    manageTaskLayout->setSpacing(5);
+    taskLayout->addLayout( manageTaskLayout );
 
-    QPushButton * demoTest = new QPushButton("Demo");
-    QPushButton * studyTest = new QPushButton("Study");
-    QPushButton * examineTest = new QPushButton("Examine");
+    QPushButton * demoTask = new QPushButton("Demo");
+    QPushButton * studyTask = new QPushButton("Study");
+    QPushButton * examineTask = new QPushButton("Examine");
 
-    connect(demoTest, SIGNAL(clicked()), _action("ad/demo"), SLOT(trigger()));
-    connect(studyTest, SIGNAL(clicked()), _action("ad/study"), SLOT(trigger()));
-    connect(examineTest, SIGNAL(clicked()), _action("ad/exam"), SLOT(trigger()));
+    connect(demoTask, SIGNAL(clicked()), _action("ad/demo"), SLOT(trigger()));
+    connect(studyTask, SIGNAL(clicked()), _action("ad/study"), SLOT(trigger()));
+    connect(examineTask, SIGNAL(clicked()), _action("ad/exam"), SLOT(trigger()));
 
-    //manageTestLayout->addItem(new QSpacerItem(10,10, QSizePolicy::Expanding, QSizePolicy::Minimum) );
-    manageTestLayout->addWidget( demoTest );
-    manageTestLayout->addWidget( studyTest );
-    manageTestLayout->addWidget( examineTest );
+    //manageTaskLayout->addItem(new QSpacerItem(10,10, QSizePolicy::Expanding, QSizePolicy::Minimum) );
+    manageTaskLayout->addWidget( demoTask );
+    manageTaskLayout->addWidget( studyTask );
+    manageTaskLayout->addWidget( examineTask );
 
-    d->testContentView = new QListView(this);
-    testLayout->addWidget( d->testContentView );
+    d->taskContentView = new QListView(this);
+    taskLayout->addWidget( d->taskContentView );
 }
 
 /*!

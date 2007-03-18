@@ -39,11 +39,13 @@ QT += network
 INCLUDEPATH += .
 
 HEADERS += \
+    serrater.h \
     mainwindow.h \
 
 
 SOURCES += \
     main.cpp \
+    serrater.cpp \
     mainwindow.cpp \
 
 

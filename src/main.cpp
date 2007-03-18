@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include "logger.h"
+#include "serrater.h"
 #include "mainwindow.h"
 
 void initResources();
@@ -51,18 +52,8 @@ int main( int argc, char ** argv )
     QCoreApplication::setApplicationName("serrater");
 
     // prepare storage
-    QString sep = QDir::separator();
-    QString storagePath = QDir::homePath();
-    storagePath = storagePath.replace('/', QDir::separator());
-
-#ifdef Q_WS_WIN
-    storagePath += sep +"Application Data" +sep +"Serrater";
-#else
-    storagePath += QDir::separator() + QString(".serrater");
-#endif
-
     QDir storageDir;
-    storageDir.mkpath(storagePath);
+    storageDir.mkpath(app::storagePath());
 
     //main window
     MainWindow * mw = new MainWindow;

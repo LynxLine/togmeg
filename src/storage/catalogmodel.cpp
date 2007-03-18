@@ -5,6 +5,8 @@
 #include <QtXml>
 #include <QtCore>
 
+#include "serrater.h"
+#include "datacontainer.h"
 #include "catalogmodel.h"
 
 /*!
@@ -125,6 +127,7 @@ class CatalogModel::Private
 {
 public:
     CatalogItem * root;
+    QList<DataContainer *> containers;
 };
 
 /*!
@@ -136,13 +139,22 @@ CatalogModel::CatalogModel(QObject * parent)
     d = new Private;
     d->root = new CatalogItem(this);
 
-    QFile catalogFile("catalog.xml");
+    QFile catalogFile(app::storagePath()+"catalog.xml");
     if (catalogFile.open(QIODevice::ReadOnly)) {
         QDomDocument xml;
         xml.setContent( &catalogFile );
         catalogFile.close();
 
         xml >> this;
+    }
+
+    QDir storageDir(app::storagePath());
+    QStringList dirs = storageDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+    foreach(QString dirName, dirs) {
+        QString taskPath = app::storagePath()+dirName;
+        DataContainer * container = DataContainerFactory::resourceContainer( taskPath );
+        if ( !container ) continue;
+        d->containers << container;
     }
 }
 
@@ -151,7 +163,7 @@ CatalogModel::CatalogModel(QObject * parent)
  */
 CatalogModel::~CatalogModel()
 {
-    QFile catalogFile("catalog.xml");
+    QFile catalogFile(app::storagePath()+"catalog.xml");
     if (catalogFile.open(QIODevice::WriteOnly)) {
         QDomDocument xml("catalogxml");
         xml << this;
@@ -254,6 +266,7 @@ QDomNode& operator>>(QDomNode & node, CatalogItem * item)
 {
     QDomElement el = node.toElement();
     item->setText(el.attribute("name"));
+    qDebug() << el.attribute("name");
 
     QDomNode n = node.firstChild();
     while (!n.isNull()) {

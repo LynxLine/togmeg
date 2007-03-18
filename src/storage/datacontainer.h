@@ -34,7 +34,7 @@ private:
 class DataContainerFactory
 {
 public:
-    static DataContainer* resourceContainer( QString bookPath );
+    static DataContainer* resourceContainer( QString location );
 };
 
 #endif // DATACONTAINER_H

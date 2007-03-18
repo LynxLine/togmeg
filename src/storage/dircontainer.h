@@ -2,8 +2,8 @@
 // Copyright (C) 2007 Oleksandr Yakovlyev <yshurik@gmail.com>
 //
 
-#ifndef DIRCONTAINER
-#define DIRCONTAINER
+#ifndef DIRCONTAINER_H
+#define DIRCONTAINER_H
 
 #include "datacontainer.h"
 
@@ -30,4 +30,4 @@ private:
     Private * d;
 };
 
-#endif // DIRCONTAINER
+#endif // DIRCONTAINER_H
