@@ -13,7 +13,7 @@
 #include "qt_windows.h"
 #endif
 
-#define DEFAULT_SIZE QRect(30, 60, 800, 550)
+#define DEFAULT_SIZE QRect(30, 60, 700, 650)
 
 void logMessageHandler(QtMsgType type, const char *msg);
 
@@ -21,8 +21,7 @@ class MainWindow::Private
 {
 public:
     Private(MainWindow * p)
-    :viewMode(MainWindow::ViewMode(-1))
-    {
+    :viewMode(MainWindow::ViewMode(-1)) {
         instance = p;
     }
 
@@ -51,25 +50,10 @@ MainWindow::MainWindow()
 
     //first geometry properies
     QByteArray ba = s.value("geometry/application").toByteArray();
-    //if (ba.isEmpty()) {
-#ifdef Q_WS_WIN
-        {
-            ::RECT drect;
-            ::SystemParametersInfo(SPI_GETWORKAREA, NULL, &drect, 0);
-            int x, y, w, h;
-            x = drect.left+5;
-            y = drect.top+5;
-            w = drect.right-drect.left-10;
-            h = drect.bottom-drect.top-10;
-
-            move(x,y);
-            resize(w-8,h-35);
-        }
-#else
+    if (ba.isEmpty()) {
         setGeometry( DEFAULT_SIZE );
-#endif
-    //}
-    //else restoreGeometry(ba);
+    }
+    else restoreGeometry(ba);
 
     setWindowTitle("Serrater");
     
@@ -81,6 +65,7 @@ MainWindow::MainWindow()
 	statusBar()->hide();
 
     d->stack = new QStackedWidget(this);
+    d->stack->setFont( baseFont() );
     setCentralWidget( d->stack );
 
     d->catalogWidget = new CatalogWidget( d->stack );

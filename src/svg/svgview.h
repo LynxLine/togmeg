@@ -1,3 +1,6 @@
+//
+// Copyright (C) 2007 Oleksandr Yakovlyev <yshurik@gmail.com>
+//
 
 #ifndef SVGVIEW_H
 #define SVGVIEW_H

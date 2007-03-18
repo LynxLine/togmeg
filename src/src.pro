@@ -49,6 +49,7 @@ SOURCES += \
 
 include("svg/svg.pri")
 include("logger/logger.pri")
+include("storage/storage.pri")
 include("catalog/catalog.pri")
 include("examine/examine.pri")
 include("qtsingleapplication/qtsingleapplication.pri")

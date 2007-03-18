@@ -2,6 +2,7 @@
 INCLUDEPATH += catalog
 
 HEADERS += \
+    catalog/catalogview.h \
     catalog/catalogwidget.h \
 
 

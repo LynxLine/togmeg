@@ -1,5 +1,5 @@
 //
-// Copyright (C) 2006 Oleksandr Yakovlyev <yshurik@gmail.com>
+// Copyright (C) 2007 Oleksandr Yakovlyev <yshurik@gmail.com>
 //
 
 #ifndef LOGGER_H
