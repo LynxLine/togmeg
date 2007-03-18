@@ -47,8 +47,22 @@ int main( int argc, char ** argv )
 
     // qsettings stuff
     QCoreApplication::setOrganizationName("UAEL");
-    QCoreApplication::setOrganizationDomain("serrater.com.ua");
+    QCoreApplication::setOrganizationDomain("serrater.com");
     QCoreApplication::setApplicationName("serrater");
+
+    // prepare storage
+    QString sep = QDir::separator();
+    QString storagePath = QDir::homePath();
+    storagePath = storagePath.replace('/', QDir::separator());
+
+#ifdef Q_WS_WIN
+    storagePath += sep +"Application Data" +sep +"Serrater";
+#else
+    storagePath += QDir::separator() + QString(".serrater");
+#endif
+
+    QDir storageDir;
+    storageDir.mkpath(storagePath);
 
     //main window
     MainWindow * mw = new MainWindow;
@@ -57,12 +71,9 @@ int main( int argc, char ** argv )
     bool maximized = s.value("geometry/maximized", false).toBool();
     bool fullscreen = s.value("geometry/fullscreen", false).toBool();
 
-    if (fullscreen) 
-        mw->showFullScreen();
-    else if (maximized) 
-        mw->showMaximized();
-    else
-        mw->show();
+    if (fullscreen)     mw->showFullScreen();
+    else if (maximized) mw->showMaximized();
+    else                mw->show();
 
     a.connect(&a, SIGNAL(messageReceived(const QString &)),
               mw,   SLOT(messageReceived(const QString &)));
