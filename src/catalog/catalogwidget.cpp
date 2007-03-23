@@ -43,10 +43,8 @@ CatalogWidget::CatalogWidget(QWidget * parent)
     {
         d->taskCatalogView->setFixedWidth(200);
         d->taskCatalogView->setModel( d->catalogModel );
-        d->taskCatalogView->expandAll();
-        d->taskCatalogView->setRootIsDecorated(false);
-        d->taskCatalogView->header()->hide();
         d->taskCatalogView->setCurrentIndex( d->catalogModel->index(0,0) );
+        d->taskCatalogView->expandAll();
     }
 
     catalogLayout->addWidget( d->taskCatalogView );
@@ -77,9 +75,9 @@ CatalogWidget::CatalogWidget(QWidget * parent)
     QPushButton * studyTask = new QPushButton("Study");
     QPushButton * examineTask = new QPushButton("Examine");
 
-    connect(demoTask, SIGNAL(clicked()), _action("ad/demo"), SLOT(trigger()));
-    connect(studyTask, SIGNAL(clicked()), _action("ad/study"), SLOT(trigger()));
-    connect(examineTask, SIGNAL(clicked()), _action("ad/exam"), SLOT(trigger()));
+    connect(demoTask, SIGNAL(clicked()), _action("app/demo"), SLOT(trigger()));
+    connect(studyTask, SIGNAL(clicked()), _action("app/study"), SLOT(trigger()));
+    connect(examineTask, SIGNAL(clicked()), _action("app/exam"), SLOT(trigger()));
 
     //manageTaskLayout->addItem(new QSpacerItem(10,10, QSizePolicy::Expanding, QSizePolicy::Minimum) );
     manageTaskLayout->addWidget( demoTask );

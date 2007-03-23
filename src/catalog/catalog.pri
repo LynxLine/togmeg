@@ -7,5 +7,6 @@ HEADERS += \
 
 
 SOURCES += \
+    catalog/catalogview.cpp \
     catalog/catalogwidget.cpp \
 

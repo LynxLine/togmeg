@@ -36,8 +36,8 @@ ExamineWidget::ExamineWidget(QWidget * parent)
     QPushButton * pauseTask = new QPushButton("Pause");
     QPushButton * stopTask = new QPushButton("Stop");
 
-    connect(pauseTask, SIGNAL(clicked()), _action("ad/stop"), SLOT(trigger()));
-    connect(stopTask,  SIGNAL(clicked()), _action("ad/stop"), SLOT(trigger()));
+    connect(pauseTask, SIGNAL(clicked()), _action("app/stop"), SLOT(trigger()));
+    connect(stopTask,  SIGNAL(clicked()), _action("app/stop"), SLOT(trigger()));
 
     manageTaskLayout->addItem(new QSpacerItem(10,10, QSizePolicy::Expanding, QSizePolicy::Minimum) );
     manageTaskLayout->addWidget( pauseTask );

@@ -139,14 +139,21 @@ CatalogModel::CatalogModel(QObject * parent)
     d = new Private;
     d->root = new CatalogItem(this);
 
-    QFile catalogFile(app::storagePath()+"catalog.xml");
-    if (catalogFile.open(QIODevice::ReadOnly)) {
-        QDomDocument xml;
-        xml.setContent( &catalogFile );
-        catalogFile.close();
+    QTime time = QTime::currentTime();
 
-        xml >> this;
+
+    //for (int i=0;i<100;i++)
+    {
+        QFile catalogFile(app::storagePath()+"catalog.xml");
+        if (catalogFile.open(QIODevice::ReadOnly)) {
+            QDomDocument xml;
+            xml.setContent( &catalogFile );
+            catalogFile.close();
+
+            xml >> this;
+        }
     }
+    qDebug() << "time for loading xml:" << time.msecsTo(QTime::currentTime());
 
     QDir storageDir(app::storagePath());
     QStringList dirs = storageDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
@@ -266,7 +273,7 @@ QDomNode& operator>>(QDomNode & node, CatalogItem * item)
 {
     QDomElement el = node.toElement();
     item->setText(el.attribute("name"));
-    qDebug() << el.attribute("name");
+    //qDebug() << el.attribute("name");
 
     QDomNode n = node.firstChild();
     while (!n.isNull()) {

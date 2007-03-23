@@ -136,25 +136,30 @@ QString MainWindow::release() const
  */
 void MainWindow::createActions()
 {
-	d->actions["ad/exit"]   = new QAction (tr("E&xit"), this);
-	d->actions["ad/import"] = new QAction (tr("&Import..."), this);
-    d->actions["ad/export"] = new QAction (tr("&Export..."), this);
-    d->actions["ad/print"]  = new QAction (tr("&Print..."), this);
+	d->actions["app/exit"]   = new QAction (tr("E&xit"), this);
+	d->actions["app/import"] = new QAction (tr("&Import..."), this);
+    d->actions["app/export"] = new QAction (tr("&Export..."), this);
+    d->actions["app/print"]  = new QAction (tr("&Print..."), this);
 
-	d->actions["ad/undo" ] = new QAction (tr("&Undo"), this);
-	d->actions["ad/redo" ] = new QAction (tr("&Redo"), this);
-    d->actions["ad/cut"  ] = new QAction (tr("Cu&t"), this);
-    d->actions["ad/copy" ] = new QAction (tr("&Copy"), this);
-    d->actions["ad/paste"] = new QAction (tr("&Paste"), this);
+	d->actions["app/undo" ] = new QAction (tr("&Undo"), this);
+	d->actions["app/redo" ] = new QAction (tr("&Redo"), this);
+    d->actions["app/cut"  ] = new QAction (tr("Cu&t"), this);
+    d->actions["app/copy" ] = new QAction (tr("&Copy"), this);
+    d->actions["app/paste"] = new QAction (tr("&Paste"), this);
 
-	d->actions["ad/demo" ] = new QAction (tr("&Demo"), this);
-    d->actions["ad/study"] = new QAction (tr("&Study"), this);
-    d->actions["ad/exam" ] = new QAction (tr("&Examinate"), this);
-    d->actions["ad/stop" ] = new QAction (tr("&Stop"), this);
+	d->actions["app/demo" ] = new QAction (tr("&Demo"), this);
+    d->actions["app/study"] = new QAction (tr("&Study"), this);
+    d->actions["app/exam" ] = new QAction (tr("&Examinate"), this);
+    d->actions["app/stop" ] = new QAction (tr("&Stop"), this);
 
-    d->actions["ad/about"]         = new QAction (tr("&About"), this);
-    d->actions["ad/help"]          = new QAction (tr("Serrater &Help"), this);
-    d->actions["ad/check_updates"] = new QAction (tr("Check for Updates Now"), this);
+	d->actions["category/add_category"    ] = new QAction (tr("&Create new Category"), this);
+	d->actions["category/remove_category" ] = new QAction (tr("&Remove this Category"), this);
+    d->actions["category/add_task"    ] = new QAction (tr("&Add new Task"), this);
+    d->actions["category/remove_task" ] = new QAction (tr("&Remove this Task"), this);
+
+    d->actions["app/about"]         = new QAction (tr("&About"), this);
+    d->actions["app/help"]          = new QAction (tr("Serrater &Help"), this);
+    d->actions["app/check_updates"] = new QAction (tr("Check for Updates Now"), this);
 }
 
 /*!
@@ -164,33 +169,33 @@ void MainWindow::createMenuBar()
 {
     QMenu * menu;
 	menu = menuBar()->addMenu(tr("&File"));
-	menu->addAction( action("ad/import") );
-	menu->addAction( action("ad/export") );
+	menu->addAction( action("app/import") );
+	menu->addAction( action("app/export") );
 	menu->addSeparator();
-	menu->addAction( action("ad/print") );
+	menu->addAction( action("app/print") );
 	menu->addSeparator();
-	menu->addAction( action("ad/exit") );
+	menu->addAction( action("app/exit") );
 
 	menu = menuBar()->addMenu(tr("&Edit"));
-	menu->addAction( action("ad/undo") );
-	menu->addAction( action("ad/redo") );
+	menu->addAction( action("app/undo") );
+	menu->addAction( action("app/redo") );
 	menu->addSeparator();
-	menu->addAction( action("ad/cut") );
-	menu->addAction( action("ad/copy") );
-	menu->addAction( action("ad/paste") );
+	menu->addAction( action("app/cut") );
+	menu->addAction( action("app/copy") );
+	menu->addAction( action("app/paste") );
 
 	menu = menuBar()->addMenu(tr("&Run"));
-	menu->addAction( action("ad/demo") );
-	menu->addAction( action("ad/study") );
-	menu->addAction( action("ad/exam") );
+	menu->addAction( action("app/demo") );
+	menu->addAction( action("app/study") );
+	menu->addAction( action("app/exam") );
 	menu->addSeparator();
-	menu->addAction( action("ad/stop") );
+	menu->addAction( action("app/stop") );
 
     menu = menuBar()->addMenu(tr("&Help"));
-	menu->addAction( action("ad/about") );
-	menu->addAction( action("ad/help") );
+	menu->addAction( action("app/about") );
+	menu->addAction( action("app/help") );
     menu->addSeparator();
-    menu->addAction( action("ad/check_updates") );
+    menu->addAction( action("app/check_updates") );
 }
 
 /*!
@@ -199,14 +204,14 @@ void MainWindow::createMenuBar()
 void MainWindow::createShortcuts()
 {
     // shortcuts
-    action("ad/print")      ->setShortcut(tr("Ctrl+P"));
-    action("ad/exit")       ->setShortcut(tr("Ctrl+Q"));
-    action("ad/undo")       ->setShortcut(tr("Ctrl+U"));
-    action("ad/redo")       ->setShortcut(tr("Ctrl+Y"));
-    action("ad/cut")        ->setShortcut(tr("Ctrl+X"));
-    action("ad/copy")       ->setShortcut(tr("Ctrl+C"));
-    action("ad/paste")      ->setShortcut(tr("Ctrl+V"));
-    action("ad/help")       ->setShortcut(tr("F1"));
+    action("app/print")      ->setShortcut(tr("Ctrl+P"));
+    action("app/exit")       ->setShortcut(tr("Ctrl+Q"));
+    action("app/undo")       ->setShortcut(tr("Ctrl+U"));
+    action("app/redo")       ->setShortcut(tr("Ctrl+Y"));
+    action("app/cut")        ->setShortcut(tr("Ctrl+X"));
+    action("app/copy")       ->setShortcut(tr("Ctrl+C"));
+    action("app/paste")      ->setShortcut(tr("Ctrl+V"));
+    action("app/help")       ->setShortcut(tr("F1"));
 }
 
 /*!
@@ -214,17 +219,17 @@ void MainWindow::createShortcuts()
  */
 void MainWindow::connectActions()
 {
-    connect( action("ad/exit"),   SIGNAL(triggered()), this, SLOT(quit()));
-    connect( action("ad/help"),   SIGNAL(triggered()), this, SLOT(openHelp()));
-    connect( action("ad/about"),  SIGNAL(triggered()), this, SLOT(openAbout()));
+    connect( action("app/exit"),   SIGNAL(triggered()), this, SLOT(quit()));
+    connect( action("app/help"),   SIGNAL(triggered()), this, SLOT(openHelp()));
+    connect( action("app/about"),  SIGNAL(triggered()), this, SLOT(openAbout()));
 
-    connect( action("ad/import"), SIGNAL(triggered()), this, SLOT(importFile()));
-    connect( action("ad/export"), SIGNAL(triggered()), this, SLOT(exportFile()));
+    connect( action("app/import"), SIGNAL(triggered()), this, SLOT(importFile()));
+    connect( action("app/export"), SIGNAL(triggered()), this, SLOT(exportFile()));
 
-   connect( action("ad/demo" ), SIGNAL(triggered()), this, SLOT(runDemo()));
-   connect( action("ad/study"), SIGNAL(triggered()), this, SLOT(runStudy()));
-   connect( action("ad/exam" ), SIGNAL(triggered()), this, SLOT(runExamine()));
-   connect( action("ad/stop" ), SIGNAL(triggered()), this, SLOT(stop()));
+   connect( action("app/demo" ), SIGNAL(triggered()), this, SLOT(runDemo()));
+   connect( action("app/study"), SIGNAL(triggered()), this, SLOT(runStudy()));
+   connect( action("app/exam" ), SIGNAL(triggered()), this, SLOT(runExamine()));
+   connect( action("app/stop" ), SIGNAL(triggered()), this, SLOT(stop()));
 
 }
 
@@ -333,10 +338,10 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
         d->stack->setCurrentWidget( d->examineWidget );
     }
 
-    action("ad/demo" )->setEnabled( m==MainWindow::CatalogMode );
-    action("ad/study")->setEnabled( m==MainWindow::CatalogMode );
-    action("ad/exam" )->setEnabled( m==MainWindow::CatalogMode );
-    action("ad/stop" )->setEnabled( m==MainWindow::ExamineMode );
+    action("app/demo" )->setEnabled( m==MainWindow::CatalogMode );
+    action("app/study")->setEnabled( m==MainWindow::CatalogMode );
+    action("app/exam" )->setEnabled( m==MainWindow::CatalogMode );
+    action("app/stop" )->setEnabled( m==MainWindow::ExamineMode );
 
     emit viewModeChanged(m);
 }
