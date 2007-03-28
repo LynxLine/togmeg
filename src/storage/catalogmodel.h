@@ -15,6 +15,7 @@ class CatalogItem
 friend class CatalogModel;
 public:
     CatalogItem(QAbstractItemModel * model);
+    CatalogItem(int index, CatalogItem * parent);
     CatalogItem(CatalogItem * parent);
     virtual ~CatalogItem();
 
@@ -36,10 +37,12 @@ public:
 
 protected:
     //! implemented for providing data for Model.
-    virtual QVariant data(int column, int role);
+    virtual QVariant data(int role);
+    bool setData(QVariant value, int role);
 
 private:
     void append(CatalogItem * child);
+    void insert(int index, CatalogItem * child);
 
 private:
     QList<CatalogItem *> _children;
@@ -66,12 +69,15 @@ public:
 
     QModelIndex parent(const QModelIndex &index) const;
     Qt::ItemFlags flags(const QModelIndex &index) const;
-    QVariant data(const QModelIndex &index, int role) const;
     QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
     QModelIndex indexOf(CatalogItem * item);
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     int columnCount(const QModelIndex &) const;
 
+    QVariant data(const QModelIndex &index, int role) const;
+    bool setData(const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
+
+    CatalogItem * createItem(QString name, CatalogItem * parent);
     void removeItem(CatalogItem *);
     void updateItem(CatalogItem *);
 

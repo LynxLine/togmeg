@@ -8,14 +8,15 @@
 #include "catalogview.h"
 #include "catalogmodel.h"
 #include "catalogwidget.h"
+#include "tasklistview.h"
 
 #include "mainwindow.h"
 
 class CatalogWidget::Private
 {
 public:
-    CatalogView * taskCatalogView;
-    QListView * taskContentView;
+    CatalogView * catalogView;
+    TaskListView * taskListView;
     CatalogModel * catalogModel;
 };
 
@@ -27,64 +28,55 @@ CatalogWidget::CatalogWidget(QWidget * parent)
 {
     d = new Private;
 
-    QHBoxLayout * layout = new QHBoxLayout;
-    layout->setMargin(10);
-    layout->setSpacing(5);
+    QGridLayout * layout = new QGridLayout;
+    layout->setMargin(0);
+    layout->setSpacing(0);
     setLayout(layout);
 
+    //category area
     QVBoxLayout * catalogLayout = new QVBoxLayout;
     catalogLayout->setMargin(0);
     catalogLayout->setSpacing(5);
-    layout->addLayout(catalogLayout);
+    layout->addLayout(catalogLayout, 0, 0);
 
     d->catalogModel = new CatalogModel(this);
-    d->taskCatalogView = new CatalogView(this);
+    d->catalogView = new CatalogView(this);
 
     {
-        d->taskCatalogView->setFixedWidth(200);
-        d->taskCatalogView->setModel( d->catalogModel );
-        d->taskCatalogView->setCurrentIndex( d->catalogModel->index(0,0) );
+        d->catalogView->setFixedWidth(200);
+        d->catalogView->setModel( d->catalogModel );
+        d->catalogView->setCurrentIndex( d->catalogModel->index(0,0) );
     }
 
-    catalogLayout->addWidget( d->taskCatalogView );
+    catalogLayout->addWidget( d->catalogView );
 
-    QHBoxLayout * manageCatalogLayout = new QHBoxLayout;
-    manageCatalogLayout->setMargin(0);
-    manageCatalogLayout->setSpacing(5);
-    catalogLayout->addLayout( manageCatalogLayout );
-
-    QPushButton * addCategory = new QPushButton("+");
-    QPushButton * remCategory = new QPushButton("-");
-
-    manageCatalogLayout->addWidget( addCategory );
-    manageCatalogLayout->addWidget( remCategory );
-    //manageCatalogLayout->addItem(new QSpacerItem(10,10, QSizePolicy::MinimumExpanding, QSizePolicy::Minimum) );
-
+    //task list area
     QVBoxLayout * taskLayout = new QVBoxLayout;
     taskLayout->setMargin(0);
     taskLayout->setSpacing(5);
-    layout->addLayout(taskLayout);
+    layout->addLayout(taskLayout, 0, 1);
 
-    QHBoxLayout * manageTaskLayout = new QHBoxLayout;
-    manageTaskLayout->setMargin(0);
-    manageTaskLayout->setSpacing(5);
-    taskLayout->addLayout( manageTaskLayout );
+    d->taskListView = new TaskListView(this);
+    taskLayout->addWidget( d->taskListView );
 
-    QPushButton * demoTask = new QPushButton("Demo");
-    QPushButton * studyTask = new QPushButton("Study");
-    QPushButton * examineTask = new QPushButton("Examine");
+    //bottom footer
+    QHBoxLayout * manageCatalogLayout = new QHBoxLayout;
+    manageCatalogLayout->setMargin(0);
+    manageCatalogLayout->setSpacing(5);
+    layout->addLayout( manageCatalogLayout, 1, 0, 1, 2 );
 
-    connect(demoTask, SIGNAL(clicked()), _action("app/demo"), SLOT(trigger()));
-    connect(studyTask, SIGNAL(clicked()), _action("app/study"), SLOT(trigger()));
-    connect(examineTask, SIGNAL(clicked()), _action("app/exam"), SLOT(trigger()));
+    QToolButton * addCategory = new QToolButton;
+    QToolButton * remCategory = new QToolButton;
 
-    //manageTaskLayout->addItem(new QSpacerItem(10,10, QSizePolicy::Expanding, QSizePolicy::Minimum) );
-    manageTaskLayout->addWidget( demoTask );
-    manageTaskLayout->addWidget( studyTask );
-    manageTaskLayout->addWidget( examineTask );
+    addCategory->setText("+Category");
+    remCategory->setText("-Category");
 
-    d->taskContentView = new QListView(this);
-    taskLayout->addWidget( d->taskContentView );
+    connect(addCategory, SIGNAL(clicked()), d->catalogView, SLOT(addSubCategory()));
+    connect(remCategory, SIGNAL(clicked()), d->catalogView, SLOT(removeCategory()));
+
+    manageCatalogLayout->addWidget( addCategory );
+    manageCatalogLayout->addWidget( remCategory );
+    manageCatalogLayout->addItem(new QSpacerItem(10,10, QSizePolicy::Expanding, QSizePolicy::Minimum) );
 }
 
 /*!

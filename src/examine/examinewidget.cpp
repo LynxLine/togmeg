@@ -28,6 +28,7 @@ ExamineWidget::ExamineWidget(QWidget * parent)
     layout->setSpacing(5);
     setLayout(layout);
 
+    /*
     QHBoxLayout * manageTaskLayout = new QHBoxLayout;
     manageTaskLayout->setMargin(0);
     manageTaskLayout->setSpacing(5);
@@ -42,6 +43,7 @@ ExamineWidget::ExamineWidget(QWidget * parent)
     manageTaskLayout->addItem(new QSpacerItem(10,10, QSizePolicy::Expanding, QSizePolicy::Minimum) );
     manageTaskLayout->addWidget( pauseTask );
     manageTaskLayout->addWidget( stopTask );
+    */
 
     d->svgWidget = new SvgWidget(this);
     layout->addWidget( d->svgWidget );

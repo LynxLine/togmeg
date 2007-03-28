@@ -28,6 +28,13 @@ CatalogItem::CatalogItem(CatalogItem * parent)
     parent->append( this );
 }
 
+CatalogItem::CatalogItem(int index, CatalogItem * parent)
+:_parent(parent)
+{
+    Q_ASSERT( parent );
+    parent->insert( index, this );
+}
+
 /*!
  Deletes all children of the item.
  */
@@ -82,11 +89,19 @@ void CatalogItem::setExpanded(bool f)
 }
 
 
-QVariant CatalogItem::data(int column, int role)
+QVariant CatalogItem::data(int role)
 {
-    Q_UNUSED(column);
-    if (role == Qt::DisplayRole) return text();
+    if (role == Qt::DisplayRole || role == Qt::EditRole) return text();
     return QVariant();
+}
+
+bool CatalogItem::setData(QVariant value, int role)
+{
+    if (role == Qt::DisplayRole || role == Qt::EditRole) {
+        setText( value.toString() );
+        return true;
+    }
+    return false;
 }
 
 /*!
@@ -114,6 +129,13 @@ QList<CatalogItem *> & CatalogItem::children()
 void CatalogItem::append(CatalogItem * item) 
 {
     _children.append(item);
+    item->_level = _level+1;
+    item->_model = _model;
+}
+
+void CatalogItem::insert(int index, CatalogItem * item) 
+{
+    _children.insert(index, item);
     item->_level = _level+1;
     item->_model = _model;
 }
@@ -232,7 +254,9 @@ QModelIndex CatalogModel::parent(const QModelIndex &index) const
 Qt::ItemFlags CatalogModel::flags(const QModelIndex &index) const 
 {
     if ( !index.isValid() ) return Qt::ItemIsDropEnabled;
-    return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+    CatalogItem * item = static_cast<CatalogItem*>(index.internalPointer());
+    if (item == root() ) return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+    return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
 }
 
 /*!
@@ -244,7 +268,15 @@ QVariant CatalogModel::data(const QModelIndex &index, int role) const
     if ( !index.isValid() ) return QVariant();
     
     CatalogItem * item = static_cast<CatalogItem *>(index.internalPointer());
-    return item->data( index.column(), role);
+    return item->data(role);
+}
+
+bool CatalogModel::setData(const QModelIndex & index, const QVariant & value, int role)
+{
+    if ( !index.isValid() ) return false;
+    
+    CatalogItem * item = static_cast<CatalogItem *>(index.internalPointer());
+    return item->setData(value, role);
 }
 
 /*!
@@ -288,6 +320,20 @@ int CatalogModel::rowCount(const QModelIndex &parent) const
 int CatalogModel::columnCount(const QModelIndex &) const 
 {
 	return 1;
+}
+
+CatalogItem * CatalogModel::createItem(QString name, CatalogItem * parent)
+{
+    if ( !parent ) return 0L;
+
+    QModelIndex index = createIndex(parent->row(), 0, parent);
+
+    beginInsertRows(index, parent->count(), parent->count());
+    CatalogItem * item = new CatalogItem(parent);
+    item->setText(name);
+    endInsertRows();
+
+    return item;
 }
 
 /*!

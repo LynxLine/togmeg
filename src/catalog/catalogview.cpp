@@ -18,7 +18,6 @@ CatalogView::CatalogView(QWidget * parent)
 {
     d = new Private;
     setRootIsDecorated(false);
-    //setItemsExpandable(false);
     header()->hide();
 
     setContextMenuPolicy(Qt::CustomContextMenu);
@@ -27,12 +26,13 @@ CatalogView::CatalogView(QWidget * parent)
 
     d->contextMenu = new QMenu(this);
     d->contextMenu->addAction( _action("category/add_category") );
-    d->contextMenu->addAction( _action("category/add_task") );
     d->contextMenu->addSeparator();
     d->contextMenu->addAction( _action("category/remove") );
     
+    connect( _action("category/add_category"), SIGNAL(triggered()), 
+             this, SLOT(addSubCategory()));
     connect( _action("category/remove"), SIGNAL(triggered()), 
-             this, SLOT(removeItem()));
+             this, SLOT(removeCategory()));
 
     connect(this, SIGNAL(expanded(const QModelIndex &)),
             this, SLOT(saveExpandState(const QModelIndex &)));
@@ -74,16 +74,6 @@ void CatalogView::activateContextMenu(const QPoint & pos)
     d->contextMenu->popup( mapToGlobal(pos) );
 }
 
-void CatalogView::removeItem()
-{
-    QModelIndex index = currentIndex();
-    CatalogModel * catalogModel = (CatalogModel *)model();
-    CatalogItem * item = catalogModel->item(index);
-    if (!item) return;
-
-    catalogModel->removeItem(item);
-}
-
 void CatalogView::loadExpandState(CatalogItem * item)
 {
     if (item->isExpanded()) {
@@ -112,4 +102,30 @@ void CatalogView::saveCollapseState(const QModelIndex & index)
     if (!item) return;
 
     item->setExpanded(false);
+}
+
+void CatalogView::addSubCategory()
+{
+    QModelIndex parentIndex = currentIndex();
+    CatalogModel * catalogModel = (CatalogModel *)model();
+    CatalogItem * parent = catalogModel->item(parentIndex);
+    if (!parent) return;
+
+    CatalogItem * item = catalogModel->createItem(tr("New Category"), parent);
+
+    setExpanded(parentIndex, true);
+    setCurrentIndex( catalogModel->indexOf(item) );
+    edit( catalogModel->indexOf(item) );
+}
+
+void CatalogView::removeCategory()
+{
+    QModelIndex index = currentIndex();
+    CatalogModel * catalogModel = (CatalogModel *)model();
+    CatalogItem * item = catalogModel->item(index);
+    if (item==catalogModel->root()) return;
+    if (!item) return;
+
+    catalogModel->removeItem(item);
+    scrollTo(currentIndex());
 }

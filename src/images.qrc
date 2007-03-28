@@ -1,5 +1,11 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
     <file>images/serrater.ico</file>
+
+    <file>images/icons/demo.png</file>
+    <file>images/icons/exam.png</file>
+    <file>images/icons/study.png</file>
+    <file>images/icons/stop.png</file>
+
 </qresource>
 </RCC>

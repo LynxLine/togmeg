@@ -20,6 +20,10 @@ public:
 
     void setModel(QAbstractItemModel * model);
 
+public slots:
+    void addSubCategory();
+    void removeCategory();
+
 protected:
     //virtual void drawBranches(QPainter *, const QRect &, const QModelIndex &) const;
     /*
@@ -27,7 +31,6 @@ protected:
     */
 
 private slots:
-    void removeItem();
     void activateContextMenu(const QPoint &);
     void loadExpandState(CatalogItem * child);
     void saveExpandState(const QModelIndex & index);

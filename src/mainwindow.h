@@ -56,6 +56,7 @@ private:
     void connectActions();
     void createShortcuts();
     void createMenuBar();
+    void createToolBar();
 
     QString release() const;
 

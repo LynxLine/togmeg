@@ -61,6 +61,7 @@ MainWindow::MainWindow()
     createShortcuts();
     connectActions();
     createMenuBar();
+    createToolBar();
 	
 	statusBar()->hide();
 
@@ -147,10 +148,10 @@ void MainWindow::createActions()
     d->actions["app/copy" ] = new QAction (tr("&Copy"), this);
     d->actions["app/paste"] = new QAction (tr("&Paste"), this);
 
-	d->actions["app/demo" ] = new QAction (tr("&Demo"), this);
-    d->actions["app/study"] = new QAction (tr("&Study"), this);
-    d->actions["app/exam" ] = new QAction (tr("&Examinate"), this);
-    d->actions["app/stop" ] = new QAction (tr("&Stop"), this);
+    d->actions["app/demo" ] = new QAction (QIcon(":/images/icons/demo.png"), tr("&Demo"), this);
+    d->actions["app/study"] = new QAction (QIcon(":/images/icons/study.png"), tr("&Study"), this);
+    d->actions["app/exam" ] = new QAction (QIcon(":/images/icons/exam.png"), tr("&Examinate"), this);
+    d->actions["app/stop" ] = new QAction (QIcon(":/images/icons/stop.png"), tr("&Stop"), this);
 
 	d->actions["category/add_category"    ] = new QAction (tr("&Create new Category"), this);
     d->actions["category/add_task"    ] = new QAction (tr("&Add new Task"), this);
@@ -195,6 +196,22 @@ void MainWindow::createMenuBar()
 	menu->addAction( action("app/help") );
     menu->addSeparator();
     menu->addAction( action("app/check_updates") );
+}
+
+void MainWindow::createToolBar()
+{
+    QToolBar * toolBar;
+	toolBar = addToolBar(tr("Run"));
+    toolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    toolBar->setIconSize(QSize(32, 32));
+    toolBar->setMovable(false);
+
+	toolBar->addAction( action("app/demo") );
+	toolBar->addAction( action("app/study") );
+	toolBar->addAction( action("app/exam") );
+	toolBar->addSeparator();
+	toolBar->addAction( action("app/stop") );
+    
 }
 
 /*!
