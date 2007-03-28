@@ -153,9 +153,8 @@ void MainWindow::createActions()
     d->actions["app/stop" ] = new QAction (tr("&Stop"), this);
 
 	d->actions["category/add_category"    ] = new QAction (tr("&Create new Category"), this);
-	d->actions["category/remove_category" ] = new QAction (tr("&Remove this Category"), this);
     d->actions["category/add_task"    ] = new QAction (tr("&Add new Task"), this);
-    d->actions["category/remove_task" ] = new QAction (tr("&Remove this Task"), this);
+    d->actions["category/remove" ] = new QAction (tr("&Remove"), this);
 
     d->actions["app/about"]         = new QAction (tr("&About"), this);
     d->actions["app/help"]          = new QAction (tr("Serrater &Help"), this);

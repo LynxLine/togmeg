@@ -21,6 +21,9 @@ public:
     QString text();
     void setText(QString);
 
+    bool isExpanded();
+    void setExpanded(bool);
+
     QAbstractItemModel * model();
 
     int row();
@@ -44,6 +47,7 @@ private:
 
     QAbstractItemModel * _model;
     QString _text;
+    bool _expanded;
     int _level;
 };
 
@@ -58,13 +62,18 @@ public:
     virtual ~CatalogModel();
 
     virtual CatalogItem * root() const;
+    CatalogItem * item(const QModelIndex &index);
 
     QModelIndex parent(const QModelIndex &index) const;
     Qt::ItemFlags flags(const QModelIndex &index) const;
     QVariant data(const QModelIndex &index, int role) const;
     QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
+    QModelIndex indexOf(CatalogItem * item);
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     int columnCount(const QModelIndex &) const;
+
+    void removeItem(CatalogItem *);
+    void updateItem(CatalogItem *);
 
 private:
 	class Private;

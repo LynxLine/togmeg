@@ -44,7 +44,6 @@ CatalogWidget::CatalogWidget(QWidget * parent)
         d->taskCatalogView->setFixedWidth(200);
         d->taskCatalogView->setModel( d->catalogModel );
         d->taskCatalogView->setCurrentIndex( d->catalogModel->index(0,0) );
-        d->taskCatalogView->expandAll();
     }
 
     catalogLayout->addWidget( d->taskCatalogView );

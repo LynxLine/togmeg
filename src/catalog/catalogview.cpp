@@ -4,6 +4,7 @@
 
 #include <QtGui>
 #include "catalogview.h"
+#include "catalogmodel.h"
 #include "mainwindow.h"
 
 class CatalogView::Private
@@ -17,6 +18,7 @@ CatalogView::CatalogView(QWidget * parent)
 {
     d = new Private;
     setRootIsDecorated(false);
+    //setItemsExpandable(false);
     header()->hide();
 
     setContextMenuPolicy(Qt::CustomContextMenu);
@@ -25,16 +27,31 @@ CatalogView::CatalogView(QWidget * parent)
 
     d->contextMenu = new QMenu(this);
     d->contextMenu->addAction( _action("category/add_category") );
-	d->contextMenu->addAction( _action("category/remove_category") );
-    d->contextMenu->addSeparator();
     d->contextMenu->addAction( _action("category/add_task") );
-    d->contextMenu->addAction( _action("category/remove_task") );
+    d->contextMenu->addSeparator();
+    d->contextMenu->addAction( _action("category/remove") );
     
+    connect( _action("category/remove"), SIGNAL(triggered()), 
+             this, SLOT(removeItem()));
+
+    connect(this, SIGNAL(expanded(const QModelIndex &)),
+            this, SLOT(saveExpandState(const QModelIndex &)));
+    connect(this, SIGNAL(collapsed(const QModelIndex &)),
+            this, SLOT(saveCollapseState(const QModelIndex &)));
 }
 
 CatalogView::~CatalogView()
 {
+    qDebug() << "~CatalogView";
     delete d;
+}
+
+void CatalogView::setModel(QAbstractItemModel * model)
+{
+    QTreeView::setModel(model);
+
+    CatalogModel * catalogModel = (CatalogModel *)model;
+    loadExpandState(catalogModel->root());
 }
 
 /*
@@ -55,4 +72,44 @@ void CatalogView::activateContextMenu(const QPoint & pos)
     if ( !index.isValid() ) return;
 
     d->contextMenu->popup( mapToGlobal(pos) );
+}
+
+void CatalogView::removeItem()
+{
+    QModelIndex index = currentIndex();
+    CatalogModel * catalogModel = (CatalogModel *)model();
+    CatalogItem * item = catalogModel->item(index);
+    if (!item) return;
+
+    catalogModel->removeItem(item);
+}
+
+void CatalogView::loadExpandState(CatalogItem * item)
+{
+    if (item->isExpanded()) {
+        CatalogModel * catalogModel = (CatalogModel *)model();
+        setExpanded(catalogModel->indexOf(item), true);
+    }
+
+    foreach(CatalogItem * child, item->children()) {
+        loadExpandState(child);
+    }
+}
+
+void CatalogView::saveExpandState(const QModelIndex & index)
+{
+    CatalogModel * catalogModel = (CatalogModel *)model();
+    CatalogItem * item = catalogModel->item(index);
+    if (!item) return;
+
+    item->setExpanded(true);
+}
+
+void CatalogView::saveCollapseState(const QModelIndex & index)
+{
+    CatalogModel * catalogModel = (CatalogModel *)model();
+    CatalogItem * item = catalogModel->item(index);
+    if (!item) return;
+
+    item->setExpanded(false);
 }

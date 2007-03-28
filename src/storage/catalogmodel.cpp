@@ -71,6 +71,17 @@ void CatalogItem::setText(QString t)
     _text = t;
 }
 
+bool CatalogItem::isExpanded()
+{
+    return _expanded;
+}
+
+void CatalogItem::setExpanded(bool f)
+{
+    _expanded = f;
+}
+
+
 QVariant CatalogItem::data(int column, int role)
 {
     Q_UNUSED(column);
@@ -170,6 +181,8 @@ CatalogModel::CatalogModel(QObject * parent)
  */
 CatalogModel::~CatalogModel()
 {
+    qDebug() << "~CatalogModel";
+
     QFile catalogFile(app::storagePath()+"catalog.xml");
     if (catalogFile.open(QIODevice::WriteOnly)) {
         QDomDocument xml("catalogxml");
@@ -191,6 +204,15 @@ CatalogItem * CatalogModel::root() const
 }
 
 /*!
+ Returns item of index
+ */
+CatalogItem * CatalogModel::item(const QModelIndex &index)
+{
+    if ( !index.isValid() ) return 0L;
+    return static_cast<CatalogItem*>(index.internalPointer());
+}
+
+/*!
  \reimp for Catalog-like Model.
  */
 QModelIndex CatalogModel::parent(const QModelIndex &index) const 
@@ -209,7 +231,7 @@ QModelIndex CatalogModel::parent(const QModelIndex &index) const
  */
 Qt::ItemFlags CatalogModel::flags(const QModelIndex &index) const 
 {
-    if ( !index.isValid() ) return Qt::ItemIsEnabled;
+    if ( !index.isValid() ) return Qt::ItemIsDropEnabled;
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 }
 
@@ -243,6 +265,13 @@ QModelIndex CatalogModel::index(int row, int column, const QModelIndex &parent) 
     return createIndex(row, column, child);
 }
 
+QModelIndex CatalogModel::indexOf(CatalogItem * item) 
+{
+    QModelIndex index;
+    index = createIndex(item->row(), 0, item);
+    return index;
+}
+
 /*!
  \reimp for Catalog-like Model.
  */
@@ -261,6 +290,31 @@ int CatalogModel::columnCount(const QModelIndex &) const
 	return 1;
 }
 
+/*!
+ Removes \a item associated with the model.
+ */
+void CatalogModel::removeItem(CatalogItem * item)
+{
+    CatalogItem * parent = item->parent();
+    if ( !parent ) return;
+
+    int i = parent->children().indexOf( item );
+    QModelIndex index = createIndex(parent->row(), 0, parent);
+
+    beginRemoveRows(index, i, i);
+    parent->remove(i);
+    endRemoveRows();
+}
+
+/*!
+ Updates the \a item in tree.
+ */
+void CatalogModel::updateItem(CatalogItem * item)
+{
+    QModelIndex index = createIndex( item->row(), 0, item );
+    emit dataChanged(index, index);
+}
+
 QDomDocument& operator>>(QDomDocument & doc, CatalogModel * catalogModel)
 {
     CatalogItem * item = catalogModel->root();    
@@ -273,7 +327,7 @@ QDomNode& operator>>(QDomNode & node, CatalogItem * item)
 {
     QDomElement el = node.toElement();
     item->setText(el.attribute("name"));
-    //qDebug() << el.attribute("name");
+    item->setExpanded(el.attribute("expanded") == "yes");
 
     QDomNode n = node.firstChild();
     while (!n.isNull()) {
@@ -295,6 +349,7 @@ QDomNode& operator<<(QDomNode & node, CatalogItem * item)
 {
     QDomElement child = node.ownerDocument().createElement("category");
     child.setAttribute("name", item->text());
+    child.setAttribute("expanded", item->isExpanded() ? "yes" : "no");
     node.appendChild(child);
 
     foreach(CatalogItem * item, item->children()) {
