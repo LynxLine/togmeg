@@ -18,6 +18,7 @@ CatalogView::CatalogView(QWidget * parent)
 {
     d = new Private;
     setRootIsDecorated(false);
+    setFrameStyle(QFrame::NoFrame);
     header()->hide();
 
     setContextMenuPolicy(Qt::CustomContextMenu);

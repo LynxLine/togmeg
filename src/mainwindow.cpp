@@ -151,7 +151,7 @@ void MainWindow::createActions()
     d->actions["app/demo" ] = new QAction (QIcon(":/images/icons/demo.png"), tr("&Demo"), this);
     d->actions["app/study"] = new QAction (QIcon(":/images/icons/study.png"), tr("&Study"), this);
     d->actions["app/exam" ] = new QAction (QIcon(":/images/icons/exam.png"), tr("&Examinate"), this);
-    d->actions["app/stop" ] = new QAction (QIcon(":/images/icons/stop.png"), tr("&Stop"), this);
+    d->actions["app/stop" ] = new QAction (QIcon(":/images/icons/stop-32x32.png"), tr("&Stop"), this);
 
 	d->actions["category/add_category"    ] = new QAction (tr("&Create new Category"), this);
     d->actions["category/add_task"    ] = new QAction (tr("&Add new Task"), this);

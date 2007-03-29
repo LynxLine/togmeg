@@ -30,7 +30,7 @@ CatalogWidget::CatalogWidget(QWidget * parent)
 
     QGridLayout * layout = new QGridLayout;
     layout->setMargin(0);
-    layout->setSpacing(0);
+    layout->setSpacing(1);
     setLayout(layout);
 
     //category area

@@ -16,8 +16,10 @@ TaskListView::TaskListView(QWidget * parent)
 {
     d = new Private;
 
+    setRootIsDecorated(false);
     setAutoFillBackground(true);
     setAlternatingRowColors(true);
+    setFrameStyle(QFrame::NoFrame);
 
     setContextMenuPolicy(Qt::CustomContextMenu);
     connect(this, SIGNAL(customContextMenuRequested(const QPoint &)), 

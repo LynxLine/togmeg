@@ -5,7 +5,7 @@
     <file>images/icons/demo.png</file>
     <file>images/icons/exam.png</file>
     <file>images/icons/study.png</file>
-    <file>images/icons/stop.png</file>
+    <file>images/icons/stop-32x32.png</file>
 
 </qresource>
 </RCC>
