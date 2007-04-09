@@ -5,7 +5,7 @@
 #include <QtXml>
 #include <QtCore>
 
-#include "serrater.h"
+#include "crammero.h"
 #include "datacontainer.h"
 #include "catalogmodel.h"
 

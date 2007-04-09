@@ -7,7 +7,7 @@
 #include <iostream>
 
 #include "logger.h"
-#include "serrater.h"
+#include "crammero.h"
 #include "mainwindow.h"
 
 void initResources();
@@ -19,7 +19,7 @@ int main( int argc, char ** argv )
     qInstallMsgHandler(messageHandler);
 
     initResources();
-    QtSingleApplication a("serrater", argc, argv );
+    QtSingleApplication a("crammero", argc, argv );
 
     for (int j=0; j<argc; j++) {
         if ( QString( argv[j] ) == "/stop" ) {
@@ -41,15 +41,15 @@ int main( int argc, char ** argv )
               &a,   SLOT(quit()) );
 
 #ifndef Q_WS_MAC
-    QIcon icon(":/images/serratericon.png");
-    icon.addFile(":/images/serratericon.png", QSize(128, 128));
+    QIcon icon(":/images/crammeroicon.png");
+    icon.addFile(":/images/crammeroicon.png", QSize(128, 128));
     a.setWindowIcon( icon );
 #endif
 
     // qsettings stuff
-    QCoreApplication::setOrganizationName("UAEL");
-    QCoreApplication::setOrganizationDomain("serrater.com");
-    QCoreApplication::setApplicationName("serrater");
+    QCoreApplication::setOrganizationName("LynxLine");
+    QCoreApplication::setOrganizationDomain("lynxline.com");
+    QCoreApplication::setApplicationName("crammero");
 
     // prepare storage
     QDir storageDir;

@@ -23,7 +23,7 @@ Logger::Logger(QObject * parent)
     Logger::Private::instance = this;
 
     d->logPath = QDir(QDir::tempPath()).absolutePath() +QDir::separator();
-    d->logPath +=  "serrater.log";
+    d->logPath +=  "crammero.log";
 
     d->logFile = new QFile( d->logPath, this );
     d->logFile->open(QIODevice::WriteOnly);

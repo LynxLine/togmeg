@@ -2,9 +2,9 @@
 unix:TEMPLATE = app
 win32:TEMPLATE = vcapp
 
-unix:!mac:TARGET = ../bin/serrater
-win32:TARGET = ..\..\bin\serrater
-mac:TARGET = ../bin/serrater
+unix:!mac:TARGET = ../bin/crammero
+win32:TARGET = ..\..\bin\crammero
+mac:TARGET = ../bin/crammero
 
 win32:LIBS += user32.lib
 win32:LIBS += shell32.lib
@@ -39,13 +39,13 @@ QT += network
 INCLUDEPATH += .
 
 HEADERS += \
-    serrater.h \
+    crammero.h \
     mainwindow.h \
 
 
 SOURCES += \
     main.cpp \
-    serrater.cpp \
+    crammero.cpp \
     mainwindow.cpp \
 
 
@@ -72,5 +72,5 @@ mac:QMAKE_INFO_PLIST = info.plist
     }
 }
 
-win32:RC_FILE = images/serrater.rc
-mac:ICON = images/serrater.icns
+win32:RC_FILE = images/crammero.rc
+mac:ICON = images/crammero.icns

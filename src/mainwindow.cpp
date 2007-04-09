@@ -55,7 +55,7 @@ MainWindow::MainWindow()
     }
     else restoreGeometry(ba);
 
-    setWindowTitle("Serrater");
+    setWindowTitle("Crammero");
     
 	createActions();
     createShortcuts();
@@ -148,9 +148,9 @@ void MainWindow::createActions()
     d->actions["app/copy" ] = new QAction (tr("&Copy"), this);
     d->actions["app/paste"] = new QAction (tr("&Paste"), this);
 
-    d->actions["app/demo" ] = new QAction (QIcon(":/images/icons/demo.png"), tr("&Demo"), this);
-    d->actions["app/study"] = new QAction (QIcon(":/images/icons/study.png"), tr("&Study"), this);
-    d->actions["app/exam" ] = new QAction (QIcon(":/images/icons/exam.png"), tr("&Examinate"), this);
+    d->actions["app/demo" ] = new QAction (QIcon(":/images/icons/play-32x32.png"), tr("&Play"), this);
+    d->actions["app/study"] = new QAction (QIcon(":/images/icons/study-32x32.png"), tr("&Study"), this);
+    d->actions["app/exam" ] = new QAction (QIcon(":/images/icons/examine-32x32.png"), tr("&Examinate"), this);
     d->actions["app/stop" ] = new QAction (QIcon(":/images/icons/stop-32x32.png"), tr("&Stop"), this);
 
 	d->actions["category/add_category"    ] = new QAction (tr("&Create new Category"), this);
@@ -158,7 +158,7 @@ void MainWindow::createActions()
     d->actions["category/remove" ] = new QAction (tr("&Remove"), this);
 
     d->actions["app/about"]         = new QAction (tr("&About"), this);
-    d->actions["app/help"]          = new QAction (tr("Serrater &Help"), this);
+    d->actions["app/help"]          = new QAction (tr("Crammero &Help"), this);
     d->actions["app/check_updates"] = new QAction (tr("Check for Updates Now"), this);
 }
 
@@ -206,6 +206,10 @@ void MainWindow::createToolBar()
     toolBar->setIconSize(QSize(32, 32));
     toolBar->setMovable(false);
 
+	toolBar->addAction( action("app/import") );
+	toolBar->addAction( action("app/export") );
+
+    toolBar->addSeparator();
 	toolBar->addAction( action("app/demo") );
 	toolBar->addAction( action("app/study") );
 	toolBar->addAction( action("app/exam") );
@@ -304,7 +308,7 @@ void MainWindow::stop()
  */
 void MainWindow::openHelp()
 {
-    QString url = QString("http://www.serrater.com");
+    QString url = QString("http://www.lynxline.com");
     QDesktopServices::openUrl(url);
 }
 

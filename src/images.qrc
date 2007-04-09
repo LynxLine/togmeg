@@ -1,10 +1,11 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
-    <file>images/serrater.ico</file>
+    <file>images/crammero.ico</file>
 
-    <file>images/icons/demo.png</file>
-    <file>images/icons/exam.png</file>
-    <file>images/icons/study.png</file>
+    <file>images/icons/play-32x32.png</file>
+    <file>images/icons/examine-32x32.png</file>
+    <file>images/icons/examine-40x32.png</file>
+    <file>images/icons/study-32x32.png</file>
     <file>images/icons/stop-32x32.png</file>
 
 </qresource>

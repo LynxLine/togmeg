@@ -3,7 +3,7 @@
 //
 
 #include <QtCore>
-#include "serrater.h"
+#include "crammero.h"
 using namespace app;
 
 QString app::storagePath() {
@@ -12,9 +12,9 @@ QString app::storagePath() {
     _storagePath = _storagePath.replace('/', QDir::separator());
 
 #ifdef Q_WS_WIN
-    _storagePath += sep +"Application Data" +sep +"Serrater" +sep;
+    _storagePath += sep +"Application Data" +sep +"Crammero" +sep;
 #else
-    _storagePath += sep +QString(".serrater") +sep;
+    _storagePath += sep +QString(".crammero") +sep;
 #endif
     return _storagePath;
 }

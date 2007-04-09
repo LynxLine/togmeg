@@ -2,8 +2,8 @@
 // Copyright (C) 2007 CafeScribe
 //
 
-#ifndef SERRATER_H
-#define SERRATER_H
+#ifndef CRAMMERO_H
+#define CRAMMERO_H
 
 #include <QString>
 
@@ -13,4 +13,4 @@ namespace app {
 
 }; //namespace
 
-#endif // SERRATER_H
+#endif // CRAMMERO_H

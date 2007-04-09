@@ -1,0 +1,5 @@
+
+#define IDI_ICON1 IDR_MAINFRAME+1
+
+IDI_ICON1               ICON                    "crammerofile.ico"
+IDR_MAINFRAME           ICON                    "crammero.ico"
