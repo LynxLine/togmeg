@@ -6,7 +6,7 @@
 #include <QtCore>
 
 #include "catalogview.h"
-#include "catalogmodel.h"
+#include "categorymodel.h"
 #include "catalogwidget.h"
 #include "tasklistview.h"
 
@@ -15,9 +15,9 @@
 class CatalogWidget::Private
 {
 public:
-    CatalogView * catalogView;
+    CategoryView * catalogView;
     TaskListView * taskListView;
-    CatalogModel * catalogModel;
+    CategoryModel * CategoryModel;
 };
 
 /*!
@@ -39,13 +39,13 @@ CatalogWidget::CatalogWidget(QWidget * parent)
     catalogLayout->setSpacing(5);
     layout->addLayout(catalogLayout, 0, 0);
 
-    d->catalogModel = new CatalogModel(this);
-    d->catalogView = new CatalogView(this);
+    d->CategoryModel = new CategoryModel(this);
+    d->catalogView = new CategoryView(this);
 
     {
         d->catalogView->setFixedWidth(200);
-        d->catalogView->setModel( d->catalogModel );
-        d->catalogView->setCurrentIndex( d->catalogModel->index(0,0) );
+        d->catalogView->setModel( d->CategoryModel );
+        d->catalogView->setCurrentIndex( d->CategoryModel->index(0,0) );
     }
 
     catalogLayout->addWidget( d->catalogView );

@@ -4,16 +4,16 @@
 
 #include <QtGui>
 #include "catalogview.h"
-#include "catalogmodel.h"
+#include "categorymodel.h"
 #include "mainwindow.h"
 
-class CatalogView::Private
+class CategoryView::Private
 {
 public:
     QPointer<QMenu> contextMenu;
 };
 
-CatalogView::CatalogView(QWidget * parent)
+CategoryView::CategoryView(QWidget * parent)
 :QTreeView(parent) 
 {
     d = new Private;
@@ -41,33 +41,33 @@ CatalogView::CatalogView(QWidget * parent)
             this, SLOT(saveCollapseState(const QModelIndex &)));
 }
 
-CatalogView::~CatalogView()
+CategoryView::~CategoryView()
 {
-    qDebug() << "~CatalogView";
+    qDebug() << "~CategoryView";
     delete d;
 }
 
-void CatalogView::setModel(QAbstractItemModel * model)
+void CategoryView::setModel(QAbstractItemModel * model)
 {
     QTreeView::setModel(model);
 
-    CatalogModel * catalogModel = (CatalogModel *)model;
-    loadExpandState(catalogModel->root());
+    CategoryModel * CategoryModel = (CategoryModel *)model;
+    loadExpandState(CategoryModel->root());
 }
 
 /*
-void CatalogView::drawBranches(QPainter *, const QRect &, const QModelIndex &) const
+void CategoryView::drawBranches(QPainter *, const QRect &, const QModelIndex &) const
 {
 }
 */
 
 /*
-void CatalogView::drawRow(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+void CategoryView::drawRow(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
 }
 */
 
-void CatalogView::activateContextMenu(const QPoint & pos)
+void CategoryView::activateContextMenu(const QPoint & pos)
 {
     QModelIndex index = currentIndex();
     if ( !index.isValid() ) return;
@@ -75,58 +75,58 @@ void CatalogView::activateContextMenu(const QPoint & pos)
     d->contextMenu->popup( mapToGlobal(pos) );
 }
 
-void CatalogView::loadExpandState(CatalogItem * item)
+void CategoryView::loadExpandState(CategoryItem * item)
 {
     if (item->isExpanded()) {
-        CatalogModel * catalogModel = (CatalogModel *)model();
-        setExpanded(catalogModel->indexOf(item), true);
+        CategoryModel * CategoryModel = (CategoryModel *)model();
+        setExpanded(CategoryModel->indexOf(item), true);
     }
 
-    foreach(CatalogItem * child, item->children()) {
+    foreach(CategoryItem * child, item->children()) {
         loadExpandState(child);
     }
 }
 
-void CatalogView::saveExpandState(const QModelIndex & index)
+void CategoryView::saveExpandState(const QModelIndex & index)
 {
-    CatalogModel * catalogModel = (CatalogModel *)model();
-    CatalogItem * item = catalogModel->item(index);
+    CategoryModel * CategoryModel = (CategoryModel *)model();
+    CategoryItem * item = CategoryModel->item(index);
     if (!item) return;
 
     item->setExpanded(true);
 }
 
-void CatalogView::saveCollapseState(const QModelIndex & index)
+void CategoryView::saveCollapseState(const QModelIndex & index)
 {
-    CatalogModel * catalogModel = (CatalogModel *)model();
-    CatalogItem * item = catalogModel->item(index);
+    CategoryModel * CategoryModel = (CategoryModel *)model();
+    CategoryItem * item = CategoryModel->item(index);
     if (!item) return;
 
     item->setExpanded(false);
 }
 
-void CatalogView::addSubCategory()
+void CategoryView::addSubCategory()
 {
     QModelIndex parentIndex = currentIndex();
-    CatalogModel * catalogModel = (CatalogModel *)model();
-    CatalogItem * parent = catalogModel->item(parentIndex);
+    CategoryModel * CategoryModel = (CategoryModel *)model();
+    CategoryItem * parent = CategoryModel->item(parentIndex);
     if (!parent) return;
 
-    CatalogItem * item = catalogModel->createItem(tr("New Category"), parent);
+    CategoryItem * item = CategoryModel->createItem(tr("New Category"), parent);
 
     setExpanded(parentIndex, true);
-    setCurrentIndex( catalogModel->indexOf(item) );
-    edit( catalogModel->indexOf(item) );
+    setCurrentIndex( CategoryModel->indexOf(item) );
+    edit( CategoryModel->indexOf(item) );
 }
 
-void CatalogView::removeCategory()
+void CategoryView::removeCategory()
 {
     QModelIndex index = currentIndex();
-    CatalogModel * catalogModel = (CatalogModel *)model();
-    CatalogItem * item = catalogModel->item(index);
-    if (item==catalogModel->root()) return;
+    CategoryModel * CategoryModel = (CategoryModel *)model();
+    CategoryItem * item = CategoryModel->item(index);
+    if (item==CategoryModel->root()) return;
     if (!item) return;
 
-    catalogModel->removeItem(item);
+    CategoryModel->removeItem(item);
     scrollTo(currentIndex());
 }

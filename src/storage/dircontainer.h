@@ -22,7 +22,7 @@ public:
     
     virtual QStringList resourceList(QStringList nameFilters);
     virtual QIODevice * resource(QString resourceName);
-	virtual QIODevice * create(QString resourceName);
+    virtual QIODevice * create(QString resourceName);
     virtual long resourceSize(QString resourceName);
  
 private:

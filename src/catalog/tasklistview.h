@@ -6,7 +6,7 @@
 #define TASKLISTVIEW_H
 
 #include <QTreeView>
-class CatalogItem;
+class CategoryItem;
 
 /*!
  * \class TaskListView

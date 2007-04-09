@@ -2,22 +2,22 @@
 // Copyright (C) 2007 Oleksandr Yakovlyev <yshurik@gmail.com>
 //
 
-#ifndef CATALOGMODEL_H
-#define CATALOGMODEL_H
+#ifndef CategoryModel_H
+#define CategoryModel_H
 
 #include <QAbstractItemModel>
 
 /*!
- * \class CatalogItem
+ * \class CategoryItem
  */
-class CatalogItem 
+class CategoryItem 
 {
-friend class CatalogModel;
+friend class CategoryModel;
 public:
-    CatalogItem(QAbstractItemModel * model);
-    CatalogItem(int index, CatalogItem * parent);
-    CatalogItem(CatalogItem * parent);
-    virtual ~CatalogItem();
+    CategoryItem(QAbstractItemModel * model);
+    CategoryItem(int index, CategoryItem * parent);
+    CategoryItem(CategoryItem * parent);
+    virtual ~CategoryItem();
 
     QString text();
     void setText(QString);
@@ -28,9 +28,9 @@ public:
     QAbstractItemModel * model();
 
     int row();
-    CatalogItem * parent();
-    CatalogItem * child(int index);
-    QList<CatalogItem *> & children();
+    CategoryItem * parent();
+    CategoryItem * child(int index);
+    QList<CategoryItem *> & children();
     void remove(int index);
     int count();
     int level();
@@ -41,12 +41,12 @@ protected:
     bool setData(QVariant value, int role);
 
 private:
-    void append(CatalogItem * child);
-    void insert(int index, CatalogItem * child);
+    void append(CategoryItem * child);
+    void insert(int index, CategoryItem * child);
 
 private:
-    QList<CatalogItem *> _children;
-    CatalogItem * _parent;
+    QList<CategoryItem *> _children;
+    CategoryItem * _parent;
 
     QAbstractItemModel * _model;
     QString _text;
@@ -56,30 +56,30 @@ private:
 
 /*!
  */
-class CatalogModel : public QAbstractItemModel
+class CategoryModel : public QAbstractItemModel
 {
 Q_OBJECT
 
 public:
-    CatalogModel(QObject * parent = 0L);
-    virtual ~CatalogModel();
+    CategoryModel(QObject * parent = 0L);
+    virtual ~CategoryModel();
 
-    virtual CatalogItem * root() const;
-    CatalogItem * item(const QModelIndex &index);
+    virtual CategoryItem * root() const;
+    CategoryItem * item(const QModelIndex &index);
 
     QModelIndex parent(const QModelIndex &index) const;
     Qt::ItemFlags flags(const QModelIndex &index) const;
     QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
-    QModelIndex indexOf(CatalogItem * item);
+    QModelIndex indexOf(CategoryItem * item);
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     int columnCount(const QModelIndex &) const;
 
     QVariant data(const QModelIndex &index, int role) const;
     bool setData(const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
 
-    CatalogItem * createItem(QString name, CatalogItem * parent);
-    void removeItem(CatalogItem *);
-    void updateItem(CatalogItem *);
+    CategoryItem * createItem(QString name, CategoryItem * parent);
+    void removeItem(CategoryItem *);
+    void updateItem(CategoryItem *);
 
 private:
 	class Private;
@@ -87,9 +87,9 @@ private:
 
 };
 
-QDomDocument& operator>>(QDomDocument & doc, CatalogModel * catalogModel);
-QDomDocument& operator<<(QDomDocument & doc, CatalogModel * catalogModel);
-QDomNode& operator>>(QDomNode & node, CatalogItem * item);
-QDomNode& operator<<(QDomNode & node, CatalogItem * item);
+QDomDocument& operator>>(QDomDocument & doc, CategoryModel * CategoryModel);
+QDomDocument& operator<<(QDomDocument & doc, CategoryModel * CategoryModel);
+QDomNode& operator>>(QDomNode & node, CategoryItem * item);
+QDomNode& operator<<(QDomNode & node, CategoryItem * item);
 
-#endif // CATALOGMODEL_H
+#endif // CategoryModel_H

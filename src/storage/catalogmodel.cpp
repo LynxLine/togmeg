@@ -6,13 +6,12 @@
 #include <QtCore>
 
 #include "crammero.h"
-#include "datacontainer.h"
-#include "catalogmodel.h"
+#include "categorymodel.h"
 
 /*!
  Creates new root item associated with \a model.
  */
-CatalogItem::CatalogItem(QAbstractItemModel * model)
+CategoryItem::CategoryItem(QAbstractItemModel * model)
 :_parent(0L), _model(model), _level(0)
 {
     setText("CATALOG");
@@ -21,14 +20,14 @@ CatalogItem::CatalogItem(QAbstractItemModel * model)
 /*!
  Creates new item and append it to parent.
  */
-CatalogItem::CatalogItem(CatalogItem * parent)
+CategoryItem::CategoryItem(CategoryItem * parent)
 :_parent(parent)
 {
     Q_ASSERT( parent );
     parent->append( this );
 }
 
-CatalogItem::CatalogItem(int index, CatalogItem * parent)
+CategoryItem::CategoryItem(int index, CategoryItem * parent)
 :_parent(parent)
 {
     Q_ASSERT( parent );
@@ -38,7 +37,7 @@ CatalogItem::CatalogItem(int index, CatalogItem * parent)
 /*!
  Deletes all children of the item.
  */
-CatalogItem::~CatalogItem() 
+CategoryItem::~CategoryItem() 
 {
     qDeleteAll(_children);;
 }
@@ -46,7 +45,7 @@ CatalogItem::~CatalogItem()
 /*!
  Returns model associated with the item.
  */
-QAbstractItemModel * CatalogItem::model()
+QAbstractItemModel * CategoryItem::model()
 {
     return _model;
 }
@@ -54,7 +53,7 @@ QAbstractItemModel * CatalogItem::model()
 /*!
  Returns current row relative to parent.
  */
-int CatalogItem::row()
+int CategoryItem::row()
 {
     if( !parent() ) return 0;
     return parent()->_children.indexOf( this );
@@ -63,39 +62,39 @@ int CatalogItem::row()
 /*!
  Returns parent item.
  */
-CatalogItem * CatalogItem::parent()
+CategoryItem * CategoryItem::parent()
 {
     return _parent;
 }
 
-QString CatalogItem::text()
+QString CategoryItem::text()
 {
     return _text;
 }
 
-void CatalogItem::setText(QString t)
+void CategoryItem::setText(QString t)
 {
     _text = t;
 }
 
-bool CatalogItem::isExpanded()
+bool CategoryItem::isExpanded()
 {
     return _expanded;
 }
 
-void CatalogItem::setExpanded(bool f)
+void CategoryItem::setExpanded(bool f)
 {
     _expanded = f;
 }
 
 
-QVariant CatalogItem::data(int role)
+QVariant CategoryItem::data(int role)
 {
     if (role == Qt::DisplayRole || role == Qt::EditRole) return text();
     return QVariant();
 }
 
-bool CatalogItem::setData(QVariant value, int role)
+bool CategoryItem::setData(QVariant value, int role)
 {
     if (role == Qt::DisplayRole || role == Qt::EditRole) {
         setText( value.toString() );
@@ -107,7 +106,7 @@ bool CatalogItem::setData(QVariant value, int role)
 /*!
  Return child at \a index.
  */
-CatalogItem * CatalogItem::child(int index)
+CategoryItem * CategoryItem::child(int index)
 {
     if ( index >= count() ) return 0L;
     return _children.at(index);
@@ -116,7 +115,7 @@ CatalogItem * CatalogItem::child(int index)
 /*!
  Return children list.
  */
-QList<CatalogItem *> & CatalogItem::children()
+QList<CategoryItem *> & CategoryItem::children()
 {
     return _children;
 }
@@ -126,14 +125,14 @@ QList<CatalogItem *> & CatalogItem::children()
  Do not use the function, use the constructor 
  which adds itself to parent.
  */
-void CatalogItem::append(CatalogItem * item) 
+void CategoryItem::append(CategoryItem * item) 
 {
     _children.append(item);
     item->_level = _level+1;
     item->_model = _model;
 }
 
-void CatalogItem::insert(int index, CatalogItem * item) 
+void CategoryItem::insert(int index, CategoryItem * item) 
 {
     _children.insert(index, item);
     item->_level = _level+1;
@@ -143,7 +142,7 @@ void CatalogItem::insert(int index, CatalogItem * item)
 /*!
  Removes child at \a index.
  */
-void CatalogItem::remove(int index) 
+void CategoryItem::remove(int index) 
 {
     _children.removeAt(index);
 }
@@ -151,59 +150,47 @@ void CatalogItem::remove(int index)
 /*!
  Returns number of children.
  */
-int CatalogItem::count()
+int CategoryItem::count()
 {
     return _children.count();
 }
 
-class CatalogModel::Private
+class CategoryModel::Private
 {
 public:
-    CatalogItem * root;
-    QList<DataContainer *> containers;
+    CategoryItem * root;
+
 };
 
 /*!
- Crestes CatalogModel
+ Crestes CategoryModel
  */
-CatalogModel::CatalogModel(QObject * parent)
+CategoryModel::CategoryModel(QObject * parent)
 :QAbstractItemModel(parent)
 {
     d = new Private;
-    d->root = new CatalogItem(this);
+    d->root = new CategoryItem(this);
 
     QTime time = QTime::currentTime();
 
+    QFile catalogFile(app::storagePath()+"catalog.xml");
+    if (catalogFile.open(QIODevice::ReadOnly)) {
+        QDomDocument xml;
+        xml.setContent( &catalogFile );
+        catalogFile.close();
 
-    //for (int i=0;i<100;i++)
-    {
-        QFile catalogFile(app::storagePath()+"catalog.xml");
-        if (catalogFile.open(QIODevice::ReadOnly)) {
-            QDomDocument xml;
-            xml.setContent( &catalogFile );
-            catalogFile.close();
-
-            xml >> this;
-        }
+        xml >> this;
     }
+
     qDebug() << "time for loading xml:" << time.msecsTo(QTime::currentTime());
-
-    QDir storageDir(app::storagePath());
-    QStringList dirs = storageDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
-    foreach(QString dirName, dirs) {
-        QString taskPath = app::storagePath()+dirName;
-        DataContainer * container = DataContainerFactory::resourceContainer( taskPath );
-        if ( !container ) continue;
-        d->containers << container;
-    }
 }
 
 /*!
  Deletes the object.
  */
-CatalogModel::~CatalogModel()
+CategoryModel::~CategoryModel()
 {
-    qDebug() << "~CatalogModel";
+    qDebug() << "~CategoryModel";
 
     QFile catalogFile(app::storagePath()+"catalog.xml");
     if (catalogFile.open(QIODevice::WriteOnly)) {
@@ -220,7 +207,7 @@ CatalogModel::~CatalogModel()
 /*!
  Returns root item
  */
-CatalogItem * CatalogModel::root() const
+CategoryItem * CategoryModel::root() const
 {
     return d->root;
 }
@@ -228,21 +215,21 @@ CatalogItem * CatalogModel::root() const
 /*!
  Returns item of index
  */
-CatalogItem * CatalogModel::item(const QModelIndex &index)
+CategoryItem * CategoryModel::item(const QModelIndex &index)
 {
     if ( !index.isValid() ) return 0L;
-    return static_cast<CatalogItem*>(index.internalPointer());
+    return static_cast<CategoryItem*>(index.internalPointer());
 }
 
 /*!
  \reimp for Catalog-like Model.
  */
-QModelIndex CatalogModel::parent(const QModelIndex &index) const 
+QModelIndex CategoryModel::parent(const QModelIndex &index) const 
 {
     if ( !index.isValid() ) return QModelIndex();
     
-    CatalogItem * child = static_cast<CatalogItem*>(index.internalPointer());
-    CatalogItem * parent = child->parent();
+    CategoryItem * child = static_cast<CategoryItem*>(index.internalPointer());
+    CategoryItem * parent = child->parent();
 
     if ( !parent ) return QModelIndex();
     return createIndex(parent->row(), 0, parent);
@@ -251,10 +238,10 @@ QModelIndex CatalogModel::parent(const QModelIndex &index) const
 /*!
  \reimp for Catalog-like Model.
  */
-Qt::ItemFlags CatalogModel::flags(const QModelIndex &index) const 
+Qt::ItemFlags CategoryModel::flags(const QModelIndex &index) const 
 {
     if ( !index.isValid() ) return Qt::ItemIsDropEnabled;
-    CatalogItem * item = static_cast<CatalogItem*>(index.internalPointer());
+    CategoryItem * item = static_cast<CategoryItem*>(index.internalPointer());
     if (item == root() ) return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
 }
@@ -263,41 +250,41 @@ Qt::ItemFlags CatalogModel::flags(const QModelIndex &index) const
  It uses data() of item.
  Do not reimplemnt this.
  */
-QVariant CatalogModel::data(const QModelIndex &index, int role) const 
+QVariant CategoryModel::data(const QModelIndex &index, int role) const 
 {
     if ( !index.isValid() ) return QVariant();
     
-    CatalogItem * item = static_cast<CatalogItem *>(index.internalPointer());
+    CategoryItem * item = static_cast<CategoryItem *>(index.internalPointer());
     return item->data(role);
 }
 
-bool CatalogModel::setData(const QModelIndex & index, const QVariant & value, int role)
+bool CategoryModel::setData(const QModelIndex & index, const QVariant & value, int role)
 {
     if ( !index.isValid() ) return false;
     
-    CatalogItem * item = static_cast<CatalogItem *>(index.internalPointer());
+    CategoryItem * item = static_cast<CategoryItem *>(index.internalPointer());
     return item->setData(value, role);
 }
 
 /*!
  \reimp for Catalog-like Model.
  */
-QModelIndex CatalogModel::index(int row, int column, const QModelIndex &parent) const 
+QModelIndex CategoryModel::index(int row, int column, const QModelIndex &parent) const 
 {
-    CatalogItem * p;
+    CategoryItem * p;
     if ( !parent.isValid() ) {
         if (row == 0) return createIndex(row, column, root());
         return QModelIndex();
     }
-    else p = static_cast<CatalogItem *>(parent.internalPointer());
+    else p = static_cast<CategoryItem *>(parent.internalPointer());
 
-    CatalogItem * child = p->child(row);
+    CategoryItem * child = p->child(row);
     if ( !child ) return QModelIndex();
 
     return createIndex(row, column, child);
 }
 
-QModelIndex CatalogModel::indexOf(CatalogItem * item) 
+QModelIndex CategoryModel::indexOf(CategoryItem * item) 
 {
     QModelIndex index;
     index = createIndex(item->row(), 0, item);
@@ -307,29 +294,29 @@ QModelIndex CatalogModel::indexOf(CatalogItem * item)
 /*!
  \reimp for Catalog-like Model.
  */
-int CatalogModel::rowCount(const QModelIndex &parent) const 
+int CategoryModel::rowCount(const QModelIndex &parent) const 
 {
-    CatalogItem * p;
+    CategoryItem * p;
 
     if (!parent.isValid()) return 1; //root only
-    else p = static_cast<CatalogItem *>(parent.internalPointer());
+    else p = static_cast<CategoryItem *>(parent.internalPointer());
 
     return p->count();
 }
 
-int CatalogModel::columnCount(const QModelIndex &) const 
+int CategoryModel::columnCount(const QModelIndex &) const 
 {
 	return 1;
 }
 
-CatalogItem * CatalogModel::createItem(QString name, CatalogItem * parent)
+CategoryItem * CategoryModel::createItem(QString name, CategoryItem * parent)
 {
     if ( !parent ) return 0L;
 
     QModelIndex index = createIndex(parent->row(), 0, parent);
 
     beginInsertRows(index, parent->count(), parent->count());
-    CatalogItem * item = new CatalogItem(parent);
+    CategoryItem * item = new CategoryItem(parent);
     item->setText(name);
     endInsertRows();
 
@@ -339,9 +326,9 @@ CatalogItem * CatalogModel::createItem(QString name, CatalogItem * parent)
 /*!
  Removes \a item associated with the model.
  */
-void CatalogModel::removeItem(CatalogItem * item)
+void CategoryModel::removeItem(CategoryItem * item)
 {
-    CatalogItem * parent = item->parent();
+    CategoryItem * parent = item->parent();
     if ( !parent ) return;
 
     int i = parent->children().indexOf( item );
@@ -355,21 +342,21 @@ void CatalogModel::removeItem(CatalogItem * item)
 /*!
  Updates the \a item in tree.
  */
-void CatalogModel::updateItem(CatalogItem * item)
+void CategoryModel::updateItem(CategoryItem * item)
 {
     QModelIndex index = createIndex( item->row(), 0, item );
     emit dataChanged(index, index);
 }
 
-QDomDocument& operator>>(QDomDocument & doc, CatalogModel * catalogModel)
+QDomDocument& operator>>(QDomDocument & doc, CategoryModel * CategoryModel)
 {
-    CatalogItem * item = catalogModel->root();    
+    CategoryItem * item = CategoryModel->root();    
     QDomNode node = doc.documentElement();
     node >> item;
     return doc;
 }
 
-QDomNode& operator>>(QDomNode & node, CatalogItem * item)
+QDomNode& operator>>(QDomNode & node, CategoryItem * item)
 {
     QDomElement el = node.toElement();
     item->setText(el.attribute("name"));
@@ -377,7 +364,7 @@ QDomNode& operator>>(QDomNode & node, CatalogItem * item)
 
     QDomNode n = node.firstChild();
     while (!n.isNull()) {
-        CatalogItem * child = new CatalogItem(item);
+        CategoryItem * child = new CategoryItem(item);
         n >> child;
         n = n.nextSibling();
     }
@@ -385,20 +372,20 @@ QDomNode& operator>>(QDomNode & node, CatalogItem * item)
     return node;
 }
 
-QDomDocument& operator<<(QDomDocument & doc, CatalogModel * catalogModel)
+QDomDocument& operator<<(QDomDocument & doc, CategoryModel * CategoryModel)
 {
-    doc << catalogModel->root();
+    doc << CategoryModel->root();
     return doc;
 }
 
-QDomNode& operator<<(QDomNode & node, CatalogItem * item)
+QDomNode& operator<<(QDomNode & node, CategoryItem * item)
 {
     QDomElement child = node.ownerDocument().createElement("category");
     child.setAttribute("name", item->text());
     child.setAttribute("expanded", item->isExpanded() ? "yes" : "no");
     node.appendChild(child);
 
-    foreach(CatalogItem * item, item->children()) {
+    foreach(CategoryItem * item, item->children()) {
         child << item;
     }
 

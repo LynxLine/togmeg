@@ -6,17 +6,17 @@
 #define CATALOGVIEW_H
 
 #include <QTreeView>
-class CatalogItem;
+class CategoryItem;
 
 /*!
- * \class CatalogView
+ * \class CategoryView
  */
-class CatalogView : public QTreeView
+class CategoryView : public QTreeView
 {
 Q_OBJECT
 public:
-    CatalogView(QWidget * parent = 0);
-    virtual ~CatalogView();
+    CategoryView(QWidget * parent = 0);
+    virtual ~CategoryView();
 
     void setModel(QAbstractItemModel * model);
 
@@ -32,7 +32,7 @@ protected:
 
 private slots:
     void activateContextMenu(const QPoint &);
-    void loadExpandState(CatalogItem * child);
+    void loadExpandState(CategoryItem * child);
     void saveExpandState(const QModelIndex & index);
     void saveCollapseState(const QModelIndex & index);
 
