@@ -87,8 +87,8 @@ private:
 
 };
 
-QDomDocument& operator>>(QDomDocument & doc, CategoryModel * CategoryModel);
-QDomDocument& operator<<(QDomDocument & doc, CategoryModel * CategoryModel);
+QDomDocument& operator>>(QDomDocument & doc, CategoryModel * categoryModel);
+QDomDocument& operator<<(QDomDocument & doc, CategoryModel * categoryModel);
 QDomNode& operator>>(QDomNode & node, CategoryItem * item);
 QDomNode& operator<<(QDomNode & node, CategoryItem * item);
 

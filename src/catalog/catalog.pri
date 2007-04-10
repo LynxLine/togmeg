@@ -2,13 +2,13 @@
 INCLUDEPATH += catalog
 
 HEADERS += \
-    catalog/catalogview.h \
+    catalog/categoryview.h \
     catalog/tasklistview.h \
     catalog/catalogwidget.h \
 
 
 SOURCES += \
-    catalog/catalogview.cpp \
+    catalog/categoryview.cpp \
     catalog/tasklistview.cpp \
     catalog/catalogwidget.cpp \
 

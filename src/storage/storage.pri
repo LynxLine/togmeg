@@ -2,14 +2,14 @@
 INCLUDEPATH += storage
 
 HEADERS += \
-    storage/catalogmodel.h \
+    storage/categorymodel.h \
     storage/tasklistmodel.h \
     storage/datacontainer.h \
     storage/dircontainer.h \
 
 
 SOURCES += \
-    storage/catalogmodel.cpp \
+    storage/categorymodel.cpp \
     storage/tasklistmodel.cpp \
     storage/datacontainer.cpp \
     storage/dircontainer.cpp \

@@ -222,7 +222,7 @@ CategoryItem * CategoryModel::item(const QModelIndex &index)
 }
 
 /*!
- \reimp for Catalog-like Model.
+ \reimp for Category-like Model.
  */
 QModelIndex CategoryModel::parent(const QModelIndex &index) const 
 {
@@ -236,7 +236,7 @@ QModelIndex CategoryModel::parent(const QModelIndex &index) const
 }
 
 /*!
- \reimp for Catalog-like Model.
+ \reimp for Category-like Model.
  */
 Qt::ItemFlags CategoryModel::flags(const QModelIndex &index) const 
 {
@@ -267,7 +267,7 @@ bool CategoryModel::setData(const QModelIndex & index, const QVariant & value, i
 }
 
 /*!
- \reimp for Catalog-like Model.
+ \reimp for Category-like Model.
  */
 QModelIndex CategoryModel::index(int row, int column, const QModelIndex &parent) const 
 {
@@ -292,7 +292,7 @@ QModelIndex CategoryModel::indexOf(CategoryItem * item)
 }
 
 /*!
- \reimp for Catalog-like Model.
+ \reimp for Category-like Model.
  */
 int CategoryModel::rowCount(const QModelIndex &parent) const 
 {
@@ -348,9 +348,9 @@ void CategoryModel::updateItem(CategoryItem * item)
     emit dataChanged(index, index);
 }
 
-QDomDocument& operator>>(QDomDocument & doc, CategoryModel * CategoryModel)
+QDomDocument& operator>>(QDomDocument & doc, CategoryModel * categoryModel)
 {
-    CategoryItem * item = CategoryModel->root();    
+    CategoryItem * item = categoryModel->root();    
     QDomNode node = doc.documentElement();
     node >> item;
     return doc;
@@ -372,9 +372,9 @@ QDomNode& operator>>(QDomNode & node, CategoryItem * item)
     return node;
 }
 
-QDomDocument& operator<<(QDomDocument & doc, CategoryModel * CategoryModel)
+QDomDocument& operator<<(QDomDocument & doc, CategoryModel * categoryModel)
 {
-    doc << CategoryModel->root();
+    doc << categoryModel->root();
     return doc;
 }
 

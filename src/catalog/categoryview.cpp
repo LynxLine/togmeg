@@ -3,7 +3,7 @@
 //
 
 #include <QtGui>
-#include "catalogview.h"
+#include "categoryview.h"
 #include "categorymodel.h"
 #include "mainwindow.h"
 
@@ -51,8 +51,8 @@ void CategoryView::setModel(QAbstractItemModel * model)
 {
     QTreeView::setModel(model);
 
-    CategoryModel * CategoryModel = (CategoryModel *)model;
-    loadExpandState(CategoryModel->root());
+    CategoryModel * categoryModel = (CategoryModel *)model;
+    loadExpandState(categoryModel->root());
 }
 
 /*
@@ -78,8 +78,8 @@ void CategoryView::activateContextMenu(const QPoint & pos)
 void CategoryView::loadExpandState(CategoryItem * item)
 {
     if (item->isExpanded()) {
-        CategoryModel * CategoryModel = (CategoryModel *)model();
-        setExpanded(CategoryModel->indexOf(item), true);
+        CategoryModel * categoryModel = (CategoryModel *)model();
+        setExpanded(categoryModel->indexOf(item), true);
     }
 
     foreach(CategoryItem * child, item->children()) {
@@ -89,8 +89,8 @@ void CategoryView::loadExpandState(CategoryItem * item)
 
 void CategoryView::saveExpandState(const QModelIndex & index)
 {
-    CategoryModel * CategoryModel = (CategoryModel *)model();
-    CategoryItem * item = CategoryModel->item(index);
+    CategoryModel * categoryModel = (CategoryModel *)model();
+    CategoryItem * item = categoryModel->item(index);
     if (!item) return;
 
     item->setExpanded(true);
@@ -98,8 +98,8 @@ void CategoryView::saveExpandState(const QModelIndex & index)
 
 void CategoryView::saveCollapseState(const QModelIndex & index)
 {
-    CategoryModel * CategoryModel = (CategoryModel *)model();
-    CategoryItem * item = CategoryModel->item(index);
+    CategoryModel * categoryModel = (CategoryModel *)model();
+    CategoryItem * item = categoryModel->item(index);
     if (!item) return;
 
     item->setExpanded(false);
@@ -108,25 +108,25 @@ void CategoryView::saveCollapseState(const QModelIndex & index)
 void CategoryView::addSubCategory()
 {
     QModelIndex parentIndex = currentIndex();
-    CategoryModel * CategoryModel = (CategoryModel *)model();
-    CategoryItem * parent = CategoryModel->item(parentIndex);
+    CategoryModel * categoryModel = (CategoryModel *)model();
+    CategoryItem * parent = categoryModel->item(parentIndex);
     if (!parent) return;
 
-    CategoryItem * item = CategoryModel->createItem(tr("New Category"), parent);
+    CategoryItem * item = categoryModel->createItem(tr("New Category"), parent);
 
     setExpanded(parentIndex, true);
-    setCurrentIndex( CategoryModel->indexOf(item) );
-    edit( CategoryModel->indexOf(item) );
+    setCurrentIndex( categoryModel->indexOf(item) );
+    edit( categoryModel->indexOf(item) );
 }
 
 void CategoryView::removeCategory()
 {
     QModelIndex index = currentIndex();
-    CategoryModel * CategoryModel = (CategoryModel *)model();
-    CategoryItem * item = CategoryModel->item(index);
-    if (item==CategoryModel->root()) return;
+    CategoryModel * categoryModel = (CategoryModel *)model();
+    CategoryItem * item = categoryModel->item(index);
+    if (item==categoryModel->root()) return;
     if (!item) return;
 
-    CategoryModel->removeItem(item);
+    categoryModel->removeItem(item);
     scrollTo(currentIndex());
 }
