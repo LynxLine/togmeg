@@ -4,11 +4,12 @@
 
 #include <QtGui>
 #include "taskeditorview.h"
+#include "studytaskmodel.h"
 
 class TaskEditorView::Private
 {
 public:
-    //QPointer<TaskListModel> model;
+    QPointer<StudyTaskModel> model;
     QPointer<QMenu> contextMenu;
 };
 
@@ -31,8 +32,8 @@ TaskEditorView::TaskEditorView(QWidget * parent)
     d->contextMenu->addSeparator();
     d->contextMenu->addAction( tr("Remove") );
 
-    //d->model = new TaskListModel(this);
-    //setModel( d->model );
+    d->model = new StudyTaskModel(this);
+    setModel( d->model );
 }
 
 TaskEditorView::~TaskEditorView()
