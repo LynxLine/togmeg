@@ -6,6 +6,7 @@
 #include <QtCore>
 
 #include "mainwindow.h"
+#include "slidedwidget.h"
 #include "catalogwidget.h"
 #include "examinewidget.h"
 #include "taskeditorwidget.h"
@@ -32,7 +33,9 @@ public:
     MainWindow::ViewMode viewMode;
     
     //gui
+    SlidedWidget * slide;
     QStackedWidget * stack;
+    
     CatalogWidget * catalogWidget;
     ExamineWidget * examineWidget;
     TaskEditorWidget * taskEditorWidget;
@@ -71,16 +74,22 @@ MainWindow::MainWindow()
     d->stack->setFont( baseFont() );
     setCentralWidget( d->stack );
 
-    d->catalogWidget = new CatalogWidget( d->stack );
-    d->stack->addWidget( d->catalogWidget );
+    d->slide = new SlidedWidget( d->stack );
+    d->stack->addWidget( d->slide );
+
+    d->catalogWidget = new CatalogWidget( d->slide );
+    d->slide->addWidget( d->catalogWidget );
+
+    d->taskEditorWidget = new TaskEditorWidget( d->slide );
+    d->slide->addWidget( d->taskEditorWidget );
 
     d->examineWidget = new ExamineWidget( d->stack );
     d->stack->addWidget( d->examineWidget );
 
-    d->taskEditorWidget = new TaskEditorWidget( d->stack );
-    d->stack->addWidget( d->taskEditorWidget );
-
     setViewMode(MainWindow::CatalogMode);
+
+    connect(d->catalogWidget, SIGNAL(studyTaskActivated(QString)),
+            this, SLOT(openTaskEditor(QString)));
 }
 
 /*!
@@ -147,6 +156,9 @@ void MainWindow::createActions()
     d->actions["app/export"] = new QAction (tr("&Export..."), this);
     d->actions["app/print"]  = new QAction (tr("&Print..."), this);
 
+	d->actions["app/back" ] = new QAction (tr("&Back"), this);
+	d->actions["app/forward" ]  = new QAction (tr("&Forward"), this);
+
 	d->actions["app/undo" ] = new QAction (tr("&Undo"), this);
 	d->actions["app/redo" ] = new QAction (tr("&Redo"), this);
     d->actions["app/cut"  ] = new QAction (tr("Cu&t"), this);
@@ -211,8 +223,8 @@ void MainWindow::createToolBar()
     toolBar->setIconSize(QSize(32, 32));
     toolBar->setMovable(false);
 
-	toolBar->addAction( action("app/import") );
-	toolBar->addAction( action("app/export") );
+	toolBar->addAction( action("app/back") );
+	//toolBar->addAction( action("app/export") );
 
     toolBar->addSeparator();
 	toolBar->addAction( action("app/demo") );
@@ -237,6 +249,7 @@ void MainWindow::createShortcuts()
     action("app/copy")       ->setShortcut(tr("Ctrl+C"));
     action("app/paste")      ->setShortcut(tr("Ctrl+V"));
     action("app/help")       ->setShortcut(tr("F1"));
+    action("app/back")       ->setShortcut(tr("Backspace"));
 }
 
 /*!
@@ -250,6 +263,8 @@ void MainWindow::connectActions()
 
     connect( action("app/import"), SIGNAL(triggered()), this, SLOT(importFile()));
     connect( action("app/export"), SIGNAL(triggered()), this, SLOT(exportFile()));
+
+    connect( action("app/back"),   SIGNAL(triggered()), this, SLOT(previousWindow()));
 
     connect( action("app/demo" ), SIGNAL(triggered()), this, SLOT(runDemo()));
     connect( action("app/study"), SIGNAL(triggered()), this, SLOT(runStudy()));
@@ -288,9 +303,16 @@ void MainWindow::exportFile()
     */
 }
 
-void MainWindow::editStudy()
+void MainWindow::openTaskEditor(QString taskId)
 {
     setViewMode(MainWindow::TaskEditorMode);
+    d->taskEditorWidget->setCurrentTask(taskId);
+}
+
+void MainWindow::previousWindow()
+{
+    if ( viewMode() == TaskEditorMode ) setViewMode(MainWindow::CatalogMode);
+    else if ( viewMode() == ExamineMode ) setViewMode(MainWindow::BrowserMode);
 }
 
 void MainWindow::runDemo()
@@ -310,7 +332,7 @@ void MainWindow::runExamine()
 
 void MainWindow::stop()
 {
-    setViewMode(MainWindow::CatalogMode);
+    setViewMode(MainWindow::BrowserMode);
 }
 
 /*!
@@ -362,21 +384,36 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
 {
     d->viewMode = m;
     if (m == MainWindow::CatalogMode) {
-        d->stack->setCurrentWidget( d->catalogWidget );
+        //first switch stack
+        if ( d->stack->currentWidget() != d->slide )
+        d->stack->setCurrentWidget( d->slide );
+        //second switch slide
+        d->slide->setCurrentWidget( d->catalogWidget );
     }
     else if (m == MainWindow::TaskEditorMode) {
-        d->stack->setCurrentWidget( d->taskEditorWidget );
+        //first switch stack
+        if ( d->stack->currentWidget() != d->slide )
+        d->stack->setCurrentWidget( d->slide );
+        //second switch slide
+        d->slide->setCurrentWidget( d->taskEditorWidget );
     }
     else if (m == MainWindow::ExamineMode) {
+        //just switch stack
         d->stack->setCurrentWidget( d->examineWidget );
     }
+    else if (m == MainWindow::BrowserMode) {
+        //just switch stack
+        d->stack->setCurrentWidget( d->slide );
+        if ( d->slide->currentWidget() == d->catalogWidget ) d->viewMode = MainWindow::CatalogMode;
+        else if ( d->slide->currentWidget() == d->taskEditorWidget ) d->viewMode = MainWindow::TaskEditorMode;
+    }
 
-    action("app/demo" )->setEnabled( m!=MainWindow::ExamineMode );
-    action("app/study")->setEnabled( m!=MainWindow::ExamineMode );
-    action("app/exam" )->setEnabled( m!=MainWindow::ExamineMode );
-    action("app/stop" )->setEnabled( m==MainWindow::ExamineMode );
+    action("app/demo" )->setEnabled( d->viewMode!=MainWindow::ExamineMode );
+    action("app/study")->setEnabled( d->viewMode!=MainWindow::ExamineMode );
+    action("app/exam" )->setEnabled( d->viewMode!=MainWindow::ExamineMode );
+    action("app/stop" )->setEnabled( d->viewMode==MainWindow::ExamineMode );
 
-    emit viewModeChanged(m);
+    emit viewModeChanged( d->viewMode );
 }
 
 QFont MainWindow::baseFont(qreal multiplier, int weight)

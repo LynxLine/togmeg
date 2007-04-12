@@ -18,6 +18,7 @@ CategoryView::CategoryView(QWidget * parent)
 {
     d = new Private;
     setRootIsDecorated(false);
+    setEditTriggers(editTriggers() | QAbstractItemView::SelectedClicked);
     setFrameStyle(QFrame::NoFrame);
     setAnimated(true);
     header()->hide();

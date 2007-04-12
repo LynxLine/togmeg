@@ -56,6 +56,7 @@ include("logger/logger.pri")
 include("storage/storage.pri")
 include("catalog/catalog.pri")
 include("examine/examine.pri")
+include("widgets/widgets.pri")
 include("taskeditor/taskeditor.pri")
 include("qtsingleapplication/qtsingleapplication.pri")
 

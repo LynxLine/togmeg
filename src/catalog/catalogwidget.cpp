@@ -104,7 +104,10 @@ CatalogWidget::CatalogWidget(QWidget * parent)
 
     connect(d->categoryView, SIGNAL(categoryActivated(QString)),
             d->taskListView, SLOT(applyCategoryFilter(QString)));
+    connect(d->taskListView, SIGNAL(studyTaskActivated(QString)),
+            this, SIGNAL(studyTaskActivated(QString)));
 
+    setFocusProxy( d->taskListView );
     d->categoryView->setFocus();
 }
 

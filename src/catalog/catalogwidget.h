@@ -17,6 +17,9 @@ public:
     CatalogWidget(QWidget * parent = 0L);
     virtual ~CatalogWidget();
 
+signals:
+    void studyTaskActivated(QString taskId);
+
 private:
 	class Private;
 	Private * d;

@@ -63,3 +63,7 @@ TaskEditorWidget::~TaskEditorWidget()
 {
     delete d;
 }
+
+void TaskEditorWidget::setCurrentTask(QString taskId)
+{
+}

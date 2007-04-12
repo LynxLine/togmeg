@@ -6,7 +6,6 @@
 #define TASKLISTVIEW_H
 
 #include <QTreeView>
-class CategoryItem;
 
 /*!
  * \class TaskListView
@@ -24,8 +23,12 @@ public slots:
     void editCurrentStudy();
     void applyCategoryFilter(QString categoryId);
 
+signals:
+    void studyTaskActivated(QString taskId);
+
 private slots:
     void editStudyName();
+    void activateItem(const QModelIndex &);
     void activateContextMenu(const QPoint &);
 
 private:

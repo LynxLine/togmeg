@@ -17,6 +17,9 @@ public:
     TaskEditorWidget(QWidget * parent = 0L);
     virtual ~TaskEditorWidget();
 
+public slots:
+    void setCurrentTask(QString taskId);
+
 private:
 	class Private;
 	Private * d;

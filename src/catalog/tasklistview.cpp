@@ -22,9 +22,11 @@ TaskListView::TaskListView(QWidget * parent)
     d = new Private;
 
     setRootIsDecorated(false);
+    setUniformRowHeights(true);
     setAutoFillBackground(true);
     setAlternatingRowColors(true);
     setFrameStyle(QFrame::NoFrame);
+    setEditTriggers(editTriggers() ^ QAbstractItemView::DoubleClicked);
 
     setContextMenuPolicy(Qt::CustomContextMenu);
     connect(this, SIGNAL(customContextMenuRequested(const QPoint &)), 
@@ -42,6 +44,9 @@ TaskListView::TaskListView(QWidget * parent)
     d->filter->setSourceModel( d->model );
     d->filter->sort(0, Qt::AscendingOrder);
     d->filter->setFilterKeyColumn(0);
+
+    connect(this, SIGNAL(doubleClicked(const QModelIndex &)), 
+            this, SLOT(activateItem(const QModelIndex &)));
 
     setModel( d->filter );
 }
@@ -86,6 +91,17 @@ void TaskListView::editCurrentStudy()
 {
     QModelIndex index = currentIndex();
     if ( !index.isValid() ) return;
+    activateItem(index);
+}
+
+void TaskListView::activateItem(const QModelIndex & i)
+{
+    if ( !i.isValid() ) return;
+    QModelIndex index = d->filter->mapFromSource( i );
+    if ( !index.isValid() ) return;
+
+    StudyTask * task = d->model->task( index );
+    emit studyTaskActivated( task->id() );
 }
 
 void TaskListView::applyCategoryFilter(QString categoryId)
