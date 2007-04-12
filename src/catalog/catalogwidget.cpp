@@ -15,7 +15,7 @@
 class CatalogWidget::Private
 {
 public:
-    CategoryView * catalogView;
+    CategoryView * categoryView;
     TaskListView * taskListView;
     CategoryModel * categoryModel;
 };
@@ -40,15 +40,15 @@ CatalogWidget::CatalogWidget(QWidget * parent)
     layout->addLayout(categoryLayout, 0, 0);
 
     d->categoryModel = new CategoryModel(this);
-    d->catalogView = new CategoryView(this);
+    d->categoryView = new CategoryView(this);
 
     {
-        d->catalogView->setFixedWidth(200);
-        d->catalogView->setModel( d->categoryModel );
-        d->catalogView->setCurrentIndex( d->categoryModel->index(0,0) );
+        d->categoryView->setFixedWidth(200);
+        d->categoryView->setModel( d->categoryModel );
+        d->categoryView->setCurrentIndex( d->categoryModel->index(0,0) );
     }
 
-    categoryLayout->addWidget( d->catalogView );
+    categoryLayout->addWidget( d->categoryView );
 
     //task list area
     QVBoxLayout * taskLayout = new QVBoxLayout;
@@ -71,24 +71,41 @@ CatalogWidget::CatalogWidget(QWidget * parent)
     addCategory->setText("+Category");
     remCategory->setText("-Category");
 
-    connect(addCategory, SIGNAL(clicked()), d->catalogView, SLOT(addSubCategory()));
-    connect(remCategory, SIGNAL(clicked()), d->catalogView, SLOT(removeCategory()));
+    addCategory->setFocusPolicy(Qt::NoFocus);
+    remCategory->setFocusPolicy(Qt::NoFocus);
 
+    connect(addCategory, SIGNAL(clicked()), d->categoryView, SLOT(addSubCategory()));
+    connect(remCategory, SIGNAL(clicked()), d->categoryView, SLOT(removeCategory()));
+
+    QToolButton * editStudy = new QToolButton;
     QToolButton * addStudy = new QToolButton;
     QToolButton * remStudy = new QToolButton;
 
+    editStudy->setText("Edit");
     addStudy->setText("+Study");
     remStudy->setText("-Study");
 
+    editStudy->setFocusPolicy(Qt::NoFocus);
+    addStudy->setFocusPolicy(Qt::NoFocus);
+    remStudy->setFocusPolicy(Qt::NoFocus);
+
+    connect(editStudy, SIGNAL(clicked()), d->taskListView, SLOT(editCurrentStudy()));
     connect(addStudy, SIGNAL(clicked()), d->taskListView, SLOT(addNewStudy()));
     connect(remStudy, SIGNAL(clicked()), d->taskListView, SLOT(removeStudy()));
 
     footerAreaLayout->addWidget( addCategory );
     footerAreaLayout->addWidget( remCategory );
     footerAreaLayout->addItem(new QSpacerItem(30,10, QSizePolicy::Fixed, QSizePolicy::Minimum) );
+    footerAreaLayout->addWidget( editStudy );
+    footerAreaLayout->addItem(new QSpacerItem(10,10, QSizePolicy::Fixed, QSizePolicy::Minimum) );
     footerAreaLayout->addWidget( addStudy );
     footerAreaLayout->addWidget( remStudy );
     footerAreaLayout->addItem(new QSpacerItem(10,10, QSizePolicy::Expanding, QSizePolicy::Minimum) );
+
+    connect(d->categoryView, SIGNAL(categoryActivated(QString)),
+            d->taskListView, SLOT(applyCategoryFilter(QString)));
+
+    d->categoryView->setFocus();
 }
 
 /*!

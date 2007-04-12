@@ -147,7 +147,6 @@ void MainWindow::createActions()
     d->actions["app/export"] = new QAction (tr("&Export..."), this);
     d->actions["app/print"]  = new QAction (tr("&Print..."), this);
 
-    d->actions["app/edit" ] = new QAction (tr("&Edit Study"), this);
 	d->actions["app/undo" ] = new QAction (tr("&Undo"), this);
 	d->actions["app/redo" ] = new QAction (tr("&Redo"), this);
     d->actions["app/cut"  ] = new QAction (tr("Cu&t"), this);
@@ -216,9 +215,6 @@ void MainWindow::createToolBar()
 	toolBar->addAction( action("app/export") );
 
     toolBar->addSeparator();
-    toolBar->addAction( action("app/edit") );
-
-    toolBar->addSeparator();
 	toolBar->addAction( action("app/demo") );
 	toolBar->addAction( action("app/study") );
 	toolBar->addAction( action("app/exam") );
@@ -254,8 +250,6 @@ void MainWindow::connectActions()
 
     connect( action("app/import"), SIGNAL(triggered()), this, SLOT(importFile()));
     connect( action("app/export"), SIGNAL(triggered()), this, SLOT(exportFile()));
-
-    connect( action("app/edit" ), SIGNAL(triggered()), this, SLOT(editStudy()));
 
     connect( action("app/demo" ), SIGNAL(triggered()), this, SLOT(runDemo()));
     connect( action("app/study"), SIGNAL(triggered()), this, SLOT(runStudy()));

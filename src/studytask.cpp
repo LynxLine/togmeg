@@ -11,6 +11,7 @@ class StudyTask::Private {
 public:
     QString id;
     QString name;
+    QString categoryId;
     DataContainer * dataContainer;
 };
 
@@ -53,6 +54,7 @@ StudyTask::StudyTask(DataContainer * container, QObject * parent)
         delete resource;
 
         QDomElement el = doc.documentElement();
+        d->categoryId = el.attribute("category");
         d->name = el.attribute("name");
         d->id = el.attribute("id");
     }
@@ -68,6 +70,7 @@ StudyTask::~StudyTask()
         QDomDocument doc("taskinfoxml");
 
         QDomElement child = doc.createElement("studytask");
+        child.setAttribute("category", categoryId());
         child.setAttribute("name", name());
         child.setAttribute("id", id());
         doc.appendChild(child);
@@ -92,6 +95,16 @@ QString StudyTask::name()
 void StudyTask::setName(QString name)
 {
     d->name = name;
+}
+
+QString StudyTask::categoryId()
+{
+    return d->categoryId;
+}
+
+void StudyTask::setCategoryId(QString id)
+{
+    d->categoryId = id;
 }
 
 DataContainer * StudyTask::dataContainer()

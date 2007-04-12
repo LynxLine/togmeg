@@ -15,9 +15,12 @@ class CategoryItem
 friend class CategoryModel;
 public:
     CategoryItem(QAbstractItemModel * model);
-    CategoryItem(int index, CategoryItem * parent);
-    CategoryItem(CategoryItem * parent);
+    CategoryItem(QString id, int index, CategoryItem * parent);
+    CategoryItem(QString id, CategoryItem * parent);
     virtual ~CategoryItem();
+
+    QString id();
+    QString compositeId();
 
     QString text();
     void setText(QString);
@@ -49,7 +52,7 @@ private:
     CategoryItem * _parent;
 
     QAbstractItemModel * _model;
-    QString _text;
+    QString _text, _id;
     bool _expanded;
     int _level;
 };

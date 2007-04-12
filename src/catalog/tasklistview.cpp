@@ -6,10 +6,12 @@
 #include "studytask.h"
 #include "tasklistview.h"
 #include "tasklistmodel.h"
+#include "tasklistfiltermodel.h"
 
 class TaskListView::Private
 {
 public:
+    QPointer<TaskListFilterModel> filter;
     QPointer<TaskListModel> model;
     QPointer<QMenu> contextMenu;
 };
@@ -29,12 +31,19 @@ TaskListView::TaskListView(QWidget * parent)
             this, SLOT(activateContextMenu(const QPoint &)));
 
     d->contextMenu = new QMenu(this);
-    d->contextMenu->addAction( tr("Create new Study") );
+    d->contextMenu->addAction( tr("Create new Study"), this, SLOT(addNewStudy()));
     d->contextMenu->addSeparator();
-    d->contextMenu->addAction( tr("Remove") );
+    d->contextMenu->addAction( tr("Rename"), this, SLOT(editStudyName()), QKeySequence("F2"));
+    d->contextMenu->addSeparator();
+    d->contextMenu->addAction( tr("Remove"), this, SLOT(removeStudy()));
 
     d->model = new TaskListModel(this);
-    setModel( d->model );
+    d->filter = new TaskListFilterModel( d->model );
+    d->filter->setSourceModel( d->model );
+    d->filter->sort(0, Qt::AscendingOrder);
+    d->filter->setFilterKeyColumn(0);
+
+    setModel( d->filter );
 }
 
 TaskListView::~TaskListView()
@@ -45,21 +54,46 @@ TaskListView::~TaskListView()
 
 void TaskListView::activateContextMenu(const QPoint & pos)
 {
-    QModelIndex index = currentIndex();
+    QModelIndex index = d->filter->mapToSource( currentIndex() );
     if ( !index.isValid() ) return;
 
-    d->contextMenu->popup( mapToGlobal(pos) );
+    d->contextMenu->popup( viewport()->mapToGlobal(pos) );
 }
 
 void TaskListView::addNewStudy()
 {
     StudyTask * task = new StudyTask( d->model );
+    task->setCategoryId( d->filter->categoryId() );
     d->model->addTask( task );
 
-    setCurrentIndex( d->model->indexOf(task) );
-    edit( d->model->indexOf(task) );
+    QModelIndex index = d->filter->mapFromSource( d->model->indexOf(task) );
+    setCurrentIndex( index );
+    edit( index );
 }
 
 void TaskListView::removeStudy()
 {
+}
+
+void TaskListView::editStudyName()
+{
+    QModelIndex index = currentIndex();
+    if ( !index.isValid() ) return;
+    edit(index);
+}
+
+void TaskListView::editCurrentStudy()
+{
+    QModelIndex index = currentIndex();
+    if ( !index.isValid() ) return;
+}
+
+void TaskListView::applyCategoryFilter(QString categoryId)
+{
+    if ( categoryId.isEmpty() ) {
+        d->filter->clearFiltering();
+        return;
+    }
+
+    d->filter->setCategoryFiltering( categoryId );
 }

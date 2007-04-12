@@ -19,6 +19,7 @@ CategoryView::CategoryView(QWidget * parent)
     d = new Private;
     setRootIsDecorated(false);
     setFrameStyle(QFrame::NoFrame);
+    setAnimated(true);
     header()->hide();
 
     setContextMenuPolicy(Qt::CustomContextMenu);
@@ -39,6 +40,11 @@ CategoryView::CategoryView(QWidget * parent)
             this, SLOT(saveExpandState(const QModelIndex &)));
     connect(this, SIGNAL(collapsed(const QModelIndex &)),
             this, SLOT(saveCollapseState(const QModelIndex &)));
+
+    connect(this, SIGNAL(clicked(const QModelIndex &)),
+            this, SLOT(activateItem(const QModelIndex &)));
+    connect(this, SIGNAL(activated(const QModelIndex &)),
+            this, SLOT(activateItem(const QModelIndex &)));
 }
 
 CategoryView::~CategoryView()
@@ -72,7 +78,7 @@ void CategoryView::activateContextMenu(const QPoint & pos)
     QModelIndex index = currentIndex();
     if ( !index.isValid() ) return;
 
-    d->contextMenu->popup( mapToGlobal(pos) );
+    d->contextMenu->popup( viewport()->mapToGlobal(pos) );
 }
 
 void CategoryView::loadExpandState(CategoryItem * item)
@@ -129,4 +135,19 @@ void CategoryView::removeCategory()
 
     categoryModel->removeItem(item);
     scrollTo(currentIndex());
+}
+
+void CategoryView::activateItem(const QModelIndex & index)
+{
+    CategoryModel * categoryModel = (CategoryModel *)model();
+    CategoryItem * item = categoryModel->item(index);
+    if (!item) return;
+
+    QString category;
+    if (item==categoryModel->root()) {
+        emit categoryActivated(QString::null);
+        return;
+    }
+
+    emit categoryActivated(item->compositeId());
 }

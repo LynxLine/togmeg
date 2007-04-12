@@ -21,15 +21,15 @@ CategoryItem::CategoryItem(QAbstractItemModel * model)
 /*!
  Creates new item and append it to parent.
  */
-CategoryItem::CategoryItem(CategoryItem * parent)
-:_parent(parent)
+CategoryItem::CategoryItem(QString id, CategoryItem * parent)
+:_parent(parent), _id(id)
 {
     Q_ASSERT( parent );
     parent->append( this );
 }
 
-CategoryItem::CategoryItem(int index, CategoryItem * parent)
-:_parent(parent)
+CategoryItem::CategoryItem(QString id, int index, CategoryItem * parent)
+:_parent(parent), _id(id)
 {
     Q_ASSERT( parent );
     parent->insert( index, this );
@@ -66,6 +66,23 @@ int CategoryItem::row()
 CategoryItem * CategoryItem::parent()
 {
     return _parent;
+}
+
+QString CategoryItem::id()
+{
+    return _id;
+}
+
+QString CategoryItem::compositeId()
+{
+    QString id = _id;
+    CategoryItem * p = _parent;
+    while(p) {
+        if ( !p->id().isEmpty() )
+            id = p->id() +"/" +id;
+        p = p->parent();
+    }
+    return id;
 }
 
 QString CategoryItem::text()
@@ -317,7 +334,7 @@ CategoryItem * CategoryModel::createItem(QString name, CategoryItem * parent)
     QModelIndex index = createIndex(parent->row(), 0, parent);
 
     beginInsertRows(index, parent->count(), parent->count());
-    CategoryItem * item = new CategoryItem(parent);
+    CategoryItem * item = new CategoryItem(app::uniqueId(), parent);
     item->setText(name);
     endInsertRows();
 
@@ -365,7 +382,8 @@ QDomNode& operator>>(QDomNode & node, CategoryItem * item)
 
     QDomNode n = node.firstChild();
     while (!n.isNull()) {
-        CategoryItem * child = new CategoryItem(item);
+        QDomElement el = n.toElement();
+        CategoryItem * child = new CategoryItem(el.attribute("id"), item);
         n >> child;
         n = n.nextSibling();
     }
@@ -383,6 +401,7 @@ QDomNode& operator<<(QDomNode & node, CategoryItem * item)
 {
     QDomElement child = node.ownerDocument().createElement("category");
     child.setAttribute("name", item->text());
+    child.setAttribute("id", item->id());
     child.setAttribute("expanded", item->isExpanded() ? "yes" : "no");
     node.appendChild(child);
 

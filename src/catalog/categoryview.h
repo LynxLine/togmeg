@@ -24,6 +24,9 @@ public slots:
     void addSubCategory();
     void removeCategory();
 
+signals:
+    void categoryActivated(QString id);
+
 protected:
     //virtual void drawBranches(QPainter *, const QRect &, const QModelIndex &) const;
     /*
@@ -35,6 +38,7 @@ private slots:
     void loadExpandState(CategoryItem * child);
     void saveExpandState(const QModelIndex & index);
     void saveCollapseState(const QModelIndex & index);
+    void activateItem(const QModelIndex & index);
 
 private:
 	class Private;

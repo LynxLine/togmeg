@@ -21,8 +21,11 @@ public:
 public slots:
     void addNewStudy();
     void removeStudy();
+    void editCurrentStudy();
+    void applyCategoryFilter(QString categoryId);
 
 private slots:
+    void editStudyName();
     void activateContextMenu(const QPoint &);
 
 private:

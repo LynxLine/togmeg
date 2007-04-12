@@ -21,9 +21,11 @@ public:
 
     QString id();
     QString name();
+    QString categoryId();
 
 public slots:
     void setName(QString);
+    void setCategoryId(QString);
 
 private:
     DataContainer * dataContainer();

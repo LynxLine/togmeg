@@ -47,7 +47,7 @@ void TaskEditorView::activateContextMenu(const QPoint & pos)
     QModelIndex index = currentIndex();
     if ( !index.isValid() ) return;
 
-    d->contextMenu->popup( mapToGlobal(pos) );
+    d->contextMenu->popup( viewport()->mapToGlobal(pos) );
 }
 
 /*
