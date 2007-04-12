@@ -18,6 +18,7 @@ Q_OBJECT
 public:
     enum ViewMode {
         CatalogMode = 1,
+        TaskEditorMode,
         ExamineMode
     };
 	
@@ -34,6 +35,7 @@ public slots:
     void importFile();
     void exportFile();
 
+    void editStudy();
     void runDemo();
     void runStudy();
     void runExamine();

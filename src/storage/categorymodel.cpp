@@ -3,6 +3,7 @@
 //
 
 #include <QtXml>
+#include <QtGui>
 #include <QtCore>
 
 #include "crammero.h"
@@ -14,7 +15,7 @@
 CategoryItem::CategoryItem(QAbstractItemModel * model)
 :_parent(0L), _model(model), _level(0)
 {
-    setText("CATALOG");
+    setText( "Library" );
 }
 
 /*!
@@ -182,7 +183,7 @@ CategoryModel::CategoryModel(QObject * parent)
         xml >> this;
     }
 
-    qDebug() << "time for loading xml:" << time.msecsTo(QTime::currentTime());
+    qDebug() << " T loading catalog.xml:" << time.msecsTo(QTime::currentTime());
 }
 
 /*!

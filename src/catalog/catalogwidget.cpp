@@ -60,10 +60,10 @@ CatalogWidget::CatalogWidget(QWidget * parent)
     taskLayout->addWidget( d->taskListView );
 
     //bottom footer
-    QHBoxLayout * manageCatalogLayout = new QHBoxLayout;
-    manageCatalogLayout->setMargin(0);
-    manageCatalogLayout->setSpacing(5);
-    layout->addLayout( manageCatalogLayout, 1, 0, 1, 2 );
+    QHBoxLayout * footerAreaLayout = new QHBoxLayout;
+    footerAreaLayout->setMargin(0);
+    footerAreaLayout->setSpacing(5);
+    layout->addLayout( footerAreaLayout, 1, 0, 1, 2 );
 
     QToolButton * addCategory = new QToolButton;
     QToolButton * remCategory = new QToolButton;
@@ -74,9 +74,21 @@ CatalogWidget::CatalogWidget(QWidget * parent)
     connect(addCategory, SIGNAL(clicked()), d->catalogView, SLOT(addSubCategory()));
     connect(remCategory, SIGNAL(clicked()), d->catalogView, SLOT(removeCategory()));
 
-    manageCatalogLayout->addWidget( addCategory );
-    manageCatalogLayout->addWidget( remCategory );
-    manageCatalogLayout->addItem(new QSpacerItem(10,10, QSizePolicy::Expanding, QSizePolicy::Minimum) );
+    QToolButton * addStudy = new QToolButton;
+    QToolButton * remStudy = new QToolButton;
+
+    addStudy->setText("+Study");
+    remStudy->setText("-Study");
+
+    connect(addStudy, SIGNAL(clicked()), d->taskListView, SLOT(addNewStudy()));
+    connect(remStudy, SIGNAL(clicked()), d->taskListView, SLOT(removeStudy()));
+
+    footerAreaLayout->addWidget( addCategory );
+    footerAreaLayout->addWidget( remCategory );
+    footerAreaLayout->addItem(new QSpacerItem(30,10, QSizePolicy::Fixed, QSizePolicy::Minimum) );
+    footerAreaLayout->addWidget( addStudy );
+    footerAreaLayout->addWidget( remStudy );
+    footerAreaLayout->addItem(new QSpacerItem(10,10, QSizePolicy::Expanding, QSizePolicy::Minimum) );
 }
 
 /*!

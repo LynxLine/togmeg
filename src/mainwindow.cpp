@@ -8,6 +8,7 @@
 #include "mainwindow.h"
 #include "catalogwidget.h"
 #include "examinewidget.h"
+#include "taskeditorwidget.h"
 
 #ifdef Q_WS_WIN
 #include "qt_windows.h"
@@ -34,6 +35,7 @@ public:
     QStackedWidget * stack;
     CatalogWidget * catalogWidget;
     ExamineWidget * examineWidget;
+    TaskEditorWidget * taskEditorWidget;
 };
 
 MainWindow * MainWindow::Private::instance = 0L;
@@ -74,6 +76,9 @@ MainWindow::MainWindow()
 
     d->examineWidget = new ExamineWidget( d->stack );
     d->stack->addWidget( d->examineWidget );
+
+    d->taskEditorWidget = new TaskEditorWidget( d->stack );
+    d->stack->addWidget( d->taskEditorWidget );
 
     setViewMode(MainWindow::CatalogMode);
 }
@@ -142,6 +147,7 @@ void MainWindow::createActions()
     d->actions["app/export"] = new QAction (tr("&Export..."), this);
     d->actions["app/print"]  = new QAction (tr("&Print..."), this);
 
+    d->actions["app/edit" ] = new QAction (tr("&Edit Study"), this);
 	d->actions["app/undo" ] = new QAction (tr("&Undo"), this);
 	d->actions["app/redo" ] = new QAction (tr("&Redo"), this);
     d->actions["app/cut"  ] = new QAction (tr("Cu&t"), this);
@@ -210,6 +216,9 @@ void MainWindow::createToolBar()
 	toolBar->addAction( action("app/export") );
 
     toolBar->addSeparator();
+    toolBar->addAction( action("app/edit") );
+
+    toolBar->addSeparator();
 	toolBar->addAction( action("app/demo") );
 	toolBar->addAction( action("app/study") );
 	toolBar->addAction( action("app/exam") );
@@ -246,10 +255,12 @@ void MainWindow::connectActions()
     connect( action("app/import"), SIGNAL(triggered()), this, SLOT(importFile()));
     connect( action("app/export"), SIGNAL(triggered()), this, SLOT(exportFile()));
 
-   connect( action("app/demo" ), SIGNAL(triggered()), this, SLOT(runDemo()));
-   connect( action("app/study"), SIGNAL(triggered()), this, SLOT(runStudy()));
-   connect( action("app/exam" ), SIGNAL(triggered()), this, SLOT(runExamine()));
-   connect( action("app/stop" ), SIGNAL(triggered()), this, SLOT(stop()));
+    connect( action("app/edit" ), SIGNAL(triggered()), this, SLOT(editStudy()));
+
+    connect( action("app/demo" ), SIGNAL(triggered()), this, SLOT(runDemo()));
+    connect( action("app/study"), SIGNAL(triggered()), this, SLOT(runStudy()));
+    connect( action("app/exam" ), SIGNAL(triggered()), this, SLOT(runExamine()));
+    connect( action("app/stop" ), SIGNAL(triggered()), this, SLOT(stop()));
 
 }
 
@@ -281,6 +292,11 @@ void MainWindow::exportFile()
         QFileInfo fi(filePath);
     }
     */
+}
+
+void MainWindow::editStudy()
+{
+    setViewMode(MainWindow::TaskEditorMode);
 }
 
 void MainWindow::runDemo()
@@ -354,13 +370,16 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
     if (m == MainWindow::CatalogMode) {
         d->stack->setCurrentWidget( d->catalogWidget );
     }
+    else if (m == MainWindow::TaskEditorMode) {
+        d->stack->setCurrentWidget( d->taskEditorWidget );
+    }
     else if (m == MainWindow::ExamineMode) {
         d->stack->setCurrentWidget( d->examineWidget );
     }
 
-    action("app/demo" )->setEnabled( m==MainWindow::CatalogMode );
-    action("app/study")->setEnabled( m==MainWindow::CatalogMode );
-    action("app/exam" )->setEnabled( m==MainWindow::CatalogMode );
+    action("app/demo" )->setEnabled( m!=MainWindow::ExamineMode );
+    action("app/study")->setEnabled( m!=MainWindow::ExamineMode );
+    action("app/exam" )->setEnabled( m!=MainWindow::ExamineMode );
     action("app/stop" )->setEnabled( m==MainWindow::ExamineMode );
 
     emit viewModeChanged(m);

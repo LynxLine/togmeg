@@ -3,18 +3,16 @@
 //
 
 #include <QtGui>
-#include "studytask.h"
-#include "tasklistview.h"
-#include "tasklistmodel.h"
+#include "taskeditorview.h"
 
-class TaskListView::Private
+class TaskEditorView::Private
 {
 public:
-    QPointer<TaskListModel> model;
+    //QPointer<TaskListModel> model;
     QPointer<QMenu> contextMenu;
 };
 
-TaskListView::TaskListView(QWidget * parent)
+TaskEditorView::TaskEditorView(QWidget * parent)
 :QTreeView(parent) 
 {
     d = new Private;
@@ -29,21 +27,21 @@ TaskListView::TaskListView(QWidget * parent)
             this, SLOT(activateContextMenu(const QPoint &)));
 
     d->contextMenu = new QMenu(this);
-    d->contextMenu->addAction( tr("Create new Study") );
+    d->contextMenu->addAction( tr("Add new question-answer") );
     d->contextMenu->addSeparator();
     d->contextMenu->addAction( tr("Remove") );
 
-    d->model = new TaskListModel(this);
-    setModel( d->model );
+    //d->model = new TaskListModel(this);
+    //setModel( d->model );
 }
 
-TaskListView::~TaskListView()
+TaskEditorView::~TaskEditorView()
 {
-    qDebug() << "~TaskListView";
+    qDebug() << "~TaskEditorView";
     delete d;
 }
 
-void TaskListView::activateContextMenu(const QPoint & pos)
+void TaskEditorView::activateContextMenu(const QPoint & pos)
 {
     QModelIndex index = currentIndex();
     if ( !index.isValid() ) return;
@@ -51,7 +49,8 @@ void TaskListView::activateContextMenu(const QPoint & pos)
     d->contextMenu->popup( mapToGlobal(pos) );
 }
 
-void TaskListView::addNewStudy()
+/*
+void TaskEditorView::addNewStudy()
 {
     StudyTask * task = new StudyTask( d->model );
     d->model->addTask( task );
@@ -60,6 +59,7 @@ void TaskListView::addNewStudy()
     edit( d->model->indexOf(task) );
 }
 
-void TaskListView::removeStudy()
+void TaskEditorView::removeStudy()
 {
 }
+*/

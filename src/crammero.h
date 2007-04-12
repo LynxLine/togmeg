@@ -10,6 +10,7 @@
 namespace app {
 
     QString storagePath();
+    QString uniqueId(int length = 32);
 
 }; //namespace
 

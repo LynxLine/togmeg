@@ -44,10 +44,10 @@ QString DataContainer::location()
     return d->location;
 }
 
-DataContainer* DataContainerFactory::resourceContainer( QString location )
+DataContainer * DataContainerFactory::resourceContainer( QString location )
 {
     if ( QFileInfo(location).isDir() ) {
-        return new DirContainer( location, QIODevice::ReadOnly);
+        return new DirContainer(location, QIODevice::ReadWrite);
     }
 
     qDebug() << location << "can not be open";

@@ -2,25 +2,26 @@
 // Copyright (C) 2007 Oleksandr Yakovlyev <yshurik@gmail.com>
 //
 
-#ifndef TASKLISTVIEW_H
-#define TASKLISTVIEW_H
+#ifndef TASKEDITORVIEW_H
+#define TASKEDITORVIEW_H
 
 #include <QTreeView>
-class CategoryItem;
 
 /*!
- * \class TaskListView
+ * \class TaskEditorView
  */
-class TaskListView : public QTreeView
+class TaskEditorView : public QTreeView
 {
 Q_OBJECT
 public:
-    TaskListView(QWidget * parent = 0);
-    virtual ~TaskListView();
+    TaskEditorView(QWidget * parent = 0);
+    virtual ~TaskEditorView();
 
 public slots:
+    /*
     void addNewStudy();
     void removeStudy();
+    */
 
 private slots:
     void activateContextMenu(const QPoint &);
@@ -30,4 +31,4 @@ private:
 	Private * d;
 };
 
-#endif // TASKLISTVIEW_H
+#endif // TASKEDITORVIEW_H
