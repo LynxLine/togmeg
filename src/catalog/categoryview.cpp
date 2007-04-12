@@ -123,6 +123,7 @@ void CategoryView::addSubCategory()
 
     setExpanded(parentIndex, true);
     setCurrentIndex( categoryModel->indexOf(item) );
+    emit categoryActivated(item->compositeId());
     edit( categoryModel->indexOf(item) );
 }
 
