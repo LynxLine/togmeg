@@ -20,26 +20,30 @@ CategoryView::CategoryView(QWidget * parent)
     setRootIsDecorated(false);
     setEditTriggers(editTriggers() | QAbstractItemView::SelectedClicked);
     setFrameStyle(QFrame::NoFrame);
+    setUniformRowHeights(true);
+    setAutoFillBackground(true);
     setAnimated(true);
     header()->hide();
+
+    {
+        QPalette palette = this->palette();
+        palette.setColor(QPalette::Base, "#E9EFF9");
+        setPalette(palette);
+    }
 
     setContextMenuPolicy(Qt::CustomContextMenu);
     connect(this, SIGNAL(customContextMenuRequested(const QPoint &)), 
             this, SLOT(activateContextMenu(const QPoint &)));
 
     d->contextMenu = new QMenu(this);
-    d->contextMenu->addAction( _action("category/add_category") );
+    d->contextMenu->addAction( tr("&Create new category"), this, SLOT(addNewCategory()));
+    d->contextMenu->addAction( tr("Create &sub-category"), this, SLOT(addNewCategory()));
     d->contextMenu->addSeparator();
-    d->contextMenu->addAction( tr("Rename") );
-    d->contextMenu->addAction( _action("category/remove") );
-    d->contextMenu->addSeparator();
-    d->contextMenu->addAction( tr("Properties"));
+    d->contextMenu->addAction( tr("Re&name"), this, SLOT(renameCategory()), QKeySequence(Qt::Key_F2));
+    d->contextMenu->addAction( tr("&Remove"), this, SLOT(removeCategory()));
+    //d->contextMenu->addSeparator();
+    //d->contextMenu->addAction( tr("Properties"));
     
-    connect( _action("category/add_category"), SIGNAL(triggered()), 
-             this, SLOT(addSubCategory()));
-    connect( _action("category/remove"), SIGNAL(triggered()), 
-             this, SLOT(removeCategory()));
-
     connect(this, SIGNAL(expanded(const QModelIndex &)),
             this, SLOT(saveExpandState(const QModelIndex &)));
     connect(this, SIGNAL(collapsed(const QModelIndex &)),
@@ -71,11 +75,17 @@ void CategoryView::drawBranches(QPainter *, const QRect &, const QModelIndex &) 
 }
 */
 
-/*
-void CategoryView::drawRow(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+
+void CategoryView::drawRow(QPainter * painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
+    QStyleOptionViewItem opt = option;
+    opt.showDecorationSelected = false;
+    if ( index == currentIndex() ) {
+        opt.font.setBold(true);
+    }
+    QTreeView::drawRow(painter, opt, index);
 }
-*/
+
 
 void CategoryView::activateContextMenu(const QPoint & pos)
 {
@@ -115,6 +125,20 @@ void CategoryView::saveCollapseState(const QModelIndex & index)
     item->setExpanded(false);
 }
 
+void CategoryView::addNewCategory()
+{
+    CategoryModel * categoryModel = (CategoryModel *)model();
+    CategoryItem * parent = categoryModel->root();
+    if (!parent) return;
+
+    CategoryItem * item = categoryModel->createItem(tr("New Category"), parent);
+
+    setExpanded( categoryModel->indexOf(parent), true);
+    setCurrentIndex( categoryModel->indexOf(item) );
+    emit categoryActivated(item->compositeId());
+    edit( categoryModel->indexOf(item) );
+}
+
 void CategoryView::addSubCategory()
 {
     QModelIndex parentIndex = currentIndex();
@@ -128,6 +152,13 @@ void CategoryView::addSubCategory()
     setCurrentIndex( categoryModel->indexOf(item) );
     emit categoryActivated(item->compositeId());
     edit( categoryModel->indexOf(item) );
+}
+
+void CategoryView::renameCategory()
+{
+    QModelIndex index = currentIndex();
+    scrollTo( index );
+    edit( index );
 }
 
 void CategoryView::removeCategory()

@@ -36,6 +36,7 @@ public slots:
     void importFile();
     void exportFile();
 
+    void newEntry();
     void openTaskEditor(QString taskId);
     void previousWindow();
 

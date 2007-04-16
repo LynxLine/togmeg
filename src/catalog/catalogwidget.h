@@ -17,6 +17,9 @@ public:
     CatalogWidget(QWidget * parent = 0L);
     virtual ~CatalogWidget();
 
+public slots:
+    void addNewStudy();
+
 signals:
     void studyTaskActivated(QString taskId);
 

@@ -106,6 +106,13 @@ QVariant TaskListModel::data(const QModelIndex & index, int role) const
         return studyTask->name();
     }
 
+    if (role == SortRole) {
+        if ( studyTask->name() != tr("New study") )
+            return "1"+studyTask->name();
+        else 
+            return "9"+studyTask->name();
+    }
+
     return QVariant();
 }
 

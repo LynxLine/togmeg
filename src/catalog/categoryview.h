@@ -21,7 +21,9 @@ public:
     void setModel(QAbstractItemModel * model);
 
 public slots:
+    void addNewCategory();
     void addSubCategory();
+    void renameCategory();
     void removeCategory();
 
 signals:
@@ -29,9 +31,9 @@ signals:
 
 protected:
     //virtual void drawBranches(QPainter *, const QRect &, const QModelIndex &) const;
-    /*
+    
     virtual void drawRow(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
-    */
+    
 
 private slots:
     void activateContextMenu(const QPoint &);

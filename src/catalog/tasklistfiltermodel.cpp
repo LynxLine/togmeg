@@ -21,6 +21,7 @@ TaskListFilterModel::TaskListFilterModel(QObject * parent)
 {
     d = new Private;
     d->categoryFiltering = false;
+    setSortRole( TaskListModel::SortRole );
 }
 
 /*!

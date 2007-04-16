@@ -18,6 +18,7 @@ public:
     virtual ~TaskEditorWidget();
 
 public slots:
+    void addNewEntry();
     void setCurrentTask(QString taskId);
 
 private:

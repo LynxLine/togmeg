@@ -18,11 +18,9 @@ public:
     virtual ~TaskEditorView();
 
 public slots:
+    void addNewEntry();
+    void removeEntry();
     void openTask(QString taskId);
-    /*
-    void addNewStudy();
-    void removeStudy();
-    */
 
 private slots:
     void activateContextMenu(const QPoint &);

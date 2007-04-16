@@ -29,6 +29,9 @@ public:
     bool setData(const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
     virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 
+    QModelIndex addNewEntry();
+    void removeEntry(QModelIndex index);
+
 public slots:
     void load(QString taskId);
     void save();

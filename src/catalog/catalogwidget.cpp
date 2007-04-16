@@ -30,7 +30,7 @@ CatalogWidget::CatalogWidget(QWidget * parent)
 
     QGridLayout * layout = new QGridLayout;
     layout->setMargin(0);
-    layout->setSpacing(1);
+    layout->setSpacing(0);
     setLayout(layout);
 
     //category area
@@ -53,54 +53,64 @@ CatalogWidget::CatalogWidget(QWidget * parent)
     //task list area
     QVBoxLayout * taskLayout = new QVBoxLayout;
     taskLayout->setMargin(0);
-    taskLayout->setSpacing(5);
-    layout->addLayout(taskLayout, 0, 1);
+    taskLayout->setSpacing(0);
+    layout->addLayout(taskLayout, 0, 2, 3,1);
 
     d->taskListView = new TaskListView(this);
     taskLayout->addWidget( d->taskListView );
 
+    QFrame * vline = new QFrame;
+    {
+        QPalette palette = vline->palette();
+        palette.setColor(QPalette::WindowText, "#888");
+        vline->setPalette(palette);
+        vline->setFrameStyle(QFrame::VLine | QFrame::Plain);
+        vline->setFixedWidth(1);
+        vline->setLineWidth(1);
+    }
+    layout->addWidget( vline, 0, 1, 3,1);
+
+    QFrame * hline = new QFrame;
+    {
+        QPalette palette = hline->palette();
+        palette.setColor(QPalette::WindowText, "#888");
+        hline->setPalette(palette);
+        hline->setFrameStyle(QFrame::HLine | QFrame::Plain);
+        hline->setFixedHeight(1);
+        hline->setLineWidth(1);
+    }
+    layout->addWidget( hline, 1, 0 );
+
     //bottom footer
     QHBoxLayout * footerAreaLayout = new QHBoxLayout;
     footerAreaLayout->setMargin(0);
-    footerAreaLayout->setSpacing(5);
-    layout->addLayout( footerAreaLayout, 1, 0, 1, 2 );
+    footerAreaLayout->setSpacing(0);
+    layout->addLayout( footerAreaLayout, 2, 0);
 
     QToolButton * addCategory = new QToolButton;
     QToolButton * remCategory = new QToolButton;
 
-    addCategory->setText("+Category");
-    remCategory->setText("-Category");
+    addCategory->setText("+");
+    remCategory->setText("-");
+
+    //addCategory->setAutoRaise(true);
+    //remCategory->setAutoRaise(true);
+
+    addCategory->setFixedSize(25,25);
+    remCategory->setFixedSize(25,25);
 
     addCategory->setFocusPolicy(Qt::NoFocus);
     remCategory->setFocusPolicy(Qt::NoFocus);
 
-    connect(addCategory, SIGNAL(clicked()), d->categoryView, SLOT(addSubCategory()));
+    connect(addCategory, SIGNAL(clicked()), d->categoryView, SLOT(addNewCategory()));
     connect(remCategory, SIGNAL(clicked()), d->categoryView, SLOT(removeCategory()));
-
-    QToolButton * editStudy = new QToolButton;
-    QToolButton * addStudy = new QToolButton;
-    QToolButton * remStudy = new QToolButton;
-
-    editStudy->setText("Edit");
-    addStudy->setText("+Study");
-    remStudy->setText("-Study");
-
-    editStudy->setFocusPolicy(Qt::NoFocus);
-    addStudy->setFocusPolicy(Qt::NoFocus);
-    remStudy->setFocusPolicy(Qt::NoFocus);
-
-    connect(editStudy, SIGNAL(clicked()), d->taskListView, SLOT(editCurrentStudy()));
-    connect(addStudy, SIGNAL(clicked()), d->taskListView, SLOT(addNewStudy()));
-    connect(remStudy, SIGNAL(clicked()), d->taskListView, SLOT(removeStudy()));
 
     footerAreaLayout->addWidget( addCategory );
     footerAreaLayout->addWidget( remCategory );
-    footerAreaLayout->addItem(new QSpacerItem(30,10, QSizePolicy::Fixed, QSizePolicy::Minimum) );
-    footerAreaLayout->addWidget( editStudy );
-    footerAreaLayout->addItem(new QSpacerItem(10,10, QSizePolicy::Fixed, QSizePolicy::Minimum) );
-    footerAreaLayout->addWidget( addStudy );
-    footerAreaLayout->addWidget( remStudy );
-    footerAreaLayout->addItem(new QSpacerItem(10,10, QSizePolicy::Expanding, QSizePolicy::Minimum) );
+
+    QWidget * space = new QWidget;
+    space->setFocusPolicy(Qt::NoFocus);
+    footerAreaLayout->addWidget(space);
 
     connect(d->categoryView, SIGNAL(categoryActivated(QString)),
             d->taskListView, SLOT(applyCategoryFilter(QString)));
@@ -117,4 +127,9 @@ CatalogWidget::CatalogWidget(QWidget * parent)
 CatalogWidget::~CatalogWidget()
 {
     delete d;
+}
+
+void CatalogWidget::addNewStudy()
+{
+    d->taskListView->addNewStudy();
 }

@@ -12,8 +12,11 @@ class StudyTask;
 class TaskListModel : public QAbstractListModel
 {
 Q_OBJECT
-
 public:
+    enum ItemDataRole {
+        SortRole = Qt::UserRole + 100
+    };
+
     TaskListModel(QObject * parent = 0L);
     static TaskListModel * instance();
     virtual ~TaskListModel();

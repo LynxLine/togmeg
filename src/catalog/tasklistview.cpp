@@ -36,9 +36,8 @@ TaskListView::TaskListView(QWidget * parent)
     d->contextMenu->addAction( tr("Create new Study"), this, SLOT(addNewStudy()));
     d->contextMenu->addSeparator();
     d->contextMenu->addAction( tr("Rename"), this, SLOT(editStudyName()), QKeySequence("F2"));
-    d->contextMenu->addAction( tr("Remove"), this, SLOT(removeStudy()));
-    d->contextMenu->addSeparator();
-    d->contextMenu->addAction( tr("Properties"));
+    //d->contextMenu->addSeparator();
+    //d->contextMenu->addAction( tr("Properties"));
 
     d->model = new TaskListModel(this);
     d->filter = new TaskListFilterModel( d->model );
@@ -75,10 +74,6 @@ void TaskListView::addNewStudy()
     QModelIndex index = d->filter->mapFromSource( d->model->indexOf(task) );
     setCurrentIndex( index );
     edit( index );
-}
-
-void TaskListView::removeStudy()
-{
 }
 
 void TaskListView::editStudyName()

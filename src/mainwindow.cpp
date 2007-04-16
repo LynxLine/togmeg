@@ -51,6 +51,18 @@ MainWindow::MainWindow()
 {
     d = new Private(this);
 
+    //setup palette
+    {
+        QPalette palette = this->palette();
+        palette.setColor(QPalette::Base, "#FFFFFF");
+        palette.setColor(QPalette::AlternateBase, "#EDF3FE");
+        palette.setColor(QPalette::Active,   QPalette::Highlight, "#3875D7");
+        palette.setColor(QPalette::Inactive, QPalette::Highlight, "#A4B4CB");
+        palette.setColor(QPalette::Active,   QPalette::HighlightedText, "#FFFFFF");
+        palette.setColor(QPalette::Inactive, QPalette::HighlightedText, "#FFFFFF");
+        setPalette( palette );
+    }
+
     QSettings s;
 
     //first geometry properies
@@ -71,7 +83,11 @@ MainWindow::MainWindow()
 	statusBar()->hide();
 
     d->stack = new QStackedWidget(this);
+
+#ifdef Q_WS_WIN
     d->stack->setFont( baseFont() );
+#endif
+
     setCentralWidget( d->stack );
 
     d->slide = new SlidedWidget( d->stack );
@@ -163,6 +179,10 @@ void MainWindow::createActions()
 	d->actions["app/back" ] = new QAction (tr("&Back"), this);
 	d->actions["app/forward" ]  = new QAction (tr("&Forward"), this);
 
+	d->actions["app/new" ] = new QAction (tr("&New"), this);
+	d->actions["app/dublicate" ] = new QAction (tr("&Dublicate"), this);
+    d->actions["app/remove" ] = new QAction (tr("&Remove"), this);
+
 	d->actions["app/undo" ] = new QAction (tr("&Undo"), this);
 	d->actions["app/redo" ] = new QAction (tr("&Redo"), this);
     d->actions["app/cut"  ] = new QAction (tr("Cu&t"), this);
@@ -173,10 +193,6 @@ void MainWindow::createActions()
     d->actions["app/study"] = new QAction (QIcon(":/images/icons/study-32x32.png"), tr("&Study"), this);
     d->actions["app/exam" ] = new QAction (QIcon(":/images/icons/examine-32x32.png"), tr("&Examinate"), this);
     d->actions["app/stop" ] = new QAction (QIcon(":/images/icons/stop-32x32.png"), tr("&Stop"), this);
-
-	d->actions["category/add_category"    ] = new QAction (tr("&Create new Category"), this);
-    d->actions["category/add_task"    ] = new QAction (tr("&Add new Task"), this);
-    d->actions["category/remove" ] = new QAction (tr("&Remove"), this);
 
     d->actions["app/about"]         = new QAction (tr("&About"), this);
     d->actions["app/help"]          = new QAction (tr("Crammero &Help"), this);
@@ -231,6 +247,12 @@ void MainWindow::createToolBar()
 	//toolBar->addAction( action("app/export") );
 
     toolBar->addSeparator();
+
+	toolBar->addAction( action("app/new") );
+	toolBar->addAction( action("app/dublicate") );
+	toolBar->addAction( action("app/remove") );
+
+    toolBar->addSeparator();
 	toolBar->addAction( action("app/demo") );
 	toolBar->addAction( action("app/study") );
 	toolBar->addAction( action("app/exam") );
@@ -264,6 +286,8 @@ void MainWindow::connectActions()
     connect( action("app/exit"),   SIGNAL(triggered()), this, SLOT(quit()));
     connect( action("app/help"),   SIGNAL(triggered()), this, SLOT(openHelp()));
     connect( action("app/about"),  SIGNAL(triggered()), this, SLOT(openAbout()));
+
+    connect( action("app/new"),    SIGNAL(triggered()), this, SLOT(newEntry()));
 
     connect( action("app/import"), SIGNAL(triggered()), this, SLOT(importFile()));
     connect( action("app/export"), SIGNAL(triggered()), this, SLOT(exportFile()));
@@ -305,6 +329,16 @@ void MainWindow::exportFile()
         QFileInfo fi(filePath);
     }
     */
+}
+
+void MainWindow::newEntry()
+{
+    if ( viewMode() == MainWindow::CatalogMode) {
+        d->catalogWidget->addNewStudy();
+    }
+    else if ( viewMode() == MainWindow::TaskEditorMode) {
+        d->taskEditorWidget->addNewEntry();
+    }
 }
 
 void MainWindow::openTaskEditor(QString taskId)
@@ -393,6 +427,8 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
         d->stack->setCurrentWidget( d->slide );
         //second switch slide
         d->slide->setCurrentWidget( d->catalogWidget );
+
+        action("app/new")->setText(tr("&New Study"));
     }
     else if (m == MainWindow::TaskEditorMode) {
         //first switch stack
@@ -400,17 +436,31 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
         d->stack->setCurrentWidget( d->slide );
         //second switch slide
         d->slide->setCurrentWidget( d->taskEditorWidget );
+
+        action("app/new")->setText(tr("&New Question"));
     }
     else if (m == MainWindow::ExamineMode) {
         //just switch stack
         d->stack->setCurrentWidget( d->examineWidget );
+
+        action("app/new")->setText(tr("&New"));
     }
     else if (m == MainWindow::BrowserMode) {
         //just switch stack
         d->stack->setCurrentWidget( d->slide );
-        if ( d->slide->currentWidget() == d->catalogWidget ) d->viewMode = MainWindow::CatalogMode;
-        else if ( d->slide->currentWidget() == d->taskEditorWidget ) d->viewMode = MainWindow::TaskEditorMode;
+        if ( d->slide->currentWidget() == d->catalogWidget ) {
+            d->viewMode = MainWindow::CatalogMode;
+            action("app/new")->setText(tr("&New Study"));
+        }
+        else if ( d->slide->currentWidget() == d->taskEditorWidget ) {
+            d->viewMode = MainWindow::TaskEditorMode;
+            action("app/new")->setText(tr("&New Question"));
+        }
     }
+
+    action("app/new")->setEnabled( d->viewMode!=MainWindow::ExamineMode );
+    action("app/dublicate")->setEnabled( d->viewMode!=MainWindow::ExamineMode );
+    action("app/remove")->setEnabled( d->viewMode!=MainWindow::ExamineMode );
 
     action("app/demo" )->setEnabled( d->viewMode!=MainWindow::ExamineMode );
     action("app/study")->setEnabled( d->viewMode!=MainWindow::ExamineMode );
