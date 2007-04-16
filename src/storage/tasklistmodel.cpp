@@ -13,8 +13,11 @@
 class TaskListModel::Private
 {
 public:
+    static TaskListModel * instance;
     QList<StudyTask *> tasks;
 };
+
+TaskListModel * TaskListModel::Private::instance = 0L;
 
 /*!
  Crestes TaskListModel
@@ -23,6 +26,7 @@ TaskListModel::TaskListModel(QObject * parent)
 :QAbstractListModel(parent)
 {
     d = new Private;
+    Private::instance = this;
 
     QDir storageDir(app::storagePath());
     QStringList dirs = storageDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
@@ -34,6 +38,11 @@ TaskListModel::TaskListModel(QObject * parent)
         StudyTask * task = new StudyTask(container, this);
         d->tasks << task;
     }
+}
+
+TaskListModel * TaskListModel::instance()
+{
+    return Private::instance;
 }
 
 /*!
@@ -55,6 +64,19 @@ StudyTask * TaskListModel::task(QModelIndex index) const
     if ( !index.isValid() ) return 0L;
     if ( index.row() < 0 || index.row() >= d->tasks.count() ) return 0L;
     return d->tasks[ index.row() ];
+}
+
+StudyTask * TaskListModel::task(QString taskId) const
+{
+    StudyTask * task = 0L;
+    for (int i=0;i<d->tasks.count();i++) {
+        if ( d->tasks[i]->id() == taskId ) {
+            task = d->tasks[i];
+            break;
+        }
+    }
+
+    return task;
 }
 
 QModelIndex TaskListModel::indexOf(StudyTask * task) const
@@ -105,7 +127,7 @@ QVariant TaskListModel::headerData(int section, Qt::Orientation orientation, int
     Q_UNUSED(section);
     Q_UNUSED(orientation);
     if (role == Qt::DisplayRole) {
-        return tr("Name:");
+        return tr("Name");
     }
     return QVariant();
 }

@@ -18,8 +18,10 @@ TaskEditorView::TaskEditorView(QWidget * parent)
 {
     d = new Private;
 
+    setSortingEnabled(true);
     setRootIsDecorated(false);
     setAutoFillBackground(true);
+    setAllColumnsShowFocus(true);
     setAlternatingRowColors(true);
     setFrameStyle(QFrame::NoFrame);
 
@@ -34,6 +36,9 @@ TaskEditorView::TaskEditorView(QWidget * parent)
 
     d->model = new StudyTaskModel(this);
     setModel( d->model );
+
+    header()->setResizeMode(0, QHeaderView::Stretch);
+    header()->setResizeMode(1, QHeaderView::Stretch);
 }
 
 TaskEditorView::~TaskEditorView()
@@ -48,6 +53,11 @@ void TaskEditorView::activateContextMenu(const QPoint & pos)
     if ( !index.isValid() ) return;
 
     d->contextMenu->popup( viewport()->mapToGlobal(pos) );
+}
+
+void TaskEditorView::openTask(QString taskId)
+{
+    d->model->load(taskId);
 }
 
 /*

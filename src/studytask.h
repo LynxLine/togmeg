@@ -13,6 +13,7 @@ class DataContainer;
  */
 class StudyTask : public QObject
 {
+friend class StudyTaskModel;
 Q_OBJECT
 public:
     StudyTask(QObject * parent = 0);

@@ -66,4 +66,5 @@ TaskEditorWidget::~TaskEditorWidget()
 
 void TaskEditorWidget::setCurrentTask(QString taskId)
 {
+    d->taskEditorView->openTask(taskId);
 }

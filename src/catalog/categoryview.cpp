@@ -30,7 +30,10 @@ CategoryView::CategoryView(QWidget * parent)
     d->contextMenu = new QMenu(this);
     d->contextMenu->addAction( _action("category/add_category") );
     d->contextMenu->addSeparator();
+    d->contextMenu->addAction( tr("Rename") );
     d->contextMenu->addAction( _action("category/remove") );
+    d->contextMenu->addSeparator();
+    d->contextMenu->addAction( tr("Properties"));
     
     connect( _action("category/add_category"), SIGNAL(triggered()), 
              this, SLOT(addSubCategory()));

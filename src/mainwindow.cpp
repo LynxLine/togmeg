@@ -105,6 +105,10 @@ MainWindow::~MainWindow()
     
     d->actions.clear();
 
+    delete d->examineWidget;
+    delete d->taskEditorWidget;
+    delete d->catalogWidget;
+
     delete d;
 }
 

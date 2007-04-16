@@ -6,13 +6,16 @@
 #include <QtCore>
 
 #include "crammero.h"
+#include "studytask.h"
 #include "datacontainer.h"
+#include "tasklistmodel.h"
 #include "studytaskmodel.h"
 
 class StudyTaskModel::Private
 {
 public:
-    QList<QString> entries;
+    QList<StudyDataEntry> entries;
+    DataContainer * dataContainer;
 };
 
 /*!
@@ -22,8 +25,7 @@ StudyTaskModel::StudyTaskModel(QObject * parent)
 :QAbstractListModel(parent)
 {
     d = new Private;
-
-
+    d->dataContainer = 0L;
 }
 
 /*!
@@ -32,7 +34,83 @@ StudyTaskModel::StudyTaskModel(QObject * parent)
 StudyTaskModel::~StudyTaskModel()
 {
     qDebug() << "~StudyTaskModel";
+    if ( d->dataContainer ) save();
     delete d;
+}
+
+void StudyTaskModel::load(QString taskId)
+{
+    qDebug() << "StudyTaskModel::load()," << taskId;
+
+    if ( d->dataContainer ) save();
+    
+    d->dataContainer = 0L;
+    d->entries.clear();
+
+    StudyTask * task = TaskListModel::instance()->task( taskId );
+    if ( !task ) return;
+
+    d->dataContainer = task->dataContainer();
+        
+    QIODevice * resource = d->dataContainer->resource("content.xml");
+    if (resource) {
+        QDomDocument doc;
+        doc.setContent( resource );
+        delete resource;
+
+        QDomElement el = doc.documentElement();
+        QDomNode n = el.firstChild();
+        while (!n.isNull()) {
+            QDomElement questionEl = n.firstChildElement("question");
+            QDomElement answerEl   = n.firstChildElement("answer");
+
+            StudyDataEntry entry;
+            entry.question = questionEl.firstChild().toText().data();
+            entry.answer   = answerEl.firstChild().toText().data();
+
+            d->entries << entry;
+
+            n = n.nextSibling();
+        }
+    }
+
+    qDebug() << d->entries.count()<< " entries loaded";
+
+    reset();
+}
+
+void StudyTaskModel::save()
+{
+    if ( !d->dataContainer ) return;
+        
+    QIODevice * resource = d->dataContainer->create("content.xml");
+    if (resource) {
+        QDomDocument doc("taskcontentxml");
+
+        QDomElement docEl = doc.createElement("content");
+        doc.appendChild(docEl);
+
+        foreach (StudyDataEntry entry, d->entries) {
+            QDomElement entryEl = doc.createElement("studyentry");
+            docEl.appendChild(entryEl);
+
+            QDomElement questionEl = doc.createElement("question");
+            entryEl.appendChild(questionEl);
+
+            QDomText questionTextEl = doc.createTextNode( entry.question );
+            questionEl.appendChild(questionTextEl);
+
+            QDomElement answerEl = doc.createElement("answer");
+            entryEl.appendChild(answerEl);
+
+            QDomText answerTextEl = doc.createTextNode( entry.answer );
+            answerEl.appendChild(answerTextEl);
+        }
+
+        resource->write(doc.toByteArray());
+
+        delete resource;
+    }
 }
 
 int StudyTaskModel::rowCount(const QModelIndex & parent) const
@@ -41,31 +119,35 @@ int StudyTaskModel::rowCount(const QModelIndex & parent) const
     return d->entries.count();
 }
 
+int StudyTaskModel::columnCount(const QModelIndex & parent) const
+{
+    Q_UNUSED(parent);
+    return 2;
+}
+
 QVariant StudyTaskModel::data(const QModelIndex & index, int role) const
 {
-    /*
-    StudyTask * studyTask = task(index);
-    if ( !studyTask ) return QVariant();
+    if ( !index.isValid() ) return QVariant();
+    if ( index.row() < 0 || index.row() >= d->entries.count() ) return QVariant();
 
     if (role == Qt::DisplayRole || role == Qt::EditRole) {
-        return studyTask->name();
+        if ( index.column() == 0 ) return d->entries[ index.row() ].question;
+        if ( index.column() == 1 ) return d->entries[ index.row() ].answer;
     }
-    */
 
     return QVariant();
 }
 
 bool StudyTaskModel::setData(const QModelIndex & index, const QVariant & value, int role)
 {
-    /*
-    StudyTask * studyTask = task(index);
-    if ( !studyTask ) return false;
-    
+    if ( !index.isValid() ) return false;
+    if ( index.row() < 0 || index.row() >= d->entries.count() ) return false;
+
     if (role == Qt::DisplayRole || role == Qt::EditRole) {
-        studyTask->setName( value.toString() );
+        if ( index.column() == 0 ) d->entries[ index.row() ].question = value.toString();
+        if ( index.column() == 1 ) d->entries[ index.row() ].answer   = value.toString();
         return true;
     }
-    */
 
     return false;
 }
@@ -75,7 +157,10 @@ QVariant StudyTaskModel::headerData(int section, Qt::Orientation orientation, in
     Q_UNUSED(section);
     Q_UNUSED(orientation);
     if (role == Qt::DisplayRole) {
-        return tr("Question:");
+        if ( section == 0)
+            return tr("Question");
+        else if ( section == 1 )
+            return tr("Answer");
     }
     return QVariant();
 }

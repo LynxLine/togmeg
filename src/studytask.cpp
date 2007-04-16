@@ -65,6 +65,7 @@ StudyTask::StudyTask(DataContainer * container, QObject * parent)
  */
 StudyTask::~StudyTask()
 {
+    qDebug() << "~StudyTask()";
     QIODevice * resource = d->dataContainer->create("info.xml");
     if (resource) {
         QDomDocument doc("taskinfoxml");
@@ -79,6 +80,7 @@ StudyTask::~StudyTask()
         delete resource;
     }
 
+    delete d->dataContainer;
     delete d;
 }
 

@@ -18,6 +18,7 @@ public:
     virtual ~TaskEditorView();
 
 public slots:
+    void openTask(QString taskId);
     /*
     void addNewStudy();
     void removeStudy();

@@ -15,10 +15,12 @@ Q_OBJECT
 
 public:
     TaskListModel(QObject * parent = 0L);
+    static TaskListModel * instance();
     virtual ~TaskListModel();
 
     QList<StudyTask *> tasks();
     StudyTask * task(QModelIndex) const;
+    StudyTask * task(QString taskId) const;
     QModelIndex indexOf(StudyTask *) const;
 
     Qt::ItemFlags flags(const QModelIndex &index) const;
