@@ -62,7 +62,7 @@ CatalogWidget::CatalogWidget(QWidget * parent)
     QFrame * vline = new QFrame;
     {
         QPalette palette = vline->palette();
-        palette.setColor(QPalette::WindowText, "#888");
+        palette.setColor(QPalette::WindowText, "#999999");
         vline->setPalette(palette);
         vline->setFrameStyle(QFrame::VLine | QFrame::Plain);
         vline->setFixedWidth(1);
@@ -73,7 +73,7 @@ CatalogWidget::CatalogWidget(QWidget * parent)
     QFrame * hline = new QFrame;
     {
         QPalette palette = hline->palette();
-        palette.setColor(QPalette::WindowText, "#888");
+        palette.setColor(QPalette::WindowText, "#999999");
         hline->setPalette(palette);
         hline->setFrameStyle(QFrame::HLine | QFrame::Plain);
         hline->setFixedHeight(1);
