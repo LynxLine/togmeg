@@ -57,6 +57,9 @@ public slots:
 signals:
     void viewModeChanged(MainWindow::ViewMode);
 
+protected:
+    virtual void resizeEvent(QResizeEvent *);
+
 private:
 	void createActions();
     void connectActions();

@@ -39,6 +39,8 @@ public:
     CatalogWidget * catalogWidget;
     ExamineWidget * examineWidget;
     TaskEditorWidget * taskEditorWidget;
+
+    QSizeGrip * sizeGrip;
 };
 
 MainWindow * MainWindow::Private::instance = 0L;
@@ -106,6 +108,9 @@ MainWindow::MainWindow()
 
     connect(d->catalogWidget, SIGNAL(studyTaskActivated(QString)),
             this, SLOT(openTaskEditor(QString)));
+
+    d->sizeGrip = new QSizeGrip(this);
+    d->sizeGrip->raise();
 }
 
 /*!
@@ -511,3 +516,11 @@ QFont MainWindow::baseFont(qreal multiplier, int weight)
     font.setPointSizeF(basePointSize * multiplier);
     return font;
 }
+
+void MainWindow::resizeEvent(QResizeEvent * re)
+{
+    QSize size = re->size();
+    d->sizeGrip->move( size.width()-d->sizeGrip->width(), size.height()-d->sizeGrip->height() );
+    QMainWindow::resizeEvent(re);
+}
+

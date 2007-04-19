@@ -10,31 +10,16 @@ win32:LIBS += user32.lib
 win32:LIBS += shell32.lib
 win32:LIBS += winhttp.lib
 
-mac:LIBS += -framework CoreFoundation
-mac:LIBS += -framework IOKit
-mac:QMAKE_MAC_SDK=/Developer/SDKs/MacOSX10.4u.sdk
-mac:CONFIG += x86 ppc
-
-unix:LIBS += -lz
-unix:!mac:CONFIG += x11
-
 CONFIG += qt
 CONFIG += warn_on
 CONFIG += debug_and_release
 
 unix:CONFIG += precompile_header
 
-!mac:precompile_header {
-    PRECOMPILED_HEADER = stable.h
-    HEADERS += stable.h
-    unix:QMAKE_CXXFLAGS += -fpch-preprocess
-}
-
 QT += xml
 QT += svg
 QT += opengl
 QT += network
-
 
 INCLUDEPATH += .
 
@@ -69,10 +54,16 @@ mac:QMAKE_INFO_PLIST = info.plist
         TARGET = $$member(TARGET, 0)_debug
         UI_DIR = debug
         CONFIG += console
+        
+        HEADERS += stable.h
+        PRECOMPILED_HEADER = stable.h
+        unix:QMAKE_CXXFLAGS += -fpch-preprocess
     }
     else {
         UI_DIR = release
-        unix:QMAKE_CXXFLAGS += -g
+
+        mac:CONFIG += x86 ppc
+        mac:QMAKE_MAC_SDK=/Developer/SDKs/MacOSX10.4u.sdk
     }
 }
 
