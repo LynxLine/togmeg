@@ -17,6 +17,9 @@ public:
     ExamineWidget(QWidget * parent = 0L);
     virtual ~ExamineWidget();
 
+protected:
+    virtual void resizeEvent(QResizeEvent *);
+
 private:
 	class Private;
 	Private * d;

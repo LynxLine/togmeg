@@ -5,14 +5,16 @@
 #include <QtGui>
 #include <QtCore>
 
-#include "svgwidget.h"
 #include "examinewidget.h"
+#include "questionwidget.h"
+#include "answerwidget.h"
 #include "mainwindow.h"
 
 class ExamineWidget::Private
 {
 public:
-    SvgWidget * svgWidget;
+    QuestionWidget * questionWidget;
+    AnswerWidget * answerWidget;
 };
 
 /*!
@@ -24,39 +26,56 @@ ExamineWidget::ExamineWidget(QWidget * parent)
     d = new Private;
 
     QVBoxLayout * layout = new QVBoxLayout;
-    layout->setMargin(10);
-    layout->setSpacing(5);
+    layout->setMargin(20);
+    layout->setSpacing(20);
     setLayout(layout);
 
+    QVBoxLayout * vlayout = new QVBoxLayout;
+    vlayout->setMargin(0);
+    vlayout->setSpacing(30);
+    layout->addLayout( vlayout );
+
+    //question
+
+    QHBoxLayout * questionLayout = new QHBoxLayout;
+    questionLayout->setSpacing(0);
+    questionLayout->setMargin(0);
+    vlayout->addLayout( questionLayout, 60 );
+
+    QWidget * space1 = new QWidget;
+    QWidget * space2 = new QWidget;
+
+    d->questionWidget = new QuestionWidget;
+
+    questionLayout->addWidget(space1,            12);
+    questionLayout->addWidget(d->questionWidget, 75);
+    questionLayout->addWidget(space2,            12);
+
+    //answer
+
+    QHBoxLayout * answerLayout = new QHBoxLayout;
+    answerLayout->setSpacing(0);
+    answerLayout->setMargin(0);
+    vlayout->addLayout( answerLayout, 40 );
+
+    QWidget * space3 = new QWidget;
+    QWidget * space4 = new QWidget;
+
+    d->answerWidget = new AnswerWidget;
+
+    answerLayout->addWidget(space3,          25);
+    answerLayout->addWidget(d->answerWidget, 50);
+    answerLayout->addWidget(space4,          25);
+
+    //progress
+
     /*
-    QHBoxLayout * manageTaskLayout = new QHBoxLayout;
-    manageTaskLayout->setMargin(0);
-    manageTaskLayout->setSpacing(5);
-    layout->addLayout( manageTaskLayout );
-
-    QPushButton * pauseTask = new QPushButton("Pause");
-    QPushButton * stopTask = new QPushButton("Stop");
-
-    connect(pauseTask, SIGNAL(clicked()), _action("app/stop"), SLOT(trigger()));
-    connect(stopTask,  SIGNAL(clicked()), _action("app/stop"), SLOT(trigger()));
-
-    manageTaskLayout->addItem(new QSpacerItem(10,10, QSizePolicy::Expanding, QSizePolicy::Minimum) );
-    manageTaskLayout->addWidget( pauseTask );
-    manageTaskLayout->addWidget( stopTask );
-    */
-
-    d->svgWidget = new SvgWidget(this);
-    layout->addWidget( d->svgWidget );
-
-    layout->addItem(new QSpacerItem(10, 30, QSizePolicy::Minimum, QSizePolicy::Fixed));
-    layout->addWidget(new QLineEdit);
-    layout->addItem(new QSpacerItem(10, 30, QSizePolicy::Minimum, QSizePolicy::Fixed));
-
     QProgressBar * pb_time = new QProgressBar;
+    pb_time->setTextVisible(false);
     pb_time->setRange(0,0);
     pb_time->setValue(0);
-    pb_time->setTextVisible(false);
     layout->addWidget(pb_time);
+    */
 }
 
 /*!
@@ -64,5 +83,20 @@ ExamineWidget::ExamineWidget(QWidget * parent)
  */
 ExamineWidget::~ExamineWidget()
 {
+    qDebug() << "~ExamineWidget()";
     delete d;
+}
+
+void ExamineWidget::resizeEvent(QResizeEvent * re)
+{
+    QWidget::resizeEvent(re);
+
+    QLinearGradient linearGradient(QPointF(0, 0), QPointF(0, re->size().height()));
+    linearGradient.setColorAt(0, "#E6E6E6");
+    linearGradient.setColorAt(1, "#CCCCCC");
+
+    QPalette palette = this->palette();
+    palette.setBrush(QPalette::Window, QBrush(linearGradient));
+    setAutoFillBackground(true);
+    setPalette(palette);
 }

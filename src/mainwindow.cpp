@@ -474,6 +474,8 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
         }
     }
 
+    action("app/back" )->setEnabled( d->viewMode==MainWindow::TaskEditorMode );
+
     action("app/new")->setEnabled( d->viewMode!=MainWindow::ExamineMode );
     action("app/dublicate")->setEnabled( d->viewMode!=MainWindow::ExamineMode );
     action("app/remove")->setEnabled( d->viewMode!=MainWindow::ExamineMode );

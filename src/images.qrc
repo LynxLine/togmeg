@@ -24,5 +24,8 @@
     <file>images/icons/library-icon-20x20.png</file>
     <file>images/icons/category-icon-20x20.png</file>
 
+    <file>images/bg-question-mark.png</file>
+
+
 </qresource>
 </RCC>
