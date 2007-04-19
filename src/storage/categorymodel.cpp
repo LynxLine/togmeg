@@ -95,6 +95,16 @@ void CategoryItem::setText(QString t)
     _text = t;
 }
 
+QPixmap CategoryItem::icon()
+{
+    return _icon;
+}
+
+void CategoryItem::setIcon(QPixmap icon)
+{
+    _icon = icon;
+}
+
 bool CategoryItem::isExpanded()
 {
     return _expanded;
@@ -109,6 +119,7 @@ void CategoryItem::setExpanded(bool f)
 QVariant CategoryItem::data(int role)
 {
     if (role == Qt::DisplayRole || role == Qt::EditRole) return text();
+    if (role == Qt::DecorationRole) return icon();
     return QVariant();
 }
 
@@ -188,6 +199,7 @@ CategoryModel::CategoryModel(QObject * parent)
 {
     d = new Private;
     d->root = new CategoryItem(this);
+    d->root->setIcon( QPixmap(":/images/icons/library-icon-20x20.png") );
 
     QTime time = QTime::currentTime();
 
@@ -335,6 +347,7 @@ CategoryItem * CategoryModel::createItem(QString name, CategoryItem * parent)
 
     beginInsertRows(index, parent->count(), parent->count());
     CategoryItem * item = new CategoryItem(app::uniqueId(), parent);
+    item->setIcon( QPixmap(":/images/icons/category-icon-20x20.png") );
     item->setText(name);
     endInsertRows();
 
@@ -383,7 +396,10 @@ QDomNode& operator>>(QDomNode & node, CategoryItem * item)
     QDomNode n = node.firstChild();
     while (!n.isNull()) {
         QDomElement el = n.toElement();
+
         CategoryItem * child = new CategoryItem(el.attribute("id"), item);
+        child->setIcon( QPixmap(":/images/icons/category-icon-20x20.png") );
+
         n >> child;
         n = n.nextSibling();
     }

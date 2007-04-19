@@ -176,12 +176,12 @@ void MainWindow::createActions()
     d->actions["app/export"] = new QAction (tr("&Export..."), this);
     d->actions["app/print"]  = new QAction (tr("&Print..."), this);
 
-	d->actions["app/back" ] = new QAction (tr("&Back"), this);
+	d->actions["app/back" ] = new QAction (QIcon(":/images/icons/back-32x32.png"), tr("&Back"), this);
 	d->actions["app/forward" ]  = new QAction (tr("&Forward"), this);
 
-	d->actions["app/new" ] = new QAction (tr("&New"), this);
-	d->actions["app/dublicate" ] = new QAction (tr("&Dublicate"), this);
-    d->actions["app/remove" ] = new QAction (tr("&Remove"), this);
+	d->actions["app/new"       ] = new QAction (QIcon(":/images/icons/new-study-32x32.png"), tr("&New"      ), this);
+	d->actions["app/dublicate" ] = new QAction (QIcon(":/images/icons/dublicate-32x32.png"), tr("&Dublicate"), this);
+    d->actions["app/remove"    ] = new QAction (QIcon(":/images/icons/remove-32x32.png"   ), tr("&Remove"   ), this);
 
 	d->actions["app/undo" ] = new QAction (tr("&Undo"), this);
 	d->actions["app/redo" ] = new QAction (tr("&Redo"), this);
@@ -189,10 +189,10 @@ void MainWindow::createActions()
     d->actions["app/copy" ] = new QAction (tr("&Copy"), this);
     d->actions["app/paste"] = new QAction (tr("&Paste"), this);
 
-    d->actions["app/demo" ] = new QAction (QIcon(":/images/icons/play-32x32.png"), tr("&Play"), this);
-    d->actions["app/study"] = new QAction (QIcon(":/images/icons/study-32x32.png"), tr("&Study"), this);
+    d->actions["app/demo" ] = new QAction (QIcon(":/images/icons/play-32x32.png"   ), tr("&Play"), this);
+    d->actions["app/study"] = new QAction (QIcon(":/images/icons/study-32x32.png"  ), tr("&Study"), this);
     d->actions["app/exam" ] = new QAction (QIcon(":/images/icons/examine-32x32.png"), tr("&Examinate"), this);
-    d->actions["app/stop" ] = new QAction (QIcon(":/images/icons/stop-32x32.png"), tr("&Stop"), this);
+    d->actions["app/stop" ] = new QAction (QIcon(":/images/icons/stop-32x32.png"   ), tr("&Stop"), this);
 
     d->actions["app/about"]         = new QAction (tr("&About"), this);
     d->actions["app/help"]          = new QAction (tr("Crammero &Help"), this);
@@ -206,20 +206,27 @@ void MainWindow::createMenuBar()
 {
     QMenu * menu;
 	menu = menuBar()->addMenu(tr("&File"));
+    /*
 	menu->addAction( action("app/import") );
 	menu->addAction( action("app/export") );
 	menu->addSeparator();
 	menu->addAction( action("app/print") );
 	menu->addSeparator();
+    */
 	menu->addAction( action("app/exit") );
 
 	menu = menuBar()->addMenu(tr("&Edit"));
+    menu->addAction( action("app/new") );
+	menu->addAction( action("app/dublicate") );
+	menu->addAction( action("app/remove") );
+    /*
 	menu->addAction( action("app/undo") );
 	menu->addAction( action("app/redo") );
 	menu->addSeparator();
 	menu->addAction( action("app/cut") );
 	menu->addAction( action("app/copy") );
 	menu->addAction( action("app/paste") );
+    */
 
 	menu = menuBar()->addMenu(tr("&Run"));
 	menu->addAction( action("app/demo") );
@@ -230,7 +237,7 @@ void MainWindow::createMenuBar()
 
     menu = menuBar()->addMenu(tr("&Help"));
 	menu->addAction( action("app/about") );
-	menu->addAction( action("app/help") );
+	//menu->addAction( action("app/help") );
     menu->addSeparator();
     menu->addAction( action("app/check_updates") );
 }
@@ -429,6 +436,7 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
         d->slide->setCurrentWidget( d->catalogWidget );
 
         action("app/new")->setText(tr("&New Study"));
+        action("app/new")->setIcon(QIcon(":/images/icons/new-study-32x32.png"));
     }
     else if (m == MainWindow::TaskEditorMode) {
         //first switch stack
@@ -438,23 +446,26 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
         d->slide->setCurrentWidget( d->taskEditorWidget );
 
         action("app/new")->setText(tr("&New Question"));
+        action("app/new")->setIcon(QIcon(":/images/icons/new-question-32x32.png"));
     }
     else if (m == MainWindow::ExamineMode) {
         //just switch stack
         d->stack->setCurrentWidget( d->examineWidget );
-
-        action("app/new")->setText(tr("&New"));
     }
     else if (m == MainWindow::BrowserMode) {
         //just switch stack
         d->stack->setCurrentWidget( d->slide );
         if ( d->slide->currentWidget() == d->catalogWidget ) {
             d->viewMode = MainWindow::CatalogMode;
+
             action("app/new")->setText(tr("&New Study"));
+            action("app/new")->setIcon(QIcon(":/images/icons/new-study-32x32.png"));
         }
         else if ( d->slide->currentWidget() == d->taskEditorWidget ) {
             d->viewMode = MainWindow::TaskEditorMode;
+
             action("app/new")->setText(tr("&New Question"));
+            action("app/new")->setIcon(QIcon(":/images/icons/new-question-32x32.png"));
         }
     }
 

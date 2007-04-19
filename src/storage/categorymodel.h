@@ -28,6 +28,9 @@ public:
     bool isExpanded();
     void setExpanded(bool);
 
+    QPixmap icon();
+    void setIcon(QPixmap);
+
     QAbstractItemModel * model();
 
     int row();
@@ -53,6 +56,7 @@ private:
 
     QAbstractItemModel * _model;
     QString _text, _id;
+    QPixmap _icon;
     bool _expanded;
     int _level;
 };
