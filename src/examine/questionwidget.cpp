@@ -35,7 +35,7 @@ QuestionWidget::QuestionWidget(QWidget * parent)
     layout->addWidget(d->l_question);
     layout->addItem(new QSpacerItem(10,10, QSizePolicy::Minimum, QSizePolicy::Expanding));
 
-    setWindowTitleFont( MainWindow::baseFont(1.5, QFont::Bold) );
+    setWindowTitleFont( MainWindow::baseFont(1.1, QFont::Bold) );
     setWindowTitle(tr("Question"));
 
     if (gradient().type() == QGradient::LinearGradient) {

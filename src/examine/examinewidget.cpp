@@ -68,14 +68,11 @@ ExamineWidget::ExamineWidget(QWidget * parent)
     answerLayout->addWidget(space4,          25);
 
     //progress
-
-    /*
     QProgressBar * pb_time = new QProgressBar;
     pb_time->setTextVisible(false);
     pb_time->setRange(0,0);
     pb_time->setValue(0);
     layout->addWidget(pb_time);
-    */
 }
 
 /*!

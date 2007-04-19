@@ -29,13 +29,16 @@ AnswerWidget::AnswerWidget(QWidget * parent)
     layout->addWidget(new QLineEdit);
     layout->addItem(new QSpacerItem(10,10, QSizePolicy::Minimum, QSizePolicy::Expanding));
 
-    setWindowTitleFont( MainWindow::baseFont(1.5, QFont::Bold) );
+    setWindowTitleFont( MainWindow::baseFont(1.1, QFont::Bold) );
     setWindowTitle(tr("Answer"));
 
     if (gradient().type() == QGradient::LinearGradient) {
         QLinearGradient * linearGradient = (QLinearGradient *)&gradient();
         linearGradient->setColorAt(0, "#CCCCCC");
         linearGradient->setColorAt(1, "#E0E0E0");
+
+        //linearGradient->setColorAt(0, "#29D22C");
+        //linearGradient->setColorAt(1, "#80D280");
     }
 }
 

@@ -58,9 +58,38 @@ void RoundedGradientWidget::paintEvent(QPaintEvent * pe)
     p.setBrush(d->gradient);
     p.drawPath(path);
 
-    p.setPen(QPen(QColor("#ffffff"), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    QFont f = windowTitleFont();
+    QFontMetrics fm(f);
+    qreal fh = fm.height()+4.0;
+
+    //header path
+    QPainterPath headerPath;
+    headerPath.moveTo(w/2, 0);
+    headerPath.arcTo(w-2*r, 0, 2*r, 2*r, 90, -90);
+
+    if ( fh > r ) {
+        headerPath.lineTo(w, fh);
+        headerPath.lineTo(0, fh);
+    }
+
+    headerPath.arcTo(0, 0, 2*r, 2*r, -180, -90);
+
+    headerPath.closeSubpath();
+
+    p.setPen(QPen(QColor(0,0,0,0), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    
+    QLinearGradient linearGradient(QPointF(0, 0), QPointF(0, 20));
+    linearGradient.setColorAt(0, "#F1F1F1");
+    linearGradient.setColorAt(1, "#D7D7D7");
+
+    p.setBrush(linearGradient);
+    p.drawPath(headerPath);
+
     p.setFont( windowTitleFont() );
-    p.drawText(20,20, windowTitle());
+    p.setPen(QPen(QColor("#ffffff"), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.drawText(QRect(0,1,w,fh), Qt::AlignCenter, windowTitle());
+    p.setPen(QPen(QColor("#666666"), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.drawText(QRect(0,0,w,fh), Qt::AlignCenter, windowTitle());
 }
 
 
