@@ -21,6 +21,9 @@ public:
 protected:
     virtual void resizeEvent(QResizeEvent *);
 
+private slots:
+    void setTaskName(QString name);
+
 private:
 	class Private;
 	Private * d;

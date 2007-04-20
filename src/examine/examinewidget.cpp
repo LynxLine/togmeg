@@ -17,7 +17,11 @@ class ExamineWidget::Private
 public:
     QuestionWidget * questionWidget;
     AnswerWidget * answerWidget;
+    QProgressBar * progress;
     Examinator * examinator;
+    QLabel * l_processing;
+
+    QString taskName;
 };
 
 /*!
@@ -112,19 +116,32 @@ ExamineWidget::ExamineWidget(QWidget * parent)
             ":/images/button-pause-pressed.png"
         );
 
-    QLabel * l_processing = new QLabel(tr("Processing...\nTest Name, X Entries"));
+    d->l_processing = new QLabel(tr("Processing...\n"));
+
+    d->progress = new QProgressBar;
+    //d->progress->setTextVisible(false);
+    d->progress->setRange(0,100);
+    d->progress->setValue(0);
 
     footerLayout->addItem(new QSpacerItem(10,10, QSizePolicy::MinimumExpanding, QSizePolicy::Minimum),0,0);
     footerLayout->addWidget(b_play, 0,1);
-    footerLayout->addWidget(l_processing, 0,2);
-    footerLayout->addItem(new QSpacerItem(10,10, QSizePolicy::MinimumExpanding, QSizePolicy::Minimum),0,3);
+    footerLayout->addWidget(d->l_processing, 0,2);
+    footerLayout->addItem(new QSpacerItem(20,10, QSizePolicy::Fixed, QSizePolicy::Minimum),0,3);
+    footerLayout->addWidget(d->progress,  0,4);
+    footerLayout->addItem(new QSpacerItem(10,10, QSizePolicy::MinimumExpanding, QSizePolicy::Minimum),0,5);
 
-    footerLayout->setColumnStretch(0,10);
-    footerLayout->setColumnStretch(2,80);
-    footerLayout->setColumnStretch(3,10);
+    footerLayout->setColumnStretch(0,05);
+    footerLayout->setColumnStretch(2,20);
+    footerLayout->setColumnStretch(4,70);
+    footerLayout->setColumnStretch(5,05);
 
     //examinator
     d->examinator = new Examinator(this);
+
+    connect(d->examinator, SIGNAL(tick(int)),
+            d->progress,     SLOT(setValue(int)));
+    connect(d->examinator, SIGNAL(taskNameChanged(QString)),
+            this,            SLOT(setTaskName(QString)));
 }
 
 /*!
@@ -153,4 +170,10 @@ void ExamineWidget::resizeEvent(QResizeEvent * re)
 Examinator * ExamineWidget::examinator()
 {
     return d->examinator;
+}
+
+void ExamineWidget::setTaskName(QString name)
+{
+    d->taskName = name;
+    d->l_processing->setText(tr("Processing...\n%1").arg(name));
 }

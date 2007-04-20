@@ -25,7 +25,12 @@ public slots:
     void setCurrentTask(QString taskId);
 
 signals:
-    void currentQuestionChanged(QString);
+    void tick(int percent);
+    void taskNameChanged(QString name);
+    void currentQuestionChanged(QString question);
+
+private slots:
+    void prepareNextQuestion();
 
 private:
     class Private;
