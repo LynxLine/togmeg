@@ -49,6 +49,8 @@ TaskListView::TaskListView(QWidget * parent)
             this, SLOT(activateItem(const QModelIndex &)));
 
     setModel( d->filter );
+    if ( model()->rowCount() )
+        setCurrentIndex( model()->index(0,0) );
 }
 
 TaskListView::~TaskListView()
@@ -108,4 +110,49 @@ void TaskListView::applyCategoryFilter(QString categoryId)
     }
 
     d->filter->setCategoryFiltering( categoryId );
+    
+    QModelIndex index = currentIndex();
+    if ( !index.isValid() ) {
+        if ( model()->rowCount() )
+            setCurrentIndex( model()->index(0,0) );
+        else
+            currentTaskChanged(QString::null);
+    }
+}
+
+QString TaskListView::currentTaskId()
+{
+    QModelIndex current = currentIndex();
+    if ( !current.isValid() ) {
+        return QString::null;
+    }
+
+    QModelIndex index = d->filter->mapToSource( current );
+
+    if ( !index.isValid() ) {
+        return QString::null;
+    }
+
+    StudyTask * task = d->model->task( index );
+    return task->id();
+}
+
+void TaskListView::currentChanged(const QModelIndex & current, const QModelIndex & previous)
+{
+    QTreeView::currentChanged(current, previous);
+
+    if ( !current.isValid() ) {
+        currentTaskChanged(QString::null);
+        return;
+    }
+
+    QModelIndex index = d->filter->mapToSource( current );
+
+    if ( !index.isValid() ) {
+        currentTaskChanged(QString::null);
+        return;
+    }
+
+    StudyTask * task = d->model->task( index );
+    emit currentTaskChanged( task->id() );
 }

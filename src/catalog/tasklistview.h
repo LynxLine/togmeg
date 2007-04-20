@@ -17,13 +17,19 @@ public:
     TaskListView(QWidget * parent = 0);
     virtual ~TaskListView();
 
+    QString currentTaskId();
+
 public slots:
     void addNewStudy();
     void editCurrentStudy();
     void applyCategoryFilter(QString categoryId);
 
 signals:
+    void currentTaskChanged(QString taskId);
     void studyTaskActivated(QString taskId);
+
+protected:
+    virtual void currentChanged(const QModelIndex & current, const QModelIndex & previous);
 
 private slots:
     void editStudyName();

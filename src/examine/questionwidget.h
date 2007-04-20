@@ -17,6 +17,9 @@ public:
     QuestionWidget(QWidget * parent = 0);
     virtual ~QuestionWidget();
 
+    QString question();
+    void setQuestion(QString);
+
 protected:
     virtual void paintEvent(QPaintEvent *);
 

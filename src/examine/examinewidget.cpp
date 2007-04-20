@@ -8,6 +8,7 @@
 #include "examinewidget.h"
 #include "questionwidget.h"
 #include "answerwidget.h"
+#include "examinator.h"
 #include "mainwindow.h"
 
 class ExamineWidget::Private
@@ -15,6 +16,7 @@ class ExamineWidget::Private
 public:
     QuestionWidget * questionWidget;
     AnswerWidget * answerWidget;
+    Examinator * examinator;
 };
 
 /*!
@@ -73,6 +75,9 @@ ExamineWidget::ExamineWidget(QWidget * parent)
     pb_time->setRange(0,0);
     pb_time->setValue(0);
     layout->addWidget(pb_time);
+
+    //examinator
+    d->examinator = new Examinator(this);
 }
 
 /*!
@@ -96,4 +101,14 @@ void ExamineWidget::resizeEvent(QResizeEvent * re)
     palette.setBrush(QPalette::Window, QBrush(linearGradient));
     setAutoFillBackground(true);
     setPalette(palette);
+}
+
+void ExamineWidget::setCurrentTask(QString taskId)
+{
+    examinator()->setCurrentTask(taskId);
+}
+
+Examinator * ExamineWidget::examinator()
+{
+    return d->examinator;
 }

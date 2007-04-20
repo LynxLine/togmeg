@@ -28,6 +28,7 @@ public:
     static MainWindow * instance();
 
     QAction * action(QString name);
+    QActionGroup * actionGroup(QString name);
 
     MainWindow::ViewMode viewMode();
     static QFont baseFont(qreal multiplier = 1.0, int weight = 20);
@@ -59,6 +60,9 @@ signals:
 
 protected:
     virtual void resizeEvent(QResizeEvent *);
+
+private slots:
+    void setCurrentTask(QString taskId);
 
 private:
 	void createActions();

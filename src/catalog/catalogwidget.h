@@ -17,10 +17,13 @@ public:
     CatalogWidget(QWidget * parent = 0L);
     virtual ~CatalogWidget();
 
+    QString currentTaskId();
+
 public slots:
     void addNewStudy();
 
 signals:
+    void currentTaskChanged(QString taskId);
     void studyTaskActivated(QString taskId);
 
 private:

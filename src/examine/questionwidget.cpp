@@ -69,3 +69,13 @@ void QuestionWidget::paintEvent(QPaintEvent * pe)
                  d->questionMarkPm
         );
 }
+
+QString QuestionWidget::question()
+{
+    return d->l_question->text();
+}
+
+void QuestionWidget::setQuestion(QString q)
+{
+    d->l_question->setText(q);
+}

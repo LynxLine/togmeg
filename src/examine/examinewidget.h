@@ -6,9 +6,8 @@
 #define EXAMINEWIDGET_H
 
 #include <QWidget>
+class Examinator;
 
-/*!
- */
 class ExamineWidget : public QWidget
 {
 Q_OBJECT
@@ -16,6 +15,11 @@ Q_OBJECT
 public:
     ExamineWidget(QWidget * parent = 0L);
     virtual ~ExamineWidget();
+
+    Examinator * examinator();
+
+public slots:
+    void setCurrentTask(QString taskId);
 
 protected:
     virtual void resizeEvent(QResizeEvent *);

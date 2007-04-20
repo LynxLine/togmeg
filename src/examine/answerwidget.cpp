@@ -8,6 +8,7 @@
 
 class AnswerWidget::Private {
 public:
+    QLineEdit * le_answer;
 };
 
 /*!
@@ -25,10 +26,15 @@ AnswerWidget::AnswerWidget(QWidget * parent)
 
     setFont( MainWindow::baseFont(1.5, QFont::Bold) );
 
+    d->le_answer = new QLineEdit;
+    connect(d->le_answer, SIGNAL(returnPressed()),
+            this,           SLOT(returnPressed()));
+
     layout->addItem(new QSpacerItem(10,10, QSizePolicy::Minimum, QSizePolicy::Expanding));
-    layout->addWidget(new QLineEdit);
+    layout->addWidget(d->le_answer);
     layout->addItem(new QSpacerItem(10,10, QSizePolicy::Minimum, QSizePolicy::Expanding));
 
+    setMaximumHeight(150);
     setWindowTitleFont( MainWindow::baseFont(1.1, QFont::Bold) );
     setWindowTitle(tr("Answer"));
 
@@ -48,4 +54,19 @@ AnswerWidget::AnswerWidget(QWidget * parent)
 AnswerWidget::~AnswerWidget()
 {
     delete d;
+}
+
+QString AnswerWidget::answer()
+{
+    return d->le_answer->text();
+}
+
+void AnswerWidget::setAnswer(QString a)
+{
+    d->le_answer->setText(a);
+}
+
+void AnswerWidget::returnPressed()
+{
+    emit commitAnswer( answer() );
 }

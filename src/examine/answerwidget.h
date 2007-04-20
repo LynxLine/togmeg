@@ -17,6 +17,15 @@ public:
     AnswerWidget(QWidget * parent = 0);
     virtual ~AnswerWidget();
 
+    QString answer();
+    void setAnswer(QString);
+
+signals:
+    void commitAnswer(QString);
+
+private slots:
+    void returnPressed();
+
 private:
     class Private;
     Private * d;

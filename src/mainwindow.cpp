@@ -29,6 +29,7 @@ public:
 
     static MainWindow * instance;
 
+    QMap<QString, QActionGroup *> actionGroups;
     QMap<QString, QAction *> actions;
     MainWindow::ViewMode viewMode;
     
@@ -108,6 +109,10 @@ MainWindow::MainWindow()
 
     connect(d->catalogWidget, SIGNAL(studyTaskActivated(QString)),
             this, SLOT(openTaskEditor(QString)));
+    connect(d->catalogWidget, SIGNAL(currentTaskChanged(QString)),
+            this, SLOT(setCurrentTask(QString)));
+
+    setCurrentTask( d->catalogWidget->currentTaskId() );
 
     d->sizeGrip = new QSizeGrip(this);
     d->sizeGrip->raise();
@@ -152,6 +157,18 @@ QAction * MainWindow::action(QString name)
 
     Q_ASSERT(d->actions[name]);
     return d->actions[name];
+}
+
+/*!
+ Returns QActionGroup object by name.
+ */
+QActionGroup * MainWindow::actionGroup(QString name)
+{
+    if (!d->actionGroups.contains(name))
+        qDebug() << "Not found action: " << name;
+
+    Q_ASSERT(d->actionGroups[name]);
+    return d->actionGroups[name];
 }
 
 /*!
@@ -202,6 +219,12 @@ void MainWindow::createActions()
     d->actions["app/about"]         = new QAction (tr("&About"), this);
     d->actions["app/help"]          = new QAction (tr("Crammero &Help"), this);
     d->actions["app/check_updates"] = new QAction (tr("Check for Updates Now"), this);
+
+    d->actionGroups["examine"] = new QActionGroup(this);
+    d->actionGroups["examine"]->setExclusive(false);
+    d->actionGroups["examine"]->addAction( d->actions["app/demo" ] );
+    d->actionGroups["examine"]->addAction( d->actions["app/study" ] );
+    d->actionGroups["examine"]->addAction( d->actions["app/exam" ] );
 }
 
 /*!
@@ -353,8 +376,15 @@ void MainWindow::newEntry()
     }
 }
 
+void MainWindow::setCurrentTask(QString taskId)
+{
+    actionGroup("examine")->setEnabled( !taskId.isEmpty() );
+    d->examineWidget->setCurrentTask(taskId);
+}
+
 void MainWindow::openTaskEditor(QString taskId)
 {
+    if ( taskId.isEmpty() ) return;
     setViewMode(MainWindow::TaskEditorMode);
     d->taskEditorWidget->setCurrentTask(taskId);
 }

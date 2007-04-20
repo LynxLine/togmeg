@@ -121,6 +121,10 @@ QFont RoundedGradientWidget::windowTitleFont()
 void RoundedGradientWidget::setWindowTitleFont(QFont f)
 {
     d->windowTitleFont = f;
+
+    QFontMetrics fm(f);
+    int fh = fm.height()+4;
+    setContentsMargins(0, fh, 0, 0);
 }
 
 qreal RoundedGradientWidget::roundRadius()
