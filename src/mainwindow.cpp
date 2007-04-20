@@ -402,18 +402,30 @@ void MainWindow::previousWindow()
 
 void MainWindow::runDemo()
 {
+    QString taskId = d->examinator->currentTaskId();
+    d->taskEditorWidget->setCurrentTask(taskId);
+    if ( taskId.isEmpty() ) return;
+
     d->examinator->start();
     setViewMode(MainWindow::ExamineMode);
 }
 
 void MainWindow::runStudy()
 {
+    QString taskId = d->examinator->currentTaskId();
+    d->taskEditorWidget->setCurrentTask(taskId);
+    if ( taskId.isEmpty() ) return;
+
     d->examinator->start();
     setViewMode(MainWindow::ExamineMode);
 }
 
 void MainWindow::runExamine()
 {
+    QString taskId = d->examinator->currentTaskId();
+    d->taskEditorWidget->setCurrentTask(taskId);
+    if ( taskId.isEmpty() ) return;
+
     d->examinator->start();
     setViewMode(MainWindow::ExamineMode);
 }
@@ -556,6 +568,11 @@ QFont MainWindow::baseFont(qreal multiplier, int weight)
     font.setStyleStrategy(QFont::PreferAntialias);
     font.setPointSizeF(basePointSize * multiplier);
     return font;
+}
+
+QFont MainWindow::systemFont()
+{
+    return instance()->font();
 }
 
 void MainWindow::resizeEvent(QResizeEvent * re)

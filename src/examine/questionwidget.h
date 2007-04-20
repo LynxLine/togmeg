@@ -18,6 +18,8 @@ public:
     virtual ~QuestionWidget();
 
     QString question();
+
+public slots:
     void setQuestion(QString);
 
 protected:

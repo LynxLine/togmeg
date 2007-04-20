@@ -4,6 +4,7 @@
 
 #include <QtGui>
 #include "studytask.h"
+#include "mainwindow.h"
 #include "tasklistview.h"
 #include "tasklistmodel.h"
 #include "tasklistfiltermodel.h"

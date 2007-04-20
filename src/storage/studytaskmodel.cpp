@@ -14,9 +14,12 @@
 class StudyTaskModel::Private
 {
 public:
+    static StudyTaskModel * instance;
     QList<StudyDataEntry> entries;
     DataContainer * dataContainer;
 };
+
+StudyTaskModel * StudyTaskModel::Private::instance = 0L;
 
 /*!
  Crestes StudyTaskModel
@@ -25,7 +28,13 @@ StudyTaskModel::StudyTaskModel(QObject * parent)
 :QAbstractListModel(parent)
 {
     d = new Private;
+    Private::instance = this;
     d->dataContainer = 0L;
+}
+
+StudyTaskModel * StudyTaskModel::instance()
+{
+    return Private::instance;
 }
 
 /*!
@@ -143,7 +152,7 @@ int StudyTaskModel::rowCount(const QModelIndex & parent) const
 int StudyTaskModel::columnCount(const QModelIndex & parent) const
 {
     Q_UNUSED(parent);
-    return 3;
+    return ColumnCount;
 }
 
 QVariant StudyTaskModel::data(const QModelIndex & index, int role) const
@@ -152,12 +161,12 @@ QVariant StudyTaskModel::data(const QModelIndex & index, int role) const
     if ( index.row() < 0 || index.row() >= d->entries.count() ) return QVariant();
 
     if (role == Qt::DisplayRole || role == Qt::EditRole) {
-        if ( index.column() == 0 ) return QString("  %1 ").arg(index.row()+1);
-        if ( index.column() == 1 ) return d->entries[ index.row() ].question;
-        if ( index.column() == 2 ) return d->entries[ index.row() ].answer;
+        if ( index.column() == IdColumn       ) return QString("  %1 ").arg(index.row()+1);
+        if ( index.column() == QuestionColumn ) return d->entries[ index.row() ].question;
+        if ( index.column() == AnswerColumn   ) return d->entries[ index.row() ].answer;
     }
 
-    if (role == Qt::TextAlignmentRole && index.column() == 0) {
+    if (role == Qt::TextAlignmentRole && index.column() == IdColumn) {
         return Qt::AlignRight;
     }
 
@@ -170,8 +179,8 @@ bool StudyTaskModel::setData(const QModelIndex & index, const QVariant & value, 
     if ( index.row() < 0 || index.row() >= d->entries.count() ) return false;
 
     if (role == Qt::DisplayRole || role == Qt::EditRole) {
-        if ( index.column() == 1 ) d->entries[ index.row() ].question = value.toString();
-        if ( index.column() == 2 ) d->entries[ index.row() ].answer   = value.toString();
+        if ( index.column() == QuestionColumn ) d->entries[ index.row() ].question = value.toString();
+        if ( index.column() == AnswerColumn   ) d->entries[ index.row() ].answer   = value.toString();
         return true;
     }
 
@@ -183,15 +192,15 @@ QVariant StudyTaskModel::headerData(int section, Qt::Orientation orientation, in
     Q_UNUSED(orientation);
 
     if (role == Qt::DisplayRole) {
-        if ( section == 0)
+        if ( section == IdColumn)
             return tr("#");
-        else if ( section == 1)
+        else if ( section == QuestionColumn)
             return tr("Question");
-        else if ( section == 2 )
+        else if ( section == AnswerColumn )
             return tr("Answer");
     }
 
-    if (role == Qt::TextAlignmentRole && section == 0) {
+    if (role == Qt::TextAlignmentRole && section == IdColumn) {
         return Qt::AlignRight;
     }
 
@@ -203,6 +212,6 @@ Qt::ItemFlags StudyTaskModel::flags(const QModelIndex &index) const
     if ( !index.isValid() ) return Qt::ItemIsDropEnabled;
     if ( index.row() < 0 || index.row() >= d->entries.count() ) return Qt::ItemIsDropEnabled;
 
-    if ( index.column() == 0 ) return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+    if ( index.column() == IdColumn ) return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
 }

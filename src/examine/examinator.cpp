@@ -7,6 +7,7 @@
 
 #include "studytask.h"
 #include "tasklistmodel.h"
+#include "studytaskmodel.h"
 
 class Examinator::Private {
 public:
@@ -14,6 +15,8 @@ public:
     QTimeLine * timeLine;
 
     State state;
+    QString answer;
+    QString question;
 };
 
 /*!
@@ -83,6 +86,14 @@ void Examinator::stop()
     d->timeLine->setCurrentTime(0);
 }
 
+QString Examinator::currentTaskId()
+{
+    if ( !d->task )
+        return QString::null;
+
+    return d->task->id();
+}
+
 void Examinator::setCurrentTask(QString taskId)
 {
     qDebug() << "Examinator::setCurrentTask()" << taskId;
@@ -98,6 +109,14 @@ void Examinator::setCurrentTask(QString taskId)
 
 void Examinator::prepareNextQuestion()
 {
+    StudyTaskModel * model = StudyTaskModel::instance();
+    int row = rand() % model->rowCount();
+
+    d->answer = model->data( model->index(row, StudyTaskModel::AnswerColumn) ).toString();
+    d->question = model->data( model->index(row, StudyTaskModel::QuestionColumn) ).toString();
+
+    emit currentQuestionChanged( d->question );
+
     d->timeLine->setDuration(10000);
     d->timeLine->setCurrentTime(0);
     d->timeLine->start();

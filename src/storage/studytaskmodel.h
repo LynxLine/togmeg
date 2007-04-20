@@ -19,7 +19,14 @@ class StudyTaskModel : public QAbstractListModel
 Q_OBJECT
 
 public:
+    enum Columns {
+        IdColumn = 0,
+        QuestionColumn,
+        AnswerColumn,
+        ColumnCount
+    };
     StudyTaskModel(QObject * parent = 0L);
+    static StudyTaskModel * instance();
     virtual ~StudyTaskModel();
 
     Qt::ItemFlags flags(const QModelIndex &index) const;

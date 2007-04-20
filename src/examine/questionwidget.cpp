@@ -28,7 +28,7 @@ QuestionWidget::QuestionWidget(QWidget * parent)
 
     setFont( MainWindow::baseFont(1.5, QFont::Bold) );
 
-    d->l_question = new QLabel("Test");
+    d->l_question = new QLabel;
     d->l_question->setAlignment(Qt::AlignCenter);
 
     layout->addItem(new QSpacerItem(10,10, QSizePolicy::Minimum, QSizePolicy::Expanding));

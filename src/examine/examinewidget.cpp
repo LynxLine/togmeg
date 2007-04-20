@@ -139,6 +139,8 @@ ExamineWidget::ExamineWidget(QWidget * parent)
             this,            SLOT(setTaskName(QString)));
     connect(d->examinator, SIGNAL(stateChanged(Examinator::State)),
             this,            SLOT(setExaminatorState(Examinator::State)));
+    connect(d->examinator,   SIGNAL(currentQuestionChanged(QString)),
+            d->questionWidget, SLOT(setQuestion(QString)));
 
     setExaminatorState( d->examinator->state() );
 }
@@ -177,7 +179,7 @@ void ExamineWidget::setTaskName(QString name)
         name = name.left(40)+"...";
 
     d->taskName = name;
-    d->l_processing->setText(tr("Processing...\n%1").arg(name));
+    d->l_processing->setText(tr("Processing...\n%1").arg(d->taskName));
 }
 
 void ExamineWidget::setExaminatorState(Examinator::State s)

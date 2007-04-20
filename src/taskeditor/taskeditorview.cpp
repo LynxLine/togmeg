@@ -3,6 +3,7 @@
 //
 
 #include <QtGui>
+#include "mainwindow.h"
 #include "taskeditorview.h"
 #include "studytaskmodel.h"
 

@@ -24,6 +24,7 @@ public:
     virtual ~Examinator();
 
     State state();
+    QString currentTaskId();
 
 public slots:
     void start();
@@ -35,8 +36,8 @@ public slots:
 
 signals:
     void tick(int percent);
-    void taskNameChanged(QString name);
-    void currentQuestionChanged(QString question);
+    void taskNameChanged(QString);
+    void currentQuestionChanged(QString);
     void stateChanged(Examinator::State);
 
 private slots:
