@@ -5,6 +5,7 @@
 #include <QtGui>
 #include <QtCore>
 
+#include "pixmapbutton.h"
 #include "examinewidget.h"
 #include "questionwidget.h"
 #include "answerwidget.h"
@@ -28,12 +29,12 @@ ExamineWidget::ExamineWidget(QWidget * parent)
     d = new Private;
 
     QVBoxLayout * layout = new QVBoxLayout;
-    layout->setMargin(20);
-    layout->setSpacing(20);
+    layout->setMargin(0);
+    layout->setSpacing(0);
     setLayout(layout);
 
     QVBoxLayout * vlayout = new QVBoxLayout;
-    vlayout->setMargin(0);
+    vlayout->setMargin(20);
     vlayout->setSpacing(30);
     layout->addLayout( vlayout );
 
@@ -70,11 +71,57 @@ ExamineWidget::ExamineWidget(QWidget * parent)
     answerLayout->addWidget(space4,          25);
 
     //progress
+    /*
     QProgressBar * pb_time = new QProgressBar;
     pb_time->setTextVisible(false);
-    pb_time->setRange(0,0);
+    pb_time->setRange(0,100);
     pb_time->setValue(0);
     layout->addWidget(pb_time);
+    */
+    
+    QFrame * hline = new QFrame;
+    {
+        QPalette palette = hline->palette();
+        palette.setColor(QPalette::WindowText, "#999999");
+        hline->setPalette(palette);
+        hline->setFrameStyle(QFrame::HLine | QFrame::Plain);
+        hline->setFixedHeight(1);
+        hline->setLineWidth(1);
+    }
+    layout->addWidget( hline );
+
+    QWidget * footer = new QWidget;
+    {
+        footer->setFocusPolicy(Qt::NoFocus);
+        QPalette palette = footer->palette();
+        palette.setColor(QPalette::Window, "#D9D9D9");
+        footer->setAutoFillBackground(true);
+        footer->setFixedHeight( 60 );
+        footer->setPalette(palette);
+    }
+    layout->addWidget(footer);
+
+    QGridLayout * footerLayout = new QGridLayout;
+    footerLayout->setSpacing(10);
+    footerLayout->setMargin(0);
+    footer->setLayout(footerLayout);
+
+    PixmapButton * b_play = new PixmapButton(
+            ":/images/button-pause.png",
+            ":/images/button-pause.png",
+            ":/images/button-pause-pressed.png"
+        );
+
+    QLabel * l_processing = new QLabel(tr("Processing...\nTest Name, X Entries"));
+
+    footerLayout->addItem(new QSpacerItem(10,10, QSizePolicy::MinimumExpanding, QSizePolicy::Minimum),0,0);
+    footerLayout->addWidget(b_play, 0,1);
+    footerLayout->addWidget(l_processing, 0,2);
+    footerLayout->addItem(new QSpacerItem(10,10, QSizePolicy::MinimumExpanding, QSizePolicy::Minimum),0,3);
+
+    footerLayout->setColumnStretch(0,10);
+    footerLayout->setColumnStretch(2,80);
+    footerLayout->setColumnStretch(3,10);
 
     //examinator
     d->examinator = new Examinator(this);
@@ -101,11 +148,6 @@ void ExamineWidget::resizeEvent(QResizeEvent * re)
     palette.setBrush(QPalette::Window, QBrush(linearGradient));
     setAutoFillBackground(true);
     setPalette(palette);
-}
-
-void ExamineWidget::setCurrentTask(QString taskId)
-{
-    examinator()->setCurrentTask(taskId);
 }
 
 Examinator * ExamineWidget::examinator()

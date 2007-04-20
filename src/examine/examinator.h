@@ -18,7 +18,14 @@ public:
     virtual ~Examinator();
 
 public slots:
+    void start();
+    void pause();
+    void stop();
+
     void setCurrentTask(QString taskId);
+
+signals:
+    void currentQuestionChanged(QString);
 
 private:
     class Private;

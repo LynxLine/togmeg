@@ -6,6 +6,8 @@
 #include <QtCore>
 
 #include "mainwindow.h"
+#include "examinator.h"
+
 #include "slidedwidget.h"
 #include "catalogwidget.h"
 #include "examinewidget.h"
@@ -40,6 +42,8 @@ public:
     CatalogWidget * catalogWidget;
     ExamineWidget * examineWidget;
     TaskEditorWidget * taskEditorWidget;
+
+    Examinator * examinator;
 
     QSizeGrip * sizeGrip;
 };
@@ -103,6 +107,7 @@ MainWindow::MainWindow()
     d->slide->addWidget( d->taskEditorWidget );
 
     d->examineWidget = new ExamineWidget( d->stack );
+    d->examinator = d->examineWidget->examinator();
     d->stack->addWidget( d->examineWidget );
 
     setViewMode(MainWindow::CatalogMode);
@@ -379,7 +384,7 @@ void MainWindow::newEntry()
 void MainWindow::setCurrentTask(QString taskId)
 {
     actionGroup("examine")->setEnabled( !taskId.isEmpty() );
-    d->examineWidget->setCurrentTask(taskId);
+    d->examinator->setCurrentTask(taskId);
 }
 
 void MainWindow::openTaskEditor(QString taskId)
@@ -397,21 +402,25 @@ void MainWindow::previousWindow()
 
 void MainWindow::runDemo()
 {
+    d->examinator->start();
     setViewMode(MainWindow::ExamineMode);
 }
 
 void MainWindow::runStudy()
 {
+    d->examinator->start();
     setViewMode(MainWindow::ExamineMode);
 }
 
 void MainWindow::runExamine()
 {
+    d->examinator->start();
     setViewMode(MainWindow::ExamineMode);
 }
 
 void MainWindow::stop()
 {
+    d->examinator->stop();
     setViewMode(MainWindow::BrowserMode);
 }
 

@@ -32,6 +32,18 @@ Examinator::~Examinator()
     delete d;
 }
 
+void Examinator::start()
+{
+}
+
+void Examinator::pause()
+{
+}
+
+void Examinator::stop()
+{
+}
+
 void Examinator::setCurrentTask(QString taskId)
 {
     qDebug() << "Examinator::setCurrentTask()" << taskId;

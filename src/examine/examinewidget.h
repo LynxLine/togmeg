@@ -18,9 +18,6 @@ public:
 
     Examinator * examinator();
 
-public slots:
-    void setCurrentTask(QString taskId);
-
 protected:
     virtual void resizeEvent(QResizeEvent *);
 

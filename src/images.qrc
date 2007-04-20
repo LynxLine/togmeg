@@ -26,6 +26,11 @@
 
     <file>images/bg-question-mark.png</file>
 
+    <file>images/button-play.png</file>
+    <file>images/button-play-pressed.png</file>
+    <file>images/button-pause.png</file>
+    <file>images/button-pause-pressed.png</file>
+
 
 </qresource>
 </RCC>

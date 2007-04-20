@@ -106,10 +106,10 @@ void TaskListView::applyCategoryFilter(QString categoryId)
 {
     if ( categoryId.isEmpty() ) {
         d->filter->clearFiltering();
-        return;
     }
-
-    d->filter->setCategoryFiltering( categoryId );
+    else {
+        d->filter->setCategoryFiltering( categoryId );
+    }
     
     QModelIndex index = currentIndex();
     if ( !index.isValid() ) {
