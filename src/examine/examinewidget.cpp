@@ -20,6 +20,7 @@ public:
     QProgressBar * progress;
     Examinator * examinator;
     QLabel * l_processing;
+    PixmapButton * b_play;
 
     QString taskName;
 };
@@ -110,21 +111,15 @@ ExamineWidget::ExamineWidget(QWidget * parent)
     footerLayout->setMargin(0);
     footer->setLayout(footerLayout);
 
-    PixmapButton * b_play = new PixmapButton(
-            ":/images/button-pause.png",
-            ":/images/button-pause.png",
-            ":/images/button-pause-pressed.png"
-        );
-
+    d->b_play = new PixmapButton;
     d->l_processing = new QLabel(tr("Processing...\n"));
 
     d->progress = new QProgressBar;
-    //d->progress->setTextVisible(false);
     d->progress->setRange(0,100);
     d->progress->setValue(0);
 
     footerLayout->addItem(new QSpacerItem(10,10, QSizePolicy::MinimumExpanding, QSizePolicy::Minimum),0,0);
-    footerLayout->addWidget(b_play, 0,1);
+    footerLayout->addWidget(d->b_play, 0,1);
     footerLayout->addWidget(d->l_processing, 0,2);
     footerLayout->addItem(new QSpacerItem(20,10, QSizePolicy::Fixed, QSizePolicy::Minimum),0,3);
     footerLayout->addWidget(d->progress,  0,4);
@@ -142,6 +137,10 @@ ExamineWidget::ExamineWidget(QWidget * parent)
             d->progress,     SLOT(setValue(int)));
     connect(d->examinator, SIGNAL(taskNameChanged(QString)),
             this,            SLOT(setTaskName(QString)));
+    connect(d->examinator, SIGNAL(stateChanged(Examinator::State)),
+            this,            SLOT(setExaminatorState(Examinator::State)));
+
+    setExaminatorState( d->examinator->state() );
 }
 
 /*!
@@ -174,6 +173,37 @@ Examinator * ExamineWidget::examinator()
 
 void ExamineWidget::setTaskName(QString name)
 {
+    if ( name.length() >50 )
+        name = name.left(40)+"...";
+
     d->taskName = name;
     d->l_processing->setText(tr("Processing...\n%1").arg(name));
+}
+
+void ExamineWidget::setExaminatorState(Examinator::State s)
+{
+    if ( s == Examinator::Processing ) {
+        d->b_play->setPixmap( QPixmap(":/images/button-pause.png"));
+        d->b_play->setPixmapHl( QPixmap(":/images/button-pause.png"));
+        d->b_play->setPixmapDown( QPixmap(":/images/button-pause-pressed.png"));
+        d->b_play->update();
+
+        disconnect( d->b_play, SIGNAL(clicked()),0,0);
+        connect( d->b_play, SIGNAL(clicked()), 
+                 d->examinator, SLOT(pause()));
+
+        d->l_processing->setText(tr("Processing...\n%1").arg(d->taskName));
+    }
+    else {
+        d->b_play->setPixmap( QPixmap(":/images/button-play.png"));
+        d->b_play->setPixmapHl( QPixmap(":/images/button-play.png"));
+        d->b_play->setPixmapDown( QPixmap(":/images/button-play-pressed.png"));
+        d->b_play->update();
+
+        disconnect( d->b_play, SIGNAL(clicked()),0,0);
+        connect( d->b_play, SIGNAL(clicked()), 
+                 d->examinator, SLOT(continuePlay()));
+
+        d->l_processing->setText(tr("Paused\n%1").arg(d->taskName));
+    }
 }

@@ -6,7 +6,7 @@
 #define EXAMINEWIDGET_H
 
 #include <QWidget>
-class Examinator;
+#include "examinator.h"
 
 class ExamineWidget : public QWidget
 {
@@ -23,6 +23,7 @@ protected:
 
 private slots:
     void setTaskName(QString name);
+    void setExaminatorState(Examinator::State);
 
 private:
 	class Private;
