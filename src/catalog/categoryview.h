@@ -33,7 +33,6 @@ protected:
     //virtual void drawBranches(QPainter *, const QRect &, const QModelIndex &) const;
     
     virtual void drawRow(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
-    
 
 private slots:
     void activateContextMenu(const QPoint &);
@@ -45,6 +44,24 @@ private slots:
 private:
 	class Private;
 	Private * d;
+};
+
+#include <QItemDelegate>
+
+class CategoryItemDelegate : public QItemDelegate
+{
+Q_OBJECT
+public:
+    CategoryItemDelegate(QObject * parent = 0):QItemDelegate(parent) {;}
+    void updateEditorGeometry(QWidget * editor, const QStyleOptionViewItem & option, const QModelIndex & index) const {
+        QStyleOptionViewItemV2 opt = option;
+        opt.rect.setRect(opt.rect.x()+2,
+                         opt.rect.y()+2,
+                         opt.rect.width()-4,
+                         opt.rect.height()-4);
+        QItemDelegate::updateEditorGeometry(editor, opt, index);
+    }
+
 };
 
 #endif // CATALOGVIEW_H

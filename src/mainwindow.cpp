@@ -406,7 +406,7 @@ void MainWindow::runDemo()
     d->taskEditorWidget->setCurrentTask(taskId);
     if ( taskId.isEmpty() ) return;
 
-    d->examinator->start();
+    d->examinator->start( Examinator::Playing );
     setViewMode(MainWindow::ExamineMode);
 }
 
@@ -416,7 +416,7 @@ void MainWindow::runStudy()
     d->taskEditorWidget->setCurrentTask(taskId);
     if ( taskId.isEmpty() ) return;
 
-    d->examinator->start();
+    d->examinator->start( Examinator::Studying );
     setViewMode(MainWindow::ExamineMode);
 }
 
@@ -426,7 +426,7 @@ void MainWindow::runExamine()
     d->taskEditorWidget->setCurrentTask(taskId);
     if ( taskId.isEmpty() ) return;
 
-    d->examinator->start();
+    d->examinator->start( Examinator::Examinating );
     setViewMode(MainWindow::ExamineMode);
 }
 

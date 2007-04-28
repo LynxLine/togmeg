@@ -184,6 +184,14 @@ int CategoryItem::count()
     return _children.count();
 }
 
+/*!
+ Returns level of the item.
+ */
+int CategoryItem::level()
+{
+    return _level;
+}
+
 class CategoryModel::Private
 {
 public:

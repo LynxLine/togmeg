@@ -14,10 +14,16 @@ class Examinator : public QObject
 {
 Q_OBJECT
 public:
+    enum Mode {
+        Undefined = 0,
+        Playing,
+        Studying,
+        Examinating,
+    };
     enum State {
         Processing = 0,
         Stopped,
-        Paused
+        Paused,
     };
 
     Examinator(QObject * parent = 0);
@@ -26,8 +32,10 @@ public:
     State state();
     QString currentTaskId();
 
+    Mode currentMode();
+
 public slots:
-    void start();
+    void start(Examinator::Mode);
     void pause();
     void stop();
     void continuePlay();

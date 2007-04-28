@@ -14,7 +14,9 @@ public:
     StudyTask * task;
     QTimeLine * timeLine;
 
+    Mode mode;
     State state;
+
     QString answer;
     QString question;
 };
@@ -34,6 +36,7 @@ Examinator::Examinator(QObject * parent)
     d->timeLine->setLoopCount(1);
 
     setState(Stopped);
+    d->mode = Undefined;
 
     connect(d->timeLine, SIGNAL(finished()),
             this, SLOT(prepareNextQuestion()), Qt::QueuedConnection);
@@ -50,10 +53,11 @@ Examinator::~Examinator()
     delete d;
 }
 
-void Examinator::start()
+void Examinator::start(Examinator::Mode mode)
 {
     Q_ASSERT( d->task );
 
+    d->mode = mode;
     setState(Processing);
     prepareNextQuestion();
 
@@ -81,7 +85,9 @@ void Examinator::stop()
 {
     Q_ASSERT( d->task );
 
+    d->mode = Undefined;
     setState(Stopped);
+
     d->timeLine->stop();
     d->timeLine->setCurrentTime(0);
 }
@@ -120,6 +126,11 @@ void Examinator::prepareNextQuestion()
     d->timeLine->setDuration(10000);
     d->timeLine->setCurrentTime(0);
     d->timeLine->start();
+}
+
+Examinator::Mode Examinator::currentMode()
+{
+    return d->mode;
 }
 
 Examinator::State Examinator::state()

@@ -7,10 +7,13 @@
 #include "categorymodel.h"
 #include "mainwindow.h"
 
+
+
 class CategoryView::Private
 {
 public:
     QPointer<QMenu> contextMenu;
+
 };
 
 CategoryView::CategoryView(QWidget * parent)
@@ -18,10 +21,10 @@ CategoryView::CategoryView(QWidget * parent)
 {
     d = new Private;
     setRootIsDecorated(false);
-    setEditTriggers(editTriggers() | QAbstractItemView::SelectedClicked);
     setFrameStyle(QFrame::NoFrame);
     setUniformRowHeights(true);
     setAutoFillBackground(true);
+    setItemDelegate(new CategoryItemDelegate(this));
     setAnimated(true);
     header()->hide();
 
@@ -78,14 +81,58 @@ void CategoryView::drawBranches(QPainter *, const QRect &, const QModelIndex &) 
 
 void CategoryView::drawRow(QPainter * painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    QStyleOptionViewItem opt = option;
-    opt.showDecorationSelected = false;
-    if ( index == currentIndex() ) {
-        opt.font.setBold(true);
-    }
-    QTreeView::drawRow(painter, opt, index);
-}
+    const QModelIndex parent = index.parent();
+    const QModelIndex current = currentIndex();
 
+    QStyleOptionViewItemV2 opt = option;
+    const int y = option.rect.y();
+
+    opt.showDecorationSelected = false;
+
+    int width = header()->sectionSize(0);
+    int height = option.rect.height();
+
+    opt.rect.setRect(0, y, width, height);
+    painter->fillRect(opt.rect, palette().brush(QPalette::Base));
+
+    QModelIndex modelIndex = model()->index( index.row(), 0, parent );
+    if (!modelIndex.isValid()) {
+        return;
+    }
+
+    if (selectionModel()->isSelected(modelIndex)) {
+        opt.state |= QStyle::State_Selected;
+        opt.font.setBold(true);
+
+        if ( opt.state & QStyle::State_Active ) {
+            QLinearGradient linearGradient(QPointF(0, y), QPointF(0, y+height));
+            linearGradient.setColorAt(0, "#5F9CFE");
+            linearGradient.setColorAt(1, "#1E61CD");
+
+            painter->fillRect(opt.rect, linearGradient);
+            opt.palette.setBrush(QPalette::Active, QPalette::Highlight, linearGradient);
+        }
+        else {
+            QLinearGradient linearGradient(QPointF(0, y), QPointF(0, y+height));
+            linearGradient.setColorAt(0, "#5F9CFE");
+            linearGradient.setColorAt(1, "#1E61CD");
+
+            painter->fillRect(opt.rect, QColor("#A5B4CC"));
+            opt.palette.setColor(QPalette::Inactive, QPalette::Highlight, "#A5B4CC");
+        }
+    }
+    
+    CategoryModel * categoryModel = (CategoryModel *)model();
+    CategoryItem * item = categoryModel->item(index);
+    int x = item->level() * indentation();
+
+    opt.rect.setRect(x, y, width - x, height);
+    
+    QRect branches(0, y, x, height);
+    drawBranches(painter, branches, index);
+    
+    itemDelegate()->paint(painter, opt, modelIndex);
+}
 
 void CategoryView::activateContextMenu(const QPoint & pos)
 {
