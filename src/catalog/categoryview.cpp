@@ -7,8 +7,6 @@
 #include "categorymodel.h"
 #include "mainwindow.h"
 
-
-
 class CategoryView::Private
 {
 public:
@@ -25,7 +23,8 @@ CategoryView::CategoryView(QWidget * parent)
     setUniformRowHeights(true);
     setAutoFillBackground(true);
     setItemDelegate(new CategoryItemDelegate(this));
-    setAnimated(true);
+    setIndentation(20);
+    setAnimated(false);
     header()->hide();
 
     {
@@ -83,6 +82,9 @@ void CategoryView::drawBranches(QPainter *, const QRect &, const QModelIndex &) 
 
 void CategoryView::drawRow(QPainter * painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
+    //QTreeView::drawRow(painter, option, index);
+
+    
     const QModelIndex parent = index.parent();
     const QModelIndex current = currentIndex();
 
@@ -136,6 +138,7 @@ void CategoryView::drawRow(QPainter * painter, const QStyleOptionViewItem &optio
     drawBranches(painter, branches, index);
     
     itemDelegate()->paint(painter, opt, modelIndex);
+    
 }
 
 void CategoryView::activateContextMenu(const QPoint & pos)

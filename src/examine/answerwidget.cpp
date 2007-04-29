@@ -75,7 +75,7 @@ void AnswerWidget::paintEvent(QPaintEvent * pe)
     p.setPen(QPen(QColor("#666666"), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     p.drawText(QRect(0,h-fh,w-20,fh), 
         Qt::AlignVCenter | Qt::AlignRight, 
-        tr("Press Enter for next question")
+        tr("Press Enter for next question...")
     );
 }
 

@@ -53,6 +53,7 @@ class CategoryItemDelegate : public QItemDelegate
 Q_OBJECT
 public:
     CategoryItemDelegate(QObject * parent = 0):QItemDelegate(parent) {;}
+    
     void updateEditorGeometry(QWidget * editor, const QStyleOptionViewItem & option, const QModelIndex & index) const {
         QStyleOptionViewItemV2 opt = option;
         opt.rect.setRect(opt.rect.x()+2,

@@ -22,7 +22,11 @@ QString app::storagePath() {
 
 QString app::uniqueId(int length)
 {
-    srand(time(NULL));
+    static bool initialized = false;
+    if ( !initialized ) {
+        initialized = true;
+        srand(time(NULL));
+    }
 
     QString id;
     QStringList slist;
