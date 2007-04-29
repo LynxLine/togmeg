@@ -44,10 +44,10 @@ public:
     
     void updateEditorGeometry(QWidget * editor, const QStyleOptionViewItem & option, const QModelIndex & index) const {
         QStyleOptionViewItemV2 opt = option;
-        opt.rect.setRect(opt.rect.x()+2,
-                         opt.rect.y()+2,
-                         opt.rect.width()-4,
-                         opt.rect.height()-4);
+        opt.rect.setRect(opt.rect.x()+1,
+                         opt.rect.y()+1,
+                         opt.rect.width()-2,
+                         opt.rect.height()-2);
         QItemDelegate::updateEditorGeometry(editor, opt, index);
     }
 

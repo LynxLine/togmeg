@@ -50,7 +50,6 @@ TaskEditorView::TaskEditorView(QWidget * parent)
     setItemDelegate(new TaskEditorItemDelegate(this));
     setEditTriggers(
             QAbstractItemView::DoubleClicked |
-            QAbstractItemView::SelectedClicked |
             QAbstractItemView::EditKeyPressed |
             QAbstractItemView::AnyKeyPressed
         );
@@ -133,6 +132,8 @@ void TaskEditorView::paintEvent(QPaintEvent * pe)
 void TaskEditorView::drawRow(QPainter *painter, const QStyleOptionViewItem &option,
                         const QModelIndex &index) const
 {
+    painter->setRenderHint(QPainter::Antialiasing);
+
     QStyleOptionViewItemV2 opt = option;
     const int y = option.rect.y();
     const QModelIndex parent = index.parent();
@@ -175,9 +176,6 @@ void TaskEditorView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
             continue;
         }
 
-        if (selectionModel()->isSelected(modelIndex))
-            opt.state |= QStyle::State_Selected;
-
         if ((current == modelIndex) && hasFocus()) {
             if (allColumnsShowFocus)
                 currentRowHasFocus = true;
@@ -206,39 +204,24 @@ void TaskEditorView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
             }
         }
 
-        if (headerSection == 0) {
-            const int i = 0;
-            //= d->indentationForItem(d->current);
-            opt.rect.setRect(i + position, y, width - i, height);
-            painter->fillRect(opt.rect, fill);
-            QRect branches(position, y, i, height);
-            QPalette::ColorGroup cg = opt.state & QStyle::State_Enabled
-                              ? QPalette::Active : QPalette::Disabled;
-            if (cg == QPalette::Active && !(opt.state & QStyle::State_Active))
-                cg = QPalette::Inactive;
-
-            painter->fillRect(branches, fill);
-            drawBranches(painter, branches, index);
-        } 
-        else {
-            opt.rect.setRect(position, y, width, height);
-            painter->fillRect(opt.rect, fill);
-        }
+        opt.rect.setRect(position, y, width, height);
+        painter->fillRect(opt.rect, fill);
 
         if (selectionModel()->isSelected(modelIndex)) {
-            opt.state |= QStyle::State_Selected;
-            //opt.font.setBold(true);
+            painter->fillRect(opt.rect, QColor("#A8B7CE"));
 
-            if ( opt.state & QStyle::State_Active ) {
-                painter->fillRect(opt.rect, QColor("#3875D7"));
-                opt.palette.setColor(QPalette::Active, QPalette::Highlight, "#3875D7");
-            }
-            else {
-                painter->fillRect(opt.rect, QColor("#A8B7CE"));
-                opt.palette.setColor(QPalette::Inactive, QPalette::Highlight, "#A8B7CE");
-            }
-
+            opt.palette.setColor(QPalette::Inactive, QPalette::Highlight, "#A8B7CE");
             opt.palette.setColor(QPalette::HighlightedText, "#FFFFFF");
+
+            if (current == modelIndex) {
+                QRect r = opt.rect;
+                r.setRect(r.x()+1,
+                          r.y()+1,
+                          r.width()-2,
+                          r.height()-2
+                );
+                painter->fillRect(r, QColor("#FFFFFF"));
+            }
         }
 
         itemDelegate()->paint(painter, opt, modelIndex);
