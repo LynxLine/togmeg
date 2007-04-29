@@ -31,6 +31,8 @@ CategoryView::CategoryView(QWidget * parent)
     {
         QPalette palette = this->palette();
         palette.setColor(QPalette::Base, "#E9EFF9");
+        palette.setColor(QPalette::Highlight, "#B5D5FF");
+        palette.setColor(QPalette::HighlightedText, "#000000");
         setPalette(palette);
     }
 
@@ -114,12 +116,14 @@ void CategoryView::drawRow(QPainter * painter, const QStyleOptionViewItem &optio
         }
         else {
             QLinearGradient linearGradient(QPointF(0, y), QPointF(0, y+height));
-            linearGradient.setColorAt(0, "#5F9CFE");
-            linearGradient.setColorAt(1, "#1E61CD");
+            linearGradient.setColorAt(0, "#A8B7CE");
+            linearGradient.setColorAt(1, "#939CAB");
 
-            painter->fillRect(opt.rect, QColor("#A5B4CC"));
-            opt.palette.setColor(QPalette::Inactive, QPalette::Highlight, "#A5B4CC");
+            painter->fillRect(opt.rect, linearGradient);
+            opt.palette.setBrush(QPalette::Inactive, QPalette::Highlight, linearGradient);
         }
+
+        opt.palette.setColor(QPalette::HighlightedText, "#FFFFFF");
     }
     
     CategoryModel * categoryModel = (CategoryModel *)model();
