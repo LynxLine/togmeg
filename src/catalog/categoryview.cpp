@@ -42,7 +42,7 @@ CategoryView::CategoryView(QWidget * parent)
 
     d->contextMenu = new QMenu(this);
     d->contextMenu->addAction( tr("&Create new category"), this, SLOT(addNewCategory()));
-    d->contextMenu->addAction( tr("Create &sub-category"), this, SLOT(addNewCategory()));
+    d->contextMenu->addAction( tr("Create &sub-category"), this, SLOT(addSubCategory()));
     d->contextMenu->addSeparator();
     d->contextMenu->addAction( tr("Re&name"), this, SLOT(renameCategory()), QKeySequence(Qt::Key_F2));
     d->contextMenu->addAction( tr("&Remove"), this, SLOT(removeCategory()));
