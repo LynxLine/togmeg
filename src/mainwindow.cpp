@@ -116,6 +116,9 @@ MainWindow::MainWindow()
             this, SLOT(openTaskEditor(QString)));
     connect(d->catalogWidget, SIGNAL(currentTaskChanged(QString)),
             this, SLOT(setCurrentTask(QString)));
+
+    connect(d->examinator, SIGNAL(examinatorEnabled(bool)),
+            actionGroup("examine"), SLOT(setEnabled(bool)));
     connect(d->examinator, SIGNAL(stopped()),
             this, SLOT(stop()));
 
@@ -385,8 +388,8 @@ void MainWindow::newEntry()
 
 void MainWindow::setCurrentTask(QString taskId)
 {
-    actionGroup("examine")->setEnabled( !taskId.isEmpty() );
     d->examinator->setCurrentTask(taskId);
+    actionGroup("examine")->setEnabled( d->examinator->entryCount() >0 );
 }
 
 void MainWindow::openTaskEditor(QString taskId)
@@ -492,6 +495,7 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
         //first switch stack
         if ( d->stack->currentWidget() != d->slide )
         d->stack->setCurrentWidget( d->slide );
+
         //second switch slide
         d->slide->setCurrentWidget( d->catalogWidget );
 
@@ -502,6 +506,7 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
         //first switch stack
         if ( d->stack->currentWidget() != d->slide )
         d->stack->setCurrentWidget( d->slide );
+
         //second switch slide
         d->slide->setCurrentWidget( d->taskEditorWidget );
 
@@ -535,6 +540,7 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
     action("app/dublicate")->setEnabled( d->viewMode!=MainWindow::ExamineMode );
     action("app/remove")->setEnabled( d->viewMode!=MainWindow::ExamineMode );
 
+    actionGroup("examine")->setEnabled( d->examinator->entryCount() >0 );
     action("app/demo" )->setEnabled( d->viewMode!=MainWindow::ExamineMode );
     action("app/study")->setEnabled( d->viewMode!=MainWindow::ExamineMode );
     action("app/exam" )->setEnabled( d->viewMode!=MainWindow::ExamineMode );

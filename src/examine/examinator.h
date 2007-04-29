@@ -30,6 +30,7 @@ public:
 
     State state();
     QString currentTaskId();
+    int entryCount();
 
 public slots:
     void start(Examinator::Mode);
@@ -42,6 +43,7 @@ public slots:
 signals:
     void stopped();
     void tick(int percent);
+    void examinatorEnabled(bool);
     void taskNameChanged(QString);
     void currentAnswerChanged(QString);
     void currentQuestionChanged(QString);
@@ -51,6 +53,7 @@ signals:
 
 private slots:
     void setState(State);
+    void setEntryCount(int);
     void prepareNextQuestion();
 
 private:

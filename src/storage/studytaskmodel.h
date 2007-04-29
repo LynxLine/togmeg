@@ -43,6 +43,9 @@ public slots:
     void load(QString taskId);
     void save();
 
+signals:
+    void rowCountChanged(int);
+
 private:
 	class Private;
 	Private * d;

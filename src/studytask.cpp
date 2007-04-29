@@ -12,6 +12,8 @@ public:
     QString id;
     QString name;
     QString categoryId;
+    int entryCount;
+
     DataContainer * dataContainer;
 };
 
@@ -26,6 +28,7 @@ StudyTask::StudyTask(QObject * parent)
 
     d->id = app::uniqueId();
     d->name = tr("New study");
+    d->entryCount = 0;
 
     QDir storageDir(app::storagePath());
     storageDir.mkpath( id() );
@@ -54,6 +57,7 @@ StudyTask::StudyTask(DataContainer * container, QObject * parent)
         delete resource;
 
         QDomElement el = doc.documentElement();
+        d->entryCount = el.attribute("count").toInt();
         d->categoryId = el.attribute("category");
         d->name = el.attribute("name");
         d->id = el.attribute("id");
@@ -71,6 +75,7 @@ StudyTask::~StudyTask()
         QDomDocument doc("taskinfoxml");
 
         QDomElement child = doc.createElement("studytask");
+        child.setAttribute("count", entryCount());
         child.setAttribute("category", categoryId());
         child.setAttribute("name", name());
         child.setAttribute("id", id());
@@ -112,4 +117,16 @@ void StudyTask::setCategoryId(QString id)
 DataContainer * StudyTask::dataContainer()
 {
     return d->dataContainer;
+}
+
+int StudyTask::entryCount()
+{
+    return d->entryCount;
+}
+
+void StudyTask::setEntryCount(int count)
+{
+    if (d->entryCount != count)
+        emit entryCountChanged(count);
+    d->entryCount = count;
 }

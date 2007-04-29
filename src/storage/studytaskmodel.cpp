@@ -56,8 +56,13 @@ void StudyTaskModel::load(QString taskId)
     d->dataContainer = 0L;
     d->entries.clear();
 
+    disconnect(this, SIGNAL(rowCountChanged(int)),0,0);
+
     StudyTask * task = TaskListModel::instance()->task( taskId );
     if ( !task ) return;
+
+    connect(this, SIGNAL(rowCountChanged(int)),
+            task, SLOT(setEntryCount(int)));
 
     d->dataContainer = task->dataContainer();
         
@@ -83,8 +88,7 @@ void StudyTaskModel::load(QString taskId)
         }
     }
 
-    qDebug() << d->entries.count()<< " entries loaded";
-
+    emit rowCountChanged( rowCount() );
     reset();
 }
 
@@ -129,6 +133,7 @@ QModelIndex StudyTaskModel::addNewEntry()
     d->entries << entry;
     endInsertRows();
 
+    emit rowCountChanged( rowCount() );
     return index( d->entries.count()-1,1 );
 }
 
@@ -141,6 +146,8 @@ void StudyTaskModel::removeEntry(QModelIndex index)
     beginRemoveRows(QModelIndex(), i, i);
     d->entries.removeAt(i);
     endRemoveRows();
+
+    emit rowCountChanged( rowCount() );
 }
 
 int StudyTaskModel::rowCount(const QModelIndex & parent) const

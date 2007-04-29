@@ -23,10 +23,15 @@ public:
     QString id();
     QString name();
     QString categoryId();
+    int entryCount();
 
 public slots:
     void setName(QString);
     void setCategoryId(QString);
+    void setEntryCount(int);
+
+signals:
+    void entryCountChanged(int);
 
 private:
     DataContainer * dataContainer();

@@ -109,6 +109,17 @@ QString Examinator::currentTaskId()
     return d->task->id();
 }
 
+int Examinator::entryCount()
+{
+    if ( !d->task ) return 0;
+    return d->task->entryCount();
+}
+
+void Examinator::setEntryCount(int count)
+{
+    emit examinatorEnabled( count >0 );
+}
+
 void Examinator::setCurrentTask(QString taskId)
 {
     qDebug() << "Examinator::setCurrentTask()" << taskId;
@@ -118,8 +129,16 @@ void Examinator::setCurrentTask(QString taskId)
         return;
     }
 
+    if (d->task) {
+        disconnect(d->task, SIGNAL(entryCountChanged(int)),
+                   this,      SLOT(setEntryCount(int)));
+    }
+
     d->task = TaskListModel::instance()->task( taskId );
     if ( !d->task ) return;
+
+    connect(d->task, SIGNAL(entryCountChanged(int)),
+            this,      SLOT(setEntryCount(int)));
 }
 
 void Examinator::prepareNextQuestion()
