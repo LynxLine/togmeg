@@ -14,8 +14,11 @@ class PlayTaskController : public TaskController
 {
 Q_OBJECT
 public:
-    PlayTaskController(QObject * parent = 0);
+    PlayTaskController(StudyTaskModel * parent = 0);
     virtual ~PlayTaskController();
+
+    virtual bool hasNext();
+    virtual ControllerDataEntry next();
 
 private:
     class Private;

@@ -23,6 +23,7 @@ protected:
 
 private slots:
     void setTaskName(QString name);
+    void setExaminatorMode(Examinator::Mode);
     void setExaminatorState(Examinator::State);
 
 private:

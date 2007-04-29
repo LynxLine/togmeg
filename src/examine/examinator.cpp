@@ -9,16 +9,18 @@
 #include "tasklistmodel.h"
 #include "studytaskmodel.h"
 
+#include "taskcontroller.h"
+#include "playtaskcontroller.h"
+#include "studytaskcontroller.h"
+#include "examinatetaskcontroller.h"
+
 class Examinator::Private {
 public:
     StudyTask * task;
     QTimeLine * timeLine;
 
-    Mode mode;
     State state;
-
-    QString answer;
-    QString question;
+    QPointer<TaskController> controller;
 };
 
 /*!
@@ -36,7 +38,6 @@ Examinator::Examinator(QObject * parent)
     d->timeLine->setLoopCount(1);
 
     setState(Stopped);
-    d->mode = Undefined;
 
     connect(d->timeLine, SIGNAL(finished()),
             this, SLOT(prepareNextQuestion()), Qt::QueuedConnection);
@@ -57,12 +58,31 @@ void Examinator::start(Examinator::Mode mode)
 {
     Q_ASSERT( d->task );
 
-    d->mode = mode;
+    StudyTaskModel * model = StudyTaskModel::instance();
+
+    if ( mode == Playing ) d->controller = new PlayTaskController( model );
+    else if ( mode == Studying ) d->controller = new StudyTaskController( model );
+    else if ( mode == Examinating ) d->controller = new ExaminateTaskController( model );
+
     setState(Processing);
     prepareNextQuestion();
 
     //update widget
     emit taskNameChanged( d->task->name() );
+    emit modeChanged( mode );
+}
+
+void Examinator::stop()
+{
+    Q_ASSERT( d->task );
+
+    setState(Stopped);
+    delete d->controller;
+
+    d->timeLine->stop();
+    d->timeLine->setCurrentTime(0);
+
+    emit stopped();
 }
 
 void Examinator::continuePlay()
@@ -79,17 +99,6 @@ void Examinator::pause()
 
     setState(Paused);
     d->timeLine->stop();
-}
-
-void Examinator::stop()
-{
-    Q_ASSERT( d->task );
-
-    d->mode = Undefined;
-    setState(Stopped);
-
-    d->timeLine->stop();
-    d->timeLine->setCurrentTime(0);
 }
 
 QString Examinator::currentTaskId()
@@ -115,26 +124,18 @@ void Examinator::setCurrentTask(QString taskId)
 
 void Examinator::prepareNextQuestion()
 {
-    StudyTaskModel * model = StudyTaskModel::instance();
-
-    if ( !model->rowCount() )
+    if ( !d->controller->hasNext() ) {
+        emit stopped();
         return;
+    }
 
-    int row = rand() % model->rowCount();
+    ControllerDataEntry entry = d->controller->next();
+    emit currentQuestionChanged( entry.question );
+    emit currentAnswerChanged( entry.answer );
 
-    d->answer = model->data( model->index(row, StudyTaskModel::AnswerColumn) ).toString();
-    d->question = model->data( model->index(row, StudyTaskModel::QuestionColumn) ).toString();
-
-    emit currentQuestionChanged( d->question );
-
-    d->timeLine->setDuration(10000);
+    d->timeLine->setDuration( entry.msecs );
     d->timeLine->setCurrentTime(0);
     d->timeLine->start();
-}
-
-Examinator::Mode Examinator::currentMode()
-{
-    return d->mode;
 }
 
 Examinator::State Examinator::state()

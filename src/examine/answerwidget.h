@@ -5,6 +5,7 @@
 #ifndef ANSWERWIDGET_H
 #define ANSWERWIDGET_H
 
+#include "examinator.h"
 #include "roundedgradientwidget.h"
 
 /*!
@@ -18,13 +19,19 @@ public:
     virtual ~AnswerWidget();
 
     QString answer();
+
+public slots:
     void setAnswer(QString);
+    void setExaminatorMode(Examinator::Mode);
 
 signals:
     void commitAnswer(QString);
 
 private slots:
     void returnPressed();
+
+protected:
+    void paintEvent(QPaintEvent *);
 
 private:
     class Private;

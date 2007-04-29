@@ -4,12 +4,13 @@
 
 #include <QtGui>
 #include "taskcontroller.h"
+#include "studytaskmodel.h"
 
 /*!
  * Creates the object.
  */
-TaskController::TaskController(QObject * parent)
-:QObject(parent)
+TaskController::TaskController(StudyTaskModel * parent)
+:QObject(parent), model(parent)
 {
 }
 
@@ -18,4 +19,8 @@ TaskController::TaskController(QObject * parent)
  */
 TaskController::~TaskController()
 {
+}
+
+bool ControllerDataEntry::isNull() {
+    return question.isEmpty() && answer.isEmpty() && msecs == 0;
 }

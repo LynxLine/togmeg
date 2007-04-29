@@ -75,15 +75,6 @@ ExamineWidget::ExamineWidget(QWidget * parent)
     answerLayout->addWidget(d->answerWidget, 50);
     answerLayout->addWidget(space4,          25);
 
-    //progress
-    /*
-    QProgressBar * pb_time = new QProgressBar;
-    pb_time->setTextVisible(false);
-    pb_time->setRange(0,100);
-    pb_time->setValue(0);
-    layout->addWidget(pb_time);
-    */
-    
     QFrame * hline = new QFrame;
     {
         QPalette palette = hline->palette();
@@ -137,10 +128,16 @@ ExamineWidget::ExamineWidget(QWidget * parent)
             d->progress,     SLOT(setValue(int)));
     connect(d->examinator, SIGNAL(taskNameChanged(QString)),
             this,            SLOT(setTaskName(QString)));
+
+    connect(d->examinator, SIGNAL(modeChanged(Examinator::Mode)),
+            this,            SLOT(setExaminatorMode(Examinator::Mode)));
     connect(d->examinator, SIGNAL(stateChanged(Examinator::State)),
             this,            SLOT(setExaminatorState(Examinator::State)));
+
     connect(d->examinator,   SIGNAL(currentQuestionChanged(QString)),
             d->questionWidget, SLOT(setQuestion(QString)));
+    connect(d->examinator,   SIGNAL(currentAnswerChanged(QString)),
+            d->answerWidget,   SLOT(setAnswer(QString)));
 
     setExaminatorState( d->examinator->state() );
 }
@@ -180,6 +177,11 @@ void ExamineWidget::setTaskName(QString name)
 
     d->taskName = name;
     d->l_processing->setText(tr("Processing...\n%1").arg(d->taskName));
+}
+
+void ExamineWidget::setExaminatorMode(Examinator::Mode mode)
+{
+    d->answerWidget->setExaminatorMode(mode);
 }
 
 void ExamineWidget::setExaminatorState(Examinator::State s)

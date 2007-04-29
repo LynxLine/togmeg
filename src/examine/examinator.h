@@ -15,8 +15,7 @@ class Examinator : public QObject
 Q_OBJECT
 public:
     enum Mode {
-        Undefined = 0,
-        Playing,
+        Playing = 0,
         Studying,
         Examinating,
     };
@@ -32,8 +31,6 @@ public:
     State state();
     QString currentTaskId();
 
-    Mode currentMode();
-
 public slots:
     void start(Examinator::Mode);
     void pause();
@@ -43,10 +40,14 @@ public slots:
     void setCurrentTask(QString taskId);
 
 signals:
+    void stopped();
     void tick(int percent);
     void taskNameChanged(QString);
+    void currentAnswerChanged(QString);
     void currentQuestionChanged(QString);
+
     void stateChanged(Examinator::State);
+    void modeChanged(Examinator::Mode);
 
 private slots:
     void setState(State);

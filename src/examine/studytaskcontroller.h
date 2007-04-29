@@ -14,8 +14,11 @@ class StudyTaskController : public TaskController
 {
 Q_OBJECT
 public:
-    StudyTaskController(QObject * parent = 0);
+    StudyTaskController(StudyTaskModel * parent = 0);
     virtual ~StudyTaskController();
+
+    virtual bool hasNext();
+    virtual ControllerDataEntry next();
 
 private:
     class Private;

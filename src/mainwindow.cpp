@@ -116,6 +116,8 @@ MainWindow::MainWindow()
             this, SLOT(openTaskEditor(QString)));
     connect(d->catalogWidget, SIGNAL(currentTaskChanged(QString)),
             this, SLOT(setCurrentTask(QString)));
+    connect(d->examinator, SIGNAL(stopped()),
+            this, SLOT(stop()));
 
     setCurrentTask( d->catalogWidget->currentTaskId() );
 
@@ -432,8 +434,10 @@ void MainWindow::runExamine()
 
 void MainWindow::stop()
 {
-    d->examinator->stop();
-    setViewMode(MainWindow::BrowserMode);
+    if ( d->examinator->state() != Examinator::Stopped ) {
+        setViewMode(MainWindow::BrowserMode);
+        d->examinator->stop();
+    }
 }
 
 /*!
