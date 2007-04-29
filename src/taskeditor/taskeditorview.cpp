@@ -4,6 +4,7 @@
 
 #include <QtGui>
 #include "mainwindow.h"
+#include "headerview.h"
 #include "taskeditorview.h"
 #include "studytaskmodel.h"
 
@@ -12,13 +13,18 @@ class TaskEditorView::Private
 public:
     QPointer<StudyTaskModel> model;
     QPointer<QMenu> contextMenu;
+    QPointer<HeaderView> header;
 };
 
 TaskEditorView::TaskEditorView(QWidget * parent)
 :QTreeView(parent) 
 {
     d = new Private;
+    d->header = new HeaderView(Qt::Horizontal, this);
+    d->header->setFont( MainWindow::baseFont(0.95) );
+    d->header->setStretchLastSection(true);
 
+    setHeader( d->header );
     setRootIsDecorated(false);
     setAutoFillBackground(true);
     setAlternatingRowColors(true);

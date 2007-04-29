@@ -5,6 +5,7 @@
 #include <QtGui>
 #include "studytask.h"
 #include "mainwindow.h"
+#include "headerview.h"
 #include "tasklistview.h"
 #include "tasklistmodel.h"
 #include "tasklistfiltermodel.h"
@@ -15,13 +16,18 @@ public:
     QPointer<TaskListFilterModel> filter;
     QPointer<TaskListModel> model;
     QPointer<QMenu> contextMenu;
+    QPointer<HeaderView> header;
 };
 
 TaskListView::TaskListView(QWidget * parent)
 :QTreeView(parent) 
 {
     d = new Private;
+    d->header = new HeaderView(Qt::Horizontal, this);
+    d->header->setFont( MainWindow::baseFont(0.95) );
+    d->header->setStretchLastSection(true);
 
+    setHeader( d->header );
     setRootIsDecorated(false);
     setUniformRowHeights(true);
     setAutoFillBackground(true);
