@@ -14,6 +14,9 @@ public:
     QPointer<StudyTaskModel> model;
     QPointer<QMenu> contextMenu;
     QPointer<HeaderView> header;
+
+    QColor c1;
+    QColor c2;
 };
 
 TaskEditorView::TaskEditorView(QWidget * parent)
@@ -27,9 +30,18 @@ TaskEditorView::TaskEditorView(QWidget * parent)
     setHeader( d->header );
     setRootIsDecorated(false);
     setAutoFillBackground(true);
-    setAlternatingRowColors(true);
+    setAlternatingRowColors(false);
+    {
+        d->c1 = palette().color(QPalette::Base);
+        d->c2 = palette().color(QPalette::AlternateBase);
+
+        QPalette palette = this->palette();
+        palette.setColor(QPalette::Base, QColor(0,0,0,0));
+        setPalette(palette);
+    }
     setFrameStyle(QFrame::NoFrame);
     setAllColumnsShowFocus(true);
+    setItemDelegate(new TaskEditorItemDelegate(this));
     setSelectionMode(QAbstractItemView::NoSelection);
     setEditTriggers(
             QAbstractItemView::DoubleClicked |
@@ -90,4 +102,22 @@ void TaskEditorView::removeEntry()
     QModelIndex index = currentIndex();
     d->model->removeEntry( index );
     scrollTo(currentIndex());
+}
+
+void TaskEditorView::paintEvent(QPaintEvent * pe)
+{
+    QRect r = pe->rect();
+    QPainter p( viewport() );
+
+    int rowHeight = 20;
+    int i1 = r.y()/rowHeight-1;
+    int i2 = (r.y()+r.height())/rowHeight+1;
+
+    for (int i=i1;i<i2;i++) {
+        QRect rf = QRect(r.x(), i*rowHeight, r.width(), rowHeight);
+        p.fillRect(rf, i % 2 ? d->c2 : d->c1);
+    }
+
+    p.end();
+    QTreeView::paintEvent(pe);
 }

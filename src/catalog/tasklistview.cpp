@@ -17,6 +17,9 @@ public:
     QPointer<TaskListModel> model;
     QPointer<QMenu> contextMenu;
     QPointer<HeaderView> header;
+
+    QColor c1;
+    QColor c2;
 };
 
 TaskListView::TaskListView(QWidget * parent)
@@ -30,9 +33,18 @@ TaskListView::TaskListView(QWidget * parent)
     setHeader( d->header );
     setRootIsDecorated(false);
     setUniformRowHeights(true);
-    setAutoFillBackground(true);
-    setAlternatingRowColors(true);
+    setAutoFillBackground(false);
+    setAlternatingRowColors(false);
+    {
+        d->c1 = palette().color(QPalette::Base);
+        d->c2 = palette().color(QPalette::AlternateBase);
+
+        QPalette palette = this->palette();
+        palette.setColor(QPalette::Base, QColor(0,0,0,0));
+        setPalette(palette);
+    }
     setFrameStyle(QFrame::NoFrame);
+    setItemDelegate(new TaskListItemDelegate(this));
     setEditTriggers(editTriggers() ^ QAbstractItemView::DoubleClicked);
 
     setContextMenuPolicy(Qt::CustomContextMenu);
@@ -162,4 +174,22 @@ void TaskListView::currentChanged(const QModelIndex & current, const QModelIndex
 
     StudyTask * task = d->model->task( index );
     emit currentTaskChanged( task->id() );
+}
+
+void TaskListView::paintEvent(QPaintEvent * pe)
+{
+    QRect r = pe->rect();
+    QPainter p( viewport() );
+
+    int rowHeight = 20;
+    int i1 = r.y()/rowHeight-1;
+    int i2 = (r.y()+r.height())/rowHeight+1;
+
+    for (int i=i1;i<i2;i++) {
+        QRect rf = QRect(r.x(), i*rowHeight, r.width(), rowHeight);
+        p.fillRect(rf, i % 2 ? d->c2 : d->c1);
+    }
+
+    p.end();
+    QTreeView::paintEvent(pe);
 }

@@ -25,9 +25,37 @@ public slots:
 private slots:
     void activateContextMenu(const QPoint &);
 
+protected:
+    virtual void paintEvent(QPaintEvent * pe);
+
 private:
 	class Private;
 	Private * d;
+};
+
+#include <QItemDelegate>
+
+class TaskEditorItemDelegate : public QItemDelegate
+{
+Q_OBJECT
+public:
+    TaskEditorItemDelegate(QObject * parent = 0):QItemDelegate(parent) {;}
+    
+    void updateEditorGeometry(QWidget * editor, const QStyleOptionViewItem & option, const QModelIndex & index) const {
+        QStyleOptionViewItemV2 opt = option;
+        opt.rect.setRect(opt.rect.x()+2,
+                         opt.rect.y()+2,
+                         opt.rect.width()-4,
+                         opt.rect.height()-4);
+        QItemDelegate::updateEditorGeometry(editor, opt, index);
+    }
+
+    virtual QSize sizeHint(const QStyleOptionViewItem & option, const QModelIndex & index ) const {
+        QSize s = QItemDelegate::sizeHint(option, index);
+        s.setHeight(20);
+        return s;
+    }
+
 };
 
 #endif // TASKEDITORVIEW_H

@@ -65,6 +65,8 @@ void HeaderView::paintSection(QPainter * painter, const QRect & rect, int logica
             align |= Qt::AlignVCenter;
 
             int margin = 3;
+            if (logicalIndex) margin++;
+
             QRect r = rect;
             r.setX( r.x()+margin );
             r.setHeight( r.height() -1 );

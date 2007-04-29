@@ -29,6 +29,7 @@ signals:
     void studyTaskActivated(QString taskId);
 
 protected:
+    virtual void paintEvent(QPaintEvent * pe);
     virtual void currentChanged(const QModelIndex & current, const QModelIndex & previous);
 
 private slots:
@@ -39,6 +40,31 @@ private slots:
 private:
 	class Private;
 	Private * d;
+};
+
+#include <QItemDelegate>
+
+class TaskListItemDelegate : public QItemDelegate
+{
+Q_OBJECT
+public:
+    TaskListItemDelegate(QObject * parent = 0):QItemDelegate(parent) {;}
+    
+    void updateEditorGeometry(QWidget * editor, const QStyleOptionViewItem & option, const QModelIndex & index) const {
+        QStyleOptionViewItemV2 opt = option;
+        opt.rect.setRect(opt.rect.x()+2,
+                         opt.rect.y()+2,
+                         opt.rect.width()-4,
+                         opt.rect.height()-4);
+        QItemDelegate::updateEditorGeometry(editor, opt, index);
+    }
+
+    virtual QSize sizeHint(const QStyleOptionViewItem & option, const QModelIndex & index ) const {
+        QSize s = QItemDelegate::sizeHint(option, index);
+        s.setHeight(20);
+        return s;
+    }
+
 };
 
 #endif // TASKLISTVIEW_H
