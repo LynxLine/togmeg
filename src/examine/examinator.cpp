@@ -116,6 +116,10 @@ void Examinator::setCurrentTask(QString taskId)
 void Examinator::prepareNextQuestion()
 {
     StudyTaskModel * model = StudyTaskModel::instance();
+
+    if ( !model->rowCount() )
+        return;
+
     int row = rand() % model->rowCount();
 
     d->answer = model->data( model->index(row, StudyTaskModel::AnswerColumn) ).toString();
