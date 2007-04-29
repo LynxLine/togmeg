@@ -30,6 +30,8 @@ TaskEditorView::TaskEditorView(QWidget * parent)
     setHeader( d->header );
     setRootIsDecorated(false);
     setAutoFillBackground(true);
+
+#ifdef Q_WS_MAC
     setAlternatingRowColors(false);
     {
         d->c1 = palette().color(QPalette::Base);
@@ -39,10 +41,13 @@ TaskEditorView::TaskEditorView(QWidget * parent)
         palette.setColor(QPalette::Base, QColor(0,0,0,0));
         setPalette(palette);
     }
+#else 
+    setAlternatingRowColors(true);
+#endif
+
     setFrameStyle(QFrame::NoFrame);
     setAllColumnsShowFocus(true);
     setItemDelegate(new TaskEditorItemDelegate(this));
-    setSelectionMode(QAbstractItemView::NoSelection);
     setEditTriggers(
             QAbstractItemView::DoubleClicked |
             QAbstractItemView::SelectedClicked |
@@ -106,6 +111,7 @@ void TaskEditorView::removeEntry()
 
 void TaskEditorView::paintEvent(QPaintEvent * pe)
 {
+#ifdef Q_WS_MAC
     QRect r = pe->rect();
     QPainter p( viewport() );
 
@@ -119,5 +125,7 @@ void TaskEditorView::paintEvent(QPaintEvent * pe)
     }
 
     p.end();
+#endif
+
     QTreeView::paintEvent(pe);
 }

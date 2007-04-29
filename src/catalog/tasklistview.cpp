@@ -33,7 +33,9 @@ TaskListView::TaskListView(QWidget * parent)
     setHeader( d->header );
     setRootIsDecorated(false);
     setUniformRowHeights(true);
-    setAutoFillBackground(false);
+    setAutoFillBackground(true);
+
+#ifdef Q_WS_MAC
     setAlternatingRowColors(false);
     {
         d->c1 = palette().color(QPalette::Base);
@@ -43,6 +45,10 @@ TaskListView::TaskListView(QWidget * parent)
         palette.setColor(QPalette::Base, QColor(0,0,0,0));
         setPalette(palette);
     }
+#else
+    setAlternatingRowColors(true);
+#endif
+
     setFrameStyle(QFrame::NoFrame);
     setItemDelegate(new TaskListItemDelegate(this));
     setEditTriggers(editTriggers() ^ QAbstractItemView::DoubleClicked);
@@ -178,6 +184,7 @@ void TaskListView::currentChanged(const QModelIndex & current, const QModelIndex
 
 void TaskListView::paintEvent(QPaintEvent * pe)
 {
+#ifdef Q_WS_MAC
     QRect r = pe->rect();
     QPainter p( viewport() );
 
@@ -191,5 +198,7 @@ void TaskListView::paintEvent(QPaintEvent * pe)
     }
 
     p.end();
+#endif
+
     QTreeView::paintEvent(pe);
 }
