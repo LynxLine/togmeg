@@ -129,3 +129,118 @@ void TaskEditorView::paintEvent(QPaintEvent * pe)
 
     QTreeView::paintEvent(pe);
 }
+
+void TaskEditorView::drawRow(QPainter *painter, const QStyleOptionViewItem &option,
+                        const QModelIndex &index) const
+{
+    QStyleOptionViewItemV2 opt = option;
+    const int y = option.rect.y();
+    const QModelIndex parent = index.parent();
+    const QModelIndex current = currentIndex();
+    const QStyle::State state = opt.state;
+
+    const int left = 0;
+    const int right = model()->columnCount()-1;
+
+    const bool alternate = true;
+    const bool enabled = (state & QStyle::State_Enabled) != 0;
+    const bool allColumnsShowFocus = true;
+
+    bool currentRowHasFocus = false;
+    if (allColumnsShowFocus && current.isValid()) { // check if the focus index is before or after the visible columns
+        const int r = index.row();
+        for (int c = 0; c < left && !currentRowHasFocus; ++c)
+            currentRowHasFocus = (index.sibling(r, c) == current);
+        for (int c = right; c < header()->count() && !currentRowHasFocus; ++c)
+            currentRowHasFocus = (index.sibling(r, c) == current);
+    }
+
+    int width, height = option.rect.height();
+    int position;
+    int headerSection;
+    QModelIndex modelIndex;
+
+    QBrush fill;
+    for (int headerIndex = left; headerIndex <= right; ++headerIndex) {
+        headerSection = header()->logicalIndex(headerIndex);
+        if (header()->isSectionHidden(headerSection))
+            continue;
+        position = columnViewportPosition(headerSection);
+        width = header()->sectionSize(headerSection);
+        modelIndex = d->model->index(index.row(), headerSection, parent);
+        opt.state = state;
+        if (!modelIndex.isValid()) {
+            opt.rect.setRect(position, y, width, height);
+            painter->fillRect(opt.rect, palette().brush(QPalette::Base));
+            continue;
+        }
+
+        if (selectionModel()->isSelected(modelIndex))
+            opt.state |= QStyle::State_Selected;
+
+        if ((current == modelIndex) && hasFocus()) {
+            if (allColumnsShowFocus)
+                currentRowHasFocus = true;
+            else
+                opt.state |= QStyle::State_HasFocus;
+        }
+
+        if (enabled) {
+            QPalette::ColorGroup cg;
+            if ((d->model->flags(index) & Qt::ItemIsEnabled) == 0) {
+                opt.state &= ~QStyle::State_Enabled;
+                cg = QPalette::Disabled;
+            } else {
+                cg = QPalette::Active;
+            }
+            opt.palette.setCurrentColorGroup(cg);
+        }
+
+        if (alternate) {
+            if (index.row() & 1) {
+                opt.features |= QStyleOptionViewItemV2::Alternate;
+                fill = opt.palette.brush(QPalette::AlternateBase);
+            } else {
+                opt.features &= ~QStyleOptionViewItemV2::Alternate;
+                fill = opt.palette.brush(QPalette::Base);
+            }
+        }
+
+        if (headerSection == 0) {
+            const int i = 0;
+            //= d->indentationForItem(d->current);
+            opt.rect.setRect(i + position, y, width - i, height);
+            painter->fillRect(opt.rect, fill);
+            QRect branches(position, y, i, height);
+            QPalette::ColorGroup cg = opt.state & QStyle::State_Enabled
+                              ? QPalette::Active : QPalette::Disabled;
+            if (cg == QPalette::Active && !(opt.state & QStyle::State_Active))
+                cg = QPalette::Inactive;
+
+            painter->fillRect(branches, fill);
+            drawBranches(painter, branches, index);
+        } 
+        else {
+            opt.rect.setRect(position, y, width, height);
+            painter->fillRect(opt.rect, fill);
+        }
+
+        if (selectionModel()->isSelected(modelIndex)) {
+            opt.state |= QStyle::State_Selected;
+            //opt.font.setBold(true);
+
+            if ( opt.state & QStyle::State_Active ) {
+                painter->fillRect(opt.rect, QColor("#3875D7"));
+                opt.palette.setColor(QPalette::Active, QPalette::Highlight, "#3875D7");
+            }
+            else {
+                painter->fillRect(opt.rect, QColor("#A8B7CE"));
+                opt.palette.setColor(QPalette::Inactive, QPalette::Highlight, "#A8B7CE");
+            }
+
+            opt.palette.setColor(QPalette::HighlightedText, "#FFFFFF");
+        }
+
+        itemDelegate()->paint(painter, opt, modelIndex);
+    }
+}

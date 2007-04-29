@@ -27,6 +27,7 @@ private slots:
 
 protected:
     virtual void paintEvent(QPaintEvent * pe);
+    virtual void drawRow(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
 
 private:
 	class Private;

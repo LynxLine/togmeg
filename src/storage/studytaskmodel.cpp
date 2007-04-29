@@ -174,7 +174,7 @@ QVariant StudyTaskModel::data(const QModelIndex & index, int role) const
     }
 
     if (role == Qt::TextAlignmentRole && index.column() == IdColumn) {
-        return Qt::AlignRight;
+        return int(Qt::AlignRight | Qt::AlignVCenter);
     }
 
     return QVariant();

@@ -52,11 +52,6 @@ CategoryView::CategoryView(QWidget * parent)
             this, SLOT(saveExpandState(const QModelIndex &)));
     connect(this, SIGNAL(collapsed(const QModelIndex &)),
             this, SLOT(saveCollapseState(const QModelIndex &)));
-
-    connect(this, SIGNAL(clicked(const QModelIndex &)),
-            this, SLOT(activateItem(const QModelIndex &)));
-    connect(this, SIGNAL(activated(const QModelIndex &)),
-            this, SLOT(activateItem(const QModelIndex &)));
 }
 
 CategoryView::~CategoryView()
@@ -240,4 +235,10 @@ void CategoryView::activateItem(const QModelIndex & index)
     }
 
     emit categoryActivated(item->compositeId());
+}
+
+void CategoryView::currentChanged(const QModelIndex & current, const QModelIndex & previous)
+{
+    QTreeView::currentChanged(current, previous);
+    activateItem(current);
 }

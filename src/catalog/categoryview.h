@@ -30,8 +30,7 @@ signals:
     void categoryActivated(QString id);
 
 protected:
-    //virtual void drawBranches(QPainter *, const QRect &, const QModelIndex &) const;
-    
+    virtual void currentChanged(const QModelIndex & current, const QModelIndex & previous);
     virtual void drawRow(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
 
 private slots:
