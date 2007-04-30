@@ -49,9 +49,12 @@ TaskEditorView::TaskEditorView(QWidget * parent)
     setAllColumnsShowFocus(true);
     setItemDelegate(new TaskEditorItemDelegate(this));
     setEditTriggers(
+            QAbstractItemView::EditKeyPressed
+            /*
             QAbstractItemView::DoubleClicked |
             QAbstractItemView::EditKeyPressed |
             QAbstractItemView::AnyKeyPressed
+            */
         );
 
     setContextMenuPolicy(Qt::CustomContextMenu);
@@ -127,6 +130,17 @@ void TaskEditorView::paintEvent(QPaintEvent * pe)
 #endif
 
     QTreeView::paintEvent(pe);
+}
+
+void TaskEditorView::currentChanged(const QModelIndex & current, const QModelIndex & previous)
+{
+    QTreeView::currentChanged(current, previous);
+    if ( current.column() == StudyTaskModel::QuestionColumn ||
+         current.column() == StudyTaskModel::AnswerColumn)
+        edit(current);
+    else {
+        setCurrentIndex( model()->index( current.row(), StudyTaskModel::QuestionColumn ) );
+    }
 }
 
 void TaskEditorView::drawRow(QPainter *painter, const QStyleOptionViewItem &option,
