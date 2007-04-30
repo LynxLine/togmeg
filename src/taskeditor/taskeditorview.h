@@ -46,9 +46,9 @@ public:
     void updateEditorGeometry(QWidget * editor, const QStyleOptionViewItem & option, const QModelIndex & index) const {
         QStyleOptionViewItemV2 opt = option;
         opt.rect.setRect(opt.rect.x()+1,
-                         opt.rect.y(),
+                         opt.rect.y()+2,
                          opt.rect.width()-1,
-                         opt.rect.height()-1);
+                         opt.rect.height()-3);
         QItemDelegate::updateEditorGeometry(editor, opt, index);
 
         QPalette vpalette = view->palette();

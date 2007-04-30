@@ -240,18 +240,19 @@ void TaskEditorView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
             opt.palette.setColor(QPalette::Inactive, QPalette::Highlight, "#A8B7CE");
             opt.palette.setColor(QPalette::HighlightedText, "#FFFFFF");
 
-            /*
+            
             if (current == modelIndex) {
                 QRect r = opt.rect;
                 r.setRect(r.x()+1,
-                          r.y()+1,
-                          r.width()-2,
-                          r.height()-2
+                          r.y(),
+                          r.width()-1,
+                          r.height()-1
                 );
-                painter->fillRect(r, QColor("#FFFFFF"));
+                QColor c = index.row() & 1 ? 
+                            opt.palette.color(QPalette::AlternateBase) : 
+                            opt.palette.color(QPalette::Base);
+                painter->fillRect(r, c);
             }
-            */
-
         }
 
 
