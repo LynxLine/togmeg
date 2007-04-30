@@ -132,8 +132,6 @@ void TaskEditorView::paintEvent(QPaintEvent * pe)
 void TaskEditorView::drawRow(QPainter *painter, const QStyleOptionViewItem &option,
                         const QModelIndex &index) const
 {
-    painter->setRenderHint(QPainter::Antialiasing);
-
     QStyleOptionViewItemV2 opt = option;
     const int y = option.rect.y();
     const QModelIndex parent = index.parent();
@@ -207,12 +205,28 @@ void TaskEditorView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
         opt.rect.setRect(position, y, width, height);
         painter->fillRect(opt.rect, fill);
 
+        {
+            QRect r = opt.rect;
+            painter->setPen(QPen(QColor("#CCCCCC"), 1, Qt::SolidLine));
+            painter->drawLine(r.x(),           r.y()+r.height()-1, 
+                              r.x()+r.width(), r.y()+r.height()-1
+            );
+
+            if (headerIndex) {
+                painter->drawLine(r.x(), r.y(), 
+                                  r.x(), r.y()+r.height()
+                );
+            }
+        }
+
+
         if (selectionModel()->isSelected(modelIndex)) {
-            painter->fillRect(opt.rect, QColor("#A8B7CE"));
+            painter->fillRect(opt.rect, QColor("#BFC8D5"));
 
             opt.palette.setColor(QPalette::Inactive, QPalette::Highlight, "#A8B7CE");
             opt.palette.setColor(QPalette::HighlightedText, "#FFFFFF");
 
+            /*
             if (current == modelIndex) {
                 QRect r = opt.rect;
                 r.setRect(r.x()+1,
@@ -222,7 +236,10 @@ void TaskEditorView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
                 );
                 painter->fillRect(r, QColor("#FFFFFF"));
             }
+            */
+
         }
+
 
         itemDelegate()->paint(painter, opt, modelIndex);
     }

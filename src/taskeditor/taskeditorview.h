@@ -40,15 +40,21 @@ class TaskEditorItemDelegate : public QItemDelegate
 {
 Q_OBJECT
 public:
-    TaskEditorItemDelegate(QObject * parent = 0):QItemDelegate(parent) {;}
+    TaskEditorItemDelegate(TaskEditorView * parent = 0):QItemDelegate(parent),view(parent) {;}
     
     void updateEditorGeometry(QWidget * editor, const QStyleOptionViewItem & option, const QModelIndex & index) const {
         QStyleOptionViewItemV2 opt = option;
         opt.rect.setRect(opt.rect.x()+1,
-                         opt.rect.y()+1,
-                         opt.rect.width()-2,
-                         opt.rect.height()-2);
+                         opt.rect.y(),
+                         opt.rect.width()-1,
+                         opt.rect.height()-1);
         QItemDelegate::updateEditorGeometry(editor, opt, index);
+
+        QPalette vpalette = view->palette();
+        QPalette palette = editor->palette();
+        if (index.row() & 1) palette.setBrush(QPalette::Base, vpalette.brush(QPalette::AlternateBase));
+        else palette.setBrush(QPalette::Base, vpalette.brush(QPalette::Base));
+        editor->setPalette(palette);
     }
 
     virtual QSize sizeHint(const QStyleOptionViewItem & option, const QModelIndex & index ) const {
@@ -57,6 +63,7 @@ public:
         return s;
     }
 
+    TaskEditorView * view;
 };
 
 #endif // TASKEDITORVIEW_H
