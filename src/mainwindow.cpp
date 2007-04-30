@@ -67,6 +67,7 @@ MainWindow::MainWindow()
         palette.setColor(QPalette::Inactive, QPalette::Highlight, "#A4B4CB");
         palette.setColor(QPalette::Active,   QPalette::HighlightedText, "#FFFFFF");
         palette.setColor(QPalette::Inactive, QPalette::HighlightedText, "#FFFFFF");
+        palette.setColor(QPalette::Disabled, QPalette::HighlightedText, "#FFFFFF");
         setPalette( palette );
     }
 
@@ -93,6 +94,10 @@ MainWindow::MainWindow()
 
 #ifdef Q_WS_WIN
     d->stack->setFont( baseFont() );
+#endif
+
+#ifdef Q_WS_MAC
+    d->stack->setFont( baseFont(0.95) );
 #endif
 
     setCentralWidget( d->stack );

@@ -30,6 +30,7 @@ QuestionWidget::QuestionWidget(QWidget * parent)
 
     d->l_question = new QLabel;
     d->l_question->setAlignment(Qt::AlignCenter);
+    d->l_question->setFont( MainWindow::baseFont(1.5, QFont::Bold) );
 
     layout->addItem(new QSpacerItem(10,10, QSizePolicy::Minimum, QSizePolicy::Expanding));
     layout->addWidget(d->l_question);
