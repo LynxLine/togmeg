@@ -6,6 +6,7 @@
 #define TASKEDITORVIEW_H
 
 #include <QTreeView>
+#include "crammero.h"
 
 /*!
  * \class TaskEditorView
@@ -55,6 +56,7 @@ public:
         QPalette palette = editor->palette();
         if (index.row() & 1) palette.setBrush(QPalette::Base, vpalette.brush(QPalette::AlternateBase));
         else palette.setBrush(QPalette::Base, vpalette.brush(QPalette::Base));
+        editor->setStyle( &app::cleanStyle );
         editor->setPalette(palette);
     }
 

@@ -7,6 +7,8 @@
 #include "crammero.h"
 using namespace app;
 
+QWindowsStyle app::cleanStyle;
+
 QString app::storagePath() {
     QString sep = QDir::separator();
     QString _storagePath = QDir::homePath();
