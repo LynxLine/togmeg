@@ -3,8 +3,10 @@
 //
 
 #include <QtGui>
+#include "crammero.h"
 #include "categoryview.h"
 #include "categorymodel.h"
+#include "itemdelegate.h"
 #include "mainwindow.h"
 
 class CategoryView::Private
@@ -22,7 +24,9 @@ CategoryView::CategoryView(QWidget * parent)
     setFrameStyle(QFrame::NoFrame);
     setUniformRowHeights(true);
     setAutoFillBackground(true);
+    //setItemDelegate(new CategoryItemDelegate(this));
     setItemDelegate(new CategoryItemDelegate(this));
+    setStyle( &app::cleanStyle );
     setIndentation(20);
     setAnimated(false);
     header()->hide();
@@ -101,7 +105,9 @@ void CategoryView::drawRow(QPainter * painter, const QStyleOptionViewItem &optio
 
     if (selectionModel()->isSelected(modelIndex)) {
         opt.state |= QStyle::State_Selected;
+        
         opt.font.setBold(true);
+        opt.fontMetrics = QFontMetrics( opt.font );
 
         if ( opt.state & QStyle::State_Active ) {
             QLinearGradient linearGradient(QPointF(0, y), QPointF(0, y+height));
@@ -125,8 +131,8 @@ void CategoryView::drawRow(QPainter * painter, const QStyleOptionViewItem &optio
     
     CategoryModel * categoryModel = (CategoryModel *)model();
     CategoryItem * item = categoryModel->item(index);
-    int x = item->level() * indentation();
 
+    int x = item->level() * indentation();
     opt.rect.setRect(x, y, width - x, height);
     
     QRect branches(0, y, x, height);
@@ -241,4 +247,81 @@ void CategoryView::currentChanged(const QModelIndex & current, const QModelIndex
 {
     QTreeView::currentChanged(current, previous);
     activateItem(current);
+}
+
+//
+// Item Delegate
+//
+
+QSize CategoryItemDelegate::sizeHint(const QStyleOptionViewItem & o, const QModelIndex & index) const
+{
+    QSize s;
+    s.setHeight(20);
+    QFontMetrics fm(o.font);
+    s.setWidth(fm.width( index.data(Qt::DisplayRole).toString() ));
+    return s; 
+}
+
+void CategoryItemDelegate::paint(QPainter * p, const QStyleOptionViewItem & o, const QModelIndex & index) const
+{
+    p->save();
+
+    //icon
+    QPixmap pm;
+    QRect drect;
+
+    QVariant value = index.data(Qt::DecorationRole);
+    if (value.isValid()) {
+        if (value.type() == QVariant::Pixmap) {
+            pm = qvariant_cast<QPixmap>(value);
+            drect = QRect(QPoint(o.rect.x(), o.rect.y()), pm.size());
+        }
+    }
+    p->drawPixmap(drect, pm);
+
+    //text color
+    QPalette::ColorGroup cg = o.state & QStyle::State_Enabled ? QPalette::Normal : QPalette::Disabled;
+    if (cg == QPalette::Normal && !(o.state & QStyle::State_Active)) cg = QPalette::Inactive;
+    
+    if (o.state & QStyle::State_Selected) 
+        p->setPen(o.palette.color(cg, QPalette::HighlightedText));
+    else  p->setPen(o.palette.color(cg, QPalette::Text));
+
+    int margin =3;
+    QRect r = o.rect;
+    r.adjust(drect.width()+margin,0, -margin,0);
+
+    p->setFont( o.font );
+    QString text = index.data(Qt::DisplayRole).toString();
+    text = o.fontMetrics.elidedText(text, Qt::ElideRight, r.width());
+    p->drawText( r, o.displayAlignment, text);
+
+    p->restore();
+}
+
+QWidget * CategoryItemDelegate::createEditor(QWidget * parent, const QStyleOptionViewItem & o, const QModelIndex & i) const
+{
+    Q_UNUSED(i);
+    Q_UNUSED(o);
+    QLineEdit * le = new QLineEdit(parent);
+    le->setFrame(false);
+    return le;
+}
+
+void CategoryItemDelegate::updateEditorGeometry(QWidget * editor, const QStyleOptionViewItem & o, const QModelIndex & i) const
+{
+    QPixmap pm;
+    QRect drect;
+
+    QVariant value = i.data(Qt::DecorationRole);
+    if (value.isValid()) {
+        if (value.type() == QVariant::Pixmap) {
+            pm = qvariant_cast<QPixmap>(value);
+            drect = QRect(QPoint(o.rect.x(), o.rect.y()), pm.size());
+        }
+    }
+
+    QRect r = o.rect;
+    r.adjust(drect.width()+2,2, -2,-2);
+    editor->setGeometry( r );
 }

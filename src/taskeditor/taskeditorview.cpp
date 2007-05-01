@@ -33,6 +33,8 @@ TaskEditorView::TaskEditorView(QWidget * parent)
     setAlternatingRowColors(true);
     setFrameStyle(QFrame::NoFrame);
     setAllColumnsShowFocus(true);
+    verticalScrollBar()->setFixedWidth(15);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     setItemDelegate(new TaskEditorItemDelegate(this));
     setEditTriggers(
             QAbstractItemView::EditKeyPressed
