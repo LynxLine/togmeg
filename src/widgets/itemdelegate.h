@@ -21,6 +21,9 @@ public:
     virtual void setEditorData(QWidget * editor, const QModelIndex & i) const;
     virtual void setModelData(QWidget * editor, QAbstractItemModel * model, const QModelIndex & i) const;
 
+signals:
+    void returnPressed();
+
 private slots:
     void commitDataAndCloseEditor(QWidget * editor);
 };

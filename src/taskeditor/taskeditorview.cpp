@@ -13,6 +13,7 @@ class TaskEditorView::Private
 {
 public:
     QPointer<StudyTaskModel> model;
+    QPointer<TaskEditorItemDelegate> delegate;
     QPointer<QMenu> contextMenu;
     QPointer<HeaderView> header;
 
@@ -36,7 +37,6 @@ TaskEditorView::TaskEditorView(QWidget * parent)
     setAllColumnsShowFocus(true);
     verticalScrollBar()->setFixedWidth(15);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-    setItemDelegate(new TaskEditorItemDelegate(this));
     setStyle( &app::cleanStyle );
     setEditTriggers(
             QAbstractItemView::EditKeyPressed
@@ -46,6 +46,10 @@ TaskEditorView::TaskEditorView(QWidget * parent)
             QAbstractItemView::AnyKeyPressed
             */
         );
+
+    d->delegate = new TaskEditorItemDelegate(this);
+    connect(d->delegate, SIGNAL(returnPressed()), this, SLOT(editNextItem()));
+    setItemDelegate( d->delegate );
 
     setContextMenuPolicy(Qt::CustomContextMenu);
     connect(this, SIGNAL(customContextMenuRequested(const QPoint &)), 
@@ -115,32 +119,75 @@ void TaskEditorView::paintEvent(QPaintEvent * pe)
 
 void TaskEditorView::keyPressEvent(QKeyEvent * ke)
 {
-/*
-    qDebug() << ke->key();
-    if (ke->key() == Qt::Key_Tab) {
+    if (ke->key() == Qt::Key_Up) {
+        int previousRow = currentIndex().row();
+        if (previousRow <= 0) return;
+        previousRow--;
+
+        QModelIndex previous = model()->index( previousRow, currentIndex().column() );
+        setCurrentIndex(previous);
     }
-    else if (ke->key() == Qt::Key_Backtab) {
+    else if (ke->key() == Qt::Key_Down) {
+        int nextRow = currentIndex().row();
+        if (nextRow >= model()->rowCount()-1) return;
+        nextRow++;
+
+        QModelIndex next = model()->index( nextRow, currentIndex().column() );
+        setCurrentIndex(next);
     }
     else
-    */
         QTreeView::keyPressEvent(ke);
+}
+
+void TaskEditorView::editNextItem()
+{
+    if ( !currentIndex().isValid() ) return;
+    int nextRow = currentIndex().row();
+    if ( currentIndex().column() == StudyTaskModel::QuestionColumn) {
+        QModelIndex next = model()->index( nextRow, StudyTaskModel::AnswerColumn );
+        setCurrentIndex(next);
+    }
+    else if ( currentIndex().column() == StudyTaskModel::AnswerColumn) {
+        if (nextRow < model()->rowCount()-1)
+        nextRow++;
+
+        QModelIndex next = model()->index( nextRow, StudyTaskModel::QuestionColumn );
+        setCurrentIndex(next);
+    }
+}
+
+void TaskEditorView::editPreviousItem()
+{
+    if ( !currentIndex().isValid() ) return;
+    int previousRow = currentIndex().row();
+    if ( currentIndex().column() == StudyTaskModel::QuestionColumn) {
+        if (previousRow > 0)
+            previousRow--;
+
+        QModelIndex previous = model()->index( previousRow, StudyTaskModel::AnswerColumn );
+        setCurrentIndex(previous);
+    }
+    else if ( currentIndex().column() == StudyTaskModel::AnswerColumn) {
+        QModelIndex previous = model()->index( previousRow, StudyTaskModel::QuestionColumn );
+        setCurrentIndex(previous);
+    }
 }
 
 void TaskEditorView::closeEditor(QWidget * editor, QAbstractItemDelegate::EndEditHint hint)
 {
-    qDebug() << "TaskEditorView::closeEditor()" << hint;
-    if (hint == QAbstractItemDelegate::EditNextItem || hint == QAbstractItemDelegate::EditPreviousItem) {
+    //qDebug() << "TaskEditorView::closeEditor()" << hint;
+
+    if (hint == QAbstractItemDelegate::EditNextItem) {
         QTreeView::closeEditor(editor, QAbstractItemDelegate::NoHint);
-        qDebug() << "1";
-        QModelIndex current = currentIndex();
-        if ( current.column() == StudyTaskModel::QuestionColumn) {
-            QModelIndex next = model()->index( current.row(), StudyTaskModel::AnswerColumn );
-            setCurrentIndex(next);
-        }
-        else if ( current.column() == StudyTaskModel::AnswerColumn) {
-            QModelIndex next = model()->index( current.row(), StudyTaskModel::QuestionColumn );
-            setCurrentIndex(next);
-        }
+        editNextItem();
+    }
+    else if (hint == QAbstractItemDelegate::EditPreviousItem) {
+        QTreeView::closeEditor(editor, QAbstractItemDelegate::NoHint);
+        editPreviousItem();
+    }
+    else if (hint == QAbstractItemDelegate::RevertModelCache) {
+        QTreeView::closeEditor(editor, QAbstractItemDelegate::RevertModelCache);
+        QMetaObject::invokeMethod(this, "edit", Qt::QueuedConnection, Q_ARG(QModelIndex, currentIndex()));
     }
     else
         QTreeView::closeEditor(editor, hint);
@@ -148,14 +195,15 @@ void TaskEditorView::closeEditor(QWidget * editor, QAbstractItemDelegate::EndEdi
 
 void TaskEditorView::currentChanged(const QModelIndex & current, const QModelIndex & previous)
 {
-    qDebug() << "currentChanged()" << current;
     QTreeView::currentChanged(current, previous);
+    if ( !current.isValid() ) return;
+
     if ( current.column() == StudyTaskModel::QuestionColumn ||
          current.column() == StudyTaskModel::AnswerColumn)
-        QMetaObject::invokeMethod(this, "edit", Qt::QueuedConnection, Q_ARG(QModelIndex, current));
+        edit(current);
     else {
         QModelIndex index = model()->index( current.row(), StudyTaskModel::QuestionColumn );
-        QMetaObject::invokeMethod(this, "setCurrentIndex", Qt::QueuedConnection, Q_ARG(QModelIndex, index));
+        setCurrentIndex(index);
     }
 }
 
@@ -173,16 +221,6 @@ void TaskEditorView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
 
     const bool alternate = true;
     const bool enabled = (state & QStyle::State_Enabled) != 0;
-    const bool allColumnsShowFocus = true;
-
-    bool currentRowHasFocus = false;
-    if (allColumnsShowFocus && current.isValid()) { // check if the focus index is before or after the visible columns
-        const int r = index.row();
-        for (int c = 0; c < left && !currentRowHasFocus; ++c)
-            currentRowHasFocus = (index.sibling(r, c) == current);
-        for (int c = right; c < header()->count() && !currentRowHasFocus; ++c)
-            currentRowHasFocus = (index.sibling(r, c) == current);
-    }
 
     int width, height = option.rect.height();
     int position;
@@ -202,13 +240,6 @@ void TaskEditorView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
             opt.rect.setRect(position, y, width, height);
             painter->fillRect(opt.rect, palette().brush(QPalette::Base));
             continue;
-        }
-
-        if ((current == modelIndex) && hasFocus()) {
-            if (allColumnsShowFocus)
-                currentRowHasFocus = true;
-            else
-                opt.state |= QStyle::State_HasFocus;
         }
 
         if (enabled) {
@@ -256,7 +287,6 @@ void TaskEditorView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
             opt.palette.setColor(QPalette::Inactive, QPalette::Highlight, "#A8B7CE");
             opt.palette.setColor(QPalette::HighlightedText, "#FFFFFF");
 
-            
             if (current == modelIndex) {
                 QRect r = opt.rect;
                 r.setRect(r.x()+1,
@@ -268,7 +298,21 @@ void TaskEditorView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
                             opt.palette.color(QPalette::AlternateBase) : 
                             opt.palette.color(QPalette::Base);
                 painter->fillRect(r, c);
+
+                painter->save();
+                painter->setPen(QPen(QColor("#A8B7CE"), 1, Qt::SolidLine));
+                {
+                    int x = r.x();
+                    int y = r.y();
+                    int w = r.width();
+                    int h = r.height()-1;
+                    
+                    painter->drawLine(x,y, x+w,y);
+                    painter->drawLine(x,y+h, x+w,y+h);
+                }
+                painter->restore();
             }
+
         }
 
 
@@ -285,7 +329,7 @@ QSize TaskEditorItemDelegate::sizeHint(const QStyleOptionViewItem & o, const QMo
     QSize s;
     s.setHeight(20);
     QFontMetrics fm(o.font);
-    s.setWidth(fm.width( index.data(Qt::DisplayRole).toString() ));
+    s.setWidth(fm.width( index.data(Qt::DisplayRole).toString()+10 ));
     return s; 
 }
 
@@ -314,7 +358,7 @@ void TaskEditorItemDelegate::paint(QPainter * p, const QStyleOptionViewItem & o,
         p->setPen(o.palette.color(cg, QPalette::HighlightedText));
     else  p->setPen(o.palette.color(cg, QPalette::Text));
 
-    int margin =3;
+    int margin =4;
     QRect r = o.rect;
     r.adjust(drect.width()+margin,0, -margin,0);
 
@@ -328,11 +372,20 @@ void TaskEditorItemDelegate::paint(QPainter * p, const QStyleOptionViewItem & o,
 
 QWidget * TaskEditorItemDelegate::createEditor(QWidget * parent, const QStyleOptionViewItem & o, const QModelIndex & i) const
 {
-    Q_UNUSED(i);
     Q_UNUSED(o);
     QLineEdit * le = new QLineEdit(parent);
     le->setStyle( &app::cleanStyle );
     le->setFrame(false);
+    {
+        QPalette palette = le->palette();
+        
+        QBrush fill;
+        if (i.row() & 1)  fill = parent->palette().brush(QPalette::AlternateBase);
+        else fill = parent->palette().brush(QPalette::Base);
+        
+        palette.setBrush(QPalette::Base, fill);
+        le->setPalette(palette);
+    }
     return le;
 }
 
@@ -352,4 +405,13 @@ void TaskEditorItemDelegate::updateEditorGeometry(QWidget * editor, const QStyle
     QRect r = o.rect;
     r.adjust(drect.width()+2,2, -2,-2);
     editor->setGeometry( r );
+}
+
+void TaskEditorItemDelegate::setEditorData(QWidget * editor, const QModelIndex & i) const
+{
+    QVariant v = i.data(Qt::EditRole);
+    QLineEdit * le = qobject_cast<QLineEdit *>(editor);
+    if (!le) return;
+
+    le->setText(v.toString());
 }

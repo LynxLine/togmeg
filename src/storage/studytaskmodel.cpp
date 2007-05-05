@@ -188,6 +188,15 @@ bool StudyTaskModel::setData(const QModelIndex & index, const QVariant & value, 
     if (role == Qt::DisplayRole || role == Qt::EditRole) {
         if ( index.column() == QuestionColumn ) d->entries[ index.row() ].question = value.toString();
         if ( index.column() == AnswerColumn   ) d->entries[ index.row() ].answer   = value.toString();
+
+        //analize last row
+        QModelIndex lastQ = this->index( rowCount()-1, QuestionColumn);
+        QModelIndex lastA = this->index( rowCount()-1, AnswerColumn);
+        if (!data(lastQ, Qt::DisplayRole).toString().isEmpty() ||
+            !data(lastA, Qt::DisplayRole).toString().isEmpty()) {
+            addNewEntry();
+        }
+
         return true;
     }
 

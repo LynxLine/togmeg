@@ -34,6 +34,8 @@ protected:
     virtual void drawRow(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
 
 protected slots:
+    void editNextItem();
+    void editPreviousItem();
     void closeEditor(QWidget * editor, QAbstractItemDelegate::EndEditHint hint);
 
 private:
@@ -56,6 +58,9 @@ public:
     //edit
     virtual QWidget * createEditor(QWidget * parent, const QStyleOptionViewItem & o, const QModelIndex & i) const;
     virtual void updateEditorGeometry(QWidget * editor, const QStyleOptionViewItem & o, const QModelIndex & i) const;
+
+    //data
+    virtual void setEditorData(QWidget * editor, const QModelIndex & i) const;
 };
 
 #endif // TASKEDITORVIEW_H
