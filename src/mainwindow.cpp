@@ -97,7 +97,7 @@ MainWindow::MainWindow()
 #endif
 
 #ifdef Q_WS_MAC
-    d->stack->setFont( baseFont(0.95) );
+    d->stack->setFont( baseFont(0.97) );
 #endif
 
     setCentralWidget( d->stack );

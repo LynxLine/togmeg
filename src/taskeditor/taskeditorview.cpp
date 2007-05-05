@@ -329,7 +329,7 @@ QSize TaskEditorItemDelegate::sizeHint(const QStyleOptionViewItem & o, const QMo
     QSize s;
     s.setHeight(20);
     QFontMetrics fm(o.font);
-    s.setWidth(fm.width( index.data(Qt::DisplayRole).toString()+10 ));
+    s.setWidth(fm.width( index.data(Qt::DisplayRole).toString())+10 );
     return s; 
 }
 
