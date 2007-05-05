@@ -24,7 +24,6 @@ CategoryView::CategoryView(QWidget * parent)
     setFrameStyle(QFrame::NoFrame);
     setUniformRowHeights(true);
     setAutoFillBackground(true);
-    //setItemDelegate(new CategoryItemDelegate(this));
     setItemDelegate(new CategoryItemDelegate(this));
     setStyle( &app::cleanStyle );
     setIndentation(20);

@@ -6,6 +6,7 @@
 #define CRAMMERO_H
 
 #include <QString>
+#include <QWindowsStyle>
 
 namespace app {
 

@@ -5,6 +5,8 @@
 #ifndef CategoryModel_H
 #define CategoryModel_H
 
+#include <QPixmap>
+#include <QDomDocument>
 #include <QAbstractItemModel>
 
 /*!

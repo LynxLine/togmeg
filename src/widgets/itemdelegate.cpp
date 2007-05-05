@@ -28,6 +28,7 @@ bool ItemDelegate::eventFilter(QObject * o, QEvent * e)
         return false;
 
     if (e->type() == QEvent::KeyPress) {
+        qDebug() << "ItemDelegate::eventFilter" << static_cast<QKeyEvent *>(e)->key();
         switch (static_cast<QKeyEvent *>(e)->key()) {
         case Qt::Key_Tab:
             emit commitData(editor);

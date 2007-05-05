@@ -3,6 +3,7 @@
 //
 
 #include <QtGui>
+#include "crammero.h"
 #include "mainwindow.h"
 #include "headerview.h"
 #include "taskeditorview.h"
@@ -36,6 +37,7 @@ TaskEditorView::TaskEditorView(QWidget * parent)
     verticalScrollBar()->setFixedWidth(15);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     setItemDelegate(new TaskEditorItemDelegate(this));
+    setStyle( &app::cleanStyle );
     setEditTriggers(
             QAbstractItemView::EditKeyPressed
             /*
@@ -81,8 +83,15 @@ void TaskEditorView::openTask(QString taskId)
 {
     d->model->load(taskId);
     setFocus();
-    if ( d->model->rowCount() )
-        setCurrentIndex( d->model->index(0,0) );
+    QTimer::singleShot(350, this, SLOT(toFirstRow()));
+}
+
+void TaskEditorView::toFirstRow()
+{
+    if ( d->model->rowCount() ) {
+        QModelIndex index = model()->index(0,0);
+        QMetaObject::invokeMethod(this, "setCurrentIndex", Qt::QueuedConnection, Q_ARG(QModelIndex, index));
+    }
 }
 
 void TaskEditorView::addNewEntry()
@@ -104,14 +113,49 @@ void TaskEditorView::paintEvent(QPaintEvent * pe)
     QTreeView::paintEvent(pe);
 }
 
+void TaskEditorView::keyPressEvent(QKeyEvent * ke)
+{
+/*
+    qDebug() << ke->key();
+    if (ke->key() == Qt::Key_Tab) {
+    }
+    else if (ke->key() == Qt::Key_Backtab) {
+    }
+    else
+    */
+        QTreeView::keyPressEvent(ke);
+}
+
+void TaskEditorView::closeEditor(QWidget * editor, QAbstractItemDelegate::EndEditHint hint)
+{
+    qDebug() << "TaskEditorView::closeEditor()" << hint;
+    if (hint == QAbstractItemDelegate::EditNextItem || hint == QAbstractItemDelegate::EditPreviousItem) {
+        QTreeView::closeEditor(editor, QAbstractItemDelegate::NoHint);
+        qDebug() << "1";
+        QModelIndex current = currentIndex();
+        if ( current.column() == StudyTaskModel::QuestionColumn) {
+            QModelIndex next = model()->index( current.row(), StudyTaskModel::AnswerColumn );
+            setCurrentIndex(next);
+        }
+        else if ( current.column() == StudyTaskModel::AnswerColumn) {
+            QModelIndex next = model()->index( current.row(), StudyTaskModel::QuestionColumn );
+            setCurrentIndex(next);
+        }
+    }
+    else
+        QTreeView::closeEditor(editor, hint);
+}
+
 void TaskEditorView::currentChanged(const QModelIndex & current, const QModelIndex & previous)
 {
+    qDebug() << "currentChanged()" << current;
     QTreeView::currentChanged(current, previous);
     if ( current.column() == StudyTaskModel::QuestionColumn ||
          current.column() == StudyTaskModel::AnswerColumn)
-        edit(current);
+        QMetaObject::invokeMethod(this, "edit", Qt::QueuedConnection, Q_ARG(QModelIndex, current));
     else {
-        setCurrentIndex( model()->index( current.row(), StudyTaskModel::QuestionColumn ) );
+        QModelIndex index = model()->index( current.row(), StudyTaskModel::QuestionColumn );
+        QMetaObject::invokeMethod(this, "setCurrentIndex", Qt::QueuedConnection, Q_ARG(QModelIndex, index));
     }
 }
 
@@ -230,4 +274,82 @@ void TaskEditorView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
 
         itemDelegate()->paint(painter, opt, modelIndex);
     }
+}
+
+//
+// Item Delegate
+//
+
+QSize TaskEditorItemDelegate::sizeHint(const QStyleOptionViewItem & o, const QModelIndex & index) const
+{
+    QSize s;
+    s.setHeight(20);
+    QFontMetrics fm(o.font);
+    s.setWidth(fm.width( index.data(Qt::DisplayRole).toString() ));
+    return s; 
+}
+
+void TaskEditorItemDelegate::paint(QPainter * p, const QStyleOptionViewItem & o, const QModelIndex & index) const
+{
+    p->save();
+
+    //icon
+    QPixmap pm;
+    QRect drect;
+
+    QVariant value = index.data(Qt::DecorationRole);
+    if (value.isValid()) {
+        if (value.type() == QVariant::Pixmap) {
+            pm = qvariant_cast<QPixmap>(value);
+            drect = QRect(QPoint(o.rect.x(), o.rect.y()), pm.size());
+        }
+    }
+    p->drawPixmap(drect, pm);
+
+    //text color
+    QPalette::ColorGroup cg = o.state & QStyle::State_Enabled ? QPalette::Normal : QPalette::Disabled;
+    if (cg == QPalette::Normal && !(o.state & QStyle::State_Active)) cg = QPalette::Inactive;
+    
+    if (o.state & QStyle::State_Selected) 
+        p->setPen(o.palette.color(cg, QPalette::HighlightedText));
+    else  p->setPen(o.palette.color(cg, QPalette::Text));
+
+    int margin =3;
+    QRect r = o.rect;
+    r.adjust(drect.width()+margin,0, -margin,0);
+
+    p->setFont( o.font );
+    QString text = index.data(Qt::DisplayRole).toString();
+    text = o.fontMetrics.elidedText(text, Qt::ElideRight, r.width());
+    p->drawText( r, o.displayAlignment, text);
+
+    p->restore();
+}
+
+QWidget * TaskEditorItemDelegate::createEditor(QWidget * parent, const QStyleOptionViewItem & o, const QModelIndex & i) const
+{
+    Q_UNUSED(i);
+    Q_UNUSED(o);
+    QLineEdit * le = new QLineEdit(parent);
+    le->setStyle( &app::cleanStyle );
+    le->setFrame(false);
+    return le;
+}
+
+void TaskEditorItemDelegate::updateEditorGeometry(QWidget * editor, const QStyleOptionViewItem & o, const QModelIndex & i) const
+{
+    QPixmap pm;
+    QRect drect;
+
+    QVariant value = i.data(Qt::DecorationRole);
+    if (value.isValid()) {
+        if (value.type() == QVariant::Pixmap) {
+            pm = qvariant_cast<QPixmap>(value);
+            drect = QRect(QPoint(o.rect.x(), o.rect.y()), pm.size());
+        }
+    }
+
+    QRect r = o.rect;
+    r.adjust(drect.width()+2,2, -2,-2);
+    editor->setGeometry( r );
 }

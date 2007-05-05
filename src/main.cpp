@@ -51,6 +51,9 @@ int main( int argc, char ** argv )
     QCoreApplication::setOrganizationDomain("lynxline.com");
     QCoreApplication::setApplicationName("crammero");
 
+    //register types
+    qRegisterMetaType<QModelIndex>("QModelIndex");
+
     // prepare storage
     QDir storageDir;
     storageDir.mkpath(app::storagePath());

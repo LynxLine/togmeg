@@ -3,6 +3,7 @@
 //
 
 #include <QtGui>
+#include <QtXml>
 #include "crammero.h"
 #include "studytask.h"
 #include "datacontainer.h"
