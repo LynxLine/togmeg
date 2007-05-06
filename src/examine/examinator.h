@@ -37,6 +37,7 @@ public slots:
     void pause();
     void stop();
     void continuePlay();
+    void processAnswer(QString);
 
     void setCurrentTask(QString taskId);
 

@@ -134,7 +134,10 @@ QVariant TaskListModel::headerData(int section, Qt::Orientation orientation, int
     Q_UNUSED(section);
     Q_UNUSED(orientation);
     if (role == Qt::DisplayRole) {
-        return tr("Name");
+        return tr("Study Name");
+    }
+    else if (role == Qt::TextAlignmentRole) {
+        return Qt::AlignCenter;
     }
     return QVariant();
 }

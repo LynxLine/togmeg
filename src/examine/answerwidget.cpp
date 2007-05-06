@@ -30,6 +30,7 @@ AnswerWidget::AnswerWidget(QWidget * parent)
     d->le_answer->setAlignment(Qt::AlignCenter);
     connect(d->le_answer, SIGNAL(returnPressed()),
             this,           SLOT(returnPressed()));
+    setFocusProxy( d->le_answer );
 
     layout->addItem(new QSpacerItem(10,10, QSizePolicy::Minimum, QSizePolicy::Expanding));
     layout->addWidget(d->le_answer);

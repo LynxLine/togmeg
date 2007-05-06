@@ -28,6 +28,7 @@ public:
     StudyTaskModel(QObject * parent = 0L);
     static StudyTaskModel * instance();
     virtual ~StudyTaskModel();
+    QString taskId();
 
     Qt::ItemFlags flags(const QModelIndex &index) const;
     virtual int rowCount(const QModelIndex & parent = QModelIndex()) const;

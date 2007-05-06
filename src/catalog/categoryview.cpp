@@ -304,6 +304,7 @@ QWidget * CategoryItemDelegate::createEditor(QWidget * parent, const QStyleOptio
     Q_UNUSED(o);
     QLineEdit * le = new QLineEdit(parent);
     le->setFrame(false);
+    registerEditor(le);
     return le;
 }
 

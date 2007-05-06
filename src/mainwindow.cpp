@@ -498,8 +498,12 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
     d->viewMode = m;
     if (m == MainWindow::CatalogMode) {
         //first switch stack
-        if ( d->stack->currentWidget() != d->slide )
-        d->stack->setCurrentWidget( d->slide );
+        if ( d->stack->currentWidget() != d->slide ) {
+            d->stack->setCurrentWidget( d->slide );
+            //d->examineWidget->setEnabled(false);
+            //d->slide->setEnabled(true);
+            //d->slide->setFocus();
+        }
 
         //second switch slide
         d->slide->setCurrentWidget( d->catalogWidget );
@@ -509,8 +513,12 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
     }
     else if (m == MainWindow::TaskEditorMode) {
         //first switch stack
-        if ( d->stack->currentWidget() != d->slide )
-        d->stack->setCurrentWidget( d->slide );
+        if ( d->stack->currentWidget() != d->slide ) {
+            d->stack->setCurrentWidget( d->slide );
+            //d->examineWidget->setEnabled(false);
+            //d->slide->setEnabled(true);
+            //d->slide->setFocus();
+        }
 
         //second switch slide
         d->slide->setCurrentWidget( d->taskEditorWidget );
@@ -521,10 +529,20 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
     else if (m == MainWindow::ExamineMode) {
         //just switch stack
         d->stack->setCurrentWidget( d->examineWidget );
+        qDebug() << QApplication::focusWidget()->metaObject()->className();
+        //d->examineWidget->setEnabled(true);
+        //d->slide->setEnabled(false);
+        //d->examineWidget->setFocus();
     }
     else if (m == MainWindow::BrowserMode) {
         //just switch stack
-        d->stack->setCurrentWidget( d->slide );
+        if ( d->stack->currentWidget() != d->slide ) {
+            d->stack->setCurrentWidget( d->slide );
+            //d->examineWidget->setEnabled(false);
+            //d->slide->setEnabled(true);
+            //d->slide->setFocus();
+        }
+
         if ( d->slide->currentWidget() == d->catalogWidget ) {
             d->viewMode = MainWindow::CatalogMode;
 

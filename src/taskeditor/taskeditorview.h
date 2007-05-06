@@ -17,6 +17,7 @@ Q_OBJECT
 public:
     TaskEditorView(QWidget * parent = 0);
     virtual ~TaskEditorView();
+    QString currentTaskId();
 
 public slots:
     void addNewEntry();

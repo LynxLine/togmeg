@@ -83,17 +83,24 @@ void TaskEditorView::activateContextMenu(const QPoint & pos)
     d->contextMenu->popup( viewport()->mapToGlobal(pos) );
 }
 
+QString TaskEditorView::currentTaskId()
+{
+    return d->model->taskId();
+}
+
 void TaskEditorView::openTask(QString taskId)
 {
     d->model->load(taskId);
     setFocus();
-    QTimer::singleShot(350, this, SLOT(toFirstRow()));
+
+    if ( model()->rowCount() ) QTimer::singleShot(350, this, SLOT(toFirstRow()));
+    else                       QTimer::singleShot(350, this, SLOT(addNewEntry()));
 }
 
 void TaskEditorView::toFirstRow()
 {
     if ( d->model->rowCount() ) {
-        QModelIndex index = model()->index(0,0);
+        QModelIndex index = model()->index(0, StudyTaskModel::QuestionColumn);
         QMetaObject::invokeMethod(this, "setCurrentIndex", Qt::QueuedConnection, Q_ARG(QModelIndex, index));
     }
 }
@@ -119,6 +126,7 @@ void TaskEditorView::paintEvent(QPaintEvent * pe)
 
 void TaskEditorView::keyPressEvent(QKeyEvent * ke)
 {
+    //qDebug() << "TaskEditorView::keyPressEvent()";
     if (ke->key() == Qt::Key_Up) {
         int previousRow = currentIndex().row();
         if (previousRow <= 0) return;
@@ -195,6 +203,8 @@ void TaskEditorView::closeEditor(QWidget * editor, QAbstractItemDelegate::EndEdi
 
 void TaskEditorView::currentChanged(const QModelIndex & current, const QModelIndex & previous)
 {
+    qDebug() << "TaskEditorView::currentChanged" << current.row() << current.column();
+
     QTreeView::currentChanged(current, previous);
     if ( !current.isValid() ) return;
 
@@ -386,6 +396,8 @@ QWidget * TaskEditorItemDelegate::createEditor(QWidget * parent, const QStyleOpt
         palette.setBrush(QPalette::Base, fill);
         le->setPalette(palette);
     }
+    parent->setFocusProxy(le);
+    registerEditor(le);
     return le;
 }
 

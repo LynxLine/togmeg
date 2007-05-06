@@ -157,6 +157,13 @@ void Examinator::prepareNextQuestion()
     d->timeLine->start();
 }
 
+void Examinator::processAnswer(QString)
+{
+    d->timeLine->stop();
+    d->timeLine->setCurrentTime(0);
+    prepareNextQuestion();
+}
+
 Examinator::State Examinator::state()
 {
     return d->state;

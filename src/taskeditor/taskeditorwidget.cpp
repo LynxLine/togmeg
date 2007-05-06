@@ -52,5 +52,6 @@ void TaskEditorWidget::addNewEntry()
 
 void TaskEditorWidget::setCurrentTask(QString taskId)
 {
-    d->taskEditorView->openTask(taskId);
+    if (d->taskEditorView->currentTaskId() != taskId)
+        d->taskEditorView->openTask(taskId);
 }

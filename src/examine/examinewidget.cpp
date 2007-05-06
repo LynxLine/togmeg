@@ -75,6 +75,8 @@ ExamineWidget::ExamineWidget(QWidget * parent)
     answerLayout->addWidget(d->answerWidget, 50);
     answerLayout->addWidget(space4,          25);
 
+    setFocusProxy( d->answerWidget );
+
     QFrame * hline = new QFrame;
     {
         QPalette palette = hline->palette();
@@ -138,6 +140,9 @@ ExamineWidget::ExamineWidget(QWidget * parent)
             d->questionWidget, SLOT(setQuestion(QString)));
     connect(d->examinator,   SIGNAL(currentAnswerChanged(QString)),
             d->answerWidget,   SLOT(setAnswer(QString)));
+
+    connect(d->answerWidget, SIGNAL(commitAnswer(QString)),
+            d->examinator,     SLOT(processAnswer(QString)));
 
     setExaminatorState( d->examinator->state() );
 }

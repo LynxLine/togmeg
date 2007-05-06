@@ -17,6 +17,7 @@ public:
     static StudyTaskModel * instance;
     QList<StudyDataEntry> entries;
     DataContainer * dataContainer;
+    QString taskId;
 };
 
 StudyTaskModel * StudyTaskModel::Private::instance = 0L;
@@ -47,14 +48,21 @@ StudyTaskModel::~StudyTaskModel()
     delete d;
 }
 
+QString StudyTaskModel::taskId()
+{
+    return d->taskId;
+}
+
 void StudyTaskModel::load(QString taskId)
 {
+    if ( d->dataContainer ) save();
+    if ( taskId == d->taskId ) return;
+    
     qDebug() << "StudyTaskModel::load()," << taskId;
 
-    if ( d->dataContainer ) save();
-    
     d->dataContainer = 0L;
     d->entries.clear();
+    d->taskId.clear();
 
     disconnect(this, SIGNAL(rowCountChanged(int)),0,0);
 
@@ -65,6 +73,7 @@ void StudyTaskModel::load(QString taskId)
             task, SLOT(setEntryCount(int)));
 
     d->dataContainer = task->dataContainer();
+    d->taskId = task->id();
         
     QIODevice * resource = d->dataContainer->resource("content.xml");
     if (resource) {

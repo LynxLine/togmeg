@@ -6,6 +6,19 @@
 #include "crammero.h"
 #include "itemdelegate.h"
 
+void ItemDelegate::registerEditor(QWidget * editor) const
+{
+    connect(editor, SIGNAL(destroyed(QObject *)), this, SLOT(deactivateEditor(QObject *)));
+    editors << editor;
+}
+
+void ItemDelegate::deactivateEditor(QObject * o)
+{
+    QWidget * editor = ::qobject_cast<QWidget*>(o);
+    if ( !editors.contains(editor) ) return;
+    editors.removeAll(editor);
+}
+
 void ItemDelegate::setEditorData(QWidget * editor, const QModelIndex & i) const
 {
     QVariant v = i.data(Qt::EditRole);
@@ -27,8 +40,10 @@ bool ItemDelegate::eventFilter(QObject * o, QEvent * e)
     if (!editor)
         return false;
 
+    if (!editors.contains(editor))
+        return false;
+
     if (e->type() == QEvent::KeyPress) {
-        //qDebug() << "ItemDelegate::eventFilter" << static_cast<QKeyEvent *>(e)->key();
         switch (static_cast<QKeyEvent *>(e)->key()) {
         case Qt::Key_Tab:
             emit commitData(editor);
@@ -62,8 +77,9 @@ bool ItemDelegate::eventFilter(QObject * o, QEvent * e)
             QWidget * w = QApplication::focusWidget();
             while (w) { 
                 // don't worry about focus changes internally in the editor
-                if (w == editor)
+                if (w == editor) {
                     return false;
+                }
                 w = w->parentWidget();
             }
 
@@ -72,8 +88,11 @@ bool ItemDelegate::eventFilter(QObject * o, QEvent * e)
             if (QApplication::activeModalWidget() && !QApplication::activeModalWidget()->isAncestorOf(editor))
                 return false;
 
-            emit commitData(editor);
-            emit closeEditor(editor, NoHint);
+            //qDebug() << "full focus out";
+            return false;
+
+            //emit commitData(editor);
+            //emit closeEditor(editor, NoHint);
         }
     }
     return false;
