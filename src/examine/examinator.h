@@ -23,6 +23,8 @@ public:
         Processing = 0,
         Stopped,
         Paused,
+        IndicatingMatch,
+        IndicatingMismatch,
     };
 
     Examinator(QObject * parent = 0);
@@ -37,8 +39,8 @@ public slots:
     void pause();
     void stop();
     void continuePlay();
-    void processAnswer(QString);
-
+    void processAnswer();
+    void setUserAnswer(QString);
     void setCurrentTask(QString taskId);
 
 signals:
@@ -56,6 +58,8 @@ private slots:
     void setState(State);
     void setEntryCount(int);
     void prepareNextQuestion();
+    void indicateMismatching();
+    void indicateMatching();
 
 private:
     class Private;

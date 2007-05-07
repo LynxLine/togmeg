@@ -111,6 +111,11 @@ QGradient & RoundedGradientWidget::gradient()
 void RoundedGradientWidget::setGradient(QGradient g)
 {
     d->gradient = g;
+    if (d->gradient.type() == QGradient::LinearGradient) {
+        QLinearGradient * linearGradient = (QLinearGradient *)&d->gradient;
+        linearGradient->setStart(QPointF(0, 0));
+        linearGradient->setFinalStop(QPointF(0, height()));
+    }
 }
 
 QFont RoundedGradientWidget::windowTitleFont()

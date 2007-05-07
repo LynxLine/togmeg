@@ -20,6 +20,8 @@ public:
     virtual bool hasNext();
     virtual ControllerDataEntry next();
 
+    virtual void processAnswer(QString);
+
 private:
     class Private;
     Private * d;

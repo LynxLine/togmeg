@@ -8,7 +8,9 @@
 
 class AnswerWidget::Private {
 public:
+    QString answer;
     QLineEdit * le_answer;
+    Examinator::Mode mode;
 };
 
 /*!
@@ -28,8 +30,12 @@ AnswerWidget::AnswerWidget(QWidget * parent)
 
     d->le_answer = new QLineEdit;
     d->le_answer->setAlignment(Qt::AlignCenter);
+
     connect(d->le_answer, SIGNAL(returnPressed()),
             this,           SLOT(returnPressed()));
+    connect(d->le_answer, SIGNAL(textChanged(const QString &)),
+            this,           SLOT(textChanged(const QString &)));
+
     setFocusProxy( d->le_answer );
 
     layout->addItem(new QSpacerItem(10,10, QSizePolicy::Minimum, QSizePolicy::Expanding));
@@ -40,11 +46,10 @@ AnswerWidget::AnswerWidget(QWidget * parent)
     setWindowTitleFont( MainWindow::baseFont(1.1, QFont::Bold) );
     setWindowTitle(tr("Answer"));
 
-    if (gradient().type() == QGradient::LinearGradient) {
-        QLinearGradient * linearGradient = (QLinearGradient *)&gradient();
-        linearGradient->setColorAt(0, "#CCCCCC");
-        linearGradient->setColorAt(1, "#E0E0E0");
-    }
+    QLinearGradient gradient;
+    gradient.setColorAt(0, "#CCCCCC");
+    gradient.setColorAt(1, "#E0E0E0");
+    setGradient( gradient );
 }
 
 /*!
@@ -87,12 +92,20 @@ QString AnswerWidget::answer()
 
 void AnswerWidget::setAnswer(QString a)
 {
-    d->le_answer->setText(a);
+    d->answer = a;
+    if ( d->mode == Examinator::Playing )
+        d->le_answer->setText(a);
+    else
+        d->le_answer->clear();
+}
+
+void AnswerWidget::textChanged(const QString & text)
+{
+    emit userAnswerChanged( text );
 }
 
 void AnswerWidget::returnPressed()
 {
-    qDebug() << "returnPressed";
     emit commitAnswer( answer() );
 }
 
@@ -114,4 +127,55 @@ void AnswerWidget::setExaminatorMode(Examinator::Mode mode)
         palette.setColor(QPalette::Base, "#FFFFFF");
         d->le_answer->setPalette(palette);
     }
+    d->mode = mode;
+}
+
+void AnswerWidget::setExaminatorState(Examinator::State s)
+{
+    //qDebug() << "AnswerWidget::setExaminatorState()" << s;
+    if (s == Examinator::IndicatingMatch) {
+        d->le_answer->setText( d->answer );
+        d->le_answer->setReadOnly(true);
+        d->le_answer->setFrame(false);
+
+        QPalette palette = d->le_answer->palette();
+        palette.setColor(QPalette::Base, QColor(0,0,0,0));
+        d->le_answer->setPalette(palette);
+
+        QLinearGradient gradient;
+        gradient.setColorAt(0, "#B0FFB0");
+        gradient.setColorAt(1, "#B0FFB0");
+        setGradient( gradient );
+    }
+    else if (s == Examinator::IndicatingMismatch) {
+        d->le_answer->setText( d->answer );
+        d->le_answer->setReadOnly(true);
+        d->le_answer->setFrame(false);
+
+        QPalette palette = d->le_answer->palette();
+        palette.setColor(QPalette::Base, QColor(0,0,0,0));
+        d->le_answer->setPalette(palette);    
+
+        QLinearGradient gradient;
+        gradient.setColorAt(0, "#FFA0A0");
+        gradient.setColorAt(1, "#FFA0A0");
+        setGradient( gradient );
+    }
+    else {
+        d->le_answer->setFrame( d->mode != Examinator::Playing );
+        d->le_answer->setReadOnly( d->mode == Examinator::Playing );
+
+        QPalette palette = d->le_answer->palette();
+        palette.setColor(QPalette::Base, 
+            d->mode == Examinator::Playing ? QColor(0,0,0,0) : "#FFFFFF"
+        );
+        d->le_answer->setPalette(palette);
+
+        QLinearGradient gradient;
+        gradient.setColorAt(0, "#CCCCCC");
+        gradient.setColorAt(1, "#E0E0E0");
+        setGradient( gradient );
+    }
+
+    update();
 }

@@ -203,7 +203,7 @@ void TaskEditorView::closeEditor(QWidget * editor, QAbstractItemDelegate::EndEdi
 
 void TaskEditorView::currentChanged(const QModelIndex & current, const QModelIndex & previous)
 {
-    qDebug() << "TaskEditorView::currentChanged" << current.row() << current.column();
+    //qDebug() << "TaskEditorView::currentChanged" << current.row() << current.column();
 
     QTreeView::currentChanged(current, previous);
     if ( !current.isValid() ) return;

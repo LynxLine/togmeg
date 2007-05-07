@@ -141,8 +141,10 @@ ExamineWidget::ExamineWidget(QWidget * parent)
     connect(d->examinator,   SIGNAL(currentAnswerChanged(QString)),
             d->answerWidget,   SLOT(setAnswer(QString)));
 
+    connect(d->answerWidget, SIGNAL(userAnswerChanged(QString)),
+            d->examinator,     SLOT(setUserAnswer(QString)));
     connect(d->answerWidget, SIGNAL(commitAnswer(QString)),
-            d->examinator,     SLOT(processAnswer(QString)));
+            d->examinator,     SLOT(processAnswer()));
 
     setExaminatorState( d->examinator->state() );
 }
@@ -191,7 +193,11 @@ void ExamineWidget::setExaminatorMode(Examinator::Mode mode)
 
 void ExamineWidget::setExaminatorState(Examinator::State s)
 {
-    if ( s == Examinator::Processing ) {
+    d->answerWidget->setExaminatorState(s);
+
+    if ( s == Examinator::Processing ||
+         s == Examinator::IndicatingMismatch ||
+         s == Examinator::IndicatingMatch) {
         d->b_play->setPixmap( QPixmap(":/images/button-pause.png"));
         d->b_play->setPixmapHl( QPixmap(":/images/button-pause.png"));
         d->b_play->setPixmapDown( QPixmap(":/images/button-pause-pressed.png"));

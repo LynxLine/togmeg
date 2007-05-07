@@ -23,11 +23,14 @@ public:
 public slots:
     void setAnswer(QString);
     void setExaminatorMode(Examinator::Mode);
+    void setExaminatorState(Examinator::State);
 
 signals:
+    void userAnswerChanged(QString);
     void commitAnswer(QString);
 
 private slots:
+    void textChanged(const QString &);
     void returnPressed();
 
 protected:

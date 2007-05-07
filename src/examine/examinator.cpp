@@ -20,6 +20,7 @@ public:
     QTimeLine * timeLine;
 
     State state;
+    QString userAnswer;
     QPointer<TaskController> controller;
 };
 
@@ -40,7 +41,7 @@ Examinator::Examinator(QObject * parent)
     setState(Stopped);
 
     connect(d->timeLine, SIGNAL(finished()),
-            this, SLOT(prepareNextQuestion()), Qt::QueuedConnection);
+            this, SLOT(processAnswer()), Qt::QueuedConnection);
     connect(d->timeLine, SIGNAL(frameChanged(int)),
             this, SIGNAL(tick(int)));
 }
@@ -64,12 +65,19 @@ void Examinator::start(Examinator::Mode mode)
     else if ( mode == Studying ) d->controller = new StudyTaskController( model );
     else if ( mode == Examinating ) d->controller = new ExaminateTaskController( model );
 
-    setState(Processing);
-    prepareNextQuestion();
+    connect(d->controller, SIGNAL(requestNextQuestion()),
+            this, SLOT(prepareNextQuestion()));
+    connect(d->controller, SIGNAL(indicateMismatching()),
+            this, SLOT(indicateMismatching()));
+    connect(d->controller, SIGNAL(indicateMatching()),
+            this, SLOT(indicateMatching()));
 
     //update widget
     emit taskNameChanged( d->task->name() );
     emit modeChanged( mode );
+
+    setState(Processing);
+    prepareNextQuestion();
 }
 
 void Examinator::stop()
@@ -152,16 +160,24 @@ void Examinator::prepareNextQuestion()
     emit currentQuestionChanged( entry.question );
     emit currentAnswerChanged( entry.answer );
 
+    setState(Processing);
+    d->userAnswer.clear();
     d->timeLine->setDuration( entry.msecs );
     d->timeLine->setCurrentTime(0);
     d->timeLine->start();
 }
 
-void Examinator::processAnswer(QString)
+void Examinator::setUserAnswer(QString answer)
 {
+    d->userAnswer = answer;
+}
+
+void Examinator::processAnswer()
+{
+    d->timeLine->setCurrentTime( d->timeLine->duration() );
     d->timeLine->stop();
-    d->timeLine->setCurrentTime(0);
-    prepareNextQuestion();
+
+    d->controller->processAnswer( d->userAnswer );
 }
 
 Examinator::State Examinator::state()
@@ -175,4 +191,14 @@ void Examinator::setState(Examinator::State s)
         emit stateChanged(s);
 
     d->state = s;
+}
+
+void Examinator::indicateMismatching()
+{
+    setState(IndicatingMismatch);
+}
+
+void Examinator::indicateMatching()
+{
+    setState(IndicatingMatch);
 }

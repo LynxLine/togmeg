@@ -500,9 +500,6 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
         //first switch stack
         if ( d->stack->currentWidget() != d->slide ) {
             d->stack->setCurrentWidget( d->slide );
-            //d->examineWidget->setEnabled(false);
-            //d->slide->setEnabled(true);
-            //d->slide->setFocus();
         }
 
         //second switch slide
@@ -515,9 +512,6 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
         //first switch stack
         if ( d->stack->currentWidget() != d->slide ) {
             d->stack->setCurrentWidget( d->slide );
-            //d->examineWidget->setEnabled(false);
-            //d->slide->setEnabled(true);
-            //d->slide->setFocus();
         }
 
         //second switch slide
@@ -529,18 +523,11 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
     else if (m == MainWindow::ExamineMode) {
         //just switch stack
         d->stack->setCurrentWidget( d->examineWidget );
-        qDebug() << QApplication::focusWidget()->metaObject()->className();
-        //d->examineWidget->setEnabled(true);
-        //d->slide->setEnabled(false);
-        //d->examineWidget->setFocus();
     }
     else if (m == MainWindow::BrowserMode) {
         //just switch stack
         if ( d->stack->currentWidget() != d->slide ) {
             d->stack->setCurrentWidget( d->slide );
-            //d->examineWidget->setEnabled(false);
-            //d->slide->setEnabled(true);
-            //d->slide->setFocus();
         }
 
         if ( d->slide->currentWidget() == d->catalogWidget ) {

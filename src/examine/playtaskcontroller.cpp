@@ -61,3 +61,9 @@ ControllerDataEntry PlayTaskController::next()
 
     return entry;
 }
+
+void PlayTaskController::processAnswer(QString answer)
+{
+    Q_UNUSED(answer);
+    emit requestNextQuestion();
+}

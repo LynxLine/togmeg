@@ -31,6 +31,13 @@ public:
     virtual bool hasNext() = 0;
     virtual ControllerDataEntry next() = 0;
 
+    virtual void processAnswer(QString) = 0;
+
+signals:
+    void requestNextQuestion();
+    void indicateMismatching();
+    void indicateMatching();
+
 protected:
     StudyTaskModel * model;
 };
