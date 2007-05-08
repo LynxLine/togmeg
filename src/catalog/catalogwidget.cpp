@@ -8,6 +8,7 @@
 #include "categoryview.h"
 #include "categorymodel.h"
 #include "catalogwidget.h"
+#include "catalogfooter.h"
 #include "tasklistview.h"
 #include "pixmapbutton.h"
 
@@ -18,6 +19,8 @@ class CatalogWidget::Private
 public:
     CategoryView * categoryView;
     TaskListView * taskListView;
+    CatalogFooter * catalogFooter;
+
     CategoryModel * categoryModel;
 };
 
@@ -55,7 +58,7 @@ CatalogWidget::CatalogWidget(QWidget * parent)
     QVBoxLayout * taskLayout = new QVBoxLayout;
     taskLayout->setMargin(0);
     taskLayout->setSpacing(0);
-    layout->addLayout(taskLayout, 0, 2, 3,1);
+    layout->addLayout(taskLayout, 0, 2);
 
     d->taskListView = new TaskListView(this);
     taskLayout->addWidget( d->taskListView );
@@ -69,20 +72,31 @@ CatalogWidget::CatalogWidget(QWidget * parent)
         vline->setFixedWidth(1);
         vline->setLineWidth(1);
     }
-    layout->addWidget( vline, 0, 1, 3,1);
+    layout->addWidget( vline, 0, 1, 2,1);
 
-    QFrame * hline = new QFrame;
+    QFrame * hline1 = new QFrame;
     {
-        QPalette palette = hline->palette();
+        QPalette palette = hline1->palette();
         palette.setColor(QPalette::WindowText, "#999999");
-        hline->setPalette(palette);
-        hline->setFrameStyle(QFrame::HLine | QFrame::Plain);
-        hline->setFixedHeight(1);
-        hline->setLineWidth(1);
+        hline1->setPalette(palette);
+        hline1->setFrameStyle(QFrame::HLine | QFrame::Plain);
+        hline1->setFixedHeight(1);
+        hline1->setLineWidth(1);
     }
-    layout->addWidget( hline, 1, 0 );
+    layout->addWidget( hline1, 1, 0 );
 
-    //bottom footer
+    QFrame * hline2 = new QFrame;
+    {
+        QPalette palette = hline2->palette();
+        palette.setColor(QPalette::WindowText, "#999999");
+        hline2->setPalette(palette);
+        hline2->setFrameStyle(QFrame::HLine | QFrame::Plain);
+        hline2->setFixedHeight(1);
+        hline2->setLineWidth(1);
+    }
+    layout->addWidget( hline2, 1, 2 );
+
+    //bottom categories footer
     QHBoxLayout * footerAreaLayout = new QHBoxLayout;
     footerAreaLayout->setMargin(0);
     footerAreaLayout->setSpacing(0);
@@ -149,13 +163,26 @@ CatalogWidget::CatalogWidget(QWidget * parent)
     }
     footerAreaLayout->addWidget(space);
 
+    d->catalogFooter = new CatalogFooter;
+    layout->addWidget( d->catalogFooter, 2,1, 1,2 );
+
     connect(d->categoryView, SIGNAL(categoryActivated(QString)),
-            d->taskListView, SLOT(applyCategoryFilter(QString)));
+            d->taskListView,   SLOT(applyCategoryFilter(QString)));
     connect(d->taskListView, SIGNAL(studyTaskActivated(QString)),
             this,            SIGNAL(studyTaskActivated(QString)));
     connect(d->taskListView, SIGNAL(currentTaskChanged(QString)),
             this,            SIGNAL(currentTaskChanged(QString)));
 
+    connect(d->taskListView, SIGNAL(currentTaskChanged(QString)),
+            d->catalogFooter,  SLOT(setCurrentTask(QString)));
+    connect(d->taskListView, SIGNAL(rowCountChanged(int)),
+            d->catalogFooter,  SLOT(setStudyCount(int)));
+
+    //init footer
+    d->catalogFooter->setCurrentTask( d->taskListView->currentTaskId() );
+    d->catalogFooter->setStudyCount( d->taskListView->model()->rowCount() );
+
+    //focus
     setFocusProxy( d->taskListView );
     d->categoryView->setFocus();
 }

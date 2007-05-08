@@ -32,6 +32,7 @@ public:
 
     State state();
     QString currentTaskId();
+    QString currentTaskName();
     int entryCount();
 
 public slots:

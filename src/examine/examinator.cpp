@@ -117,6 +117,14 @@ QString Examinator::currentTaskId()
     return d->task->id();
 }
 
+QString Examinator::currentTaskName()
+{
+    if ( !d->task )
+        return QString::null;
+
+    return d->task->name();
+}
+
 int Examinator::entryCount()
 {
     if ( !d->task ) return 0;

@@ -27,6 +27,7 @@ public slots:
 signals:
     void currentTaskChanged(QString taskId);
     void studyTaskActivated(QString taskId);
+    void rowCountChanged(int);
 
 protected:
     virtual void paintEvent(QPaintEvent * pe);

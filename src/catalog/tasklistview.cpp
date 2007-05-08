@@ -103,6 +103,8 @@ void TaskListView::addNewStudy()
     QModelIndex index = d->filter->mapFromSource( d->model->indexOf(task) );
     setCurrentIndex( index );
     edit( index );
+
+    emit rowCountChanged( model()->rowCount() );
 }
 
 void TaskListView::editStudyName()
@@ -145,6 +147,8 @@ void TaskListView::applyCategoryFilter(QString categoryId)
         else
             currentTaskChanged(QString::null);
     }
+
+    emit rowCountChanged( model()->rowCount() );
 }
 
 QString TaskListView::currentTaskId()
