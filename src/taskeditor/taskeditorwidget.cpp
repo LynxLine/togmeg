@@ -3,6 +3,7 @@
 //
 
 #include <QtGui>
+#include "gradientwidget.h"
 #include "taskeditorview.h"
 #include "taskeditorfooter.h"
 #include "taskeditorwidget.h"
@@ -12,6 +13,11 @@ class TaskEditorWidget::Private
 public:
     TaskEditorView * taskEditorView;
     TaskEditorFooter * taskEditorFooter;
+
+    GradientWidget * generalPanel;
+    GradientWidget * examinePanel;
+    GradientWidget * studyPanel;
+    GradientWidget * playPanel;
 };
 
 /*!
@@ -49,6 +55,67 @@ TaskEditorWidget::TaskEditorWidget(QWidget * parent)
 
     d->taskEditorFooter = new TaskEditorFooter;
     layout->addWidget( d->taskEditorFooter, 2,0 );
+
+    QFrame * vline = new QFrame;
+    {
+        QPalette palette = vline->palette();
+        palette.setColor(QPalette::WindowText, "#999999");
+        vline->setPalette(palette);
+        vline->setFrameStyle(QFrame::VLine | QFrame::Plain);
+        vline->setFixedWidth(1);
+        vline->setLineWidth(1);
+    }
+    layout->addWidget( vline, 0,1, 3,1);
+
+    //properties layout
+    QVBoxLayout * propertiesAreaLayout = new QVBoxLayout;
+    propertiesAreaLayout->setMargin(0);
+    propertiesAreaLayout->setSpacing(0);
+    layout->addLayout( propertiesAreaLayout, 0,2, 3,1 );
+
+    QWidget * space = new QWidget;
+    space->setAutoFillBackground(true);
+    space->setFixedSize(250, 5);
+    propertiesAreaLayout->addWidget( space );
+
+    QTabBar * tab = new QTabBar;
+    tab->setAutoFillBackground(true);
+    tab->setFixedWidth(250);
+    {
+        QPalette palette = tab->palette();
+        palette.setColor(QPalette::Window, "#A0A0A0");
+        space->setPalette(palette);
+        tab->setPalette(palette);
+    }
+    propertiesAreaLayout->addWidget( tab );
+
+    QStackedWidget * stack = new QStackedWidget;
+    stack->setFixedWidth(250);
+    propertiesAreaLayout->addWidget( stack );
+
+    connect(tab, SIGNAL(currentChanged(int)),
+            stack, SLOT(setCurrentIndex(int)));
+
+    d->generalPanel = new GradientWidget;
+    d->generalPanel->gradient().setColorAt(0, "#E8E8E8");
+    d->generalPanel->gradient().setColorAt(1, "#D0D0D0");
+
+    d->examinePanel = new GradientWidget;
+    d->examinePanel->gradient().setColorAt(0, "#E8E8E8");
+    d->examinePanel->gradient().setColorAt(1, "#D0D0D0");
+
+    d->studyPanel   = new GradientWidget;
+    d->studyPanel->gradient().setColorAt(0, "#E8E8E8");
+    d->studyPanel->gradient().setColorAt(1, "#D0D0D0");
+
+    d->playPanel    = new GradientWidget;
+    d->playPanel->gradient().setColorAt(0, "#E8E8E8");
+    d->playPanel->gradient().setColorAt(1, "#D0D0D0");
+
+    stack->insertWidget( tab->addTab( tr("General")), d->generalPanel );
+    stack->insertWidget( tab->addTab( tr("Play")),    d->playPanel    );
+    stack->insertWidget( tab->addTab( tr("Study")),   d->studyPanel   );
+    stack->insertWidget( tab->addTab( tr("Exam")),    d->examinePanel );
 
     setFocusProxy( d->taskEditorView );
 }
