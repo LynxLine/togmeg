@@ -15,18 +15,27 @@ class TaskEditorView : public QTreeView
 {
 Q_OBJECT
 public:
+    enum NextItemMode {
+        QAQAMode = 0,
+        QQAAMode,
+    };
     TaskEditorView(QWidget * parent = 0);
     virtual ~TaskEditorView();
     QString currentTaskId();
+    NextItemMode nextItemMode();
 
 public slots:
     void addNewEntry();
     void removeEntry();
     void openTask(QString taskId);
+    void setNextItemMode(TaskEditorView::NextItemMode);
 
 private slots:
     void toFirstRow();
     void activateContextMenu(const QPoint &);
+
+signals:
+    void nextItemModeChanged(TaskEditorView::NextItemMode);
 
 protected:
     virtual void paintEvent(QPaintEvent * pe);
@@ -37,6 +46,7 @@ protected:
 protected slots:
     void editNextItem();
     void editPreviousItem();
+    void editNextItemUsingMode();
     void closeEditor(QWidget * editor, QAbstractItemDelegate::EndEditHint hint);
 
 private:

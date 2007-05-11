@@ -85,6 +85,7 @@ public:
 
     QVariant data(const QModelIndex &index, int role) const;
     bool setData(const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
+    virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 
     CategoryItem * createItem(QString name, CategoryItem * parent);
     void removeItem(CategoryItem *);

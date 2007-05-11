@@ -304,6 +304,19 @@ bool CategoryModel::setData(const QModelIndex & index, const QVariant & value, i
     return item->setData(value, role);
 }
 
+QVariant CategoryModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    Q_UNUSED(section);
+    Q_UNUSED(orientation);
+    if (role == Qt::DisplayRole) {
+        return tr("Category");
+    }
+    else if (role == Qt::TextAlignmentRole) {
+        return Qt::AlignCenter;
+    }
+    return QVariant();
+}
+
 /*!
  \reimp for Category-like Model.
  */

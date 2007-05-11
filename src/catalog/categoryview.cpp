@@ -4,6 +4,7 @@
 
 #include <QtGui>
 #include "crammero.h"
+#include "headerview.h"
 #include "categoryview.h"
 #include "categorymodel.h"
 #include "itemdelegate.h"
@@ -13,13 +14,18 @@ class CategoryView::Private
 {
 public:
     QPointer<QMenu> contextMenu;
-
+    QPointer<HeaderView> header;
 };
 
 CategoryView::CategoryView(QWidget * parent)
 :QTreeView(parent) 
 {
     d = new Private;
+    d->header = new HeaderView(Qt::Horizontal, this);
+    d->header->setFont( MainWindow::baseFont(0.95) );
+    d->header->setStretchLastSection(true);
+
+    setHeader( d->header );
     setRootIsDecorated(false);
     setFrameStyle(QFrame::NoFrame);
     setUniformRowHeights(true);
@@ -28,7 +34,7 @@ CategoryView::CategoryView(QWidget * parent)
     setStyle( &app::cleanStyle );
     setIndentation(20);
     setAnimated(false);
-    header()->hide();
+    //header()->hide();
 
     {
         QPalette palette = this->palette();

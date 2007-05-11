@@ -56,8 +56,13 @@ TaskEditorWidget::TaskEditorWidget(QWidget * parent)
     }
     layout->addWidget( hline1, 1,0 );
 
+    //footer
     d->taskEditorFooter = new TaskEditorFooter;
     layout->addWidget( d->taskEditorFooter, 2,0 );
+
+    d->taskEditorFooter->setNextItemMode( d->taskEditorView->nextItemMode() );
+    connect(d->taskEditorFooter, SIGNAL(nextItemModeChanged(TaskEditorView::NextItemMode)),
+            d->taskEditorView, SLOT(setNextItemMode(TaskEditorView::NextItemMode)));
 
     QFrame * vline = new QFrame;
     {
@@ -75,19 +80,6 @@ TaskEditorWidget::TaskEditorWidget(QWidget * parent)
     propertiesAreaLayout->setMargin(0);
     propertiesAreaLayout->setSpacing(0);
     layout->addLayout( propertiesAreaLayout, 0,2, 3,1 );
-
-    /*
-    QTabBar * tab = new QTabBar;
-    tab->setAutoFillBackground(true);
-    tab->setFixedWidth(250);
-    {
-        QPalette palette = tab->palette();
-        palette.setColor(QPalette::Window, "#A0A0A0");
-        space->setPalette(palette);
-        tab->setPalette(palette);
-    }
-    propertiesAreaLayout->addWidget( tab );
-    */
 
     TabBar * tab = new TabBar;
     tab->setFixedWidth(250);

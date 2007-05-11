@@ -19,12 +19,15 @@ public:
 
     QColor c1;
     QColor c2;
+
+    NextItemMode nextItemMode;
 };
 
 TaskEditorView::TaskEditorView(QWidget * parent)
 :QTreeView(parent) 
 {
     d = new Private;
+    d->nextItemMode = NextItemMode(-1); //undefined;
     d->header = new HeaderView(Qt::Horizontal, this);
     d->header->setFont( MainWindow::baseFont(0.95) );
     d->header->setStretchLastSection(true);
@@ -39,9 +42,10 @@ TaskEditorView::TaskEditorView(QWidget * parent)
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     setStyle( &app::cleanStyle );
     setEditTriggers(QAbstractItemView::EditKeyPressed);
+    setNextItemMode(QAQAMode);
 
     d->delegate = new TaskEditorItemDelegate(this);
-    connect(d->delegate, SIGNAL(returnPressed()), this, SLOT(editNextItem()));
+    connect(d->delegate, SIGNAL(returnPressed()), this, SLOT(editNextItemUsingMode()));
     setItemDelegate( d->delegate );
 
     setContextMenuPolicy(Qt::CustomContextMenu);
@@ -66,6 +70,19 @@ TaskEditorView::~TaskEditorView()
 {
     qDebug() << "~TaskEditorView";
     delete d;
+}
+
+TaskEditorView::NextItemMode TaskEditorView::nextItemMode()
+{
+    return d->nextItemMode;
+}
+
+void TaskEditorView::setNextItemMode(NextItemMode m)
+{
+    if ( d->nextItemMode == m ) return;
+    d->nextItemMode = m;
+
+    emit nextItemModeChanged(m);
 }
 
 void TaskEditorView::activateContextMenu(const QPoint & pos)
@@ -102,7 +119,6 @@ void TaskEditorView::addNewEntry()
 {
     QModelIndex index = d->model->addNewEntry();
     setCurrentIndex( index );
-    edit( index );
 }
 
 void TaskEditorView::removeEntry()
@@ -140,8 +156,32 @@ void TaskEditorView::keyPressEvent(QKeyEvent * ke)
         QTreeView::keyPressEvent(ke);
 }
 
+void TaskEditorView::editNextItemUsingMode()
+{
+    //qDebug() << "editNextItemUsingMode()" << nextItemMode();
+
+    if ( nextItemMode() == QAQAMode ) {
+        editNextItem();
+    }
+    else if ( nextItemMode() == QQAAMode ) {
+        if ( !currentIndex().isValid() ) return;
+
+        int nextRow = currentIndex().row();
+        if (nextRow >= model()->rowCount()-1) {
+            edit( currentIndex() ); //just reopen
+            return;
+        }
+
+        nextRow++;
+        QModelIndex next = model()->index( nextRow, currentIndex().column() );
+        setCurrentIndex(next);
+    }
+}
+
 void TaskEditorView::editNextItem()
 {
+    qDebug() << "editNextItem()";
+
     if ( !currentIndex().isValid() ) return;
     int nextRow = currentIndex().row();
     if ( currentIndex().column() == StudyTaskModel::QuestionColumn) {
@@ -150,7 +190,7 @@ void TaskEditorView::editNextItem()
     }
     else if ( currentIndex().column() == StudyTaskModel::AnswerColumn) {
         if (nextRow < model()->rowCount()-1)
-        nextRow++;
+            nextRow++;
 
         QModelIndex next = model()->index( nextRow, StudyTaskModel::QuestionColumn );
         setCurrentIndex(next);

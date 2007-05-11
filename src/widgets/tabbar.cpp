@@ -94,7 +94,7 @@ void TabBar::paintEvent(QPaintEvent * pe)
         else p.drawPixmap(d->tabRect(i), d->pmInActiveTab);
 
         QRect r = d->tabRect(i);
-        r.adjust(2,11,-2,1);
+        r.adjust(2,10,-2,0);
 
         p.setPen(QColor("#F0F0F0"));
         p.drawText(r, Qt::AlignCenter, d->tabs[i]);

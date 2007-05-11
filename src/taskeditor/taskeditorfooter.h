@@ -6,6 +6,7 @@
 #define TASKEDITORFOOTER_H
 
 #include <QWidget>
+#include "taskeditorview.h"
 
 /*!
  * \class TaskEditorFooter
@@ -20,9 +21,15 @@ public:
 public slots:
     void setStudyCount(int);
     void setCurrentTask(QString taskId);
+    void setNextItemMode(TaskEditorView::NextItemMode);
+
+signals:
+    void nextItemModeChanged(TaskEditorView::NextItemMode);
 
 private slots:
     void updateMessageLabel();
+    void toQAQAMode();
+    void toQQAAMode();
 
 private:
     class Private;
