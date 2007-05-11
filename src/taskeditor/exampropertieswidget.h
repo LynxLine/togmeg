@@ -17,6 +17,9 @@ public:
     ExamPropertiesWidget(QWidget * parent = 0);
     virtual ~ExamPropertiesWidget();
 
+public slots:
+    void setCurrentTask(QString taskId);
+
 private:
     class Private;
     Private * d;

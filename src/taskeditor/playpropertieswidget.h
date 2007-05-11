@@ -17,6 +17,9 @@ public:
     PlayPropertiesWidget(QWidget * parent = 0);
     virtual ~PlayPropertiesWidget();
 
+public slots:
+    void setCurrentTask(QString taskId);
+
 private:
     class Private;
     Private * d;

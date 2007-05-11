@@ -122,6 +122,11 @@ void TaskEditorWidget::addNewEntry()
 
 void TaskEditorWidget::setCurrentTask(QString taskId)
 {
-    if (d->taskEditorView->currentTaskId() != taskId)
+    if (d->taskEditorView->currentTaskId() != taskId) {
         d->taskEditorView->openTask(taskId);
+
+        d->examinePanel->setCurrentTask(taskId);
+        d->studyPanel->setCurrentTask(taskId);
+        d->playPanel->setCurrentTask(taskId);
+    }
 }

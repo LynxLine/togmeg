@@ -17,6 +17,9 @@ public:
     StudyPropertiesWidget(QWidget * parent = 0);
     virtual ~StudyPropertiesWidget();
 
+public slots:
+    void setCurrentTask(QString taskId);
+
 private:
     class Private;
     Private * d;

@@ -8,6 +8,7 @@ HEADERS += \
     taskeditor/exampropertieswidget.h \
     taskeditor/playpropertieswidget.h \
     taskeditor/studypropertieswidget.h \
+    taskeditor/timelinewidget.h \
 
 
 SOURCES += \
@@ -17,4 +18,5 @@ SOURCES += \
     taskeditor/exampropertieswidget.cpp \
     taskeditor/playpropertieswidget.cpp \
     taskeditor/studypropertieswidget.cpp \
+    taskeditor/timelinewidget.cpp \
 
