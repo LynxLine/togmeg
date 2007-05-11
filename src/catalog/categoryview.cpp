@@ -105,7 +105,9 @@ void CategoryView::drawRow(QPainter * painter, const QStyleOptionViewItem &optio
     if (selectionModel()->isSelected(modelIndex)) {
         opt.state |= QStyle::State_Selected;
         
+#ifndef Q_WS_MAC
         opt.font.setBold(true);
+#endif
         opt.fontMetrics = QFontMetrics( opt.font );
 
         if ( opt.state & QStyle::State_Active ) {
