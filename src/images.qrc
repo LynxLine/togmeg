@@ -27,6 +27,10 @@
     <file>images/bg-question-mark.png</file>
     <file>images/bg-header-view-horizontal.png</file>
 
+    <file>images/tab.png</file>
+    <file>images/tab-on.png</file>
+    <file>images/bg-tab.png</file>
+
     <file>images/button-play.png</file>
     <file>images/button-play-pressed.png</file>
     <file>images/button-pause.png</file>

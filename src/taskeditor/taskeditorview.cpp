@@ -319,6 +319,10 @@ void TaskEditorView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
                     
                     painter->drawLine(x,y, x+w,y);
                     painter->drawLine(x,y+h, x+w,y+h);
+
+                    if ( headerSection == StudyTaskModel::AnswerColumn ) {
+                        painter->drawLine(x+w-1,y, x+w-1,y+h);
+                    }
                 }
                 painter->restore();
             }

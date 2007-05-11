@@ -3,6 +3,9 @@
 //
 
 #include <QtGui>
+#include "tabbar.h"
+#include "mainwindow.h"
+#include "pixmapbutton.h"
 #include "gradientwidget.h"
 #include "taskeditorview.h"
 #include "taskeditorfooter.h"
@@ -14,7 +17,7 @@ public:
     TaskEditorView * taskEditorView;
     TaskEditorFooter * taskEditorFooter;
 
-    GradientWidget * generalPanel;
+    //GradientWidget * generalPanel;
     GradientWidget * examinePanel;
     GradientWidget * studyPanel;
     GradientWidget * playPanel;
@@ -73,11 +76,7 @@ TaskEditorWidget::TaskEditorWidget(QWidget * parent)
     propertiesAreaLayout->setSpacing(0);
     layout->addLayout( propertiesAreaLayout, 0,2, 3,1 );
 
-    QWidget * space = new QWidget;
-    space->setAutoFillBackground(true);
-    space->setFixedSize(250, 5);
-    propertiesAreaLayout->addWidget( space );
-
+    /*
     QTabBar * tab = new QTabBar;
     tab->setAutoFillBackground(true);
     tab->setFixedWidth(250);
@@ -88,6 +87,12 @@ TaskEditorWidget::TaskEditorWidget(QWidget * parent)
         tab->setPalette(palette);
     }
     propertiesAreaLayout->addWidget( tab );
+    */
+
+    TabBar * tab = new TabBar;
+    tab->setFixedWidth(250);
+    tab->setFont(MainWindow::baseFont(0.95, QFont::Bold));
+    propertiesAreaLayout->addWidget( tab );
 
     QStackedWidget * stack = new QStackedWidget;
     stack->setFixedWidth(250);
@@ -95,10 +100,6 @@ TaskEditorWidget::TaskEditorWidget(QWidget * parent)
 
     connect(tab, SIGNAL(currentChanged(int)),
             stack, SLOT(setCurrentIndex(int)));
-
-    d->generalPanel = new GradientWidget;
-    d->generalPanel->gradient().setColorAt(0, "#E8E8E8");
-    d->generalPanel->gradient().setColorAt(1, "#D0D0D0");
 
     d->examinePanel = new GradientWidget;
     d->examinePanel->gradient().setColorAt(0, "#E8E8E8");
@@ -112,7 +113,6 @@ TaskEditorWidget::TaskEditorWidget(QWidget * parent)
     d->playPanel->gradient().setColorAt(0, "#E8E8E8");
     d->playPanel->gradient().setColorAt(1, "#D0D0D0");
 
-    stack->insertWidget( tab->addTab( tr("General")), d->generalPanel );
     stack->insertWidget( tab->addTab( tr("Play")),    d->playPanel    );
     stack->insertWidget( tab->addTab( tr("Study")),   d->studyPanel   );
     stack->insertWidget( tab->addTab( tr("Exam")),    d->examinePanel );

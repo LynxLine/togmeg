@@ -2,6 +2,7 @@
 INCLUDEPATH += widgets
 
 HEADERS += \
+    widgets/tabbar.h \
     widgets/headerview.h \
     widgets/slidedwidget.h \
     widgets/pixmapbutton.h \
@@ -12,6 +13,7 @@ HEADERS += \
 
 
 SOURCES += \
+    widgets/tabbar.cpp \
     widgets/headerview.cpp \
     widgets/slidedwidget.cpp \
     widgets/pixmapbutton.cpp \
