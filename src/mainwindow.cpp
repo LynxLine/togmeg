@@ -514,9 +514,6 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
 
         //second switch slide
         d->slide->setCurrentWidget( d->catalogWidget );
-
-        action("app/new")->setText(tr("&New Study"));
-        action("app/new")->setIcon(QIcon(":/images/icons/new-study-32x32.png"));
     }
     else if (m == MainWindow::TaskEditorMode) {
         //first switch stack
@@ -526,9 +523,6 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
 
         //second switch slide
         d->slide->setCurrentWidget( d->taskEditorWidget );
-
-        action("app/new")->setText(tr("&New Question"));
-        action("app/new")->setIcon(QIcon(":/images/icons/new-question-32x32.png"));
     }
     else if (m == MainWindow::ExamineMode) {
         //just switch stack
@@ -542,21 +536,15 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
 
         if ( d->slide->currentWidget() == d->catalogWidget ) {
             d->viewMode = MainWindow::CatalogMode;
-
-            action("app/new")->setText(tr("&New Study"));
-            action("app/new")->setIcon(QIcon(":/images/icons/new-study-32x32.png"));
         }
         else if ( d->slide->currentWidget() == d->taskEditorWidget ) {
             d->viewMode = MainWindow::TaskEditorMode;
-
-            action("app/new")->setText(tr("&New Question"));
-            action("app/new")->setIcon(QIcon(":/images/icons/new-question-32x32.png"));
         }
     }
 
     action("app/back" )->setEnabled( d->viewMode==MainWindow::TaskEditorMode );
 
-    action("app/new")->setEnabled( d->viewMode!=MainWindow::ExamineMode );
+    action("app/new")->setEnabled( d->viewMode==MainWindow::CatalogMode );
     action("app/dublicate")->setEnabled( d->viewMode!=MainWindow::ExamineMode );
     action("app/remove")->setEnabled( d->viewMode!=MainWindow::ExamineMode );
 

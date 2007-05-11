@@ -10,6 +10,9 @@
 #include "taskeditorview.h"
 #include "taskeditorfooter.h"
 #include "taskeditorwidget.h"
+#include "playpropertieswidget.h"
+#include "studypropertieswidget.h"
+#include "exampropertieswidget.h"
 
 class TaskEditorWidget::Private
 {
@@ -18,9 +21,9 @@ public:
     TaskEditorFooter * taskEditorFooter;
 
     //GradientWidget * generalPanel;
-    GradientWidget * examinePanel;
-    GradientWidget * studyPanel;
-    GradientWidget * playPanel;
+    ExamPropertiesWidget * examinePanel;
+    StudyPropertiesWidget * studyPanel;
+    PlayPropertiesWidget * playPanel;
 };
 
 /*!
@@ -93,17 +96,9 @@ TaskEditorWidget::TaskEditorWidget(QWidget * parent)
     connect(tab, SIGNAL(currentChanged(int)),
             stack, SLOT(setCurrentIndex(int)));
 
-    d->examinePanel = new GradientWidget;
-    d->examinePanel->gradient().setColorAt(0, "#E8E8E8");
-    d->examinePanel->gradient().setColorAt(1, "#D0D0D0");
-
-    d->studyPanel   = new GradientWidget;
-    d->studyPanel->gradient().setColorAt(0, "#E8E8E8");
-    d->studyPanel->gradient().setColorAt(1, "#D0D0D0");
-
-    d->playPanel    = new GradientWidget;
-    d->playPanel->gradient().setColorAt(0, "#E8E8E8");
-    d->playPanel->gradient().setColorAt(1, "#D0D0D0");
+    d->examinePanel = new ExamPropertiesWidget;
+    d->studyPanel   = new StudyPropertiesWidget;
+    d->playPanel    = new PlayPropertiesWidget;
 
     stack->insertWidget( tab->addTab( tr("Play")),    d->playPanel    );
     stack->insertWidget( tab->addTab( tr("Study")),   d->studyPanel   );
