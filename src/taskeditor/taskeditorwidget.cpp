@@ -91,7 +91,7 @@ TaskEditorWidget::TaskEditorWidget(QWidget * parent)
 
     TabBar * tab = new TabBar;
     tab->setFixedWidth(250);
-    tab->setFont(MainWindow::baseFont(0.95, QFont::Bold));
+    tab->setFont(MainWindow::baseFont(0.90, QFont::Bold));
     propertiesAreaLayout->addWidget( tab );
 
     QStackedWidget * stack = new QStackedWidget;

@@ -100,7 +100,7 @@ void TabBar::paintEvent(QPaintEvent * pe)
         p.drawText(r, Qt::AlignCenter, d->tabs[i]);
 
         r.adjust(0,-1,0,-1);
-        p.setPen(QColor("#505050"));
+        p.setPen(QColor("#404040"));
         p.drawText(r, Qt::AlignCenter, d->tabs[i]);
     }
 }
@@ -124,11 +124,10 @@ void TabBar::mouseReleaseEvent(QMouseEvent * me)
     for (int i=0;i<count();i++) {
         if ( d->tabRect(i).contains(me->pos()) && i == d->pressed) {
             d->current = d->pressed;
-            d->pressed = -1;
-            update();
-
             emit currentChanged( currentIndex() );
             break;
         }
     }
+    d->pressed = -1;
+    update();
 }

@@ -131,6 +131,11 @@ MainWindow::MainWindow()
 
     d->sizeGrip = new QSizeGrip(this);
     d->sizeGrip->raise();
+#ifdef Q_WS_MAC
+    QPalette palette = d->sizeGrip->palette();
+    palette.setColor(QPalette::Window, QColor(0,0,0,0));
+    d->sizeGrip->setPalette( palette );
+#endif
 }
 
 /*!
