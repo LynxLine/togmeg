@@ -127,6 +127,9 @@ void CategoryView::drawRow(QPainter * painter, const QStyleOptionViewItem &optio
             linearGradient.setColorAt(1, "#939CAB");
 
             painter->fillRect(opt.rect, linearGradient);
+            QRect r = opt.rect;
+            r.setHeight(1);
+            painter->fillRect(r, QColor("#939CAB"));
             opt.palette.setBrush(QPalette::Inactive, QPalette::Highlight, linearGradient);
         }
 

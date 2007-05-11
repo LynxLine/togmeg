@@ -62,6 +62,25 @@ public:
 
     //data
     virtual void setEditorData(QWidget * editor, const QModelIndex & i) const;
+
+private slots:
+    void editNextItem();
+    void editPreviousItem();
+
+};
+
+class TaskItemEditor : public QLineEdit
+{
+Q_OBJECT
+public:
+    TaskItemEditor(QWidget * parent = 0L):QLineEdit(parent) {;}
+
+signals:
+    void editNextItem();
+    void editPreviousItem();
+
+protected:
+    virtual void keyPressEvent(QKeyEvent * ke);
 };
 
 #endif // TASKEDITORVIEW_H

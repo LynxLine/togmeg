@@ -40,16 +40,11 @@ TaskEditorFooter::TaskEditorFooter(QWidget * parent)
     d->l_message->setAlignment( Qt::AlignCenter );
     d->l_message->setFont( MainWindow::baseFont(0.95) );
     layout->addWidget( d->l_message );
-    
-    QLinearGradient linearGradient;
-    linearGradient.setFinalStop(QPointF(0, 22));
-    linearGradient.setStart(QPointF(0, 0));
-    linearGradient.setColorAt(0, "#CAD2DD");
-    linearGradient.setColorAt(1, "#B6C0CF");
 
     QPalette palette = this->palette();
-    palette.setBrush(QPalette::Window, linearGradient);
-    setPalette(palette);    
+    palette.setColor(QPalette::WindowText, "#505050");
+    palette.setBrush(QPalette::Window, QPixmap(":/images/icons/bg-bottom-category.png"));
+    setPalette(palette);
 }
 
 /*!

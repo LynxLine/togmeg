@@ -38,14 +38,7 @@ TaskEditorView::TaskEditorView(QWidget * parent)
     verticalScrollBar()->setFixedWidth(15);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     setStyle( &app::cleanStyle );
-    setEditTriggers(
-            QAbstractItemView::EditKeyPressed
-            /*
-            QAbstractItemView::DoubleClicked |
-            QAbstractItemView::EditKeyPressed |
-            QAbstractItemView::AnyKeyPressed
-            */
-        );
+    setEditTriggers(QAbstractItemView::EditKeyPressed);
 
     d->delegate = new TaskEditorItemDelegate(this);
     connect(d->delegate, SIGNAL(returnPressed()), this, SLOT(editNextItem()));
@@ -379,7 +372,7 @@ void TaskEditorItemDelegate::paint(QPainter * p, const QStyleOptionViewItem & o,
     p->setFont( o.font );
     QString text = index.data(Qt::DisplayRole).toString();
     text = o.fontMetrics.elidedText(text, Qt::ElideRight, r.width());
-    p->drawText( r, o.displayAlignment, text);
+    p->drawText( r, o.displayAlignment | index.data(Qt::TextAlignmentRole).toInt(), text);
 
     p->restore();
 }
@@ -387,7 +380,7 @@ void TaskEditorItemDelegate::paint(QPainter * p, const QStyleOptionViewItem & o,
 QWidget * TaskEditorItemDelegate::createEditor(QWidget * parent, const QStyleOptionViewItem & o, const QModelIndex & i) const
 {
     Q_UNUSED(o);
-    QLineEdit * le = new QLineEdit(parent);
+    QLineEdit * le = new TaskItemEditor(parent);
     le->setStyle( &app::cleanStyle );
     le->setFrame(false);
     {
@@ -402,6 +395,10 @@ QWidget * TaskEditorItemDelegate::createEditor(QWidget * parent, const QStyleOpt
     }
     parent->setFocusProxy(le);
     registerEditor(le);
+
+    connect(le, SIGNAL(editNextItem()), this, SLOT(editNextItem()));
+    connect(le, SIGNAL(editPreviousItem()), this, SLOT(editPreviousItem()));
+
     return le;
 }
 
@@ -430,4 +427,44 @@ void TaskEditorItemDelegate::setEditorData(QWidget * editor, const QModelIndex &
     if (!le) return;
 
     le->setText(v.toString());
+}
+
+void TaskEditorItemDelegate::editNextItem()
+{
+    QWidget * editor = ::qobject_cast<QWidget*>(sender());
+    if (!editor) return;
+
+    emit commitData(editor);
+    emit closeEditor(editor, QAbstractItemDelegate::EditNextItem);
+}
+
+void TaskEditorItemDelegate::editPreviousItem()
+{
+    QWidget * editor = ::qobject_cast<QWidget*>(sender());
+    if (!editor) return;
+
+    emit commitData(editor);
+    emit closeEditor(editor, QAbstractItemDelegate::EditPreviousItem);
+}
+
+void TaskItemEditor::keyPressEvent(QKeyEvent * ke)
+{
+    if ( !selectedText().isEmpty() || ke->modifiers() ) {
+        QLineEdit::keyPressEvent(ke);
+        return;
+    }
+
+    if ( cursorPosition() == 0 && ke->key() == Qt::Key_Left) {
+        QLineEdit::keyPressEvent(ke);
+        emit editPreviousItem();
+        return;
+    }
+
+    if ( cursorPosition() == text().length() && ke->key() == Qt::Key_Right) {
+        QLineEdit::keyPressEvent(ke);
+        emit editNextItem();
+        return;
+    }
+
+    QLineEdit::keyPressEvent(ke);
 }
