@@ -79,6 +79,8 @@ private slots:
 
 };
 
+#include <QLineEdit>
+
 class TaskItemEditor : public QLineEdit
 {
 Q_OBJECT
