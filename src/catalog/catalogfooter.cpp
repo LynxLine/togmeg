@@ -56,6 +56,7 @@ CatalogFooter::CatalogFooter(QWidget * parent)
     */
 
     QPalette palette = this->palette();
+    palette.setColor(QPalette::Text, "#505050");
     palette.setColor(QPalette::WindowText, "#505050");
     palette.setBrush(QPalette::Window, QPixmap(":/images/icons/bg-bottom-category.png"));
     setPalette(palette);
