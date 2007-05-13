@@ -17,9 +17,6 @@ CONFIG += debug_and_release
 unix:CONFIG += precompile_header
 
 QT += xml
-QT += svg
-QT += opengl
-QT += network
 
 INCLUDEPATH += .
 
@@ -36,7 +33,6 @@ SOURCES += \
     studytask.cpp \
 
 
-include("svg/svg.pri")
 include("logger/logger.pri")
 include("storage/storage.pri")
 include("catalog/catalog.pri")
@@ -62,8 +58,8 @@ mac:QMAKE_INFO_PLIST = info.plist
     else {
         UI_DIR = release
 
-        mac:CONFIG += x86 ppc
-        mac:QMAKE_MAC_SDK=/Developer/SDKs/MacOSX10.4u.sdk
+#        mac:CONFIG += x86 ppc
+#        mac:QMAKE_MAC_SDK=/Developer/SDKs/MacOSX10.4u.sdk
     }
 }
 

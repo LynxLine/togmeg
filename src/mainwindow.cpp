@@ -5,6 +5,7 @@
 #include <QtGui>
 #include <QtCore>
 
+#include "crammero.h"
 #include "mainwindow.h"
 #include "examinator.h"
 
@@ -293,7 +294,7 @@ void MainWindow::createMenuBar()
 void MainWindow::createToolBar()
 {
     QToolBar * toolBar;
-	toolBar = addToolBar(tr("Run"));
+	toolBar = addToolBar(tr("Toolbar"));
     toolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     toolBar->setIconSize(QSize(32, 32));
     toolBar->setMovable(false);
@@ -314,6 +315,7 @@ void MainWindow::createToolBar()
 	toolBar->addSeparator();
 	toolBar->addAction( action("app/stop") );
     
+    //toolBar->setStyle( &app::cleanStyle );
     //QMainWindow::setUnifiedTitleAndToolBarOnMac(true);
 }
 
