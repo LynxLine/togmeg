@@ -2,7 +2,6 @@
 
 #include <QtGui>
 #include <QtXml>
-#include <QtNetwork>
 
 #endif
 
