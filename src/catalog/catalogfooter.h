@@ -21,12 +21,28 @@ public slots:
     void setStudyCount(int);
     void setCurrentTask(QString taskId);
 
+signals:
+    void renameClicked();
+
 private slots:
     void updateMessageLabel();
 
 private:
     class Private;
     Private * d;
+};
+
+#include "pixmapbutton.h"
+
+class RenamePixmapButton : public PixmapButton
+{
+Q_OBJECT
+public:
+    RenamePixmapButton(QWidget * parent = 0);
+
+protected:
+    virtual void paintEvent(QPaintEvent * pe);
+
 };
 
 #endif // CATALOGFOOTER_H

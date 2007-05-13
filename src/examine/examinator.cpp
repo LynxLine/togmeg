@@ -138,7 +138,7 @@ void Examinator::setEntryCount(int count)
 
 void Examinator::setCurrentTask(QString taskId)
 {
-    qDebug() << "Examinator::setCurrentTask()" << taskId;
+    //qDebug() << "Examinator::setCurrentTask()" << taskId;
 
     if ( taskId.isEmpty() ) {
         d->task = 0L;

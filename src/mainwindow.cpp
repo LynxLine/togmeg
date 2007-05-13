@@ -222,7 +222,7 @@ void MainWindow::createActions()
 	d->actions["app/back" ] = new QAction (QIcon(":/images/icons/back-32x32.png"), tr("&Back"), this);
 	d->actions["app/forward" ]  = new QAction (tr("&Forward"), this);
 
-	d->actions["app/new"       ] = new QAction (QIcon(":/images/icons/new-study-32x32.png"), tr("&New"      ), this);
+	d->actions["app/new"       ] = new QAction (QIcon(":/images/icons/new-study-32x32.png"), tr("&New Study"), this);
 	d->actions["app/dublicate" ] = new QAction (QIcon(":/images/icons/dublicate-32x32.png"), tr("&Dublicate"), this);
     d->actions["app/remove"    ] = new QAction (QIcon(":/images/icons/remove-32x32.png"   ), tr("&Remove"   ), this);
 
@@ -299,21 +299,33 @@ void MainWindow::createToolBar()
     toolBar->setIconSize(QSize(32, 32));
     toolBar->setMovable(false);
 
-	toolBar->addAction( action("app/back") );
-	//toolBar->addAction( action("app/export") );
+    QWidget * space1 = new QWidget;
+    space1->setFixedSize(10,10);
+    toolBar->addWidget(space1);
 
-    toolBar->addSeparator();
+	toolBar->addAction( action("app/back") );
+
+    QWidget * space2 = new QWidget;
+    space2->setFixedSize(30,10);
+    toolBar->addWidget(space2);
 
 	toolBar->addAction( action("app/new") );
 	toolBar->addAction( action("app/dublicate") );
 	toolBar->addAction( action("app/remove") );
 
-    toolBar->addSeparator();
+    QWidget * space3 = new QWidget;
+    space3->setFixedSize(30,10);
+    toolBar->addWidget(space3);
+
 	toolBar->addAction( action("app/demo") );
 	toolBar->addAction( action("app/study") );
 	toolBar->addAction( action("app/exam") );
-	toolBar->addSeparator();
-	toolBar->addAction( action("app/stop") );
+
+    QWidget * space4 = new QWidget;
+    space4->setFixedSize(20,10);
+    toolBar->addWidget(space4);
+
+    toolBar->addAction( action("app/stop") );
     
     //toolBar->setStyle( &app::cleanStyle );
     //QMainWindow::setUnifiedTitleAndToolBarOnMac(true);

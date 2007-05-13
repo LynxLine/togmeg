@@ -5,6 +5,7 @@
 #include <QtGui>
 #include "studytask.h"
 #include "mainwindow.h"
+#include "pixmapbutton.h"
 #include "tasklistmodel.h"
 #include "catalogfooter.h"
 
@@ -33,27 +34,20 @@ CatalogFooter::CatalogFooter(QWidget * parent)
 
     QHBoxLayout * layout = new QHBoxLayout;
     layout->setSpacing(5);
-    layout->setMargin(3);
+    layout->setMargin(0);
     setLayout(layout);
+
+    layout->addItem(new QSpacerItem(10,10, QSizePolicy::Fixed, QSizePolicy::Minimum));
+
+    PixmapButton * b_rename = new RenamePixmapButton;
+    b_rename->setFont( MainWindow::baseFont(0.95) );
+    connect(b_rename, SIGNAL(clicked()), this, SIGNAL(renameClicked()));
+    layout->addWidget( b_rename );
 
     d->l_message = new QLabel;
     d->l_message->setAlignment( Qt::AlignCenter );
     d->l_message->setFont( MainWindow::baseFont(0.95) );
     layout->addWidget( d->l_message );
-
-    //d->l_message->setText("Total: 27 Studies, Current: BINGO1, 24 Entries");
-
-    /*
-    QLinearGradient linearGradient;
-    linearGradient.setFinalStop(QPointF(0, 22));
-    linearGradient.setStart(QPointF(0, 0));
-    linearGradient.setColorAt(0, "#CAD2DD");
-    linearGradient.setColorAt(1, "#B6C0CF");
-
-    QPalette palette = this->palette();
-    palette.setBrush(QPalette::Window, linearGradient);
-    setPalette(palette);
-    */
 
     QPalette palette = this->palette();
     palette.setColor(QPalette::Text, "#505050");
@@ -108,4 +102,22 @@ void CatalogFooter::updateMessageLabel()
                 .arg( d->currentTaskEntryCount )
         );
     }
+}
+
+RenamePixmapButton::RenamePixmapButton(QWidget * parent)
+:PixmapButton(":/images/button-rename-study.png",
+              ":/images/button-rename-study.png",
+              ":/images/button-rename-study-on.png", parent)
+{
+}
+
+void RenamePixmapButton::paintEvent(QPaintEvent * pe)
+{
+    PixmapButton::paintEvent(pe);
+
+    QPainter p(this);
+    if ( isDown() ) 
+        p.setPen( QColor("#303030") );
+    else p.setPen( QColor("#505050") );
+    p.drawText(rect(), Qt::AlignCenter, tr("Rename"));
 }

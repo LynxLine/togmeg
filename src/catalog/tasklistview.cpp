@@ -53,7 +53,7 @@ TaskListView::TaskListView(QWidget * parent)
 
     setFrameStyle(QFrame::NoFrame);
     setItemDelegate(new TaskListItemDelegate(this));
-    setEditTriggers(editTriggers() ^ QAbstractItemView::DoubleClicked);
+    setEditTriggers(QAbstractItemView::EditKeyPressed);
 
     setContextMenuPolicy(Qt::CustomContextMenu);
     connect(this, SIGNAL(customContextMenuRequested(const QPoint &)), 

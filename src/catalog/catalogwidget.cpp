@@ -133,18 +133,6 @@ CatalogWidget::CatalogWidget(QWidget * parent)
         vline3->setLineWidth(1);
     }
 
-    //addCategory->setText("+");
-    //remCategory->setText("-");
-
-    //addCategory->setAutoRaise(true);
-    //remCategory->setAutoRaise(true);
-
-    //addCategory->setFixedSize(25,25);
-    //remCategory->setFixedSize(25,25);
-
-    //addCategory->setFocusPolicy(Qt::NoFocus);
-    //remCategory->setFocusPolicy(Qt::NoFocus);
-
     connect(addCategory, SIGNAL(clicked()), d->categoryView, SLOT(addNewCategory()));
     connect(remCategory, SIGNAL(clicked()), d->categoryView, SLOT(removeCategory()));
 
@@ -177,6 +165,9 @@ CatalogWidget::CatalogWidget(QWidget * parent)
             d->catalogFooter,  SLOT(setCurrentTask(QString)));
     connect(d->taskListView, SIGNAL(rowCountChanged(int)),
             d->catalogFooter,  SLOT(setStudyCount(int)));
+
+    connect(d->catalogFooter, SIGNAL(renameClicked()),
+            d->taskListView,    SLOT(editStudyName()));
 
     //init footer
     d->catalogFooter->setCurrentTask( d->taskListView->currentTaskId() );

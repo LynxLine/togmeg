@@ -21,6 +21,7 @@ public:
 
 public slots:
     void addNewStudy();
+    void editStudyName();
     void editCurrentStudy();
     void applyCategoryFilter(QString categoryId);
 
@@ -34,7 +35,6 @@ protected:
     virtual void currentChanged(const QModelIndex & current, const QModelIndex & previous);
 
 private slots:
-    void editStudyName();
     void activateItem(const QModelIndex &);
     void activateContextMenu(const QPoint &);
 
