@@ -3,6 +3,7 @@
 //
 
 #include <QtGui>
+#include "mainwindow.h"
 #include "timelinewidget.h"
 
 class TimeLineWidget::Private {
@@ -22,6 +23,8 @@ TimeLineWidget::TimeLineWidget(QWidget * parent)
 :QWidget(parent)
 {
     d = new Private;
+
+    setFont( MainWindow::baseFont(0.95) );
 
     QGridLayout * layout = new QGridLayout;
     layout->setSpacing(5);

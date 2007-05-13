@@ -14,7 +14,7 @@ class ItemDelegate : public QAbstractItemDelegate
 {
 Q_OBJECT
 public:
-    ItemDelegate(QObject * parent):QAbstractItemDelegate(parent) {;}
+    ItemDelegate(QAbstractItemView * parent):QAbstractItemDelegate(parent), view(parent) {;}
     virtual bool eventFilter(QObject * object, QEvent * event);
 
     //editor
@@ -33,6 +33,7 @@ private slots:
 
 private:
     mutable QList<QWidget *> editors;
+    QAbstractItemView * view;
 };
 
 #endif // ITEMDELEGATE_H

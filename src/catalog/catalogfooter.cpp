@@ -109,6 +109,7 @@ RenamePixmapButton::RenamePixmapButton(QWidget * parent)
               ":/images/button-rename-study.png",
               ":/images/button-rename-study-on.png", parent)
 {
+    setFocusPolicy(Qt::NoFocus);
 }
 
 void RenamePixmapButton::paintEvent(QPaintEvent * pe)

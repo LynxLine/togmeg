@@ -39,7 +39,7 @@ TaskEditorView::TaskEditorView(QWidget * parent)
     setFrameStyle(QFrame::NoFrame);
     setAllColumnsShowFocus(true);
     verticalScrollBar()->setFixedWidth(15);
-    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    //setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     setStyle( &app::cleanStyle );
     setEditTriggers(QAbstractItemView::EditKeyPressed);
     setNextItemMode(QAQAMode);
@@ -275,10 +275,12 @@ void TaskEditorView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
         headerSection = header()->logicalIndex(headerIndex);
         if (header()->isSectionHidden(headerSection))
             continue;
+
         position = columnViewportPosition(headerSection);
         width = header()->sectionSize(headerSection);
         modelIndex = d->model->index(index.row(), headerSection, parent);
         opt.state = state;
+
         if (!modelIndex.isValid()) {
             opt.rect.setRect(position, y, width, height);
             painter->fillRect(opt.rect, palette().brush(QPalette::Base));

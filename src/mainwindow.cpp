@@ -219,7 +219,7 @@ void MainWindow::createActions()
     d->actions["app/export"] = new QAction (tr("&Export..."), this);
     d->actions["app/print"]  = new QAction (tr("&Print..."), this);
 
-	d->actions["app/back" ] = new QAction (QIcon(":/images/icons/back-32x32.png"), tr("&Back"), this);
+	d->actions["app/back" ] = new QAction (QIcon(":/images/icons/back-32x32.png"), tr("&Backward"), this);
 	d->actions["app/forward" ]  = new QAction (tr("&Forward"), this);
 
 	d->actions["app/new"       ] = new QAction (QIcon(":/images/icons/new-study-32x32.png"), tr("&New Study"), this);
@@ -300,13 +300,13 @@ void MainWindow::createToolBar()
     toolBar->setMovable(false);
 
     QWidget * space1 = new QWidget;
-    space1->setFixedSize(10,10);
+    space1->setFixedSize(5,10);
     toolBar->addWidget(space1);
 
 	toolBar->addAction( action("app/back") );
 
     QWidget * space2 = new QWidget;
-    space2->setFixedSize(30,10);
+    space2->setFixedSize(20,10);
     toolBar->addWidget(space2);
 
 	toolBar->addAction( action("app/new") );
@@ -314,7 +314,7 @@ void MainWindow::createToolBar()
 	toolBar->addAction( action("app/remove") );
 
     QWidget * space3 = new QWidget;
-    space3->setFixedSize(30,10);
+    space3->setFixedSize(20,10);
     toolBar->addWidget(space3);
 
 	toolBar->addAction( action("app/demo") );
@@ -322,7 +322,7 @@ void MainWindow::createToolBar()
 	toolBar->addAction( action("app/exam") );
 
     QWidget * space4 = new QWidget;
-    space4->setFixedSize(20,10);
+    space4->setFixedSize(10,10);
     toolBar->addWidget(space4);
 
     toolBar->addAction( action("app/stop") );
@@ -345,7 +345,7 @@ void MainWindow::createShortcuts()
     action("app/copy")       ->setShortcut(tr("Ctrl+C"));
     action("app/paste")      ->setShortcut(tr("Ctrl+V"));
     action("app/help")       ->setShortcut(tr("F1"));
-    action("app/back")       ->setShortcut(tr("Backspace"));
+    action("app/back")       ->setShortcut(QKeySequence(Qt::ALT+Qt::Key_Left ));
 }
 
 /*!

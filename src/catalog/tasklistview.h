@@ -33,6 +33,7 @@ signals:
 protected:
     virtual void paintEvent(QPaintEvent * pe);
     virtual void currentChanged(const QModelIndex & current, const QModelIndex & previous);
+    virtual void drawRow(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
 
 private slots:
     void activateItem(const QModelIndex &);
@@ -43,28 +44,21 @@ private:
 	Private * d;
 };
 
-#include <QItemDelegate>
+#include <itemdelegate.h>
 
-class TaskListItemDelegate : public QItemDelegate
+class TaskListItemDelegate : public ItemDelegate
 {
 Q_OBJECT
 public:
-    TaskListItemDelegate(QObject * parent = 0):QItemDelegate(parent) {;}
+    TaskListItemDelegate(QAbstractItemView * parent = 0):ItemDelegate(parent) {;}
     
-    void updateEditorGeometry(QWidget * editor, const QStyleOptionViewItem & option, const QModelIndex & index) const {
-        QStyleOptionViewItemV2 opt = option;
-        opt.rect.setRect(opt.rect.x()+2,
-                         opt.rect.y()+2,
-                         opt.rect.width()-4,
-                         opt.rect.height()-4);
-        QItemDelegate::updateEditorGeometry(editor, opt, index);
-    }
+    //view
+    virtual QSize sizeHint(const QStyleOptionViewItem & o, const QModelIndex & i) const;
+    virtual void paint(QPainter * painter, const QStyleOptionViewItem & o, const QModelIndex & i) const;
 
-    virtual QSize sizeHint(const QStyleOptionViewItem & option, const QModelIndex & index ) const {
-        QSize s = QItemDelegate::sizeHint(option, index);
-        s.setHeight(20);
-        return s;
-    }
+    //edit
+    virtual QWidget * createEditor(QWidget * parent, const QStyleOptionViewItem & o, const QModelIndex & i) const;
+    virtual void updateEditorGeometry(QWidget * editor, const QStyleOptionViewItem & o, const QModelIndex & i) const;
 
 };
 

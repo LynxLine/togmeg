@@ -68,8 +68,9 @@ bool ItemDelegate::eventFilter(QObject * o, QEvent * e)
         default:
             return false;
         }
-        if (editor->parentWidget())
-            editor->parentWidget()->setFocus();
+        if (view) {
+            view->setFocus();
+        }
         return true;
     } 
     else if (e->type() == QEvent::FocusOut) {

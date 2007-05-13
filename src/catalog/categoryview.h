@@ -51,7 +51,7 @@ class CategoryItemDelegate : public ItemDelegate
 {
 Q_OBJECT
 public:
-    CategoryItemDelegate(QObject * parent = 0):ItemDelegate(parent) {;}
+    CategoryItemDelegate(QAbstractItemView * parent = 0):ItemDelegate(parent) {;}
     
     //view
     virtual QSize sizeHint(const QStyleOptionViewItem & o, const QModelIndex & i) const;

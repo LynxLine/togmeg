@@ -3,6 +3,7 @@
 //
 
 #include <QtGui>
+#include "crammero.h"
 #include "studytask.h"
 #include "mainwindow.h"
 #include "headerview.h"
@@ -36,20 +37,7 @@ TaskListView::TaskListView(QWidget * parent)
     setAutoFillBackground(true);
     verticalScrollBar()->setFixedWidth(15);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-
-#ifdef Q_WS_MAC
-    setAlternatingRowColors(false);
-    {
-        d->c1 = palette().color(QPalette::Base);
-        d->c2 = palette().color(QPalette::AlternateBase);
-
-        QPalette palette = this->palette();
-        palette.setColor(QPalette::Base, QColor(0,0,0,0));
-        setPalette(palette);
-    }
-#else
     setAlternatingRowColors(true);
-#endif
 
     setFrameStyle(QFrame::NoFrame);
     setItemDelegate(new TaskListItemDelegate(this));
@@ -73,6 +61,8 @@ TaskListView::TaskListView(QWidget * parent)
     d->filter->setFilterKeyColumn(0);
 
     connect(this, SIGNAL(doubleClicked(const QModelIndex &)), 
+            this, SLOT(activateItem(const QModelIndex &)));
+    connect(this, SIGNAL(activated(const QModelIndex &)), 
             this, SLOT(activateItem(const QModelIndex &)));
 
     setModel( d->filter );
@@ -190,21 +180,199 @@ void TaskListView::currentChanged(const QModelIndex & current, const QModelIndex
 
 void TaskListView::paintEvent(QPaintEvent * pe)
 {
-#ifdef Q_WS_MAC
-    QRect r = pe->rect();
-    QPainter p( viewport() );
+    QTreeView::paintEvent(pe);
+}
 
-    int rowHeight = 20;
-    int i1 = r.y()/rowHeight-1;
-    int i2 = (r.y()+r.height())/rowHeight+1;
+void TaskListView::drawRow(QPainter *painter, const QStyleOptionViewItem &option,
+                        const QModelIndex &index) const
+{
+    QStyleOptionViewItemV2 opt = option;
+    const int y = option.rect.y();
+    const QModelIndex parent = index.parent();
+    const QModelIndex current = currentIndex();
+    const QStyle::State state = opt.state;
 
-    for (int i=i1;i<i2;i++) {
-        QRect rf = QRect(r.x(), i*rowHeight, r.width(), rowHeight);
-        p.fillRect(rf, i % 2 ? d->c2 : d->c1);
+    const int left = 0;
+    const int right = model()->columnCount()-1;
+
+    const bool alternate = true;
+    const bool enabled = (state & QStyle::State_Enabled) != 0;
+
+    int width, height = option.rect.height();
+    int position;
+    int headerSection;
+    QModelIndex modelIndex;
+
+    QBrush fill;
+    for (int headerIndex = left; headerIndex <= right; ++headerIndex) {
+        headerSection = header()->logicalIndex(headerIndex);
+        if (header()->isSectionHidden(headerSection))
+            continue;
+
+        position = columnViewportPosition(headerSection);
+        width = header()->sectionSize(headerSection);
+        modelIndex = model()->index(index.row(), headerSection, parent);
+        opt.state = state;
+
+        if (!modelIndex.isValid()) {
+            opt.rect.setRect(position, y, width, height);
+            painter->fillRect(opt.rect, palette().brush(QPalette::Base));
+            continue;
+        }
+
+        if (enabled) {
+            QPalette::ColorGroup cg;
+            if ((d->model->flags(index) & Qt::ItemIsEnabled) == 0) {
+                opt.state &= ~QStyle::State_Enabled;
+                cg = QPalette::Disabled;
+            } else {
+                cg = QPalette::Active;
+            }
+            opt.palette.setCurrentColorGroup(cg);
+        }
+
+        if (alternate) {
+            if (index.row() & 1) {
+                opt.features |= QStyleOptionViewItemV2::Alternate;
+                fill = opt.palette.brush(QPalette::AlternateBase);
+            } else {
+                opt.features &= ~QStyleOptionViewItemV2::Alternate;
+                fill = opt.palette.brush(QPalette::Base);
+            }
+        }
+
+        opt.rect.setRect(position, y, width, height);
+        painter->fillRect(opt.rect, fill);
+
+        {
+            QRect r = opt.rect;
+            if (headerIndex) {
+                painter->drawLine(r.x(), r.y(), 
+                                  r.x(), r.y()+r.height()
+                );
+            }
+        }
+
+
+        if (selectionModel()->isSelected(modelIndex)) {
+            opt.state |= QStyle::State_Selected;
+            if ( opt.state & QStyle::State_Active ) {
+                QLinearGradient linearGradient(QPointF(0, y), QPointF(0, y+height));
+                linearGradient.setColorAt(0, "#5F9CFE");
+                linearGradient.setColorAt(1, "#1E61CD");
+
+                painter->fillRect(opt.rect, linearGradient);
+                QRect r = opt.rect;
+                r.setHeight(1);
+                painter->fillRect(r, QColor("#3B7CDA"));
+                opt.palette.setBrush(QPalette::Active, QPalette::Highlight, linearGradient);
+            }
+            else {
+                QLinearGradient linearGradient(QPointF(0, y), QPointF(0, y+height));
+                linearGradient.setColorAt(0, "#A8B7CE");
+                linearGradient.setColorAt(1, "#939CAB");
+
+                painter->fillRect(opt.rect, linearGradient);
+                QRect r = opt.rect;
+                r.setHeight(1);
+                painter->fillRect(r, QColor("#939CAB"));
+                opt.palette.setBrush(QPalette::Inactive, QPalette::Highlight, linearGradient);
+            }
+            
+            opt.palette.setColor(QPalette::Inactive, QPalette::Highlight, "#A8B7CE");
+            opt.palette.setColor(QPalette::HighlightedText, "#FFFFFF");
+        }
+
+        opt.rect.adjust(5,0,0,0);
+        itemDelegate()->paint(painter, opt, modelIndex);
+    }
+}
+
+//
+// Item Delegate
+//
+
+QSize TaskListItemDelegate::sizeHint(const QStyleOptionViewItem & o, const QModelIndex & index) const
+{
+    QSize s;
+    s.setHeight(20);
+    QFontMetrics fm(o.font);
+    s.setWidth(fm.width( index.data(Qt::DisplayRole).toString())+10 );
+    return s; 
+}
+
+void TaskListItemDelegate::paint(QPainter * p, const QStyleOptionViewItem & o, const QModelIndex & index) const
+{
+    p->save();
+
+    //icon
+    QPixmap pm;
+    QRect drect;
+
+    QVariant value = index.data(Qt::DecorationRole);
+    if (value.isValid()) {
+        if (value.type() == QVariant::Pixmap) {
+            pm = qvariant_cast<QPixmap>(value);
+            drect = QRect(QPoint(o.rect.x(), o.rect.y()), pm.size());
+        }
+    }
+    p->drawPixmap(drect, pm);
+
+    //text color
+    QPalette::ColorGroup cg = o.state & QStyle::State_Enabled ? QPalette::Normal : QPalette::Disabled;
+    if (cg == QPalette::Normal && !(o.state & QStyle::State_Active)) cg = QPalette::Inactive;
+    
+    if (o.state & QStyle::State_Selected) 
+        p->setPen(o.palette.color(cg, QPalette::HighlightedText));
+    else  p->setPen(o.palette.color(cg, QPalette::Text));
+
+    int margin =4;
+    QRect r = o.rect;
+    r.adjust(drect.width()+margin,0, -margin,0);
+
+    p->setFont( o.font );
+    QString text = index.data(Qt::DisplayRole).toString();
+    text = o.fontMetrics.elidedText(text, Qt::ElideRight, r.width());
+    p->drawText( r, o.displayAlignment | index.data(Qt::TextAlignmentRole).toInt(), text);
+
+    p->restore();
+}
+
+QWidget * TaskListItemDelegate::createEditor(QWidget * parent, const QStyleOptionViewItem & o, const QModelIndex & i) const
+{
+    Q_UNUSED(o);
+    QLineEdit * le = new QLineEdit(parent);
+    le->setStyle( &app::cleanStyle );
+    le->setFrame(false);
+    {
+        QPalette palette = le->palette();
+        
+        QBrush fill;
+        if (i.row() & 1)  fill = parent->palette().brush(QPalette::AlternateBase);
+        else fill = parent->palette().brush(QPalette::Base);
+        
+        palette.setBrush(QPalette::Base, fill);
+        le->setPalette(palette);
+    }
+    parent->setFocusProxy(le);
+    registerEditor(le);
+    return le;
+}
+
+void TaskListItemDelegate::updateEditorGeometry(QWidget * editor, const QStyleOptionViewItem & o, const QModelIndex & i) const
+{
+    QPixmap pm;
+    QRect drect;
+
+    QVariant value = i.data(Qt::DecorationRole);
+    if (value.isValid()) {
+        if (value.type() == QVariant::Pixmap) {
+            pm = qvariant_cast<QPixmap>(value);
+            drect = QRect(QPoint(o.rect.x(), o.rect.y()), pm.size());
+        }
     }
 
-    p.end();
-#endif
-
-    QTreeView::paintEvent(pe);
+    QRect r = o.rect;
+    r.adjust(drect.width()+2,2, -2,-2);
+    editor->setGeometry( r );
 }

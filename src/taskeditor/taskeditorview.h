@@ -60,7 +60,7 @@ class TaskEditorItemDelegate : public ItemDelegate
 {
 Q_OBJECT
 public:
-    TaskEditorItemDelegate(QObject * parent = 0):ItemDelegate(parent) {;}
+    TaskEditorItemDelegate(QAbstractItemView * parent = 0):ItemDelegate(parent) {;}
     
     //view
     virtual QSize sizeHint(const QStyleOptionViewItem & o, const QModelIndex & i) const;
