@@ -314,6 +314,7 @@ void MainWindow::createToolBar()
 	toolBar->addSeparator();
 	toolBar->addAction( action("app/stop") );
     
+    //QMainWindow::setUnifiedTitleAndToolBarOnMac(true);
 }
 
 /*!
