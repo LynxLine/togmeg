@@ -4,12 +4,10 @@
 
 #include <QtGui>
 #include "mainwindow.h"
-#include "timelinewidget.h"
 #include "playpropertieswidget.h"
 
 class PlayPropertiesWidget::Private {
 public:
-    QPointer<TimeLineWidget> timeLineWidget;
 };
 
 /*!
@@ -45,11 +43,31 @@ PlayPropertiesWidget::PlayPropertiesWidget(QWidget * parent)
     grid->addWidget( new QLabel(tr("times")), 5,2 );
     grid->addItem  ( new QSpacerItem(10,10, QSizePolicy::MinimumExpanding, QSizePolicy::Fixed), 5,3 );
 
+    layout->addItem(new QSpacerItem(10,20, QSizePolicy::Minimum, QSizePolicy::Fixed));
+
+
+    {
+        QHBoxLayout * hbox = new QHBoxLayout;
+        hbox->setSpacing(2);
+        hbox->setMargin(0);
+
+        QLabel * l = new QLabel(tr("<b>Timeline</b>"));
+        hbox->addWidget(l);
+
+        {
+            QFrame * hline = new QFrame;
+            hline->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Minimum);
+            hline->setFrameStyle(QFrame::HLine | QFrame::Sunken);
+            hline->setMidLineWidth(0);
+            hline->setLineWidth(1);
+            hbox->addWidget( hline );
+        }
+
+        layout->addLayout( hbox );
+        layout->addItem(new QSpacerItem(10,100, QSizePolicy::Minimum, QSizePolicy::Fixed));
+    }
+
     layout->addItem(new QSpacerItem(10,10, QSizePolicy::Minimum, QSizePolicy::Expanding));
-
-    d->timeLineWidget = new TimeLineWidget;
-    layout->addWidget( d->timeLineWidget );
-
 }
 
 /*!

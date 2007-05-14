@@ -50,10 +50,32 @@ StudyPropertiesWidget::StudyPropertiesWidget(QWidget * parent)
     grid->addWidget( new QLabel(tr("correct answers")), 4,2 );
     grid->addItem  ( new QSpacerItem(10,10, QSizePolicy::MinimumExpanding, QSizePolicy::Fixed), 4,3 );
 
-    layout->addItem(new QSpacerItem(10,10, QSizePolicy::Minimum, QSizePolicy::Expanding));
+    layout->addItem(new QSpacerItem(10,20, QSizePolicy::Minimum, QSizePolicy::Fixed));
 
+    {
+        QHBoxLayout * hbox = new QHBoxLayout;
+        hbox->setSpacing(2);
+        hbox->setMargin(0);
+
+        QLabel * l = new QLabel(tr("<b>Statistics</b>"));
+        hbox->addWidget(l);
+
+        {
+            QFrame * hline = new QFrame;
+            hline->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Minimum);
+            hline->setFrameStyle(QFrame::HLine | QFrame::Sunken);
+            hline->setMidLineWidth(0);
+            hline->setLineWidth(1);
+            hbox->addWidget( hline );
+        }
+
+        layout->addLayout( hbox );
+        layout->addItem(new QSpacerItem(10,100, QSizePolicy::Minimum, QSizePolicy::Fixed));
+    }
     d->timeLineWidget = new TimeLineWidget;
     layout->addWidget( d->timeLineWidget );
+
+    layout->addItem(new QSpacerItem(10,10, QSizePolicy::Minimum, QSizePolicy::Expanding));
 }
 
 /*!

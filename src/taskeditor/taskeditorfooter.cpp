@@ -42,6 +42,7 @@ TaskEditorFooter::TaskEditorFooter(QWidget * parent)
     layout->setMargin(0);
     setLayout(layout);
 
+    /*
     QFrame * vline2 = new QFrame;
     {
         QPalette palette = vline2->palette();
@@ -61,31 +62,40 @@ TaskEditorFooter::TaskEditorFooter(QWidget * parent)
         vline3->setFixedWidth(1);
         vline3->setLineWidth(1);
     }
+    */
 
     d->b_qqaaMode = new PixmapButton(
         ":/images/icons/qqaa-order-button-on.png",
         ":/images/icons/qqaa-order-button-on.png",
         ":/images/icons/qqaa-order-button-down.png"
     );
-    layout->addWidget( d->b_qqaaMode );
-    layout->addWidget( vline3 );
+    
+
+    //layout->addWidget( vline3 );
 
     d->b_qaqaMode = new PixmapButton(
         ":/images/icons/qaqa-order-button.png",
         ":/images/icons/qaqa-order-button.png",
         ":/images/icons/qaqa-order-button-down.png"
     );
+
+    layout->addItem(new QSpacerItem(5,10, QSizePolicy::Fixed, QSizePolicy::Minimum));
+    layout->addWidget( d->b_qqaaMode );
     layout->addWidget( d->b_qaqaMode );
-    layout->addWidget( vline2 );
+    layout->addItem(new QSpacerItem(10,10, QSizePolicy::MinimumExpanding, QSizePolicy::Minimum));
+
+    //layout->addWidget( vline2 );
 
 
     connect(d->b_qaqaMode, SIGNAL(pressed()), this, SLOT(toQAQAMode()));
     connect(d->b_qqaaMode, SIGNAL(pressed()), this, SLOT(toQQAAMode()));
 
+    /*
     d->l_message = new QLabel;
     d->l_message->setAlignment( Qt::AlignCenter );
     d->l_message->setFont( MainWindow::baseFont(0.95) );
     layout->addWidget( d->l_message );
+    */
 
     QPalette palette = this->palette();
     palette.setColor(QPalette::WindowText, "#505050");
@@ -159,6 +169,7 @@ void TaskEditorFooter::setCurrentTask(QString taskId)
 
 void TaskEditorFooter::updateMessageLabel()
 {
+    /*
     if ( d->currentTaskName.isEmpty() ) {
         d->l_message->setText(
             tr("Studies: %1")
@@ -173,4 +184,5 @@ void TaskEditorFooter::updateMessageLabel()
                 .arg( d->currentTaskEntryCount )
         );
     }
+    */
 }
