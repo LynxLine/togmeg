@@ -23,11 +23,13 @@ public:
     QString id();
     QString name();
     QString categoryId();
+    QVariant property(QString);
     int entryCount();
 
 public slots:
     void setName(QString);
     void setCategoryId(QString);
+    void setProperty(QString name, QVariant value);
     void setEntryCount(int);
 
 signals:

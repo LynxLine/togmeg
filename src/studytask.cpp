@@ -14,6 +14,7 @@ public:
     QString name;
     QString categoryId;
     int entryCount;
+    QMap<QString, QVariant> properties;
 
     DataContainer * dataContainer;
 };
@@ -62,6 +63,13 @@ StudyTask::StudyTask(DataContainer * container, QObject * parent)
         d->categoryId = el.attribute("category");
         d->name = el.attribute("name");
         d->id = el.attribute("id");
+
+        QDomNamedNodeMap nodeMap = el.attributes();
+        for (int i=0;i<nodeMap.count();i++) {
+            QDomAttr a = nodeMap.item(i).toAttr();
+            if (a.isNull()) continue;
+            d->properties[ a.name() ] = a.value();
+        }
     }
 }
 
@@ -80,6 +88,11 @@ StudyTask::~StudyTask()
         child.setAttribute("category", categoryId());
         child.setAttribute("name", name());
         child.setAttribute("id", id());
+
+        foreach (QString propertyName, d->properties.keys()) {
+            child.setAttribute(propertyName, property(propertyName).toString());
+        }
+
         doc.appendChild(child);
 
         resource->write(doc.toByteArray());
@@ -130,4 +143,14 @@ void StudyTask::setEntryCount(int count)
     if (d->entryCount != count)
         emit entryCountChanged(count);
     d->entryCount = count;
+}
+
+QVariant StudyTask::property(QString name)
+{
+    return d->properties[ name ];
+}
+
+void StudyTask::setProperty(QString name, QVariant value)
+{
+    d->properties[ name ] = value;
 }
