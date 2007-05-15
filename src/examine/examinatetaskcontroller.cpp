@@ -3,16 +3,24 @@
 //
 
 #include <QtGui>
+#include "studytask.h"
 #include "studytaskmodel.h"
+#include "tasklistmodel.h"
 #include "examinatetaskcontroller.h"
 
 class ExaminateTaskController::Private {
 public:
-    Private():index(0) {;}
+    Private()/*:index(0)*/ {;}
 
-    int index;
+    //int index;
     QTimeLine * timeLine;
+
+    StudyTask * task;
+    QList<int> entryIndexes;
     ControllerDataEntry currentEntry;
+
+    bool processOnly;
+    int processOnlyCount;
 };
 
 /*!
@@ -22,6 +30,7 @@ ExaminateTaskController::ExaminateTaskController(StudyTaskModel * parent)
 :TaskController(parent)
 {
     d = new Private;
+    d->task = TaskListModel::instance()->task( model->taskId() );
 
     d->timeLine = new QTimeLine(1000, this);
     d->timeLine->setCurveShape(QTimeLine::LinearCurve);
@@ -30,6 +39,19 @@ ExaminateTaskController::ExaminateTaskController(StudyTaskModel * parent)
 
     connect(d->timeLine, SIGNAL(finished()),
             this, SLOT(readyForNext()), Qt::QueuedConnection);
+
+    d->processOnly = d->task->property("exam_processOnly").toBool();
+    d->processOnlyCount = d->task->property("exam_processOnlyCount").toInt();
+
+    int index = 0;
+    while ( index < model->rowCount() ) {
+        QModelIndex i = model->index(index, StudyTaskModel::QuestionColumn);
+        QString question = model->data(i).toString();
+        if ( !question.isEmpty() ) {
+            d->entryIndexes << index;
+        }
+        index++;
+    }
 }
 
 /*!
@@ -42,34 +64,29 @@ ExaminateTaskController::~ExaminateTaskController()
 
 bool ExaminateTaskController::hasNext()
 {
-    int nextIndex = d->index;
-    while ( nextIndex < model->rowCount() ) {
-        QModelIndex i = model->index(nextIndex, StudyTaskModel::QuestionColumn);
-        QString question = model->data(i).toString();
-        if ( !question.isEmpty() ) break;
-        nextIndex++;
-    }
-    return nextIndex < model->rowCount();
+    if ( d->processOnly && d->processOnlyCount <=0 ) return false;
+    return d->entryIndexes.count() >0;
 }
 
 ControllerDataEntry ExaminateTaskController::next()
 {
-    while ( d->index < model->rowCount() ) {
-        QModelIndex i = model->index(d->index, StudyTaskModel::QuestionColumn);
-        QString question = model->data(i).toString();
-        if ( !question.isEmpty() ) break;
-        d->index++;
+    int count = d->entryIndexes.count();
+    int index = d->entryIndexes.first();
+    bool randomize = d->task->property("exam_randomize").toBool();
+    if (randomize) {
+        index = d->entryIndexes[ rand() % count ];
     }
+
+    d->entryIndexes.removeAll(index);
+    if (d->processOnly) d->processOnlyCount--;
 
     ControllerDataEntry entry;
 
-    entry.answer = model->data( model->index(d->index, StudyTaskModel::AnswerColumn) ).toString();
-    entry.question = model->data( model->index(d->index, StudyTaskModel::QuestionColumn) ).toString();
+    entry.answer = model->data( model->index(index, StudyTaskModel::AnswerColumn) ).toString();
+    entry.question = model->data( model->index(index, StudyTaskModel::QuestionColumn) ).toString();
     entry.msecs = 5000; //temp
 
     d->currentEntry = entry;
-    d->index++;
-
     return entry;
 }
 

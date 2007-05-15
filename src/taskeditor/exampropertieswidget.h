@@ -22,6 +22,8 @@ public slots:
 
 private slots:
     void randomizeStateChanged(int);
+    void processOnlyStateChanged(int);
+    void processOnlyCountChanged(int);
 
 private:
     class Private;

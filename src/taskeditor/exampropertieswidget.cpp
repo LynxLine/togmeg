@@ -12,6 +12,10 @@ class ExamPropertiesWidget::Private {
 public:
     StudyTask * currentTask;
     QCheckBox * cb_randomize;
+
+    QCheckBox * cb_processOnly;
+    QSpinBox * sb_processOnly;
+    QLabel * l_processOnly;
 };
 
 /*!
@@ -39,17 +43,31 @@ ExamPropertiesWidget::ExamPropertiesWidget(QWidget * parent)
     layout->addLayout(grid);
 
     d->cb_randomize = new QCheckBox(tr("Randomize questions"));
+    d->cb_randomize->setFocusPolicy(Qt::NoFocus);
     connect(d->cb_randomize, SIGNAL(stateChanged(int)), 
             this, SLOT(randomizeStateChanged(int)));
 
     grid->addWidget( d->cb_randomize, 0,0, 1,4 );
     grid->addItem  ( new QSpacerItem(10,10, QSizePolicy::Minimum, QSizePolicy::Fixed), 1,0);
 
-    grid->addWidget( new QCheckBox(tr("Process only")),      2,0, 1,4 );
+    d->cb_processOnly = new QCheckBox(tr("Process only"));
+    d->cb_processOnly->setFocusPolicy(Qt::NoFocus);
+    connect(d->cb_processOnly, SIGNAL(stateChanged(int)), 
+            this, SLOT(processOnlyStateChanged(int)));
 
+    d->sb_processOnly = new QSpinBox;
+    d->sb_processOnly->setAlignment(Qt::AlignRight);
+    d->sb_processOnly->setFocusPolicy(Qt::NoFocus);
+    d->sb_processOnly->setMinimum(1);
+    connect(d->sb_processOnly, SIGNAL(valueChanged(int)), 
+            this, SLOT(processOnlyCountChanged(int)));
+
+    d->l_processOnly = new QLabel(tr(" questions"));
+
+    grid->addWidget( d->cb_processOnly, 2,0, 1,4 );
     grid->addItem  ( new QSpacerItem(15,10, QSizePolicy::Fixed, QSizePolicy::Fixed), 3,0 );
-    grid->addWidget( new QSpinBox(), 3,1 );
-    grid->addWidget( new QLabel(tr("questions of study")), 3,2 );
+    grid->addWidget( d->sb_processOnly, 3,1 );
+    grid->addWidget( d->l_processOnly, 3,2 );
     grid->addItem  ( new QSpacerItem(10,10, QSizePolicy::MinimumExpanding, QSizePolicy::Fixed), 3,3 );
 
     grid->addItem  ( new QSpacerItem(10,15, QSizePolicy::Minimum, QSizePolicy::Fixed), 4,0);
@@ -104,10 +122,30 @@ void ExamPropertiesWidget::setCurrentTask(QString taskId)
     if ( !t ) return;
 
     d->cb_randomize->setChecked( t->property("exam_randomize").toBool() );
+    d->cb_processOnly->setChecked( t->property("exam_processOnly").toBool() );
+    d->l_processOnly->setEnabled( t->property("exam_processOnly").toBool() );
+    d->sb_processOnly->setEnabled( t->property("exam_processOnly").toBool() );
+    d->sb_processOnly->setValue( t->property("exam_processOnlyCount").toInt() );
 }
 
 void ExamPropertiesWidget::randomizeStateChanged(int state)
 {
     if ( !d->currentTask ) return;
     d->currentTask->setProperty("exam_randomize", state == Qt::Checked);
+}
+
+void ExamPropertiesWidget::processOnlyStateChanged(int state)
+{
+    if ( !d->currentTask ) return;
+    d->currentTask->setProperty("exam_processOnly", state == Qt::Checked);
+    d->sb_processOnly->setEnabled( state == Qt::Checked );
+    d->l_processOnly->setEnabled( state == Qt::Checked );
+    if ( state == Qt::Checked )
+        d->sb_processOnly->setValue( d->currentTask->entryCount() );
+}
+
+void ExamPropertiesWidget::processOnlyCountChanged(int count)
+{
+    if ( !d->currentTask ) return;
+    d->currentTask->setProperty("exam_processOnlyCount", count);
 }
