@@ -10,12 +10,7 @@
 
 class StudyTask::Private {
 public:
-    QString id;
-    QString name;
-    QString categoryId;
-    int entryCount;
     QMap<QString, QVariant> properties;
-
     DataContainer * dataContainer;
 };
 
@@ -28,9 +23,9 @@ StudyTask::StudyTask(QObject * parent)
 {
     d = new Private;
 
-    d->id = app::uniqueId();
-    d->name = tr("New study");
-    d->entryCount = 0;
+    setProperty("id", app::uniqueId());
+    setProperty("name", tr("New study"));
+    setProperty("count", 0);
 
     QDir storageDir(app::storagePath());
     storageDir.mkpath( id() );
@@ -59,15 +54,10 @@ StudyTask::StudyTask(DataContainer * container, QObject * parent)
         delete resource;
 
         QDomElement el = doc.documentElement();
-        d->entryCount = el.attribute("count").toInt();
-        d->categoryId = el.attribute("category");
-        d->name = el.attribute("name");
-        d->id = el.attribute("id");
-
         QDomNamedNodeMap nodeMap = el.attributes();
         for (int i=0;i<nodeMap.count();i++) {
             QDomAttr a = nodeMap.item(i).toAttr();
-            if (a.isNull()) continue;
+            if (a.isNull() || a.name().isEmpty() ) continue;
             d->properties[ a.name() ] = a.value();
         }
     }
@@ -84,15 +74,9 @@ StudyTask::~StudyTask()
         QDomDocument doc("taskinfoxml");
 
         QDomElement child = doc.createElement("studytask");
-        child.setAttribute("count", entryCount());
-        child.setAttribute("category", categoryId());
-        child.setAttribute("name", name());
-        child.setAttribute("id", id());
-
         foreach (QString propertyName, d->properties.keys()) {
             child.setAttribute(propertyName, property(propertyName).toString());
         }
-
         doc.appendChild(child);
 
         resource->write(doc.toByteArray());
@@ -105,27 +89,27 @@ StudyTask::~StudyTask()
 
 QString StudyTask::id()
 {
-    return d->id;
+    return property("id").toString();
 }
 
 QString StudyTask::name()
 {
-    return d->name;
+    return property("name").toString();
 }
 
 void StudyTask::setName(QString name)
 {
-    d->name = name;
+    setProperty("name", name);
 }
 
 QString StudyTask::categoryId()
 {
-    return d->categoryId;
+    return property("category").toString();
 }
 
 void StudyTask::setCategoryId(QString id)
 {
-    d->categoryId = id;
+    setProperty("category", id);
 }
 
 DataContainer * StudyTask::dataContainer()
@@ -135,14 +119,15 @@ DataContainer * StudyTask::dataContainer()
 
 int StudyTask::entryCount()
 {
-    return d->entryCount;
+    return property("count").toInt();
 }
 
 void StudyTask::setEntryCount(int count)
 {
-    if (d->entryCount != count)
+    if ( entryCount() != count)
         emit entryCountChanged(count);
-    d->entryCount = count;
+
+    setProperty("count", count);
 }
 
 QVariant StudyTask::property(QString name)
