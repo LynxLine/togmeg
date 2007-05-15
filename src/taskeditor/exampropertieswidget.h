@@ -20,6 +20,9 @@ public:
 public slots:
     void setCurrentTask(QString taskId);
 
+private slots:
+    void randomizeStateChanged(int);
+
 private:
     class Private;
     Private * d;

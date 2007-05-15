@@ -3,11 +3,15 @@
 //
 
 #include <QtGui>
+#include "studytask.h"
 #include "mainwindow.h"
+#include "tasklistmodel.h"
 #include "exampropertieswidget.h"
 
 class ExamPropertiesWidget::Private {
 public:
+    StudyTask * currentTask;
+    QCheckBox * cb_randomize;
 };
 
 /*!
@@ -17,6 +21,8 @@ ExamPropertiesWidget::ExamPropertiesWidget(QWidget * parent)
 :GradientWidget(parent)
 {
     d = new Private;
+    d->currentTask = 0L;
+
     gradient().setColorAt(0, "#E8E8E8");
     gradient().setColorAt(1, "#D0D0D0");
     setContentsMargins(15, 10, 15, 20);
@@ -32,7 +38,11 @@ ExamPropertiesWidget::ExamPropertiesWidget(QWidget * parent)
     grid->setMargin(0);
     layout->addLayout(grid);
 
-    grid->addWidget( new QCheckBox(tr("Randomize questions")),        0,0, 1,4 );
+    d->cb_randomize = new QCheckBox(tr("Randomize questions"));
+    connect(d->cb_randomize, SIGNAL(stateChanged(int)), 
+            this, SLOT(randomizeStateChanged(int)));
+
+    grid->addWidget( d->cb_randomize, 0,0, 1,4 );
     grid->addItem  ( new QSpacerItem(10,10, QSizePolicy::Minimum, QSizePolicy::Fixed), 1,0);
 
     grid->addWidget( new QCheckBox(tr("Process only")),      2,0, 1,4 );
@@ -88,4 +98,16 @@ ExamPropertiesWidget::~ExamPropertiesWidget()
 
 void ExamPropertiesWidget::setCurrentTask(QString taskId)
 {
+    StudyTask * t = TaskListModel::instance()->task( taskId );
+    d->currentTask = t;
+
+    if ( !t ) return;
+
+    d->cb_randomize->setChecked( t->property("exam_randomize").toBool() );
+}
+
+void ExamPropertiesWidget::randomizeStateChanged(int state)
+{
+    if ( !d->currentTask ) return;
+    d->currentTask->setProperty("exam_randomize", state == Qt::Checked);
 }
