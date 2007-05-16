@@ -14,6 +14,10 @@ namespace app {
     QString uniqueId(int length = 10);
     extern QWindowsStyle cleanStyle;
 
+    //typos in minute
+    int typingSpeed();
+    void addTypingStats(int msecs, int count);
+
 }; //namespace
 
 #endif // CRAMMERO_H

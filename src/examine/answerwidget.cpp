@@ -9,7 +9,7 @@
 class AnswerWidget::Private {
 public:
     QString answer;
-    QLineEdit * le_answer;
+    AnswerLineEdit * le_answer;
     Examinator::Mode mode;
 };
 
@@ -28,13 +28,15 @@ AnswerWidget::AnswerWidget(QWidget * parent)
 
     setFont( MainWindow::baseFont(1.5, QFont::Bold) );
 
-    d->le_answer = new QLineEdit;
+    d->le_answer = new AnswerLineEdit;
     d->le_answer->setAlignment(Qt::AlignCenter);
 
     connect(d->le_answer, SIGNAL(returnPressed()),
             this,           SLOT(returnPressed()));
     connect(d->le_answer, SIGNAL(textChanged(const QString &)),
             this,           SLOT(textChanged(const QString &)));
+    connect(d->le_answer, SIGNAL(userEvent(int, int)),
+            this,         SIGNAL(userEvent(int, int)));
 
     setFocusProxy( d->le_answer );
 
@@ -93,8 +95,10 @@ QString AnswerWidget::answer()
 void AnswerWidget::setAnswer(QString a)
 {
     d->answer = a;
-    if ( d->mode == Examinator::Playing )
+    if ( d->mode == Examinator::Playing ) {
+        d->le_answer->clear();
         d->le_answer->setText(a);
+    }
     else
         d->le_answer->clear();
 }
@@ -178,4 +182,46 @@ void AnswerWidget::setExaminatorState(Examinator::State s)
     }
 
     update();
+}
+
+//
+// AnswerLineEdit
+//
+
+class AnswerLineEdit::Private {
+public:
+    QTime startTime;
+    bool firstKey;
+};
+
+AnswerLineEdit::AnswerLineEdit(QWidget * parent)
+:QLineEdit(parent)
+{
+    d = new Private;
+    reset();
+}
+
+AnswerLineEdit::~AnswerLineEdit()
+{
+    delete d;
+}
+
+void AnswerLineEdit::reset()
+{
+    clear();
+    d->firstKey = true;
+    d->startTime = QTime::currentTime();
+}
+
+void AnswerLineEdit::keyPressEvent(QKeyEvent * ke)
+{
+    QLineEdit::keyPressEvent(ke);
+
+    int msecs = d->startTime.msecsTo( QTime::currentTime() );
+    if ( d->firstKey ) {
+        d->firstKey = false;
+        emit userEvent(msecs, int(TypingStarted));
+    }
+    else
+        emit userEvent(msecs, int(SymbolTyped));
 }

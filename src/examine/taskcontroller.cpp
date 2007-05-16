@@ -24,3 +24,8 @@ TaskController::~TaskController()
 bool ControllerDataEntry::isNull() {
     return question.isEmpty() && answer.isEmpty() && msecs == 0;
 }
+
+void TaskController::collectUserEvent(int msecs, int eventType)
+{
+    eventTimeMap[ msecs ] = eventType;
+}

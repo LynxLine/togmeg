@@ -51,6 +51,7 @@ signals:
     void taskNameChanged(QString);
     void currentAnswerChanged(QString);
     void currentQuestionChanged(QString);
+    void userEvent(int msecs, int eventType);
 
     void stateChanged(Examinator::State);
     void modeChanged(Examinator::Mode);

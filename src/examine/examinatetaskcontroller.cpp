@@ -3,6 +3,7 @@
 //
 
 #include <QtGui>
+#include "crammero.h"
 #include "studytask.h"
 #include "studytaskmodel.h"
 #include "tasklistmodel.h"
@@ -73,6 +74,7 @@ ControllerDataEntry ExaminateTaskController::next()
     int count = d->entryIndexes.count();
     int index = d->entryIndexes.first();
     bool randomize = d->task->property("exam_randomize").toBool();
+    if (d->processOnly) randomize = true;
     if (randomize) {
         index = d->entryIndexes[ rand() % count ];
     }
@@ -92,6 +94,8 @@ ControllerDataEntry ExaminateTaskController::next()
 
 void ExaminateTaskController::processAnswer(QString answer)
 {
+    //qDebug() << eventTimeMap;
+
     if ( d->timeLine->state() != QTimeLine::NotRunning ) {
         d->timeLine->setCurrentTime( d->timeLine->duration() );
         d->timeLine->stop();
@@ -100,12 +104,23 @@ void ExaminateTaskController::processAnswer(QString answer)
     }
 
     if ( d->currentEntry.answer != answer.toLower().simplified() ) {
-        emit indicateMismatching();
         d->timeLine->setDuration( 1000 );
+        emit indicateMismatching();
     }
     else {
-        emit indicateMatching();
+        //answer is correct
         d->timeLine->setDuration( 300 );
+        emit indicateMatching();
+
+        //commit stats
+        QList<int> times = eventTimeMap.keys();
+        if (times.count() >= 2) {
+            qSort(times);
+            int msecs = times.last() - times.first();
+            if (msecs) {
+                app::addTypingStats(msecs, times.count());
+            }
+        }
     }
 
     d->timeLine->setCurrentTime(0);

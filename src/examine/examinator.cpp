@@ -71,6 +71,8 @@ void Examinator::start(Examinator::Mode mode)
             this, SLOT(indicateMismatching()));
     connect(d->controller, SIGNAL(indicateMatching()),
             this, SLOT(indicateMatching()));
+    connect(this, SIGNAL(userEvent(int, int)),
+            d->controller, SLOT(collectUserEvent(int, int)));
 
     //update widget
     emit taskNameChanged( d->task->name() );

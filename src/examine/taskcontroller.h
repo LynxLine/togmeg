@@ -33,6 +33,9 @@ public:
 
     virtual void processAnswer(QString) = 0;
 
+public slots:
+    virtual void collectUserEvent(int msecs, int eventType);
+
 signals:
     void requestNextQuestion();
     void indicateMismatching();
@@ -40,6 +43,7 @@ signals:
 
 protected:
     StudyTaskModel * model;
+    QMap<int, int> eventTimeMap;
 };
 
 #endif // TASKCONTROLLER_H

@@ -3,6 +3,7 @@
 //
 
 #include <QtGui>
+#include "crammero.h"
 #include "studytask.h"
 #include "mainwindow.h"
 #include "tasklistmodel.h"
@@ -361,6 +362,7 @@ void ExamPropertiesWidget::basedOnTypingToggled(bool f)
     if ( !d->currentTask ) return;
     d->currentTask->setProperty("exam_basedOnTyping", f);
     if ( f ) {
+        d->l_basedOnTyping->setText(tr("typing speed = %1").arg( app::typingSpeed() ));
         d->cb_basedOnTyping->setCurrentIndex( CB_TIME_SECONDS );
         d->sb_basedOnTyping->setValue( 5 );
     }

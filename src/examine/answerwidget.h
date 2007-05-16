@@ -28,6 +28,7 @@ public slots:
 signals:
     void userAnswerChanged(QString);
     void commitAnswer(QString);
+    void userEvent(int msecs, int eventType);
 
 private slots:
     void textChanged(const QString &);
@@ -35,6 +36,33 @@ private slots:
 
 protected:
     void paintEvent(QPaintEvent *);
+
+private:
+    class Private;
+    Private * d;
+};
+
+#include <QLineEdit>
+
+class AnswerLineEdit : public QLineEdit
+{
+Q_OBJECT
+public:
+    enum EventType {
+        TypingStarted = 0,
+        SymbolTyped
+    };
+    AnswerLineEdit(QWidget * parent = 0);
+    virtual ~AnswerLineEdit();
+
+public slots:
+    void reset();
+
+signals:
+    void userEvent(int msecs, int eventType);
+
+protected:
+    virtual void keyPressEvent(QKeyEvent * ke);
 
 private:
     class Private;
