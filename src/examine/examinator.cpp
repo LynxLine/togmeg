@@ -186,6 +186,7 @@ void Examinator::processAnswer()
     d->timeLine->stop();
 
     d->controller->processAnswer( d->userAnswer );
+
 }
 
 Examinator::State Examinator::state()

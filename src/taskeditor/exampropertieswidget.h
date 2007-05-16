@@ -24,6 +24,15 @@ private slots:
     void randomizeStateChanged(int);
     void processOnlyStateChanged(int);
     void processOnlyCountChanged(int);
+    void limitExamTimeToggled(bool);
+    void limitExamTimeChanged(int);
+    void limitExamTimeUnitChanged(int);
+    void timeForQuestionToggled(bool);
+    void timeForQuestionChanged(int);
+    void timeForQuestionUnitChanged(int);
+    void basedOnTypingToggled(bool);
+    void basedOnTypingChanged(int);
+    void basedOnTypingUnitChanged(int);
 
 private:
     class Private;
