@@ -11,7 +11,7 @@
 
 class ExaminateTaskController::Private {
 public:
-    Private()/*:index(0)*/ {;}
+    Private():usedTime(0) {;}
 
     //int index;
     QTimeLine * timeLine;
@@ -20,6 +20,7 @@ public:
     QList<int> entryIndexes;
     ControllerDataEntry currentEntry;
 
+    int usedTime;
     bool processOnly;
     int processOnlyCount;
 };
@@ -86,15 +87,53 @@ ControllerDataEntry ExaminateTaskController::next()
 
     entry.answer = model->data( model->index(index, StudyTaskModel::AnswerColumn) ).toString();
     entry.question = model->data( model->index(index, StudyTaskModel::QuestionColumn) ).toString();
-    entry.msecs = 5000; //temp
+
+    //calculate timeline
+    bool basedOnTyping = d->task->property("exam_basedOnTyping").toBool();
+    bool limitExamTime = d->task->property("exam_limitExamTime").toBool();
+    bool timeForQuestion = d->task->property("exam_timeForQuestion").toBool();
+
+    int basedOnTypingValue = d->task->property("exam_basedOnTypingValue").toInt();
+    int limitExamTimeValue = d->task->property("exam_limitExamTimeValue").toInt();
+    int timeForQuestionValue = d->task->property("exam_timeForQuestionValue").toInt();
+
+    int basedOnTypingUnit = d->task->property("exam_basedOnTypingUnit").toInt();
+    int limitExamTimeUnit = d->task->property("exam_limitExamTimeUnit").toInt();
+    int timeForQuestionUnit = d->task->property("exam_timeForQuestionUnit").toInt();
+
+    basedOnTypingValue *= basedOnTypingUnit == CB_TIME_MINUTES ? 60000 : 1000;
+    limitExamTimeValue *= limitExamTimeUnit == CB_TIME_MINUTES ? 60000 : 1000;
+    timeForQuestionValue *= timeForQuestionUnit == CB_TIME_MINUTES ? 60000 : 1000;
+
+    if ( !basedOnTyping && !limitExamTime && !timeForQuestion ) {
+        basedOnTyping = true;
+    }
+
+    if (basedOnTyping) {
+        int typingSpeed = app::typingSpeed(); //symbols in minute
+        if ( typingSpeed <= 0 ) typingSpeed = 60;
+
+        int typingTime = entry.answer.length() *1000 *60 /typingSpeed;
+
+        entry.startTime = 0;
+        entry.totalTime = basedOnTypingValue + typingTime;
+    }
+    else if (limitExamTime) {
+        entry.startTime = d->usedTime;
+        entry.totalTime = limitExamTimeValue;
+    }
+    else if (timeForQuestion) {
+        entry.startTime = 0;
+        entry.totalTime = timeForQuestionValue;
+    }
 
     d->currentEntry = entry;
     return entry;
 }
 
-void ExaminateTaskController::processAnswer(QString answer)
+void ExaminateTaskController::processAnswer(int usedTime, QString answer)
 {
-    //qDebug() << eventTimeMap;
+    d->usedTime = usedTime;
 
     if ( d->timeLine->state() != QTimeLine::NotRunning ) {
         d->timeLine->setCurrentTime( d->timeLine->duration() );
@@ -123,6 +162,7 @@ void ExaminateTaskController::processAnswer(QString answer)
         }
     }
 
+    eventTimeMap.clear();
     d->timeLine->setCurrentTime(0);
     d->timeLine->start();
 }

@@ -40,7 +40,10 @@ public slots:
     void pause();
     void stop();
     void continuePlay();
-    void processAnswer();
+
+    void processAnswerEarly();
+    void processAnswer(int usedTime);
+
     void setUserAnswer(QString);
     void setCurrentTask(QString taskId);
 
@@ -59,6 +62,7 @@ signals:
 private slots:
     void setState(State);
     void setEntryCount(int);
+    void timeLineFinished();
     void prepareNextQuestion();
     void indicateMismatching();
     void indicateMatching();

@@ -20,7 +20,7 @@ public:
     virtual bool hasNext();
     virtual ControllerDataEntry next();
 
-    virtual void processAnswer(QString);
+    virtual void processAnswer(int usedTime, QString);
 
 private:
     class Private;

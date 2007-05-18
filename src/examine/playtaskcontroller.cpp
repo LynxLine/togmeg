@@ -55,14 +55,16 @@ ControllerDataEntry PlayTaskController::next()
 
     entry.answer = model->data( model->index(d->index, StudyTaskModel::AnswerColumn) ).toString();
     entry.question = model->data( model->index(d->index, StudyTaskModel::QuestionColumn) ).toString();
-    entry.msecs = 5000; //temp
+
+    entry.totalTime = 5000; //temp
+    entry.startTime = 0; //temp
 
     d->index++;
 
     return entry;
 }
 
-void PlayTaskController::processAnswer(QString answer)
+void PlayTaskController::processAnswer(int usedTime, QString answer)
 {
     Q_UNUSED(answer);
     emit requestNextQuestion();

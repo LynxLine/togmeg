@@ -10,12 +10,13 @@ class StudyTaskModel;
 
 class ControllerDataEntry {
 public:
-    ControllerDataEntry():msecs(0) {;}
+    ControllerDataEntry():startTime(0),totalTime(0) {;}
     bool isNull();
 
     QString question;
     QString answer;
-    int msecs;
+    int startTime; //msecs
+    int totalTime; //msecs
 };
 
 /*!
@@ -31,7 +32,10 @@ public:
     virtual bool hasNext() = 0;
     virtual ControllerDataEntry next() = 0;
 
-    virtual void processAnswer(QString) = 0;
+    virtual void processAnswer(int usedTime, QString answer) {
+        Q_UNUSED(usedTime);
+        eventTimeMap.clear();
+    }
 
 public slots:
     virtual void collectUserEvent(int msecs, int eventType);

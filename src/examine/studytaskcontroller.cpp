@@ -65,14 +65,16 @@ ControllerDataEntry StudyTaskController::next()
 
     entry.answer = model->data( model->index(d->index, StudyTaskModel::AnswerColumn) ).toString();
     entry.question = model->data( model->index(d->index, StudyTaskModel::QuestionColumn) ).toString();
-    entry.msecs = 5000; //temp
+    
+    entry.totalTime = 5000; //temp
+    entry.startTime = 0; //temp
 
     d->currentEntry = entry;
  
     return entry;
 }
 
-void StudyTaskController::processAnswer(QString answer)
+void StudyTaskController::processAnswer(int usedTime, QString answer)
 {
     if ( d->timeLine->state() != QTimeLine::NotRunning ) {
         d->timeLine->setCurrentTime( d->timeLine->duration() );

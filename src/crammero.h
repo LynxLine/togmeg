@@ -8,6 +8,9 @@
 #include <QString>
 #include <QWindowsStyle>
 
+#define CB_TIME_SECONDS 0
+#define CB_TIME_MINUTES 1
+
 namespace app {
 
     QString storagePath();

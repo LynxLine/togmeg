@@ -144,7 +144,7 @@ ExamineWidget::ExamineWidget(QWidget * parent)
     connect(d->answerWidget, SIGNAL(userAnswerChanged(QString)),
             d->examinator,     SLOT(setUserAnswer(QString)));
     connect(d->answerWidget, SIGNAL(commitAnswer(QString)),
-            d->examinator,     SLOT(processAnswer()));
+            d->examinator,     SLOT(processAnswerEarly()));
     connect(d->answerWidget, SIGNAL(userEvent(int, int)),
             d->examinator,   SIGNAL(userEvent(int, int)));
 

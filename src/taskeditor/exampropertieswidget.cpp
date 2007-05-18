@@ -9,9 +9,6 @@
 #include "tasklistmodel.h"
 #include "exampropertieswidget.h"
 
-#define CB_TIME_SECONDS 0
-#define CB_TIME_MINUTES 1
-
 class ExamPropertiesWidget::Private {
 public:
     StudyTask * currentTask;
@@ -186,6 +183,7 @@ ExamPropertiesWidget::ExamPropertiesWidget(QWidget * parent)
             QPalette palette = d->l_basedOnTyping->palette();
             palette.setColor(QPalette::WindowText, "#5050FF");
             d->l_basedOnTyping->setPalette(palette);
+            d->l_basedOnTyping->setWordWrap(true);
         }
 
         //
@@ -237,12 +235,23 @@ void ExamPropertiesWidget::setCurrentTask(QString taskId)
 
     if ( !t ) return;
 
+    int processOnlyCount = t->property("exam_processOnlyCount").toInt();
+
     d->cb_randomize->setChecked( t->property("exam_randomize").toBool() );
     d->cb_processOnly->setChecked( t->property("exam_processOnly").toBool() );
     d->l_processOnly->setEnabled( t->property("exam_processOnly").toBool() );
     d->sb_processOnly->setEnabled( t->property("exam_processOnly").toBool() );
-    d->sb_processOnly->setValue( t->property("exam_processOnlyCount").toInt() );
-    
+    d->sb_processOnly->setValue( processOnlyCount );
+
+    //load first
+    int basedOnTyping = t->property("exam_basedOnTypingValue").toInt();
+    int limitExamTime = t->property("exam_limitExamTimeValue").toInt();
+    int timeForQuestion = t->property("exam_timeForQuestionValue").toInt();
+
+    int basedOnTypingUnit = t->property("exam_basedOnTypingUnit").toInt();
+    int limitExamTimeUnit = t->property("exam_limitExamTimeUnit").toInt();
+    int timeForQuestionUnit = t->property("exam_timeForQuestionUnit").toInt();
+
     d->rb_basedOnTyping->setChecked( t->property("exam_basedOnTyping").toBool() );
     d->rb_limitExamTime->setChecked( t->property("exam_limitExamTime").toBool() );
     d->rb_timeForQuestion->setChecked( t->property("exam_timeForQuestion").toBool() );
@@ -257,10 +266,6 @@ void ExamPropertiesWidget::setCurrentTask(QString taskId)
     limitExamTimeToggled( d->rb_limitExamTime->isChecked() );
     timeForQuestionToggled( d->rb_timeForQuestion->isChecked() );
 
-    int basedOnTyping = t->property("exam_basedOnTypingValue").toInt();
-    int limitExamTime = t->property("exam_limitExamTimeValue").toInt();
-    int timeForQuestion = t->property("exam_timeForQuestionValue").toInt();
-
     if ( basedOnTyping <=0 ) basedOnTyping = 5;
     if ( timeForQuestion <=0 ) timeForQuestion = 10;
     if ( limitExamTime <=0 ) limitExamTime = 10 * d->currentTask->entryCount();
@@ -268,10 +273,6 @@ void ExamPropertiesWidget::setCurrentTask(QString taskId)
     d->sb_basedOnTyping->setValue( basedOnTyping );
     d->sb_limitExamTime->setValue( limitExamTime );
     d->sb_timeForQuestion->setValue( timeForQuestion );
-
-    int basedOnTypingUnit = t->property("exam_basedOnTypingUnit").toInt();
-    int limitExamTimeUnit = t->property("exam_limitExamTimeUnit").toInt();
-    int timeForQuestionUnit = t->property("exam_timeForQuestionUnit").toInt();
 
     d->cb_basedOnTyping->setCurrentIndex( basedOnTypingUnit );
     d->cb_limitExamTime->setCurrentIndex( limitExamTimeUnit );
@@ -311,7 +312,7 @@ void ExamPropertiesWidget::limitExamTimeToggled(bool f)
     d->currentTask->setProperty("exam_limitExamTime", f);
     if ( f ) {
         d->cb_limitExamTime->setCurrentIndex( CB_TIME_SECONDS );
-        d->sb_limitExamTime->setValue( 10 * d->currentTask->entryCount() );
+        d->sb_limitExamTime->setValue( 5 * d->currentTask->entryCount() );
     }
 }
 
@@ -337,7 +338,7 @@ void ExamPropertiesWidget::timeForQuestionToggled(bool f)
     d->currentTask->setProperty("exam_timeForQuestion", f);
     if ( f ) {
         d->cb_timeForQuestion->setCurrentIndex( CB_TIME_SECONDS );
-        d->sb_timeForQuestion->setValue( 10 );
+        d->sb_timeForQuestion->setValue( 5 );
     }
 }
 
@@ -364,7 +365,7 @@ void ExamPropertiesWidget::basedOnTypingToggled(bool f)
     if ( f ) {
         d->l_basedOnTyping->setText(tr("typing speed = %1").arg( app::typingSpeed() ));
         d->cb_basedOnTyping->setCurrentIndex( CB_TIME_SECONDS );
-        d->sb_basedOnTyping->setValue( 5 );
+        d->sb_basedOnTyping->setValue( 2 );
     }
 }
 

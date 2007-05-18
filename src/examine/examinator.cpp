@@ -19,6 +19,7 @@ public:
     StudyTask * task;
     QTimeLine * timeLine;
 
+    Mode mode;
     State state;
     QString userAnswer;
     QPointer<TaskController> controller;
@@ -41,7 +42,7 @@ Examinator::Examinator(QObject * parent)
     setState(Stopped);
 
     connect(d->timeLine, SIGNAL(finished()),
-            this, SLOT(processAnswer()), Qt::QueuedConnection);
+            this, SLOT(timeLineFinished()), Qt::QueuedConnection);
     connect(d->timeLine, SIGNAL(frameChanged(int)),
             this, SIGNAL(tick(int)));
 }
@@ -60,6 +61,8 @@ void Examinator::start(Examinator::Mode mode)
     Q_ASSERT( d->task );
 
     StudyTaskModel * model = StudyTaskModel::instance();
+
+    d->mode = mode;
 
     if ( mode == Playing ) d->controller = new PlayTaskController( model );
     else if ( mode == Studying ) d->controller = new StudyTaskController( model );
@@ -172,8 +175,8 @@ void Examinator::prepareNextQuestion()
 
     setState(Processing);
     d->userAnswer.clear();
-    d->timeLine->setDuration( entry.msecs );
-    d->timeLine->setCurrentTime(0);
+    d->timeLine->setDuration( entry.totalTime );
+    d->timeLine->setCurrentTime( entry.startTime );
     d->timeLine->start();
 }
 
@@ -182,12 +185,26 @@ void Examinator::setUserAnswer(QString answer)
     d->userAnswer = answer;
 }
 
-void Examinator::processAnswer()
+void Examinator::timeLineFinished()
 {
-    d->timeLine->setCurrentTime( d->timeLine->duration() );
+    processAnswer(d->timeLine->duration());
+}
+
+void Examinator::processAnswerEarly()
+{
+    processAnswer(d->timeLine->currentTime());
+}
+
+void Examinator::processAnswer( int usedTime )
+{
+    if ( d->mode != Examinating && 
+         d->task->property("exam_limitExamTime").toBool()) {
+        //jump prohress to 100% to indicate finish
+        d->timeLine->setCurrentTime( d->timeLine->duration() );
+    }
     d->timeLine->stop();
 
-    d->controller->processAnswer( d->userAnswer );
+    d->controller->processAnswer( usedTime, d->userAnswer );
 
 }
 
