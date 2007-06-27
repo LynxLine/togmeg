@@ -3,6 +3,7 @@
 //
 
 #include <QtGui>
+#include "crammero.h"
 #include "studytaskmodel.h"
 #include "studytaskcontroller.h"
 
@@ -66,8 +67,16 @@ ControllerDataEntry StudyTaskController::next()
     entry.answer = model->data( model->index(d->index, StudyTaskModel::AnswerColumn) ).toString();
     entry.question = model->data( model->index(d->index, StudyTaskModel::QuestionColumn) ).toString();
     
-    entry.totalTime = 5000; //temp
-    entry.startTime = 0; //temp
+    //entry.totalTime = 5000; //temp
+    //entry.startTime = 0; //temp
+
+    int typingSpeed = app::typingSpeed(); //symbols in minute
+    if ( typingSpeed <= 0 ) typingSpeed = 60;
+
+    int typingTime = entry.answer.length() *1000 *60 /typingSpeed;
+
+    entry.startTime = 0;
+    entry.totalTime = 5000 + typingTime;
 
     d->currentEntry = entry;
  
@@ -90,6 +99,16 @@ void StudyTaskController::processAnswer(int usedTime, QString answer)
     else {
         emit indicateMatching();
         d->timeLine->setDuration( 300 );
+
+        //commit stats
+        QList<int> times = eventTimeMap.keys();
+        if (times.count() >= 2) {
+            qSort(times);
+            int msecs = times.last() - times.first();
+            if (msecs) {
+                app::addTypingStats(msecs, times.count());
+            }
+        }
     }
 
     d->timeLine->setCurrentTime(0);
