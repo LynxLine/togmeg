@@ -14,7 +14,7 @@ CONFIG += qt
 CONFIG += warn_on
 CONFIG += debug_and_release
 
-unix:CONFIG += precompile_header
+#unix:CONFIG += precompile_header
 
 QT += xml
 

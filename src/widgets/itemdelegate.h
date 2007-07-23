@@ -5,7 +5,9 @@
 #ifndef ITEMDELEGATE_H
 #define ITEMDELEGATE_H
 
+#include <QAbstractItemView>
 #include <QAbstractItemDelegate>
+class QAbstractItemModel;
 
 /*!
  * \class ItemDelegate

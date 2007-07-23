@@ -6,6 +6,7 @@
 #define STUDYTASK_H
 
 #include <QObject>
+#include <QVariant>
 class DataContainer;
 
 /*!

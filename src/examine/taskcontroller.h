@@ -5,6 +5,7 @@
 #ifndef TASKCONTROLLER_H
 #define TASKCONTROLLER_H
 
+#include <QMap>
 #include <QObject>
 class StudyTaskModel;
 
