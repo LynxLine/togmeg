@@ -36,6 +36,7 @@ TaskListView::TaskListView(QWidget * parent)
     setUniformRowHeights(true);
     setAutoFillBackground(true);
     verticalScrollBar()->setFixedWidth(15);
+    setAttribute(Qt::WA_MacShowFocusRect, false);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     setAlternatingRowColors(true);
 

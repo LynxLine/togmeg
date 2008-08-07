@@ -1,24 +1,24 @@
 
-INCLUDEPATH += widgets
+INCLUDEPATH += src/widgets
 
 HEADERS += \
-    widgets/tabbar.h \
-    widgets/headerview.h \
-    widgets/slidedwidget.h \
-    widgets/pixmapbutton.h \
-    widgets/itemdelegate.h \
-    widgets/gradientwidget.h \
-    widgets/roundedlineedit.h \
-    widgets/roundedgradientwidget.h \
+    src/widgets/tabbar.h \
+    src/widgets/headerview.h \
+    src/widgets/slidedwidget.h \
+    src/widgets/pixmapbutton.h \
+    src/widgets/itemdelegate.h \
+    src/widgets/gradientwidget.h \
+    src/widgets/roundedlineedit.h \
+    src/widgets/roundedgradientwidget.h \
 
 
 SOURCES += \
-    widgets/tabbar.cpp \
-    widgets/headerview.cpp \
-    widgets/slidedwidget.cpp \
-    widgets/pixmapbutton.cpp \
-    widgets/itemdelegate.cpp \
-    widgets/gradientwidget.cpp \
-    widgets/roundedlineedit.cpp \
-    widgets/roundedgradientwidget.cpp \
+    src/widgets/tabbar.cpp \
+    src/widgets/headerview.cpp \
+    src/widgets/slidedwidget.cpp \
+    src/widgets/pixmapbutton.cpp \
+    src/widgets/itemdelegate.cpp \
+    src/widgets/gradientwidget.cpp \
+    src/widgets/roundedlineedit.cpp \
+    src/widgets/roundedgradientwidget.cpp \
 

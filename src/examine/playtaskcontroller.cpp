@@ -3,6 +3,8 @@
 //
 
 #include <QtGui>
+#include <ApplicationServices/ApplicationServices.h>
+
 #include "studytaskmodel.h"
 #include "playtaskcontroller.h"
 
@@ -11,6 +13,7 @@ public:
     Private():index(0) {;}
 
     int index;
+    SpeechChannel speechChannel;
 };
 
 /*!
@@ -20,6 +23,13 @@ PlayTaskController::PlayTaskController(StudyTaskModel * parent)
 :TaskController(parent)
 {
     d = new Private;
+    
+    OSErr theErr = noErr;
+    theErr = NewSpeechChannel(NULL, &d->speechChannel);
+    if (theErr != noErr) {
+        qDebug() << "NewSpeechChannel() failed," << theErr;
+        return;
+    }
 }
 
 /*!
@@ -27,6 +37,17 @@ PlayTaskController::PlayTaskController(StudyTaskModel * parent)
  */
 PlayTaskController::~PlayTaskController()
 {
+    if (!d->speechChannel) return;
+    
+    OSErr theErr = noErr;
+    theErr = StopSpeech(d->speechChannel);
+    if (theErr != noErr)
+        qDebug() << "StopSpeech() failed," << theErr;
+    
+    theErr = DisposeSpeechChannel(d->speechChannel);
+    if (theErr != noErr)
+        qDebug() << "DisposeSpeechChannel() failed," << theErr;
+    
     delete d;
 }
 
@@ -59,6 +80,9 @@ ControllerDataEntry PlayTaskController::next()
     entry.totalTime = 5000; //temp
     entry.startTime = 0; //temp
 
+    QString text = entry.answer;
+    SpeakText(d->speechChannel , text.toLatin1().data(), text.toLatin1().size() );
+    
     d->index++;
 
     return entry;
@@ -66,6 +90,7 @@ ControllerDataEntry PlayTaskController::next()
 
 void PlayTaskController::processAnswer(int usedTime, QString answer)
 {
+    Q_UNUSED(usedTime);
     Q_UNUSED(answer);
     emit requestNextQuestion();
 }

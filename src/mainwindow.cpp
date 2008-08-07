@@ -223,8 +223,6 @@ void MainWindow::createActions()
 	d->actions["app/forward" ]  = new QAction (tr("&Forward"), this);
 
 	d->actions["app/new"       ] = new QAction (QIcon(":/images/icons/new-study-32x32.png"), tr("&New Study"), this);
-	d->actions["app/dublicate" ] = new QAction (QIcon(":/images/icons/dublicate-32x32.png"), tr("&Dublicate"), this);
-    d->actions["app/remove"    ] = new QAction (QIcon(":/images/icons/remove-32x32.png"   ), tr("&Remove"   ), this);
 
 	d->actions["app/undo" ] = new QAction (tr("&Undo"), this);
 	d->actions["app/redo" ] = new QAction (tr("&Redo"), this);
@@ -255,27 +253,10 @@ void MainWindow::createMenuBar()
 {
     QMenu * menu;
 	menu = menuBar()->addMenu(tr("&File"));
-    /*
-	menu->addAction( action("app/import") );
-	menu->addAction( action("app/export") );
-	menu->addSeparator();
-	menu->addAction( action("app/print") );
-	menu->addSeparator();
-    */
 	menu->addAction( action("app/exit") );
 
 	menu = menuBar()->addMenu(tr("&Edit"));
     menu->addAction( action("app/new") );
-	menu->addAction( action("app/dublicate") );
-	menu->addAction( action("app/remove") );
-    /*
-	menu->addAction( action("app/undo") );
-	menu->addAction( action("app/redo") );
-	menu->addSeparator();
-	menu->addAction( action("app/cut") );
-	menu->addAction( action("app/copy") );
-	menu->addAction( action("app/paste") );
-    */
 
 	menu = menuBar()->addMenu(tr("&Run"));
 	menu->addAction( action("app/demo") );
@@ -286,7 +267,6 @@ void MainWindow::createMenuBar()
 
     menu = menuBar()->addMenu(tr("&Help"));
 	menu->addAction( action("app/about") );
-	//menu->addAction( action("app/help") );
     menu->addSeparator();
     menu->addAction( action("app/check_updates") );
 }
@@ -312,8 +292,6 @@ void MainWindow::createToolBar()
     toolBar->addWidget(space2);
 
 	toolBar->addAction( action("app/new") );
-	toolBar->addAction( action("app/dublicate") );
-	toolBar->addAction( action("app/remove") );
 
     QWidget * space3 = new QWidget;
     space3->setFixedSize(20,10);
@@ -328,9 +306,6 @@ void MainWindow::createToolBar()
     toolBar->addWidget(space4);
 
     toolBar->addAction( action("app/stop") );
-    
-    //toolBar->setStyle( &app::cleanStyle );
-    //QMainWindow::setUnifiedTitleAndToolBarOnMac(true);
 }
 
 /*!
@@ -562,8 +537,6 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
     action("app/back" )->setEnabled( d->viewMode==MainWindow::TaskEditorMode );
 
     action("app/new")->setEnabled( d->viewMode==MainWindow::CatalogMode );
-    action("app/dublicate")->setEnabled( d->viewMode!=MainWindow::ExamineMode );
-    action("app/remove")->setEnabled( d->viewMode!=MainWindow::ExamineMode );
 
     actionGroup("examine")->setEnabled( d->examinator->entryCount() >0 );
     action("app/demo" )->setEnabled( d->viewMode!=MainWindow::ExamineMode );

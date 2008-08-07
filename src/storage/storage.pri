@@ -1,18 +1,18 @@
 
-INCLUDEPATH += storage
+INCLUDEPATH += src/storage
 
 HEADERS += \
-    storage/categorymodel.h \
-    storage/tasklistmodel.h \
-    storage/studytaskmodel.h \
-    storage/datacontainer.h \
-    storage/dircontainer.h \
+    src/storage/categorymodel.h \
+    src/storage/tasklistmodel.h \
+    src/storage/studytaskmodel.h \
+    src/storage/datacontainer.h \
+    src/storage/dircontainer.h \
 
 
 SOURCES += \
-    storage/categorymodel.cpp \
-    storage/tasklistmodel.cpp \
-    storage/studytaskmodel.cpp \
-    storage/datacontainer.cpp \
-    storage/dircontainer.cpp \
+    src/storage/categorymodel.cpp \
+    src/storage/tasklistmodel.cpp \
+    src/storage/studytaskmodel.cpp \
+    src/storage/datacontainer.cpp \
+    src/storage/dircontainer.cpp \
 

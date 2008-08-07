@@ -22,20 +22,19 @@ QuestionWidget::QuestionWidget(QWidget * parent)
     d->questionMarkPm = QPixmap(":/images/bg-question-mark.png");
 
     QVBoxLayout * layout = new QVBoxLayout;
-    layout->setMargin(50);
+    layout->setMargin(20);
     layout->setSpacing(0);
     setLayout(layout);
 
     setFont( MainWindow::baseFont(1.5, QFont::Bold) );
 
     d->l_question = new QLabel;
-    d->l_question->setAlignment(Qt::AlignCenter);
+    d->l_question->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     d->l_question->setFont( MainWindow::baseFont(1.5, QFont::Bold) );
 
-    layout->addItem(new QSpacerItem(10,10, QSizePolicy::Minimum, QSizePolicy::Expanding));
     layout->addWidget(d->l_question);
-    layout->addItem(new QSpacerItem(10,10, QSizePolicy::Minimum, QSizePolicy::Expanding));
 
+    setMaximumHeight(150);
     setWindowTitleFont( MainWindow::baseFont(1.1, QFont::Bold) );
     setWindowTitle(tr("Question"));
 
@@ -52,23 +51,6 @@ QuestionWidget::QuestionWidget(QWidget * parent)
 QuestionWidget::~QuestionWidget()
 {
     delete d;
-}
-
-void QuestionWidget::paintEvent(QPaintEvent * pe)
-{
-    RoundedGradientWidget::paintEvent(pe);
-
-    QPainter p(this);
-    p.setClipRegion(pe->region());
-    p.setRenderHint(QPainter::Antialiasing);
-
-    qreal w = qreal(width());
-    qreal h = qreal(height());
-
-    p.drawPixmap(w-d->questionMarkPm.width(),
-                 h-d->questionMarkPm.height(),
-                 d->questionMarkPm
-        );
 }
 
 QString QuestionWidget::question()

@@ -3,6 +3,8 @@
 //
 
 #include <QtGui>
+#include <ApplicationServices/ApplicationServices.h>
+
 #include "crammero.h"
 #include "studytask.h"
 #include "studytaskmodel.h"
@@ -23,6 +25,8 @@ public:
     int usedTime;
     bool processOnly;
     int processOnlyCount;
+    
+    SpeechChannel speechChannel;
 };
 
 /*!
@@ -54,6 +58,13 @@ ExaminateTaskController::ExaminateTaskController(StudyTaskModel * parent)
         }
         index++;
     }
+    
+    OSErr theErr = noErr;
+    theErr = NewSpeechChannel(NULL, &d->speechChannel);
+    if (theErr != noErr) {
+        qDebug() << "NewSpeechChannel() failed," << theErr;
+        return;
+    }
 }
 
 /*!
@@ -61,6 +72,17 @@ ExaminateTaskController::ExaminateTaskController(StudyTaskModel * parent)
  */
 ExaminateTaskController::~ExaminateTaskController()
 {
+    if (!d->speechChannel) return;
+    
+    OSErr theErr = noErr;
+    theErr = StopSpeech(d->speechChannel);
+    if (theErr != noErr)
+        qDebug() << "StopSpeech() failed," << theErr;
+    
+    theErr = DisposeSpeechChannel(d->speechChannel);
+    if (theErr != noErr)
+        qDebug() << "DisposeSpeechChannel() failed," << theErr;
+    
     delete d;
 }
 
@@ -162,6 +184,9 @@ void ExaminateTaskController::processAnswer(int usedTime, QString answer)
         }
     }
 
+    QString text = d->currentEntry.answer;
+    SpeakText(d->speechChannel , text.toLatin1().data(), text.toLatin1().size() );
+    
     eventTimeMap.clear();
     d->timeLine->setCurrentTime(0);
     d->timeLine->start();

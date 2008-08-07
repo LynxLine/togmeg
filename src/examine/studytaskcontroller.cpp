@@ -3,6 +3,8 @@
 //
 
 #include <QtGui>
+#include <ApplicationServices/ApplicationServices.h>
+
 #include "crammero.h"
 #include "studytaskmodel.h"
 #include "studytaskcontroller.h"
@@ -14,6 +16,8 @@ public:
     int index;
     QTimeLine * timeLine;
     ControllerDataEntry currentEntry;
+    
+    SpeechChannel speechChannel;
 };
 
 /*!
@@ -31,6 +35,13 @@ StudyTaskController::StudyTaskController(StudyTaskModel * parent)
 
     connect(d->timeLine, SIGNAL(finished()),
             this, SLOT(readyForNext()), Qt::QueuedConnection);
+    
+    OSErr theErr = noErr;
+    theErr = NewSpeechChannel(NULL, &d->speechChannel);
+    if (theErr != noErr) {
+        qDebug() << "NewSpeechChannel() failed," << theErr;
+        return;
+    }
 }
 
 /*!
@@ -38,6 +49,17 @@ StudyTaskController::StudyTaskController(StudyTaskModel * parent)
  */
 StudyTaskController::~StudyTaskController()
 {
+    if (!d->speechChannel) return;
+    
+    OSErr theErr = noErr;
+    theErr = StopSpeech(d->speechChannel);
+    if (theErr != noErr)
+        qDebug() << "StopSpeech() failed," << theErr;
+    
+    theErr = DisposeSpeechChannel(d->speechChannel);
+    if (theErr != noErr)
+        qDebug() << "DisposeSpeechChannel() failed," << theErr;
+    
     delete d;
 }
 
@@ -66,9 +88,6 @@ ControllerDataEntry StudyTaskController::next()
 
     entry.answer = model->data( model->index(d->index, StudyTaskModel::AnswerColumn) ).toString();
     entry.question = model->data( model->index(d->index, StudyTaskModel::QuestionColumn) ).toString();
-    
-    //entry.totalTime = 5000; //temp
-    //entry.startTime = 0; //temp
 
     int typingSpeed = app::typingSpeed(); //symbols in minute
     if ( typingSpeed <= 0 ) typingSpeed = 60;
@@ -85,6 +104,8 @@ ControllerDataEntry StudyTaskController::next()
 
 void StudyTaskController::processAnswer(int usedTime, QString answer)
 {
+    Q_UNUSED(usedTime);
+    
     if ( d->timeLine->state() != QTimeLine::NotRunning ) {
         d->timeLine->setCurrentTime( d->timeLine->duration() );
         d->timeLine->stop();
@@ -110,6 +131,9 @@ void StudyTaskController::processAnswer(int usedTime, QString answer)
             }
         }
     }
+    
+    QString text = d->currentEntry.answer;
+    SpeakText(d->speechChannel , text.toLatin1().data(), text.toLatin1().size() );
 
     d->timeLine->setCurrentTime(0);
     d->timeLine->start();

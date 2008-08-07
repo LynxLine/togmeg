@@ -80,4 +80,5 @@ PlayPropertiesWidget::~PlayPropertiesWidget()
 
 void PlayPropertiesWidget::setCurrentTask(QString taskId)
 {
+    Q_UNUSED(taskId);
 }

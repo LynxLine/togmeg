@@ -38,42 +38,33 @@ ExamineWidget::ExamineWidget(QWidget * parent)
     layout->setSpacing(0);
     setLayout(layout);
 
-    QVBoxLayout * vlayout = new QVBoxLayout;
-    vlayout->setMargin(20);
-    vlayout->setSpacing(30);
-    layout->addLayout( vlayout );
+    QHBoxLayout * contentLayout = new QHBoxLayout;
+    contentLayout->setMargin(20);
+    contentLayout->setSpacing(5);
+    
+    layout->addItem(new QSpacerItem(10,10, QSizePolicy::Minimum, QSizePolicy::Expanding));
+    layout->addLayout( contentLayout );
+    layout->addItem(new QSpacerItem(10,10, QSizePolicy::Minimum, QSizePolicy::Expanding));
 
     //question
 
     QHBoxLayout * questionLayout = new QHBoxLayout;
     questionLayout->setSpacing(0);
     questionLayout->setMargin(0);
-    vlayout->addLayout( questionLayout, 60 );
-
-    QWidget * space1 = new QWidget;
-    QWidget * space2 = new QWidget;
+    contentLayout->addLayout( questionLayout );
 
     d->questionWidget = new QuestionWidget;
-
-    questionLayout->addWidget(space1,            12);
     questionLayout->addWidget(d->questionWidget, 75);
-    questionLayout->addWidget(space2,            12);
 
     //answer
 
     QHBoxLayout * answerLayout = new QHBoxLayout;
     answerLayout->setSpacing(0);
     answerLayout->setMargin(0);
-    vlayout->addLayout( answerLayout, 40 );
-
-    QWidget * space3 = new QWidget;
-    QWidget * space4 = new QWidget;
+    contentLayout->addLayout( answerLayout );
 
     d->answerWidget = new AnswerWidget;
-
-    answerLayout->addWidget(space3,          25);
     answerLayout->addWidget(d->answerWidget, 50);
-    answerLayout->addWidget(space4,          25);
 
     setFocusProxy( d->answerWidget );
 

@@ -1,22 +1,22 @@
 
-INCLUDEPATH += taskeditor
+INCLUDEPATH += src/taskeditor
 
 HEADERS += \
-    taskeditor/taskeditorview.h \
-    taskeditor/taskeditorwidget.h \
-    taskeditor/taskeditorfooter.h \
-    taskeditor/exampropertieswidget.h \
-    taskeditor/playpropertieswidget.h \
-    taskeditor/studypropertieswidget.h \
-    taskeditor/timelinewidget.h \
+    src/taskeditor/taskeditorview.h \
+    src/taskeditor/taskeditorwidget.h \
+    src/taskeditor/taskeditorfooter.h \
+    src/taskeditor/exampropertieswidget.h \
+    src/taskeditor/playpropertieswidget.h \
+    src/taskeditor/studypropertieswidget.h \
+    src/taskeditor/timelinewidget.h \
 
 
 SOURCES += \
-    taskeditor/taskeditorview.cpp \
-    taskeditor/taskeditorwidget.cpp \
-    taskeditor/taskeditorfooter.cpp \
-    taskeditor/exampropertieswidget.cpp \
-    taskeditor/playpropertieswidget.cpp \
-    taskeditor/studypropertieswidget.cpp \
-    taskeditor/timelinewidget.cpp \
+    src/taskeditor/taskeditorview.cpp \
+    src/taskeditor/taskeditorwidget.cpp \
+    src/taskeditor/taskeditorfooter.cpp \
+    src/taskeditor/exampropertieswidget.cpp \
+    src/taskeditor/playpropertieswidget.cpp \
+    src/taskeditor/studypropertieswidget.cpp \
+    src/taskeditor/timelinewidget.cpp \
 

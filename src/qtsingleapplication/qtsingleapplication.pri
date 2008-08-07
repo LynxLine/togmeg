@@ -1,11 +1,11 @@
 
-DEPENDPATH += qtsingleapplication
-INCLUDEPATH	+= qtsingleapplication
+DEPENDPATH += src/qtsingleapplication
+INCLUDEPATH	+= src/qtsingleapplication
 
-HEADERS		+= qtsingleapplication/qtsingleapplication.h
-SOURCES		+= qtsingleapplication/qtsingleapplication.cpp
+HEADERS		+= src/qtsingleapplication/qtsingleapplication.h
+SOURCES		+= src/qtsingleapplication/qtsingleapplication.cpp
 
-mac:SOURCES       += qtsingleapplication/qtsingleapplication_mac.cpp
-win32:SOURCES     += qtsingleapplication/qtsingleapplication_win.cpp
-unix:!mac:SOURCES += qtsingleapplication/qtsingleapplication_x11.cpp
+mac:SOURCES       += src/qtsingleapplication/qtsingleapplication_mac.cpp
+win32:SOURCES     += src/qtsingleapplication/qtsingleapplication_win.cpp
+unix:!mac:SOURCES += src/qtsingleapplication/qtsingleapplication_x11.cpp
 

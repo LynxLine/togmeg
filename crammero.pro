@@ -18,7 +18,7 @@ CONFIG += debug_and_release
 
 QT += xml
 
-INCLUDEPATH += .
+INCLUDEPATH += src
 
 HEADERS += \
     src/crammero.h \

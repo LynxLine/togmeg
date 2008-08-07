@@ -38,8 +38,9 @@ TaskEditorView::TaskEditorView(QWidget * parent)
     setAlternatingRowColors(true);
     setFrameStyle(QFrame::NoFrame);
     setAllColumnsShowFocus(true);
+    setAttribute(Qt::WA_MacShowFocusRect, false);
     verticalScrollBar()->setFixedWidth(15);
-    //setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     setStyle( &app::cleanStyle );
     setEditTriggers(QAbstractItemView::EditKeyPressed);
     setNextItemMode(QAQAMode);

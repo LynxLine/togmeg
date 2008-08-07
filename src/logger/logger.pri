@@ -1,10 +1,10 @@
 
-INCLUDEPATH += logger
+INCLUDEPATH += src/logger
 
 HEADERS += \
-    logger/logger.h \
+    src/logger/logger.h \
 
 
 SOURCES += \
-    logger/logger.cpp \
+    src/logger/logger.cpp \
 

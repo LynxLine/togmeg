@@ -22,8 +22,8 @@ public:
 
     //GradientWidget * generalPanel;
     ExamPropertiesWidget * examinePanel;
-    StudyPropertiesWidget * studyPanel;
-    PlayPropertiesWidget * playPanel;
+    //StudyPropertiesWidget * studyPanel;
+    //PlayPropertiesWidget * playPanel;
 };
 
 /*!
@@ -97,11 +97,11 @@ TaskEditorWidget::TaskEditorWidget(QWidget * parent)
             stack, SLOT(setCurrentIndex(int)));
 
     d->examinePanel = new ExamPropertiesWidget;
-    d->studyPanel   = new StudyPropertiesWidget;
-    d->playPanel    = new PlayPropertiesWidget;
+    //d->studyPanel   = new StudyPropertiesWidget;
+    //d->playPanel    = new PlayPropertiesWidget;
 
-    stack->insertWidget( tab->addTab( tr("Play")),    d->playPanel    );
-    stack->insertWidget( tab->addTab( tr("Study")),   d->studyPanel   );
+    //stack->insertWidget( tab->addTab( tr("Play")),    d->playPanel    );
+    //stack->insertWidget( tab->addTab( tr("Study")),   d->studyPanel   );
     stack->insertWidget( tab->addTab( tr("Exam")),    d->examinePanel );
 
     setFocusProxy( d->taskEditorView );
@@ -126,7 +126,7 @@ void TaskEditorWidget::setCurrentTask(QString taskId)
         d->taskEditorView->openTask(taskId);
 
         d->examinePanel->setCurrentTask(taskId);
-        d->studyPanel->setCurrentTask(taskId);
-        d->playPanel->setCurrentTask(taskId);
+        //d->studyPanel->setCurrentTask(taskId);
+        //d->playPanel->setCurrentTask(taskId);
     }
 }

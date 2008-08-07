@@ -22,14 +22,14 @@ AnswerWidget::AnswerWidget(QWidget * parent)
     d = new Private;
 
     QVBoxLayout * layout = new QVBoxLayout;
-    layout->setMargin(50);
+    layout->setMargin(20);
     layout->setSpacing(0);
     setLayout(layout);
 
     setFont( MainWindow::baseFont(1.5, QFont::Bold) );
 
     d->le_answer = new AnswerLineEdit;
-    d->le_answer->setAlignment(Qt::AlignCenter);
+    d->le_answer->setAlignment(Qt::AlignLeft);
 
     connect(d->le_answer, SIGNAL(returnPressed()),
             this,           SLOT(returnPressed()));
@@ -39,10 +39,7 @@ AnswerWidget::AnswerWidget(QWidget * parent)
             this,         SIGNAL(userEvent(int, int)));
 
     setFocusProxy( d->le_answer );
-
-    layout->addItem(new QSpacerItem(10,10, QSizePolicy::Minimum, QSizePolicy::Expanding));
     layout->addWidget(d->le_answer);
-    layout->addItem(new QSpacerItem(10,10, QSizePolicy::Minimum, QSizePolicy::Expanding));
 
     setMaximumHeight(150);
     setWindowTitleFont( MainWindow::baseFont(1.1, QFont::Bold) );

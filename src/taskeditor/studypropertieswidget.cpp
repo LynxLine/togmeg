@@ -88,4 +88,5 @@ StudyPropertiesWidget::~StudyPropertiesWidget()
 
 void StudyPropertiesWidget::setCurrentTask(QString taskId)
 {
+    Q_UNUSED(taskId);
 }

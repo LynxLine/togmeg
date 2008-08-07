@@ -1,26 +1,26 @@
 
-INCLUDEPATH += examine
+INCLUDEPATH += src/examine
 
 HEADERS += \
-    examine/examinator.h \
-    examine/taskcontroller.h \
-    examine/playtaskcontroller.h \
-    examine/studytaskcontroller.h \
-    examine/examinatetaskcontroller.h \
+    src/examine/examinator.h \
+    src/examine/taskcontroller.h \
+    src/examine/playtaskcontroller.h \
+    src/examine/studytaskcontroller.h \
+    src/examine/examinatetaskcontroller.h \
     \
-    examine/examinewidget.h \
-    examine/questionwidget.h \
-    examine/answerwidget.h \
+    src/examine/examinewidget.h \
+    src/examine/questionwidget.h \
+    src/examine/answerwidget.h \
 
 
 SOURCES += \
-    examine/examinator.cpp \
-    examine/taskcontroller.cpp \
-    examine/playtaskcontroller.cpp \
-    examine/studytaskcontroller.cpp \
-    examine/examinatetaskcontroller.cpp \
+    src/examine/examinator.cpp \
+    src/examine/taskcontroller.cpp \
+    src/examine/playtaskcontroller.cpp \
+    src/examine/studytaskcontroller.cpp \
+    src/examine/examinatetaskcontroller.cpp \
     \
-    examine/examinewidget.cpp \
-    examine/questionwidget.cpp \
-    examine/answerwidget.cpp \
+    src/examine/examinewidget.cpp \
+    src/examine/questionwidget.cpp \
+    src/examine/answerwidget.cpp \
 

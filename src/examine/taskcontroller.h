@@ -35,6 +35,7 @@ public:
 
     virtual void processAnswer(int usedTime, QString answer) {
         Q_UNUSED(usedTime);
+        Q_UNUSED(answer);
         eventTimeMap.clear();
     }
 

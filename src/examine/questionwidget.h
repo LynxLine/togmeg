@@ -22,9 +22,6 @@ public:
 public slots:
     void setQuestion(QString);
 
-protected:
-    virtual void paintEvent(QPaintEvent *);
-
 private:
     class Private;
     Private * d;
