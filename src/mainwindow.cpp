@@ -293,6 +293,8 @@ void MainWindow::createMenuBar()
 
 void MainWindow::createToolBar()
 {
+    setUnifiedTitleAndToolBarOnMac(true);
+    
     QToolBar * toolBar;
 	toolBar = addToolBar(tr("Toolbar"));
     toolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);

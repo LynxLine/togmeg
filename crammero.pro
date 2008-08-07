@@ -21,29 +21,33 @@ QT += xml
 INCLUDEPATH += .
 
 HEADERS += \
-    crammero.h \
-    mainwindow.h \
-    studytask.h \
+    src/crammero.h \
+    src/mainwindow.h \
+    src/studytask.h \
 
 
 SOURCES += \
-    main.cpp \
-    crammero.cpp \
-    mainwindow.cpp \
-    studytask.cpp \
+    src/main.cpp \
+    src/crammero.cpp \
+    src/mainwindow.cpp \
+    src/studytask.cpp \
 
+UI_DIR = ./build
+MOC_DIR = ./build
 
-include("logger/logger.pri")
-include("storage/storage.pri")
-include("catalog/catalog.pri")
-include("examine/examine.pri")
-include("widgets/widgets.pri")
-include("taskeditor/taskeditor.pri")
-include("qtsingleapplication/qtsingleapplication.pri")
+include("src/logger/logger.pri")
+include("src/storage/storage.pri")
+include("src/catalog/catalog.pri")
+include("src/examine/examine.pri")
+include("src/widgets/widgets.pri")
+include("src/taskeditor/taskeditor.pri")
+include("src/qtsingleapplication/qtsingleapplication.pri")
 
 RESOURCES += images.qrc
 
 mac:QMAKE_INFO_PLIST = info.plist
+mac:CONFIG += x86 ppc
+mac:QMAKE_MAC_SDK=/Developer/SDKs/MacOSX10.4u.sdk
 
 !debug_and_release|build_pass {
     CONFIG(debug, debug|release) {
@@ -57,9 +61,6 @@ mac:QMAKE_INFO_PLIST = info.plist
     }
     else {
         UI_DIR = release
-
-#        mac:CONFIG += x86 ppc
-#        mac:QMAKE_MAC_SDK=/Developer/SDKs/MacOSX10.4u.sdk
     }
 }
 
