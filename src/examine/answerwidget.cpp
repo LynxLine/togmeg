@@ -26,11 +26,19 @@ AnswerWidget::AnswerWidget(QWidget * parent)
     layout->setSpacing(0);
     setLayout(layout);
 
-    setFont( MainWindow::baseFont(1.5, QFont::Bold) );
+    setFont( MainWindow::baseFont(3, QFont::Bold) );
 
     d->le_answer = new AnswerLineEdit;
     d->le_answer->setAlignment(Qt::AlignLeft);
 
+    {
+        QFontMetrics fm(font()); 
+        d->le_answer->setMinimumHeight(fm.height()+6);
+        QPalette p = d->le_answer->palette();
+        p.setColor(QPalette::Text, QColor("#0000ff"));
+        d->le_answer->setPalette(p);
+    }
+    
     connect(d->le_answer, SIGNAL(returnPressed()),
             this,           SLOT(returnPressed()));
     connect(d->le_answer, SIGNAL(textChanged(const QString &)),
@@ -42,6 +50,7 @@ AnswerWidget::AnswerWidget(QWidget * parent)
     layout->addWidget(d->le_answer);
 
     setMaximumHeight(150);
+    setMinimumHeight(150);
     setWindowTitleFont( MainWindow::baseFont(1.1, QFont::Bold) );
     setWindowTitle(tr("Answer"));
 

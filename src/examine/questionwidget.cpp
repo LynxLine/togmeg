@@ -26,15 +26,22 @@ QuestionWidget::QuestionWidget(QWidget * parent)
     layout->setSpacing(0);
     setLayout(layout);
 
-    setFont( MainWindow::baseFont(1.5, QFont::Bold) );
+    setFont( MainWindow::baseFont(3, QFont::Bold) );
 
     d->l_question = new QLabel;
     d->l_question->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    d->l_question->setFont( MainWindow::baseFont(1.5, QFont::Bold) );
+    d->l_question->setFont( MainWindow::baseFont(3, QFont::Bold) );
 
+    {
+        QPalette p = d->l_question->palette();
+        p.setColor(QPalette::Text, QColor("#808080"));
+        d->l_question->setPalette(p);
+    }
+    
     layout->addWidget(d->l_question);
 
     setMaximumHeight(150);
+    setMinimumHeight(150);
     setWindowTitleFont( MainWindow::baseFont(1.1, QFont::Bold) );
     setWindowTitle(tr("Question"));
 
