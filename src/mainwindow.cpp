@@ -221,10 +221,10 @@ void MainWindow::createActions()
     d->actions["app/export"] = new QAction (tr("&Export..."), this);
     d->actions["app/print"]  = new QAction (tr("&Print..."), this);
 
-	d->actions["app/back" ] = new QAction (QIcon(":/images/icons/back-32x32.png"), tr("&Backward"), this);
+	d->actions["app/back" ] = new QAction (QIcon(":/images/icons/Backward.png"), tr("&Backward"), this);
 	d->actions["app/forward" ]  = new QAction (tr("&Forward"), this);
 
-	d->actions["app/new"       ] = new QAction (QIcon(":/images/icons/new-study-32x32.png"), tr("&New Study"), this);
+	d->actions["app/new"       ] = new QAction (QIcon(":/images/icons/AddTableRow.png"), tr("&New Study"), this);
 
 	d->actions["app/undo" ] = new QAction (tr("&Undo"), this);
 	d->actions["app/redo" ] = new QAction (tr("&Redo"), this);
@@ -232,7 +232,7 @@ void MainWindow::createActions()
     d->actions["app/copy" ] = new QAction (tr("&Copy"), this);
     d->actions["app/paste"] = new QAction (tr("&Paste"), this);
 
-    d->actions["app/demo" ] = new QAction (QIcon(":/images/icons/play-32x32.png"   ), tr("&Play"), this);
+    d->actions["app/demo" ] = new QAction (QIcon(":/images/icons/Play.png"   ), tr("&Play"), this);
     d->actions["app/study"] = new QAction (QIcon(":/images/icons/study-32x32.png"  ), tr("&Study"), this);
     d->actions["app/exam" ] = new QAction (QIcon(":/images/icons/examine-32x32.png"), tr("&Examinate"), this);
     d->actions["app/stop" ] = new QAction (QIcon(":/images/icons/Stop.png"   ), tr("&Stop"), this);
@@ -275,11 +275,7 @@ void MainWindow::createMenuBar()
 
 void MainWindow::createToolBar()
 {
-    QToolBar * toolBar;
-	toolBar = addToolBar(tr("Toolbar"));
-    toolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-    toolBar->setIconSize(QSize(32, 32));
-    toolBar->setMovable(false);
+	QToolBar * toolBar = addToolBar(tr("Toolbar"));
 
     QWidget * space1 = new QWidget;
     space1->setFixedSize(5,10);
@@ -312,6 +308,9 @@ void MainWindow::createToolBar()
     toolBar->setIconSize(QSize(24,24));
     toolBar->setStyleSheet(AppStyles::mac_toolbarStyle);
 #endif
+    
+    toolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    toolBar->setMovable(false);
 }
 
 /*!
