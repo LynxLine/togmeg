@@ -6,14 +6,14 @@
     <file>images/icons/examine-32x32.png</file>
     <file>images/icons/examine-40x32.png</file>
     <file>images/icons/study-32x32.png</file>
-    <file>images/icons/stop-32x32.png</file>
+    <file>images/icons/Stop.png</file>
 
     <file>images/icons/new-question-32x32.png</file>
     <file>images/icons/new-study-32x32.png</file>
     <file>images/icons/dublicate-32x32.png</file>
     <file>images/icons/remove-32x32.png</file>
 
-    <file>images/icons/back-32x32.png</file>
+    <file>images/icons/Backward.png</file>
 
     <file>images/icons/add-button-30x22.png</file>
     <file>images/icons/add-button-pressed-30x22.png</file>

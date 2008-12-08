@@ -2,28 +2,27 @@
 unix:TEMPLATE = app
 win32:TEMPLATE = vcapp
 
-unix:!mac:TARGET = bin/crammero
-win32:TARGET = ..\bin\crammero
-mac:TARGET = bin/crammero
-
-win32:LIBS += user32.lib
-win32:LIBS += shell32.lib
-win32:LIBS += winhttp.lib
+unix:TARGET = crammero
+win32:TARGET = ../crammero
 
 CONFIG += qt
 CONFIG += warn_on
 CONFIG += debug_and_release
+CONFIG += precompile_header
 
-#unix:CONFIG += precompile_header
+HEADERS += src/stable.h
+PRECOMPILED_HEADER = src/stable.h
 
 QT += xml
 
 INCLUDEPATH += src
+INCLUDEPATH += src/Utils
 
 HEADERS += \
     src/crammero.h \
     src/mainwindow.h \
     src/studytask.h \
+    src/Utils/AppStyles.h \
 
 
 SOURCES += \
@@ -31,9 +30,10 @@ SOURCES += \
     src/crammero.cpp \
     src/mainwindow.cpp \
     src/studytask.cpp \
+    src/Utils/AppStyles.cpp \
 
-UI_DIR = ./build
-MOC_DIR = ./build
+UI_DIR = ./build/GeneratedFiles
+MOC_DIR = ./build/GeneratedFiles
 
 include("src/logger/logger.pri")
 include("src/storage/storage.pri")
@@ -45,32 +45,25 @@ include("src/qtsingleapplication/qtsingleapplication.pri")
 
 RESOURCES += images.qrc
 
+mac:ICON = images/crammero.icns
 mac:QMAKE_INFO_PLIST = info.plist
-mac:CONFIG += x86 ppc
-mac:QMAKE_MAC_SDK=/Developer/SDKs/MacOSX10.4u.sdk
+
+win32:RC_FILE = images/crammero.rc
 
 !debug_and_release|build_pass {
     CONFIG(debug, debug|release) {
-        TARGET = $$member(TARGET, 0)_debug
-        UI_DIR = debug
+        TARGET = $$member(TARGET, 0)d
         CONFIG += console
-        
-        HEADERS += src/stable.h
-        PRECOMPILED_HEADER = src/stable.h
-        unix:QMAKE_CXXFLAGS += -fpch-preprocess
-    }
-    else {
-        UI_DIR = release
     }
 }
-
-win32:RC_FILE = images/crammero.rc
-mac:ICON = images/crammero.icns
 
 macx-g++ {
     # section for batch building
     # from command line on mac osx.
+    
+    CONFIG += x86 ppc
     QMAKE_MACOSX_DEPLOYMENT_TARGET=10.4
+    QMAKE_MAC_SDK=/Developer/SDKs/MacOSX10.4u.sdk
     
     !debug_and_release|build_pass {
         CONFIG(release, debug|release) {
@@ -167,7 +160,7 @@ macx-g++ {
         }
         else {
             # debug batch build
-            TARGET = "crammero_debug"
+            TARGET = "crammerod"
         }
     }
 }
