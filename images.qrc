@@ -3,14 +3,12 @@
     <file>images/crammero.ico</file>
 
     <file>images/icons/Play.png</file>
-    <file>images/icons/examine-32x32.png</file>
-    <file>images/icons/examine-40x32.png</file>
     <file>images/icons/study-32x32.png</file>
     <file>images/icons/Stop.png</file>
 
     <file>images/icons/AddTableRow.png</file>
     <file>images/icons/dublicate-32x32.png</file>
-    <file>images/icons/remove-32x32.png</file>
+    <file>images/icons/Remove.png</file>
 
     <file>images/icons/Backward.png</file>
 
