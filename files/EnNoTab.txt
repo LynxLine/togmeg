@@ -1,0 +1,4821 @@
+1000 square meter	mål(et)
+24 hours	døgn(et)
+a	"en, ei, et (masculine, feminine, neutral)"
+abandon[s]	forlate[r]
+abandoned	forlatt
+abdicate[s]	abdisere[r]
+ability	evne(n)
+about	"om, omkring"
+about	omtrent
+above	"over, ovenfor, oppe"
+abroad	utenlands
+abroad	utland(et)
+abscess	byll(en)
+absent	fraværende
+absent-minded	åndsfraværende
+absolutely	absolutt
+abstinence	avhold(et)
+abstract	utdrag(et)
+abundance	vell(et)
+access	"tilgang(en), høve(t)"
+accept[s]	akseptere[r]
+accident	ulykke(n)
+accidentally	uforvarende
+accountant	regnskapsfører(en)
+accounts	regnskap(et)
+according to	ifølge
+according to hear say	angiverlig
+accordion	trekkspill(et)
+account	konto(en)
+accuse[s|d]	anklage[r|t]
+accusation	anklage(n)
+accuse[s]	beskylde[r]
+accused	beskyldte
+achievement	"bragd(en), bedrift(en)"
+acknowledge[s]	erkjenne[r]
+acknowledgement	"anerkjennnelse(n), påskjønnelse(n)"
+acquire[s|d]	erverve[r|t]
+across	på tvers
+act[s|ed]	handle[r|t]
+activity	"aktivitet(en), virksomhet(en)"
+actual	"egentlig, faktisk"
+actor	skuespiller(en)
+actress	skuespillerinne(n)
+adamant	beinhard
+add[s]	tilsette[r]
+add[s]	påføre[r]
+add[s|ed]	spe[r|dde]
+added	påført
+addition	tillegg(et)
+additional	mer
+additional ..	tilleggs..
+additionally	dessuten
+address	adresse(n)
+administrate[s]	administrere[r]
+administrated	administrerte
+administration	administrasjon(en)
+administrative district	fylke(t)
+adopt[s]	adoptere[r]
+adopted	adoptert
+adult	voksen
+adultery	hor
+adults	voksne
+advance[s|d]	rykke[r|t]
+advanced	videregående
+advertisement	annonse(n)
+advice	råd(et)
+aeromechanic	flymekaniker(en)
+aeroplane	fly(et)
+affect[s|ed]	påvirke[r|t]
+afraid	redd
+after	etter
+afternoon	ettermiddag(en)
+again	igjen
+against	mot
+age	alder(en)
+age group	årgang(en)
+agent	agent(en)
+agent	fullmektig(en)
+agile	spenstig
+agility	spenst(en)
+agree (with another)	enig
+agreement	"avtale(n), samtykke(t)"
+agricultural ..	landbruks..
+agricultural college graduate	agronom(en)
+agricultural equipment	jordbruksredskap(et)
+agricultural machine	landbruksmaskin(en)
+agricultural region	jordbruksområde(t)
+agricultural school	jordbruksskole(n)
+agriculture	landbruk(et)
+ailment	plage(n)
+aim	målsetting(en)
+aim[s|ed]	sikte[r|t]
+air	luft(en)
+air conditioner	klimaanlegg(et)
+airport	flyplass(en)
+alarm	alarm(en)
+alcohol	"alkohol(en), sprit(en)"
+alert	våken
+alert	åndsfrisk
+alga	alge(n)
+alibi	alibi(et)
+alike	like
+all	"alle, alt, samtlige, hele"
+allergy	allergi(en)
+allergic person	allergiker(en)
+allodial law	odelsrett(en)
+allodial ownership	odel(en)
+allodial right	odelsrett(en)
+allow[s]	"tillate[r], la[r]"
+almost	nesten
+alone	"ene, alene"
+also	også
+altar	alter(et)
+alteration	forandring(en)
+alternate[s|d]	veksle[r|t]
+alternative	alternativ(et)
+although	"selv om, enda"
+always	alltid
+am	er
+amateur	amatør(en)
+ambission	ambisjon(en)
+ambulance	ambulanse(n)
+ameba	amøbe(n)
+American Indian	indiansk
+American	amerikaner(en)
+American	amerikansk
+American Indian	indianer(en)
+among	"blant, imellom"
+among others	blant annet
+amount of money	beløp(et)
+amputate[s]	amputere[r]
+amputated	amputert
+amputation	amputasjon(en)
+analysis	analyse(n)
+analyses[s]	analysere[r]
+ancestor	"ane(n), stamfar(en)"
+ancestors	forfedre(ne)
+ancestry	herkomst(en)
+ancestry	ætt(en)
+anchorage	feste(t)
+anchovy	ansjos(en)
+and	og
+angel	engel(en)
+anger	"sinne(t), harme(n)"
+angry	"sint, arg"
+angry	hissig
+animal	dyr(et)
+animal husbandry	kreaturhold(et)
+annexe	"anneks(et), sidehus(et)"
+anniversary	jubileum(et)
+announce	kunngjøre
+announce[s]	"anmelde[r], forkynne[r], annonsere[r]"
+announced	"anmeldte, forkynte"
+annual	årlig
+annual fee	årsavgift(en)
+annual statement	årsoppgave(n)
+another	"annen, annet"
+ant	mauer(en)
+ant hill	mauertue(n)
+antique	antikvarisk
+antique	antikvitet(en)
+answer	svar(et)
+answer[s]	svare[r]
+answered	svart[e]
+any	"enhver, noen"
+anyway	lell
+apart from	bortsett fra
+apartment	leilighet(en)
+ape	ape(n)
+ape[s|d]	"ape[r|t], herme[r|t]"
+apolectic stroke	slag(et)
+apparent	tydelig
+apparently	"tydeligvis, visst, visstnok"
+appendicitis	blindtarmbetennelse(n)
+apple	eple(t)
+appoint[s]	"utnevne[r], ansette[r]"
+appointed	"utnevnt, bestemt"
+appreciation	påskjønnelse(n)
+apprentice	"lærling(en), læregutt(en)"
+approximately	"omtrent, cirka"
+April	april
+aptitude	anlegg(et)
+arable	fruktbar
+arable land	åkerland(et)
+arbitrary	vilkårlig
+archive	arkiv(et)
+archive information	arkivinformasjon(en)
+architect	arkitekt(en)
+are	er
+area	"areal(et), område(t)"
+arena	arena(en)
+arm	arm(en)
+armor	panser(et)
+army	"hær(en), arme(en)"
+around	"rundt, om, utenom, forbi"
+arrange[s|d]	formidle[r|t]
+arrest[s]	"arrestere[r], gripe[r]"
+arrested	grepet
+arrival	ankomst(en)
+arrow	pil(en)
+date of arrival	ankomstdato(en)
+art	kunst(en)
+artificial	kunstig
+artillery	arteleri(et)
+artilleryman	artelerist(en)
+artistic	kunstnerisk
+as	"som, såsom"
+as far as	såvidt
+as if	"liksom, som om"
+ascending	oppadgående
+ash	ask(en)
+ash tree	asketre(et)
+ashes	aske(n)
+ask	spørre
+asked	spurt[e]
+asks	spørr
+assemble[s|d]	forsamle[r|t]
+financial asset	aktivum(et)
+financial assets	aktiva(ene)
+assets	formue(n)
+assign[s]	"tilordne[r], overlate[r]"
+assignment	oppdrag(et)
+assist[s]	hjelpe[r]
+assistance	hjelp(en)
+assistant	"assistent(en), medarbeider(en), lærling(en), medhjelper(en)"
+assistant nurse	hjelpepleier(en)
+associate	forbindelse(n)
+associate professor	dosent(en)
+association	forening(en)
+association	forbindelse(n)
+association of neighbours	vel(et)
+assumption	forutsetning(en)
+asthma	astma(en)
+at	"ved, hos, av, på, uti"
+at home	hjemme
+at least	ihvertfall
+ate	"spiste, åt"
+attach[es|ed]	feste[r|t]
+attack	angrep(et)
+attack	anfall(et)
+attend[s|ed]	delta[r|tt]
+attendance	deltagelse(n)
+attendant	oppsynsmann(en)
+attention	oppmerksomhet(en)
+attic	loft(et)
+attic room	loftskammer(et)
+attorney	advokat(en)
+attorney	sakfører(en)
+audience	tilskuer(en)
+auditor	revisor(en)
+auction	auksjon(en)
+auction records	auksjonsprotoll(en)
+August	august
+aunt	"tante(n), faster(en), moster(en)"
+author	forfatter(en)
+authority	autoritet(en)
+authorization	fullmakt(en)
+authorize[s]	anerkjenne[r]
+authorized	anerkjent
+authorized trading agent	handelsfullmektig
+autumn	høst(en)
+available	tilgjengelig
+awake	våken
+away	"borte, ifra, hen"
+away from home	bortreist
+baby	"baby(en), spebarn(et)"
+back	rygg(en)
+back	tilbake
+background	bakgrunn(en)
+backward	tilbake
+backwards	bakover
+bachelor	ungkar(en)
+bacteria	bakterie(n)
+bad	stygg
+badly beaten	mørbanket
+badger	grevling(en)
+bag	"veske(n), skreppe(n)"
+baggarly	fattigslig
+bailiff	"fogd(en), fut(en)"
+bailiff's accounts	futeregnskap(et)
+bait spoon	sluk(et)
+bake[s]	bake[r]
+baked	bakt[e]
+baker	baker(en)
+baker apprentice	bakerlærling(en)
+bakery	bakeri(et)
+bald	skallet
+ball	ball(en)
+ballast	ballast(en)
+ballet	ballet(en)
+banana	banan(en)
+bandage	"bandasje(n), bind(et)"
+bank	bank(en)
+bank cashier	bankkasserer(en)
+bank clerk	bankfunksjonær(en)
+bank manager	banksjef(en)
+Bank of Norway	Norges Bank
+bank robbery	bankran(et)
+bank security	pant(en)
+bankruptcy	konkurs(en)
+banquet	gilde(t)
+baptism	dåp(en)
+baptism certificate	dåpsattest(en)
+baptismal day	dåpsdag(en)
+Baptist	baptist(en)
+baptize[s]	døpe[r]
+baptize[s|d]	kristne[r|t]
+baptized	døpt
+baptized at home	hjemmedøpt
+bar	"bar(en), bule(n)"
+bare	bar
+barefoot	barfot
+barely	såvidt
+bark	bark(en)
+barley	bygg(et)
+barn	låve(n)
+barque	bark(en)
+barrel	"tønne(n), fat(et)"
+bartender	bartender(en)
+base	base(n)
+base	grunn(en)
+base amount	grunnbeløp(et)
+base[s]	basere[r]
+based	basert
+basin	vask(en)
+basis	grunnlag(et)
+basis of calculation	beregningsgrunnlag(et)
+basket	kurv(en)
+basket maker	kurvmaker(en)
+bat (animal)	flaggermus(en)
+bat (for ballgames)	balltre(et)
+bate	åte(t)
+bate	agn(et)
+bath room	bad(et)
+bath tub	badekarr(et)
+batten[s] down the hatches	skalke[r]
+batter	røre(n)
+batter[s]	denge[r]
+battery	batteri(et)
+battle	slag(et)
+bay	"bukt(en), vik(en), våg(en)"
+be	være
+beach	strand(en)
+beach area	strandsone(n)
+beacon	sjømerke(t)
+beam	asal(en)
+bean	bønne(n)
+bear	"bjørn(en), bamse(n)"
+bear[s]	tåle[r]
+beat[s]	"slå[r], denge[r]"
+beat[s|en] to death	ihjelslå[r|tt]
+beating	juling(en)
+beautiful	"vakker, vakre, fager"
+beaver	bever(en)
+became	ble
+because	fordi
+become[s]	bli[r]
+bed	seng(en)
+bedridden	sengeliggende
+bee	bie(n)
+beehive	bikube(n)
+has been	vært
+beer	øl(et)
+before	"før, foran"
+beg[s]	be[r]
+beggar	tigger(en)
+begged	ba
+behave[s]	oppføre[r] seg
+behaved	oppført seg
+behead[s|ed]	halshugge[r|t]
+beheld	så
+behind	"bak, bakenfor"
+behind	bakende(n)
+behold[s]	se[r]
+being	vesen(et)
+bell	bjelle(n)
+bell ringer	klokker(en)
+belt	belte(t)
+belong to	høre hjemme
+below	"under, nedenfor"
+belong[s] to	tilhøre[r]
+believe[s|d]	tro[r|dde]
+belief	tro(en)
+bench	"benk(en), pall(en)"
+bend	sving(en)
+benefit	utbytte(t)
+benevolence	velvillighet(en)
+benevolent	velvillig
+bequeath[s]	testamentere[r]
+berserk	berserk(en)
+berry	bær(et)
+bereaved	etterlatte
+besides	dessuten
+best	"best, beste"
+bet[s]	tippe[r]
+better	bedre
+between	"mellom, imellom"
+beverage	drikk(en)
+beyond	bakenfor
+Bible	bibel(en)
+bigwig	kakse(n)
+biljard	biljard
+bill	regning(en)
+binding	binding(en)
+binoculars	kikkert(en)
+biographical	biografisk
+biography	biografi(en)
+biology	biologi(en)
+biological	biologisk
+birch	"bjerk(en), bjørk(en)"
+bird	fugl(en)
+birth	fødsel(en)
+date of birth	fødselsdato(en)
+year of birth	fødselsår(et)
+birth certificate	fødselsattest(en)
+birthday	fødselsdag(en)
+birthing bed	barselseng(en)
+birthrate	fødselsrate(n)
+biscuit	kjeks(en)
+bishop	biskop(en)
+bishopric	bispedømme(t)
+bit	gran(net)
+bite	bit(en)
+bite[s]	bite[r]
+black	"sort, svart"
+black currant	solbær(et)
+blackberry	bjørnebær(et)
+blacksmith	smed(en)
+blacksmith apprentice	smedlærling(en)
+bladder	blære(n)
+blame	skyld(en)
+bland	blass
+blasphemy	blassfemi(en)
+blead[s]	blø[r|dde]
+bless[es|ed]	velsigne[r|t]
+blessed	salig
+blind	blind
+blind	skalkeskjul(et)
+blink[s|ed]	"blinke[r|t], blunke[r|t]"
+block	blokk(en)
+blood	blod(et)
+blood donor	blodgiver(en)
+bloodpoisoning	blodforgiftning(en)
+bloody	blodig
+blow	slag(et)
+blue	blå
+blueberry	blåbær(et)
+boar	galt(en)
+board	"brett(et), plate(en)"
+board of directors	styre(t)
+boarding	logerende
+boat	"båt(en), skøyte(n)"
+boat builder	båtbygger(en)
+bog	myr(en)
+boil[s]	koke[r]
+boil	byll(en)
+boiler	kjele(n)
+bolt	bolt(en)
+bomb	bombe(n)
+bond	verdipapir(et)
+bond fire	bål(et)
+bone	"ben(et), bein(et)"
+bonus	"bonus(en), påskjønnelse(n)"
+book	bok(en)
+bookbinder	bokbinder(en)
+bookkeeper	"bokholder(en), regnskapsfører(en)"
+books	bøker
+bookseller	bokhandler(en)
+boot	støvel(en)
+boots	støvler
+border	grense(n)
+born	født
+borrow[s]	låne[r]
+borrowed	lånt[e]
+bosom	barm(en)
+boss	sjef(en)
+boss[es]	kommandere[r]
+bossed	kommandert[e]
+both	"begge, både"
+bother[s|ed]	bry[r|dde]
+bother	bry(et)
+bottom	bunn(en)
+bought	kjøpte
+boundary	"grense(n), avgrensning(en)"
+bourgeois	borgerskap(et)
+bowler hat	skalk(en)
+box	"eske(n), boks(en), kasse(n)"
+box	bås(en)
+boy	gutt(en)
+brain	hjerne(n)
+brain tumor	hjernesvulst(en)
+branch	gren(en)
+brass	messing(en)
+bread	brød(et)
+bread distributor	brødkjører(en)
+breadwinner	familieforsørger(en)
+break[s]	bryte[r]
+break[s|ed]	knekke[r|t]
+break[s] free	slite[r]
+breast	bryst(et)
+breast [feed[s]|fead]	amme[r|t]
+breast feeding haze	ammetåke(n)
+breeze	bris(en)
+brevity	korthet(en)
+brewer	brygger(en)
+brewery	bryggeri(et)
+brewery worker	bryggeriarbeider(en)
+brick	teglsten(en)
+bricklayer	murer(en)
+brickworks	teglverk(et)
+brief	kort
+briefness	korthet(en)
+bride	brud(en)
+bridge	"bro(en), bru(a)"
+bright	intens
+bright	"smart, oppvakt"
+brine	lake(n)
+bring[s]	bringe[r]
+bring[s] up	oppdra[r]
+broke	brøt
+broke free	slet
+broken	brukket
+broken heart	kjælighetssorg(en)
+broker	megler(en)
+broom	kost(en)
+brothel	bordell(et)
+brother	bror(en)
+brother-in-law	svoger(en)
+brothers	brødre(ne)
+brown	brun
+brown cheese	brunost
+brought with	medbragt
+brush	børste(n)
+brush	basketak(et)
+brutal	brutal
+bubble	boble(n)
+bucket	"bøtte(n), spann(et)"
+buckle	spenne(n)
+buried	bisatt
+burn[s]	brenne[r]
+[bury|buries]	"bisette[r], begrave[r], gravlegge[r]"
+build[s|t]	bygge[r|t]
+building	"bygning(en), bygg(et)"
+bull	okse(n)
+bullet	kule(n)
+bunny	kanin(en)
+buoy	sjømerke(t)
+burden	byrde(n)
+burn[s|ed]	svi[r|dde]
+burnt down	nedbrent
+buried	gravlagt
+bus	rutebil(en)
+business	"virksomhet(en), forretning(en)"
+business college	handelshøyskole(n)
+business field	bransje(n)
+business license	handelsbrev(et)
+business machine	kontormaskin(en)
+business man	forrettningsmann(en)
+business management	forretningsførsel(en)
+business manager	forretningsfører(en)
+business partner	"kompanjong(en), samarbeidspartner(en)"
+busy	travel
+but	men
+butcher	slakter(en)
+butcher[s|ed]	slakte[r|t]
+butter	smørr(et)
+butterfly	sommerfugl(en)
+button	knapp(en)
+buy[s]	kjøpe[r]
+buzzhead	surrekopp(en)
+by	"ved, av, hos, forbi"
+bye	"farvel, ha det"
+cabin	hytte(n)
+cabinet	skap(et)
+cable	kabel(en)
+cadet	kadett(en)
+caecum	blindtarm(en)
+café	konditori(et)
+cage	bur(et)
+cake	kake(n)
+calculate[s|d]	regne[r|t]
+calf	legg(en)
+calf	kalv(en)
+call[s]	kalle[r]
+call[s]	ringe[r]
+called	kalt[e]
+calling	kall(et)
+came	kom
+camel	kamel(en)
+can	"boks(en), kanne(n)"
+can	kan
+cancel[s]	sløyfe[r]
+cancer	kreft(en)
+candlestick	lysestake(n)
+candy	"snop(et), godteri(et), slikkeri(et), drops(et)"
+cane	stokk(en)
+canon	kanon(en)
+cap	lue(n)
+capital	kapital(en)
+capital city	hovedstad(en)
+captain	"kaptein(en), sjøkaptein(en)"
+captain on a merchant ship	koffardikaptein(en)
+capture	erobring(en)
+capture[s|d]	"fange[r|t], erobre[r|t]"
+car	"bil(en), personbil(en)"
+car accident	bilulykke(n)
+card	kort(et)
+card[s|ed]	karde[r|t]
+cardamom	kardemomme(n)
+cardamom crackers	goro(en)
+carder	karder(en)
+care[s|d]	stelle[r|t]
+careful	forsiktig(en)
+caress[es]	stryke[r]
+caressed	strøk
+cargo	"frakt(en), last(en), gods(et)"
+cargo ticket	fraktbillet(en)
+carnation {flower}	nellik(en)
+carpenter	"snekker(en), tømmermann(en), trearbeider(en)"
+carriage	vogn(en)
+carried	"bar, båret"
+carry[s]	bære[r]
+cartel	kartell(et)
+case	sak(en)
+cash	kontant(er)
+cash register	kasse(n)
+the cash register	kassa
+casket	skrin(et)
+cast[s]	støpe[r]
+castle	slott(et)
+cat	katt(en)
+catch [catches|cought]	fange[r|t]
+catch[es]	gripe[r]
+category	klasse(n)
+cathedral	"katedral(en), domkirke(en)"
+catherdral dean	domprost(en)
+Catholic	katolsk
+cattle	"fe(et), kveg(et), kyr(ene), naut(et), storfe(et), kreatur(et)"
+cattle tender	kreatursteller(en)
+cattle tending	kreaturstell(et)
+cattle trader	fehandler(en)
+caught	"grep, grepet"
+cause	gjøre
+cause	årsak(en)
+cause	anledning(en)
+caution[s]	advare[r]
+cautioned	advarte
+cavalryman	husar(en)
+cavalry	kavaleri(et)
+cave	hule(n)
+ceiling	tak(et)
+celery	selleri(et)
+cemetery	"gravlund(en), kirkegård(en)"
+census	"folketelling(en), manntall(et)"
+center	sentrum(et)
+century	århundre(t)
+cerebral hemorrhage	hjerneblødning(en)
+certainly	riktignok
+certificate	attest(en)
+certify [certifies|certified]	bevitne[r|t]
+certain	viss
+certainty	visshet(en)
+chain	lenke(n)
+chair	stol(en)
+chair sledge	"spark(en), sparkstøtting(en)"
+chairman	formann(en)
+chairmannship	formannskap(et)
+chance	sjanse(n)
+change	gjøre om
+change	forandring(en)
+change	vekslepenge(ne)
+changed one's mind	ombestemte
+change[s] one's mind	ombestemme[r]
+change[s|d]	"forandre[r|t], skifte[r|t]"
+chap	kar(en)
+chapel	kapell(et)
+character {letter}	bokstav(en)
+charcoal drawing	kulltegning(en)
+charcoal maker	kullbrenner(en)
+charm[s|ed]	bedåre[r|t]
+charming	"sjarmerende, nydelig, yndig"
+chase[s|d] or hunt	jage[r|t]
+chassis	karosseri(et)
+chauffeur	sjåfør(en)
+cheak	kinn(et)
+cheap	billig
+cheat[s|ed]	jukse[r|t]
+cheat[s]	bedra[r]
+cheese	ost(en)
+[make|made] cheese	yste[r|t]
+cheese factory	ysteri(et)
+chemical	kjemisk
+chemical engineer	kjemiingeniør(en)
+chemical pulp	cellulose(n)
+chemist	apotek(et)
+chemistry	kjemi(en)
+chest	bryst(et)
+chest	kiste(n)
+chicken	kylling(en)
+chief	høvding(en)
+chief	sjef(en)
+chief cashier	kemner(en)
+chief engineer	overingeniør(en)
+chief officer	rådmann(en)
+chief petty officer	kvartermester(en)
+chief physician	overlege(n)
+child	"barn(et), unge(n)"
+restless child	surrekopp(en)
+child baptism	barnedåp(en)
+childbed fever	barselfeber(en)
+childbirth	barsel(en)
+childhood	barndom(men)
+childhood	barneårene
+childhood disease	barnesykdom(men)
+childish	barnslig
+childless	barnløs
+children	"barn, unger, småbarn"
+chocolate	sjokolade(n)
+choice	valg(et)
+choke[s]	kvele[r]
+cholera	kolera(en)
+choose[s]	"velge[r], kåre[r]"
+chopper	hugger(en)
+christian	kristen
+Christmas	jul(en)
+Christmas greeting	julehilsen(en)
+chronic	kronisk
+church	kirke(n)
+church property	kirkegods(et)
+church record	kirkebok(en)
+church records	kirkebøker
+church singer	kirkesanger(en)
+cinnamon	kanel(en)
+cinnamon bun	skillingsbolle(n)
+cinnamon bread	skillingskake(n)
+cinema	kino(en)
+circuit	krets(en)
+circumstance	omstendighet(en)
+circumstances	kår
+circus	sirkus(et)
+citizen	"borger(en), statsborger(en)"
+citizen register	folkeregister(et)
+citizenship	statsborgerskap(et)
+city	"by(en), storby(en)"
+city atmosphere	bybilde(t)
+city council	"bystyre(t), byting(et)"
+city council records	bytingsprotokoll(en)
+city fire	bybrann(en)
+city hall	rådhus(et)
+city museum	bymuseum(et)
+city picture	bybilde(t)
+city skyline	bybilde(t)
+civil	borgerlig
+minor civil court	forliksråd(et)
+civil war	borgerkrig(en)
+civilian	sivil
+civilized	sivilisert
+clash	strid(en)
+clasp	spenne(n)
+class	klasse(n)
+classic	klassisk
+clean	ren
+clean[s]	"vaske[r], skure[s]"
+cleaner	vaskehjelp(en)
+cleaning	rengjøring(en)
+cleaning girl	vaskepike(n)
+cleaning woman	vaskekone(n)
+clear	"klar, tydelig"
+clear[s|ed]	klarne[r|t]
+clearly	"tydeligvis, åpenbart"
+cleft	sprekk(en)
+clerk	ekspeditør(en)
+clever	"flink, lur"
+climate	klima(et)
+clock	klokke(n)
+clog	tresko(en)
+close	nær
+close	tett
+close[s]	lukke[r]
+close[s]	stenge[r]
+close[s]	nedlegge[r]
+closed	nedla[gt]
+cloth	lapp(en)
+clothing	klær(ene)
+cloud	sky(en)
+cloud berry	multe(n)
+clove {spice}	nellik(en)
+clown	klovn(en)
+club	klubbe(n)
+social club	klubb(en)
+club	forening(en)
+coach	vogn(en)
+coach	rutebil(en)
+coach builder	karetmaker(en)
+coaching inn	skysstasjon(en)
+coachman	"vognmann(en), kusk(en)"
+coal	kull(et)
+coalfish	sei(en)
+coast	kyst(en)
+coastguard	kystvakt(en)
+coat of arms	våpen(et)
+coating	belegg(et)
+coffee	kaffe(n)
+coffin	kiste(n)
+cold	kald
+cold	kulde(n)
+to have a cold	å være forkjølet
+collaborate[s|d]	samarbeide[r|t]
+collaborator	samarbeidspartner(en)
+colleague	kollega(en)
+collect[s|ed]	samle[r|t]
+colic	kolikk(en)
+colonel	oberst(en)
+color	farge(n)
+column	kolonne(n)
+come[s]	komme[r]
+come to agreement	enes
+command[s]	anføre[r]
+command[s]	kommandere[r]
+command[s|ed]	beordre[r|t]
+commanded	"kommandert[e], anførte"
+commersial area	næringsområde(t)
+commit[s]	bedrive[r]
+commited	begikk
+committee	utvalg(et)
+common	almen
+common	felles
+common	alminnelig
+communication	kommunikasjon(en)
+communion	"nattverd(en), altergang(en)"
+community	samfunn(et)
+company	"selskap(et), firma(et), bedrift(en)"
+company name	firmanavn(et)
+compare	jevnfør
+compare[s]	konferere[r]
+compare[s|d]	sammenligne[r|t]
+comparison	sammenlignelse(n)
+compassionate	barmhjertig
+compass	kompass(et)
+competence	"kompetanse(n), fagområde(t)"
+competition	konkurranse(n)
+complaint	klage(n)
+complain[s|ed]	klage[r|t]
+complete	"komplett, fullkommen, full, hel, hele"
+complicated	innviklet
+comprehend[s]	innse[r]
+comprehension	oppfatning(en)
+compromise	forlik(et)
+computer	datamaskin(en)
+comrade	kammerat(en)
+concern[s]	angå[r]
+concrete worker	støpearbeider(en)
+concussion	rystelse(n)
+condition	"tilstand(en), forfatning(en), forhold(et)"
+condition	"vilkår(et), forutsetning(en)"
+conduct[s] (an orchestra)	dirigere[r]
+conducted (an orchestra)	dirigerte
+conductor (of an orchestra)	dirigent(en)
+electrical conductor	leder(en)
+railway conductor	konduktør(en)
+confess[es|ed]	skrifte[r|t]
+confession	skriftemål(et)
+confidence	tillit(en)
+confirm[s|ed]	bekrefte[r|t]
+confirm[s|ed]	stadfeste[r|t]
+confirm[s]	konfirmere[r] in church
+confirmation in church	konfirmasjon(en)
+confirmed	konfirmert in church
+confiscate[s]	frata[r]
+confiscated	fratok
+conflict	stridighet(en)
+congregation	menighet(en)
+coniferous forrest	barskog(en)
+conifer	bartre(et)
+conifers	bartrær
+conjugal	ekteskapelig
+connect[s|ed]	koble[r|t]
+connective tissue	bindevev(et)
+conquer[s|ed]	erobre[r|t]
+conquest	erobring(en)
+conscious	bevisst
+consecrate[s|d]	innvie[r|t]
+consensus	enighet
+consent	samtykke(t)
+consequence	følge(n)
+consequence	virkning(en)
+conservative	"konservativ, borgerlig"
+conserve[s]	bevare[r]
+consider[s]	anse[r]
+considerable	adskillig
+consolidate[s|d]	befeste[r|t]
+constant	konstant(en)
+constant	"konstant, stadig"
+constipation	forstoppelse(n)
+constituency	krets(en)
+construct[s]	oppføre[r]
+constructed	oppført
+construction	"konstruksjonen(en), bygg(et)"
+construction site	anlegg(et)
+construction worker	"bygningsarbeider(en), anleggsarbeider(en)"
+consultant	konsulent(en)
+consume[s|d]	tære[r|t]
+consumption	tæring(en)
+contain[s]	inneholde[r]
+contained	inneholdt[e]
+contamination	forurensning(en)
+content	"fornøyd, blid"
+content	innhold(et)
+context	sammenheng(en)
+continued	fortsatt
+contract	kontrakt(en)
+contract fee	festeavgift(en)
+contract[s|ed] out	bortfeste[r|t]
+contractor	entrepenør(en)
+contractor	oppdragsgiver(en)
+contrary	derimot
+contribution	innlegg(et)
+controller	kontrollør(en)
+convene[s|d]	forsamle[r|t]
+convent	kloster(et)
+convention	konvensjon(en)
+convert[s]	"konvertere[r], gjøre om"
+convulsion	krampe(n)
+conversion	omvendelse(n)
+conveyor belt	rullebånd(et)
+conversation	samtale(n)
+conveyance	skyss(et)
+cook	kokk(en)
+cookie	"cookie(n), kjeks(en)"
+cool	"kjølig, sval"
+coordinate	koordinat(en)
+coordination	koordinasjon(en)
+cooper	bøkker(en)
+copper	kopper(et)
+copper kettle	kopperkjele(n)
+copulate[s|d]	parre[r|t]
+copy	"kopi(en), avskrift(en)"
+corner	hjøne(t)
+corporal	korporal(en)
+corps	lik(et)
+correct	"riktig, rett, sant, ordentlig"
+is correct	stemme[r]
+correct[s|ed]	rette[r|t]
+was correct	stemt[e]
+corrode[s|d]	etse[r|t]
+corrode[s|d]	tære[r|t]
+cortex	bark(en)
+cosiness	kos(en)
+costs	kostnad(en)
+costume	drakt(en)
+cosy	"koselig, lun"
+cot	barneseng(en)
+cottage	stue(n)
+the cottage	stua
+cottager	husmann(en)
+cough[s|ed]	hoste[r|t]
+count	antall(et)
+Count	greve(n)
+counter	disk(en)
+Countess	grevinne(n)
+counting	telling(a|en)
+country	land(et)
+country people	bygdefolk(et)
+country road	bygdevei(en)
+county	kommune(n)
+county border	kommunegrense(n)
+county road	fylkesvei(en)
+couple	par(et)
+course	kurs(et)
+course	"bane(n), løp(et)"
+court	rett(en)
+court records	dombok(en)
+court of law	domstol(en)
+courtyard	gårdsplass(en)
+courting	kur(en)
+courage	"mot(et), tapperhet(en)"
+court	ting(et)
+courtyard	tun(et)
+cousin	"søskenbarn(et), søsterdatter(en), søstersønn(en)"
+female cousin	kusine(n)
+male cousin	fetter(en)
+cover[s|ed]	dekke[r|t]
+cover	"dekke(t), skalkeskjul(et)"
+cow	ku(a|en)
+cowhouse	fjøs(et)
+cowshed	fjøs(et)
+cowshed	fehus(et)
+cracker	kjeks(en)
+craft	brukskunst(en)
+craft	fartøy(et)
+crane	heisekran(en)
+crane operator	kranfører(en)
+cranium	skalle(n)
+crate	kasse(n)
+crazy	gal
+create[s]	skape[r]
+creature	vesen(et)
+creed	trosbekjennelse(n)
+crew	besetning(en)
+crib	barneseng(en)
+cried	gråt[t]
+crime	forbrytelse(n)
+criminal	kriminell
+crippled	krøpling(en)
+crippled	"lam, ufør, vanfør"
+cripple[s|d]	lemleste[r|t]
+crisis	krise(n)
+crochet[s|ed]	hekle[r|t]
+crocodile	krokodille(n)
+cross	kors(et)
+cross country skier	skiløper(en)
+cross country skiing trip	skitur(en)
+croup	"krupp(en), strupehoste(n)"
+crowd	"folkemengde(n), mylder(et)"
+crowd of children	barneflokk(en)
+crown	krone(n)
+Crown Court	lagmannsrett(en)
+Crown Court	lagrett(en) = lagmannsrett(en)
+crown-cent {Norwegian currency unit}	øre(t)
+crowns {Norwegian currency unit}	kroner
+crumb	smule(n)
+crumple[s|ed]	krølle[r|t]
+crusty fat on a steak	svor(en)
+cry[s]	gråte[r]
+cultivate[s|d]	dyrke[r|t]
+culture	kultur(en)
+cunt	fitte(n)
+the cunt	fitta
+cunning	lur
+cupboad	skap(et)
+curate	kapellan(en)
+currency	valuta(en)
+current	strøm(men)
+current version	siste versjon
+currently	for tiden
+custom	konvensjon(en)
+customer	kunde(n)
+customer support	kundebehandler(en)
+customs	toll(en)
+customs officer	tollbetjent(en)
+customs department	tollverket
+cut	skar
+cut[s] down	felle[r]
+cutter	overskjærer(en)
+daily	daglig
+damage[s]	"skade[r], ødelegge[r], skamfere[r]"
+damsel	jomfru(en)
+dance	dans(en)
+dance ball	ball(et)
+dance[s|d]	danse[r|t]
+dancing teacher	danselærer(en)
+dandy	dåre(n)
+danger	fare(n)
+dangerous	farlig
+extremely dangerous	livsfarlig
+Danish	dansk
+dare[s|d]	våge[r|t]
+dark	"mørk, svart"
+darling	elskling(en)
+dash	sprint(en)
+dash[es|ed]	sprinte[r|t]
+data	data
+date	dato(en)
+date	stevnemøte(t)
+date[s]	datere[r]
+daughter	datter(en)
+daughter's daughter	datterdatter(en)
+daughter's son	dattersønn(en)
+daughter with right to inherit the farm	odelsjente(n)
+daughter-in-law	svigerdatter(en)
+daughters	døtre(ne)
+dawn	demring[en]
+dawn[s|ed]	demre[r|t]
+day	dag(en)
+day labour	dagleie(n)
+day labourer	"dagsarbeider(en), løsarbeider(en)"
+deacon	diakon(en)
+deacon	klokker(en)
+dead	salig
+dead end street	blindvei(en)
+deadline	frist(en)
+deaf	døv
+deaf and dumb	døvstum
+dean	prost(en)
+dear	kjære
+death	død(en)
+death	"dødsfall(et), endelikt(en), avgang(en), bortgang(en)"
+cause of death	dødsårsak(en)
+date of death	dødsdato(en)
+to death	ihjel
+year of death	dødsår(et)
+deathbed	dødsleie(t)
+debenture	gjeldsbrev(et)
+debt	"skyld(en), gjeld(en)"
+debt ratio	gjeldsandel(en)
+debtor's prison	gjeldsfengsel(et)
+decapitate[s|d]	halshugge[r|t]
+deceased	"avdød, død, forhenværende, salig"
+deceive[s]	bedra[r]
+December	desember
+decent	anstendig
+decent	"kjekk, real"
+decide[s]	bestemme[r]
+decided	"bestemt, bestemte"
+decorate[s|d]	"pynte[r|t], smykke[r|t]"
+decoration	pynt(en)
+deduction	fradrag(et)
+deductible	fradragsberettiget
+deed of property	skjøte(t)
+deep	dyp
+deep	dyp(et)
+deer	hjort(en)
+defeat	nederlag(et)
+defect	"feil(en), mangel(en)"
+defence	forsvar(et)
+definition of word	ordforklaring(en)
+deformed	vanskapt
+degree from high school	eksamen artium
+deliver[s]	levere[r]
+delivered	leverte
+demarcation	avgrensning(en)
+demand[s]	"forlange[r], kreve[r]"
+demanded	"forlangte, krevde"
+demise	"avgang(en), bortgang(en)"
+demolish[es]	rive[r]
+Denmark	Danmark
+denounce[s]	"angi[r], sladre[r]"
+denounciation	angiveri(et)
+dense	tett
+dent	bulk(en)
+dental mechanic	tanntekniker(en)
+dentist	tannlege(n)
+[deny|denies|denied]	"benekte[r|t], nekte[r|t], avslå[r|tt][avslo]"
+depart[s|ed]	"dra[r|tt], avgå[r|tt]"
+departed	dro
+department	byrå(et)
+department manager	avdelingssjef(en)
+departure	"avgang(en), avreise(n), avskjed(en)"
+date of departure	avreisedato(en)
+departure date	reisedato(en)
+depth	dybde(n)
+deputyship	vikariate(t)
+descend[s]	dale[r]
+descended	dalte
+describe[s]	beskrive[r]
+described	beskrevet
+description	beskrivelse(n)
+descend[s|ed]	stamme[r|t]
+descendant	etterkommer(en)
+deserted	øde
+desire	"lyst(en), trang(en)"
+desire[s|ed]	ønske[r|t]
+desolate	øde
+destination	reisemål(et)
+destiny	skjebne(n)
+destroy[s]	ødelegge[r]
+determine[s]	fastslå[r]
+development	utvikling(en)
+devil	djevel(en)
+the devil	fanden
+devote[s]	hengi[r]
+devoted	henga
+devotion	hengivelse(n)
+diagonal	diagonal
+diameter	diameter(en)
+diamond	diamant(en)
+dictionary	ordbok(en)
+did	gjorde
+didactic	belærende
+die[s|d]	"dø[r|de], omkom[mer|met]"
+die[s|d] out	utdø[r|dd]
+diet[s|ed] in order to get thinner	slanke[r|t]
+difference	forskjell(en)
+different	"forskjellig, forskjellige, annerledes"
+difficult	stridt
+difficult	vanskelig
+difficulty	vanskelighet(en)
+dig[s]	"grave[r], spa[r]"
+diligence	flid(en)
+diligent	flittig
+diminish[es|ed]	forringe[r|t]
+diner	kafé(en)
+dinner	middag(en)
+dip[s|ed]	dyppe[r|t]
+diptheria	difteri
+direct[s] (traffic)	dirigere[r]
+directed (traffic)	dirigerte
+direction	retning(en)
+director	direktør(en)
+director of social services	sosialsjef(en)
+disabled	vanfør
+disarmament	nedrustning(en)
+disbursement	utlegg(et)
+disc	plate(en)
+discharge[s] from military service	dimmitere[r]
+disciple	disippel(en)
+disclaim[s]	frasi[er]
+disclaimed	frasa
+disease	sykdom(men)
+dish	tallerken(en)
+disinherited	arveløs
+dismiss[es]	permittere[r]
+dismiss[es]	henlegge[r]
+dismissed	permittert
+dismissed	henlagt
+disorder	"uro(en), rot(et)"
+disown[s]	frata[r]
+disowned	fratok
+dispensation	tillatelse(n)
+display[s]	framvise[r]
+displayed	framvist[e]
+disposition	"gemytt(et), sinnelag(et)"
+dispute	stridighet(en)
+dissertation	avhandling(en)
+dissolve[s]	oppløse[r]
+dissolved	oppløst
+distance	avstand(en)
+distance learning	fjernundervisning(en)
+distant	fjern
+distant place on the horizon	blåne(n)
+distillery	brenneri(et)
+distinguished	anerkjent
+distribution	fordeling(en)
+distribution of probate estate	arveskifte(t)
+distribution of probate estate	bodeling(en)
+district	"distrikt(et), krets(en)"
+District Governor	fylkesmann(en)
+District Governor of Svalbard	sysselmann(en) på Svalbard
+district stipendiary magistrate	sorenskriver(en)
+disturb	forstyrre[r]
+disturbance	uro(en)
+divide[s]	dele[r]
+divide[s|d] an estate	skifte[r|t]
+divide[s] in two	halvvere[r]
+divided	delt
+divided in two	halvvert[e]
+dividend	utbytte(t)
+dividing	deling(en)
+divination	spådom(men)
+divine[s|d]	spå[r|dde]
+diviner	"spåkone(n), spåmann(en)"
+division of an estate	skifte(t)
+divorce	skilsmisse(n)
+divorce[s]	skille[r]
+divorced	skilt
+do	gjøre
+does	gjøre
+do[es]	utføre[r]
+docker	sjauer(en)
+dockworker	bryggearbeider(en)
+doctrine	lære(n)
+document	dokument(et)
+dog	hund(en)
+pack of dogs	hundeflokk(en)
+team of dogs	hundespann(et)
+doll	dukke(n)
+domestic	huslig
+domestic animal	husdyr(et)
+domestic affairs	innenriks
+domestic work	husgjerning(en)
+domicile	"hjemsted(et), bopel(en)"
+Dominican	dominikaner(en)
+done	"gjort, utført"
+donkey	esel(et)
+donor	giver(en)
+door	dør(en)
+doubt	tvil(en)
+dough	deig(en)
+down	"ned, nede"
+downstairs	nede
+dowry	medgift(en)
+drain[s|ed]	tappe[r|t]
+dragon	drage(n)
+dragonfly	øyenstikker(en)
+dragoon	dragon(en)
+drank	drakk
+[draw|draws|drew]	tegne[r|t]
+drawing	tegning(en)
+drawnet	trekkegarn(et)
+dreadful	fryktelig
+dream	drøm(men)
+dream[s]	drømme[r]
+dress	"kjole(n), drakt(en)"
+dress[es|ed]	kle[r|dde]
+dried fish	"tørrfisk(en), klippfisk(en)"
+drink	drikk(en)
+drink[s]	drikke[r]
+drive[s]	"kjøre[r], føre[r]"
+driven	ført[e]
+driver	"sjåfør(en), fører(en)"
+driving wheel	styre(t)
+drop	dråpe(n)
+drop[s]	slippe[r]
+drop[s]	sløyfe[r]
+drool[s|ed]	sikle[r|t]
+drought	tørke(n)
+drove	kjørte
+drown[s|ed]	drukne[r|t]
+drug	"medisin(en), narkotika(et)"
+drug store	apotek(et)
+drummer	tambur(en)
+drunk	drakk
+drunk	"full, beruset"
+dry	"tørr, tørt"
+duck	and(en)
+ducks	ender
+dug	spadd[e]
+duke	hertug(en)
+dull	sløv
+dullness	sløvhet(en)
+dust	støv(et)
+dutchy	hertugdømme(t)
+duty	avgift(en)
+dyer	farger(en)
+dysentary	blodgang(en)
+e.g. = for example	f.eks. = for eksempel
+e-mail	e-post(en)
+each	hver
+each	enhver
+each other	hverandre
+eager	"ivrig, hissig"
+ear	øre(t)
+Earl	jarl(en)
+earlier	tidligere
+early	tidlig
+earn[s]	tjene[r]
+earned	tjente
+earth	jord(en)
+Earth	jorden
+earth fault	jordfeil(en)
+earth fault protection switch	jordfeilbryter(en)
+earthing	jordning(en)
+earthing block	jordningsblokk(en)
+earthquake	jordskjelv(et)
+east	øst
+east side	østside(n)
+Easter	påske(n)
+eastern	østre
+easy	"lett, enkel"
+eat[s]	spise[r]
+eat[s]	ete[r]
+eccentric	sær
+ecclesiastical	geistlig
+economy	økonomi(en)
+edge	rand(en)
+editor	redaktør(en)
+educate[s|d]	oppdra[r|dd]
+education	utdannelse(n)
+effect	"virkning(en), utslag(et)"
+egg	egg(et)
+egg yolk	eggeplomme(n)
+eiderdown	dyne(n)
+eight	åtte
+eighteen	atten
+eighteenth	attende
+eighth	åttende
+eightieth	åttiende
+eighty	åtti
+elastic band	strikk(en)
+election	valg(et)
+electric	elektrisk
+electrical	elektrisk
+electrical wire	ledning(en)
+electrician	elektriker(en)
+electricity	elektrisitet(en)
+electron	elektron(et)
+electronic	elektronisk
+elegant	elegant
+element	element(et)
+elementary school	barneskole(n)
+eleven	elleve
+eleventh	ellevte
+elf	"alv(en), fe(en)"
+eliminate[s]	eliminere[r]
+eliminated	eliminerte
+elk	elg(en)
+elm	alm(en)
+email	epost(en)
+embassy	ambassade(n)
+embrace	favn(et)
+embryo	foster(et)
+emigrant	"emigrant(en), utvandrer(en)"
+emigrant records	emigrantprotokoll(en)
+emigrate[s]	"emigrere[r], utvandre[r]"
+emigrate[s|d]	utflytte[r|t]
+emigration	"emigrasjon(en), utvandring(en)"
+emit[s] gas or vapour	ose[r]
+emitted gas or vapour	oste
+emphatic	utpreget
+emphatically	ettertrykkelig
+employ[s]	ansette[r]
+employed	"sysselsatt, ansatt"
+employee	"arbeidstaker(en), ansatt"
+state employee	statsansatt
+employer	arbeidsgiver(en)
+employer	oppdragsgiver(en)
+empty	tom
+empty[s]	tømme[r]
+enchanted	trollsk
+enchanted forest	trollskog(en)
+enclosed pasture	kulturbeite(t)
+end	slutt(en)
+end	ende(n)
+end[s|ed]	slutte[r|t]
+end[s]	ende[r]
+ended	endte
+endure[s]	"holde[r] ut, utholde[r], tåle[r]"
+energetic	energisk
+energy	energi(en)
+engage[s]	"engasjere[r], ansette[r]"
+engaged	"forlovet, trolovet"
+engagement	"forlovelse(n), trolovelse(n)"
+military engagement	trefning(en)
+engine	"maskin(en), motor(en)"
+engineer	"ingeniør(en), maskinist(en)"
+England	England
+English	engelsk
+enjoy[s]	like[r]
+enjoyed	likte
+enjoy[s]	"kose[r], boltre[r]"
+enjoyed	koste
+enlist[s]	innrullere[r]
+enlisted	innrullert
+enough	nok
+enterprise	foretaket(et)
+entertain[s]	underholde[r]
+entertainment	underholdining(en)
+entice[s|d]	lokke[r|t]
+entitled	berettiget
+environment	miljø(et)
+environment therapist	miljøterapeut(en)
+environmentaly friendly	miljøvennlig
+epic	episk
+epic poem	epos(et)
+epilepsy	epilepsi(en)
+epilepsy	fallesyke(n)
+equal	like
+equally good	jevngod
+equally large	jevnstor
+equation	ligning(en)
+equipment	utstyr(et)
+erect[s]	reise[r]
+errand boy	visergutt(en)
+escape[s]	rømme[r]
+escaped	rømte
+escaped	bortrømt
+establish[es]	etablere[r]
+establish[es]	fastslå[r]
+estate	"gods(et), bo(et)"
+estate owner	godseier(en)
+estimate	anslag(et)
+etc.	etc.
+etc. = et cetera	o.s.v. = og så videre
+eternal	evig
+eternity	evighet(en)
+ether	eter(en)
+ethnicity	etnisitet(en)
+eulogy	lovtale(n)
+even	jevn
+even that ..	endog det ..
+even though	selv om
+evening	"kveld(en), aften(en)"
+event	begivenhet(en)
+every	hver
+everybody	alle
+everything	alt
+evil	"ond, onde, ondt"
+evil	ondskap(en)
+exactly	nettopp
+examin[s]	undersøke[r]
+examination	eksamen
+excavator	gravemaskin(en)
+except	unntatt
+exception	unntak(et)
+excitement	spenning(en)
+exciting	spennende
+exchange	veksling(en)
+exchange[s|d] money	veksle[r|t]
+exchange[s|d]	bytte[r|t]
+excomminicate[s]	bannlyse[r]
+excuse	"unnskyldning(en), påskudd(et)"
+excuse[s]	unnskylde[r]
+execute[s]	utføre[r]
+executed	utført[e]
+exercise[s|d]	øve[r|t]
+exercised	øvde
+existing	bestående
+exit	utgang(en)
+exit[s]	avstige[r]
+exiting	avstigning(en)
+expel[s]	utvise[r]
+expense	utlegg(et)
+expensive	dyr
+experience	opplevelse(n)
+experience	erfaring(en)
+explanation	forklaring(en)
+exploit[s|ed]	utnytte[r|t]
+expose[s|d]	blotte[r|t]
+exposed	åpen
+extend[s|ed]	forlenge[r|t]
+exterior	utenpå
+external gallery	sval(en)
+extinct	utdødd
+extra	ekstra
+extreme	ekstrem
+extreme powerty or state of danger	nød(en)
+extremely	svært
+eye	øye(t)
+eyesight	syn(et)
+fable	fabel(en)
+face	ansikt(et)
+fact	faktum(et)
+facts	fakta
+factory	"fabrikk(en), verk(et), bruk(et), bedrift(en)"
+factory owner	verkseier(en)
+factory worker	fabrikkarbeider(en)
+factory worker	verksarbeidar(en)
+fade[s]	svinne[r]
+faded	svunnet
+fair	"real, rettferdig"
+fairly	nokså
+fairy	"fe(en), alv(en)"
+faith	tro(en)
+faithful	trofast
+fall	fall(et)
+fall	høst(en)
+fall[s]	falle[r]
+the fallen	falne
+family	familie(n)
+family	"ætt(en), slekt(en)"
+family branch	slektsgren(en)
+family chronicle	slektsbok(en)
+family coat of arms	slektsvåpen(et)
+family history	slektshistorie(n)
+family name	"familienavn(et), slektsnavn(et)"
+fantastic	fantastisk
+far	langt
+far-sighted	vidsynt
+farm	"gård(en), bondegård(en), gårsdbruk(et), småbruk(et)"
+farm boy	bondegutt(en)
+farm equipment	gårdsredskap(et)
+farm engineer	landbrukstekniker(en)
+farm girl	bondejente(en)
+farm hand	gårdsgutt(en)
+farm manager	gårdsbestyrer(en)
+farm name	gårdsnavn(et)
+farm occupant	gårdbeboer(en)
+farm work	"gårdsarbeid(et), jordbruksarbeid(et)"
+farm worker	"gårdsarbeider(en), jordbruksarbeider(en)"
+farmer	"bonde(n), gårdbruker(en), jordbruker(en), småbruker(en)"
+farmer's daughter	gårdmannsdatter(en)
+farmer's estate	bondegods(et)
+farmer's son	gårdbrukersønn(en)
+farmer's son	gårdmannssønn(en)
+farmer's widow	gårdmannsenke(n)
+farmer's wife	gårdmannskone(n)
+farmers	"bønder, gårdsfolk(et)"
+farming	jordbruk(et)
+farming area	jordbruksareal(et)
+farmworker	jordarbeider(en)
+fart	fjert(en)
+fashion	mote(n)
+fast	"fort, rask"
+fast	faste(n)
+fast[s|ed]	faste[r|t]
+fat	fet
+fat	"fett(et), smult(en)"
+fatal	"drepende, skjebnesvanger"
+fate	skjebne(n)
+fateful	skjebnesvanger
+father	far(en)
+Father Christmas	julenisse(n)
+father's brother	farbror(en)
+father's family	farsslekt(en)
+father's father	farfar(en)
+father's mother	farmor(en)
+father's sister	faster(en)
+father-in-law	svigerfar(en)
+father-in-law and mother-in-law	svigerforeldre(ne)
+fathers	fedre(ne)
+fathom[s|ed]	favne[r|t]
+fault	skyld(en)
+fear	frykt(en)
+fearfulness	angst(en)
+feast	gilde(t)
+feather	fjær(en)
+February	februar
+fed up	lei
+fee	avgift(en)
+feeble	"svak, veik"
+feeble minded	"åndssvak, åndsveik"
+[feed|feeds|fed]	mate[r|t]
+feedback	tilbakemelding(en)
+feel[s]	føle[r]
+feeling	"følelse(n), anelse(n)"
+fell	falt
+fellow	kar(en)
+fellow being	medmenneske(t)
+felt	filt(en)
+felt	følt[e]
+female	kvinne(n)
+female gender	kvinnekjønn(et)
+fence	gjerde(t)
+ferry	ferge(n)
+ferryman	fergemann(en)
+fetch[es]	hente[r]
+fetched	hentet
+fetus	foster(et)
+fever	feber(en)
+few	få
+fewer	færre
+fiancee	forlovede(n)
+fiddle	fele(n)
+fiddler	spillemann(en)
+field	"åker(en), jord(et), mark(en)"
+fierce	arg
+fifteen	femten
+fifteenth	femtende
+fiftieth	femtiende
+fifth	femte
+fifty	femti
+fight	strid(en)
+fight[s][fought]	kjempe[r|t]
+figure	"figur(en), struktur(en)"
+fill[s|ed]	fylle[r|t]
+filling	fyll(et)
+filling	plombe(n)
+fin of fish	finne(n)
+Fin from Finland	finne(n)
+Finland	Finnland
+Finnish	finsk
+final	endelig
+finally	tilsist
+finally	endelig
+find[s]	finne[r]
+fine	fin
+fine	bot(en)
+fine[s]	bøtelegge[r]
+fined	bøtelagt
+finger	finger(en)
+finger tip	fingerspiss(en)
+fir tree	gran(en)
+fire	"ild(en), bål(et), brann(en), fyr"
+fire chief	brannmester(en)
+fire insurance value	branntakst(en)
+fireman	brannmann(en)
+fireplace	peis(en)
+firewood	ved(en)
+first	først
+first	fremst
+first name	fornavn(et)
+fish	fisk(en)
+fish farming	havbruk(et)
+fish hook	fiskekrok(en)
+fisherman	fisker(en)
+fishermen's shed	rorbu(en)
+fishery	"fiskeri(et), havbruk(et)"
+fishing boat	sjekte(n)
+fishing line	line(n)
+fishmonger	fiskehandler(en)
+fist	neve(n)
+fitter	montør(en)
+fitting	armatur(en)
+five	fem
+fixed	"fast, bestemt"
+fjord	fjord(en)
+fjord	vik(en)
+fjord	våg(en)
+flag	"flagg(et), fane(en)"
+flag bearer in the army	fanejunker(en)
+flash	lyn(et)
+flash light	lommelykt(en)
+flash[es|ed]	blotte[r|t]
+flat	"flat, platt"
+flat bread baker	fladbrødbager(en)
+flew	fløy
+flog[s|ed]	slå[r|tt]
+floor	gulv(et)
+floor	etasje(n)
+flour	mel(et)
+flow[s]	strømme[r]
+flower	blomst(en)
+flute	fløyte(n)
+fly	flue(n)
+[fly|flies]	fly[r]
+foal	føll(et)
+fodder	for(et)
+fodder storage	lade(n)
+fog	tåke(n)
+fold[s|ed]	brette[r|t]
+followed	fulgte
+follow[s]	følge[r]
+following	følgende
+fond of	glad i
+fondle[s]	beføle[r]
+fondled	befølt[e]
+food	"mat(en), føde(n)"
+food storage	lade(n)
+foot	fot(en)
+footprint	fotavtrykk(et)
+for	"for, til"
+for one	blant annet
+force	kraft(en)
+forced labour	tvangsarbeide(t)
+forces	krefter
+forefathers	forfedre(ne)
+foreign	"fremmed, ukjent"
+foreign affairs	utenriks
+foreign country	utlandet
+foreigner	fremmed
+foreman	formann(en)
+foremost	fremst
+forest	skog(en)
+the forest	marka
+forest bailiff	skogsfut(en)
+forestry	skogsdrift(en)
+forge	smie(n)
+forget[s]	glemme[r]
+forgive	tilgi
+forgive[s]	forlate[r]
+forgot	glemt
+former	"forhenværende, forrige"
+fornication	utukt(en)
+fort	"fort(et), borg(en)"
+fortress	festning(en)
+fortify [fortifies|fortified]	befeste[r|t]
+forward	"forover, fram, frem"
+forward	spiss(en)
+foster child	fosterbarn(et)
+foster child	pleiebarn(et)
+foster daughter	fosterdatter(en)
+foster daughter	pleiedatter(en)
+foster father	fosterfar(en)
+foster father	pleiefar(en)
+foster mother	fostermor(en)
+foster mother	pleiemor(en)
+foster parents	pleieforeldre(ne)
+foster son	fostersønn(en)
+foster son	pleiesønn(en)
+foster[s|ed]	oppfostre[r|t]
+foster[s|ed]	fostre[r|t]
+foul	stygg
+found	fant
+found[s|ed]	stifte[r|t]
+foundation	stiftelse(n)
+founder	grunnlegger(et)
+foundling	hittebarn(et)
+foundry	støperi(et)
+foundry	jernverk(et)
+foundry worker	støperiarbeider(en)
+fountain	fontene(n)
+four	fire
+fourteen	fjorten
+fourteenth	fjortende
+fourth	fjerde
+fourtieth	førtiende
+fourty	førti
+fox	rev(en)
+fraud	bedrageri(et)
+freckle	fregne(n)
+free	fri
+free	gratis
+free of dept	gjeldfri
+free time	fritid(en)
+freedom	frihet(en)
+freehold	odel(en)
+freehold farm	odelsgård(en)
+freeholder	"selveier(en), odelsbonde(n)"
+freight	frakt(en)
+freeze[s]	fryse[r]
+freeze-dr[y|ied]	frysetørke[r|t]
+Friday	fredag
+friend	venn(en)
+friendly	vennlig
+friendly and helpful	elskverdig
+friendship	vennskap(et)
+frieze	vadmel(en)
+from	"fra, av"
+from the begining	forfra
+froth	skum(met)
+froze	frøs
+fruit	frukt(en)
+fuck[s]	pule[r]
+full	full
+full of food	mett
+full fat sour cream	seterrømme(n)
+function[s]	fungere[r]
+functioned	fungert[e]
+functioning	istand
+fun	moro(a|en)
+fundamental	grunnleggende
+funeral	"begravelse(n), bisettelse(n)"
+funnel	trakt(en)
+funny	"morsom, spøkefull"
+fur	pels(en)
+fur coat	pelskåpe(n)
+furious	rasende
+furnish[es|ed]	innrede[r|t]
+furnishing	innredning(en)
+furniture	møbel(et)
+furniture maker	møbelsnekker(en)
+furniture upholsterer	møbeltapetserer(en)
+furrier	buntmaker(en)
+further	videre
+further	videregående
+futile	forgjeves
+future	"framtid(en), fremtid(en)"
+future	fremtidig
+gain	gevinst(en)
+gallows	galge(n)
+game	lek(en)
+game	spill(et)
+gang	gjeng(en)
+gang foreman	baneformann(en)
+gangrene	koldbrann(en)
+gape[s]	gape[r]
+garden	hage(n)
+gardener	gartner(en)
+garrison	garnison(en)
+gas	gass(en)
+gastric flu	omgangssyke(n)
+gastric ulcer	magesår(et)
+gastritis	magebetennelse(n)
+gathering	stevne(t)
+gave	ga
+gaze	blikk(et)
+gazoline	bensin(en)
+powered by gazoline	bensindrevet
+gear	gir(et)
+gelatin	gelatin(et)
+gender	kjønn(et)
+general	"generell, almen"
+general store	"kolonialbutikk(en), landhandel(en)"
+general store owner	landhandler(en)
+genealogy	slektsforskning(en)
+general	general(en)
+general major	generalmajor(en)
+general staff	generalstab(en)
+generation	generasjon(en)
+gentleman	herre(n)
+German	tysk
+Germany	Tyskland
+get[s]	"få[r], anskaffe[r]"
+get[s] used to	venne[s]
+get[s] up	reise[r]
+ghost	"spøkelse(t), gjenferd(et), gjenganger(en), ånd(en)"
+giant	"kjempe(n), rise(n)"
+gift	"gave(n), pakke(n)"
+gifted	begavet
+giggle[s]	knise[r]
+gilding	forgylling(en)
+Gin-like liquour	aquavit(en)
+ginger	ingefær(et)
+gingerbread cookies	pepperkaker
+girdle	belte(t)
+girl	"jente(n), pike(n), pikebarn(et)"
+give[s]	"gi[r], yte[r]"
+give[s] birth	føde[r]
+given	gitt
+glacier	"bre(en), jøkel(en)"
+glance[s|d]	kikke[r|t]
+glass	glass(et)
+glasses	brille(n)
+glasswork	glassverk(et)
+glide[s]	gli[r]
+glory	herlighet(en)
+glove	"hanske(n), vante(n)"
+glove maker	hanskemaker(en)
+glue	lim(et)
+glue[s]	lime[r]
+glued	limte
+gnome	nisse(n)
+go[s]	gå[r]
+goal	mål(et)
+goal	målsetting(en)
+goat	"geit(en), bukk(en)"
+goat cheese	geitost(en)
+goat willow	selje(en)
+goat willow flute	seljefløyte(n)
+god	gud(en)
+God	Gud
+godfather	gudfar(en)
+godmother	gudmor(en)
+godparent	fadder(en)
+gold	gull(et)
+goldsmith	gullsmed(en)
+golf	golf
+golf course	golfbane(n)
+gone	reist
+got	fikk
+got	fått
+good	"god, godt, bra, flink"
+Good Friday	langfredag(en)
+good luck to you	lykke til
+goodbye	"farvel, ha det"
+goods	vare(n)
+goose	"gås(en), gasse(n)"
+gossip	sladder(et)
+gouty	giktbrudden
+government	regjering(en)
+governor	stattholder(en)
+grab[s]	gripe[r]
+grace	bønn(en)
+gracefull	yndig
+gracious	nådig
+grades	karakter(ene)
+gradually	gradvis
+graduate from university	akademiker(en)
+grandchild	barnebarn(et)
+grandfather	"bestefar(en), farfar(en), morfar(en)"
+grandmother	"bestemor(en), farmor(en), mormor(en)"
+grandparents	besteforeldre(ne)
+grant	bevilgning(en)
+grant[s|ed]	bevilge[r|t]
+grant[s] leave	permittere[r]
+granted leave	permittert
+grasp	grep(et)
+grass	gress(et)
+grave	alvorlig
+grave	grav(en)
+grave digger	graver(en)
+grave-mound	gravhaug(en)
+gravel	grus(en)
+gravestone	gravsten(en)
+gray	grå
+graybeard	gamling(en)
+graybeard	gubbe(n)
+graybeard	kall(en)
+great	"stor, flott"
+Great Britain	Storbritania
+great-grandchild	"oldebarn(et), barnebarnsbarn(et)"
+great-grandfather	oldefar(en)
+great-grandmother	oldemor(en)
+great-grandparents	oldeforeldre(ne)
+great-great-grandfather	tippoldefar(en)
+great-great-grandmother	tippoldemor(en)
+great-great-grandparents	tippoldeforeldre(ne)
+greed	grådighet(en)
+greedy	grådig
+green	grønn
+greeting	hilsen(en)
+greetings	hilsen
+grenadier	grenader(en)
+grew	vokste
+griddle cake	lefse(n)
+grin	glis(et)
+grin[s]	glise[r]
+grind[s]	"male[r], kverne[r]"
+grinder	"mølle(n), kvern(en)"
+groom	brudgom(men)
+gross	brutto
+gross property	bruttoformue(n)
+groceries	dagligvarer
+grocery	kolonialbutikk(en)
+ground	grunn(en)
+ground	"malt, malte"
+growth	tilvekst(en)
+grow[s]	vokse[r]
+grumpy	"gretten, sur"
+guard	vakt(en)
+guardian	verge(n)
+guardian	formynder(en)
+guest	gjest(en)
+guesthouse	vertshus(et)
+guestroom	gjesterom(met)
+guess[es|ed]	"gjette[r|t], tippe[r|t]"
+guidance	oppfølging(en)
+guide	"fører(en), leder(en)"
+guiding star	ledestjerne(n)
+guild	laug(et)
+guilt	skyld(en)
+guilty	skyldig
+gully	sluk(et)
+gun	gevær(et)
+gun maker	bøssemaker(en)
+gunner	artelerist(en)
+gunpowder	krutt(et)
+guy	fyr(en)
+had	hadde
+hail	haggel(et)
+hair	hår(et)
+hairdresser	frisør(en)
+half	"halv, halvdel(en)"
+half way	halvveis
+half-brother	halvbror(en)
+half-sibling(s)	halvsøsken
+half-sister	halvsøster(en)
+halibut	kveite(n)
+hall	sal(en)
+Halling Dance	halling(en)
+hallway or hall	gang(en)
+hamburger	"hamburger(en), medisterkake(n)"
+hamlet	bygd(a|en)
+hammer	hammer(en)
+hand	"hånd(en), neve(n)"
+hand[s] back	tilbakelevere[r]
+handed back	tilbakelevert[e]
+handeling	håndtering(en)
+handicraft	håndverk(et)
+handle[s|d]	behandle[r|t]
+handsome	"vakker, vakre"
+handwork	håndarbeide(t)
+handwriting	håndskrift(en)
+handy	kjekk
+hang[s]	henge[r]
+happen[s|ed]	skje[r|dde]
+happen[s]	hende[r]
+happened	hendt[e]
+happiness	lykke(n)
+happy	"glad, lykkelig, blid"
+harbor	havn(en)
+hard	"hard, beinhard"
+hard roe	rogn(en)
+Hardanger fiddle	hardingfele(n)
+hardly	neppe
+harmony	harmoni(en)
+harsh	streng
+harvest	avling(en)
+the harvest time	skuronne(n)
+haste	hastverk(et)
+hat	hatt(en)
+hate	hat(et)
+hatmaker	hattemaker(en)
+haunt[s]	spøke[r]
+haunted	spøkt[e]
+have	"ha, har"
+having allodial right	odelsberettiget(en)
+hay	høy(et)
+hay mowing	slått(en)
+haze	tåke(n)
+the haying time	høyonne(n)
+he	han
+head	hode(t)
+head clerk	"kontorfullmektig(en), fullmektig(en)"
+head of household	husbonde(n)
+head of the patrol	oppsynssjef(en)
+head-land	"nes(et), odde(n), tange(n), skag(et)"
+headline	overskrift(en)
+headmaster	rektor(en)
+heal	hæl(en)
+heal[s|ed]	lege[r|t]
+health	helse(n)
+health service	helsetjeneste(n)
+heamatology	hematologi(en)
+heap	haug(en)
+heap[s|ed]	lesse[r|t]
+hear[s]	høre[r]
+heart	hjerte(t)
+heart attack	hjerteinfarkt(en)
+heart disease	hjertefeil(en)
+heartfailure	hjertesvikt(en)
+heartdisease	hjertesykdom(men)
+heat	hete(n)
+heather	lyng(en)
+heating	fyring(en)
+heaven	himmel (himlen)
+heavy	tung
+heavy sea	sjøgang(en)
+heel of a foot or shoe	hel(en)
+heel of a loaf	skalk(en)
+height	høyde(n)
+heir	arving(en)
+heirloom	arvestykke(t)
+heirloom	arvegods(et)
+held	"holdt, grep"
+hell	helvete(t)
+hello	hallo
+help	hjelp(en)
+help[s]	hjelpe[r]
+helper	medhjelper(en)
+helpful	behjelpelig
+her	henne
+here	her
+hers	"hennes, sin, sitt"
+herself	"seg, selv, sjøl"
+herdsman	gjeter(en)
+hero	helt(en)
+heroic act	dåd(en)
+herring	sild(en)
+hi	hei
+hide	hud(en)
+hide and seek	gjemsel(en)
+hide[s]	gjemme[r]
+hidden	gjemt
+high	høy
+high	kikk(et)
+high standard	standsmessig
+hike	tur(en)
+hiking road	turvei(en)
+hill	bakke(n)
+hill	"ås(en), haug(en)"
+him	ham
+himself	"seg, selv, sjøl"
+hip	hofte(n)
+hire	leie(n)
+hire[s|d]	hyre[r|t]
+hiring contract	hyrekontrakt(en)
+his	"hans, sin, sitt"
+history	historie(n)
+hit[s]	"slå[r|tt], denge[r]"
+hit	slo
+hive	bikube(n)
+hobble[s|d]	dilte[r|t]
+hobby	fritidsinteresse(n)
+hold	grep(et)
+hold[s]	holde[r]
+hole in the ice	råk(en)
+holiday	helligdag(en)
+holiday home	fritidsbolig(en)
+hollow	hul
+holy	"hellig, salig"
+home	hjem
+home	"hjem(met), heim(en)"
+home craft	husflid(en)
+home economics school	husmorskole(n)
+homely	huslig
+homespun	vadmel(en)
+homestead	rud(en)
+honest	ærlig
+honesty	ærlighet(en)
+honney	honning(en)
+honour[s|ed]	hedre[r|t]
+honourable	hederlig
+honour	ære(n)
+hook	krok(en)
+hope	håp(et)
+hope[s|d]	håpe[r|t]
+horn	horn(et)
+horrible	grusom
+horse	hest(en)
+team of horses	hestespann(et)
+horse fly	klegg(en)
+hospital	"sykehus(et), hospital(et)"
+hospitality	gjestfrihet(en)
+hostage	gissel(et)
+hot	het
+hot punch	gløgg(en)
+hotel	hotell(et)
+hotel booking	hotellbestilling(en)
+hotel reservation	hotellreservasjon(en)
+hotel standard	hotellstandard(en)
+hour	time(n)
+hour	klokke(n)
+house	"hus(et), våningshus(et)"
+house maid	stuepike(n)
+house no	husnr(et)
+house valuation	hustaksering(en)
+house work	husarbeid(et)
+household	hushold(et)
+household	"husholdning(en), hustand(en)"
+housekeeper	"husholder(en), husholderske(n)"
+housekeeping	hushold(et)
+housekeeping	husstell(et)
+housemaid	hushjelp(en)
+houseowner	huseier(en)
+housewife	husmor(en)
+housing	bolig(en)
+how	"hvordan, hvorledes"
+however	imidlertid
+hug[s]	klemme[r]
+hugged	klemt[e]
+huh	hæ
+human	menneskelig
+human being	menneske(t)
+humor	humor(en)
+humorless joke	blødme(n)
+hunch	anelse(n)
+hundred	hundre
+hung	"hang, hengt"
+hunt	jakt(en)
+hunt[s|ed]	jakte[r|t]
+hunter	jeger(en)
+hurrah	hurra
+hurry	skynde
+husband	"mann(en), ektemann(en)"
+hymn	salme(n)
+hymn book	salmebok(en)
+hyssop	isop(et)
+I	jeg
+ice	is(en)
+ice patches on a road	holke(n)
+ice skate	skøyte(n)
+Iceland	Island
+Iceland moss	islandslav(en)
+Icelandic	islandsk
+if	"hvis, om, dersom"
+ignorant	uvitende
+ill	syk
+illegal	ulovlig
+illegitimate	uekte
+illegitimate child	lausunge(n)
+illness	sykdom(men)
+imagine[s] falsely	innbilde[r]
+imagined falsely	innbildt[e]
+immediate	"umiddelbar, omgående"
+immediately	straks
+immigrant	"innvandrer(en), innflytter(en)"
+immigrate[s]	imigrere[r]
+immigrate[s|d]	innvandre[r|t]
+immigration	innvandring(en)
+immigration	innflytning(en)
+immoral	umoralsk
+important	viktig
+impose[s]	pålegge[r]
+imposed	pålagt
+impression	inntrykk(et)
+improper	uskikkelig
+improve[s|d]	forbedre[r|t]
+in	"i, inn, uti"
+in front of	foran
+in other words	d.v.s. = det vil si
+inadvertently	uforvarende
+inbreeding	innavl(en)
+incapacitate	inhabil
+incest	blodskam(men)
+inch	tomme(en)
+including	samt
+income	inntekt(en)
+increased	økt
+indecent	usømmelig
+indeed	riktignok
+indeed not	neimen
+index	"indeks(et), register(et)"
+Indian	inder(en)
+Indian	indisk
+Indian ink	tusj(en)
+indigent	almisselem(met)
+individual	individ(et)
+[is|was] indolent	somle[r|t]
+indoors	"inne, innendørs"
+indulgent	overbærende
+industry	industri(en)
+infant	"spebarn(et), baby(en)"
+infantryman	grenader(en)
+infection	infeksjon(en)
+infidelity	utroskap(et)
+inflammation	betennelse(n)
+influence[s|d]	innvirke[r|t]
+influence	innflytelse(en)
+influx	pågang(en)
+informer	angiver(en)
+inhabitant	innbygger(en)
+inhabited	bebodd
+inherit[s|ed]	arve[r|t]
+inheritance	arv(en)
+inheritance tax	"arveavgift(en), arveskatt(en)"
+inherited land	arvejord(en)
+ink	blekk(et)
+inn	#NAME?
+inner	indre
+innermost	innerst
+innkeeper	gjestgiver(en)
+innocent	uskyldig
+innocence	uskyldighet(en)
+inquiry	undersøkelse(n)
+insane	vanvittig
+insane asylum	sinnsykasyl(et)
+insersion	innrykning(en)
+date of insersion	innryksdato(en)
+inside	"inni, i, inne"
+insignificant	ubetydelig
+inspection	"inspeksjon(en), gjennomsyn(et)"
+inspector	"kontrollør(en), oppsynsmann(en)"
+instalation	anlegg(et)
+instant	øyeblikk(et)
+instinct	"instinkt(et), drift(en)"
+instruction	instruksjon(en)
+instructive	belærende
+instrument	instrument(et)
+insulation	isolsjon(en)
+insurance	forsikring(en)
+insurance premium	forsikringspremie(en)
+intellect	forstand(en)
+intelligent	"intelligent, oppvakt"
+intense	intens
+intention	intensjon(en)
+intercourse	samvær(et)
+interest on money	rente(n)
+interesting	interessant
+interdisciplinary	tverrfaglig
+interment	jordpåkastelse(n)
+interval	omgang(en)
+interview	intervju(et)
+intestine	tarm(en)
+intoxicated	"beruset, full"
+intricate	innviklet
+invest[s|ed]	satse[r|t]
+invisible	usynlig
+invite[s]	invitere[r]
+involve[s]	engasjere[r]
+involved	"engasjert, engasjerte"
+involvement	engasjement(et)
+iron	jern(et)
+iron mill	jernverk(et)
+iron ore	jernmalm(et)
+iron pole	jernstang(en)
+iron works	jernverk(et)
+irrelevant	uvedkommende
+irritate[s|d]	ergre[r|t]
+is	er
+island	øy(en)
+isolation	isolsjon(en)
+isotope	isotop(et)
+issue	sak(en)
+issue	utgivelse(n)
+it	"den, det"
+item	gjenstand(en)
+its	"dens, dets, sin, sitt"
+j.r. = junior	d.y. = den yngre
+jacket	jakke(n)
+jam	syltetøy(et)
+jam[s|ed] together	stue[r|t]
+January	januar
+jaundice	gallfeber(en)
+jaundice	gulsot(en)
+jealous	sjalu
+jealousy	sjalusi(en)
+jerk	rykk(et)
+jerk	dust(en)
+jetty	brygge(n)
+Jew	jøde(n)
+jewlery	smykke(t)
+jog[s|ed] along	dilte[r|t]
+join[s]	forene[r]
+joined	forent[e]
+joint	felles
+joint	ledd(et)
+joint owner	medeier(en)
+joke[s]	spøke[r]
+joked	spøkt[e]
+joker	spøkefugl(en)
+journeyman	håndverkssvenn(en)
+journalist	journalist(en)
+journey	reise(n)
+journeyman	svenn(en)
+judge	dommer(en)
+juice	saft(en)
+juicy	saftig
+July	juli
+June	juni
+junior high-school	ungdommsskole(n)
+junk	skrap(et)
+jump	hopp(et)
+jump[s]	"hoppe[r], springe[r]"
+jumped	sprang
+jurisprudence	jus(en)
+just	nettopp
+just	rettferdig
+just	såvidt
+keep[s]	"beholde[r], forbli[r]"
+keep[s] silent	tie[r]
+keg	kagge(n)
+kettle	kjele(n)
+kick	spark(et)
+kick	kikk(et)
+kick[s]	sparke[r]
+kill[s]	"drepe[r], kverke[r]"
+kin	slekt(en)
+kind	snill
+kind	type
+kindergarden	barnehage(n)
+kindergarden assistant	barnehageassistent(en)
+king	konge(n)
+kingdom	kongedømme(t)
+kitchen	kjøkken(et)
+knapsack	skreppe(n)
+knead[s|ed]	elte[r|t]
+knee	kne(et)
+knew	visste
+knight	ridder(en)
+knight[s|ed]	adle[r|t]
+knit[s|ed]	strikke[r|t]
+knitting	strikking(en)
+knock[s|ed]	banke[r|t]
+to know	å vite
+knot	"knute(n), sløyfe(n)"
+know[s]	vet
+knowledge	kjennskap(en)
+knowledge	kunnskap(en)
+known	kjent
+Labour Party	AP = Arbeiderpartiet
+labour	"arbeid(et), strev(et)"
+labourer	"arbeider(en), arbeidsmann(en), arbeidskar(en)"
+labourous	strevsom
+lace[s]	snøre[r]
+ladder	stige(n)
+ladies' hairdresser	damefrisør(en)
+lady	dame(n)
+ladybird	marihøne(n)
+lake	"innsjø(en), sjø(en), vann(et)"
+lamb	lam(met)
+lame	"lam, halt"
+land	land(et)
+land	jord(et)
+land number	gnr. = gårdsnummer(et)
+land number	gårdsnummer(et)
+land register	matrikkel(en)
+land register	jordbok(en)
+landowner	jordeier(en)
+landslide	ras(et)
+landtax	jordskatt(en)
+lane	bygdevei(en)
+language	språk(et)
+Lapp	same(n)
+Lappish	samisk
+large	"stor, svær"
+largest	størst
+lark	lerke(n)
+last	"sist, tilsist"
+last name	etternavn(et)
+last year	ifjor
+last[s]	vare[r]
+lasting	varig
+late	"sen, sent"
+late	forhenværende
+lately	nylig
+later	"senere, etter hvert, siden"
+Latin	latin(en)
+laugh[s|ed]	skratte[r|t]
+laugh[s]	le[r]
+laughed	lo
+laundry	"vaskeri(et), vaskehus(et)"
+laundry worker	vaskeriarbeider(en)
+lava	lava(en)
+lavatory	"toalett(et), do(en)"
+outdoor lavatory	utedo(en)
+law	lov(en)
+law	jus(en)
+administration of law	justis(en)
+law obiding	lovlydig
+law suit	rettsak(en)
+law suit	stevnemål(et)
+lawyer	"jurist(en), advokat(en), sakfører(en)"
+[lay|lays|laid]	legge[r|t]
+lay	lå
+lay preacher	lekmann(en)
+lazy	lat
+lead	bly(et)
+lead	"ført[e], ledet, anførte"
+lead weight	lodd(et)
+lead[s]	"lede[r], føre[r], anføre[r]"
+leader	leder(en)
+leaf	blad(et)
+learn[s]	lære[r]
+learned	lærte
+lease	feste(t)
+lease[s|d]	bygsle[r|t]
+leasehold contract	bygselbrev(et)
+leash	bånd(et)
+leave[s]	"forlate[r], fraflytte[r]"
+leave of absence	permisjon(en)
+left hand side	venstre
+leg	"ben(et), bein(et)"
+legal	lovlig
+legend	sagn(et)
+legitimate	ekte
+lemonade	saft(en)
+lend[s]	låne[r] bort
+length	lengde(n)
+lengthman	banevokter(en)
+lenient	overbærende
+lent	lånt[e] bort
+Lent	faste(n)
+leprous	spedalsk
+less	mindre
+let[s]	la[r]
+letter {character}	bokstav(en)
+letter {correspondence}	brev(et)
+level	nivå(et)
+financial liabilities	passiva(ene)
+financial liability	passivum(et)
+librarian	bibliotekar(en)
+library	bibliotek(et)
+lice	lus(ene)
+lick[s|ed]	slikke[r]
+lie[s] (down)	ligge[r]
+lie[s]	lyve[r]
+lied	løy
+lieutenant	løytnant(en)
+lieutenant general	generalløyntnant(en)
+life	liv(et)
+life prisoner	livsfange(n)
+lift	heis(en)
+lift	skyss(et)
+light	lys(et)
+light	lett
+light	lyst
+light hearted	lystig
+light infantry soldier	jeger(en)
+light source	lyskilde(n)
+lighthouse	"fyr(et), fyrtårn(et)"
+lighthouse keeper	fyrvokter(en)
+lightning	lyn(et)
+like	lik
+like	som
+like this	slik
+like[s]	like[r]
+liked	likte
+likewise	likeledes
+lilly	lilje(n)
+lime tree	lind(en)
+limit	grense(n)
+limit[s|ed]	begrense[r|t]
+limited company	aksjeselskap(et)
+limited partnership	kommandittselskap(et)
+limitless	grenseløs
+limp[s|ed]	halte[r|t]
+line	"snøre(t), tråd(en)"
+line	linje(n)
+line	rekke(n)
+line	bane(n)
+lineage	slekt(en)
+link	lenke(n)
+lipp	leppe(n)
+liquor	brennevin(en)
+list	liste(n)
+list of persons	personregister(et)
+list[s]	oppføre[r]
+listed	"ført[e], oppført[e]"
+listen[s|ed]	høre[r]
+listen[s|ed]	lytte[r|t]
+liter	liter(en)
+little	"lite, litt"
+little by little	etter hvert
+live	levende
+live-in	samboer(en)
+live[s]	leve[r]
+live[s|d]	bo[r|dde]
+lived	levde
+livelihood	"erverv(et), næringsvei(en)"
+lively	livlig
+livestock	"buskap(et), kreatur(et), besetning(en)"
+livestock trading	kreaturhandel(en)
+living	"levende, nålevende"
+living quarters	våningshus(et)
+living-room	"stue(n), dagligstue(n)"
+the living-room	stua
+load	belastning(en)
+load[s|ed]	lade[r|t]
+loaf of white bread	loff(en)
+loan	lån(et)
+local	lokal
+local government archive	kommunearkiv(et)
+local government worker	kommunearbeider(en)
+local council	kommunestyre(t)
+location	sted(et)
+location	beliggenhet(en)
+lock	lås(en)
+locomotive	lokomotiv(et)
+lodging	losjerende
+lodging	losji(en)
+log	protokoll(en)
+log	kubbe(n)
+log driver	tømmerfløter(en)
+logger	tømmerhugger(en)
+logger	skogsarbeider(en)
+lonely	alene
+long	"lang, langt"
+long	lenge
+look[s]	"se[r], lete[r]"
+loom	vev(en)
+loop	slyng(en)
+loose	løs
+the Lord	Herren
+lorry	lastebil(en)
+lose[s]	tape[r]
+loser	taper(en)
+loss	tap(et)
+lost and found	hittegods(et)
+lot of land	tomt(en)
+loud noice	larm(en)
+loudspeaker	høytaler(en)
+louse	lus(en)
+lovable	kjælig
+lovage	løpstikke(n)
+love	kjælighet(en)
+unhappy love affair	kjælighetssorg(en)
+love[s|ed] or make love	elske[r|t]
+lovely	yndig
+low	lav
+lower	nedre
+loyal	lojal
+luck	"hell(et), lykke(n)"
+lucky	heldig
+lung	lunge(n)
+lure	lur(en)
+lumber	"tømmer(et), trevirke(t)"
+lumber {load of}	trelast(en)
+lumber firm	trelastvirksomhed(en)
+lumber jack	skogshogger(en)
+lumber jack	skogsarbeider(en)
+lumber worker	tømmerarbeider(en)
+lust	"kåthet(en), brunst(en)"
+lusty	"kåt, brunstig"
+Lutheran	lutersk
+luxurious	herskapelig
+lye	lut(en)
+lye cured fish	lutefisk(en)
+machine	maskin(en)
+machine operator	maskinist(en)
+machine operator	maskinarbeider(en)
+mad	gal
+made	lagde
+madhouse	sinnsykasyl(et)
+madman	berserk(en)
+madness	galskap(en)
+magazine	blad(et)
+magnificence	prakt(en)
+magnificent specimen	prakteksemplar(et)
+maid	pike(n)
+maiden name	pikenavn(et)
+mail	post(en)
+mail carrier	postmann(en)
+mailman	postmann(en)
+main ..	hoved..
+main building	hovedbygning(en)
+main farm	hovedgård(en)
+main switch	hovedbryter(en)
+mainly	hovedsakelig
+maintain[s]	underholde[r]
+maize corn	mais(en)
+major	major(en)
+make[s]	lage[r]
+male	mann(en)
+male gender	mannkjønn(et)
+mammal	pattedyr(et)
+man	"mann(en), kar(en)"
+man-labour year	årsverk(et)
+manage[s]	klare[r]
+manage[s|d]	behandle[r|t]
+managed	klart[e]
+management	drift(en)
+manager	"forvalter(en), bestyrer(en), sjef(en), direktør(en)"
+manager of estate	forpakter(en)
+manor's archive	godsarkiv(et)
+mansion/estate	herregård(en)
+manual work	håndarbeide(t)
+many	mange
+map	kart(et)
+maple	lønn(en)
+maple tree	lønnetre(et)
+March	mars
+marital	ekteskapelig
+marital status	sivilstand(en)
+maritime	maritim
+maritime court	sjørett(en)
+maritime inquiry	sjøforklaring(en)
+mark	"merke(t), segl(et)"
+mark of repect	æresbevisning(en)
+mark[s]	markere[r]
+marks	karakter(ene)
+marriage	ekteskap(et)
+marriage witness	forlover(en)
+married	gift
+married couple	ektepar(et)
+marriage	giftemål(et)
+marriage certificate	vielsesattest(en)
+marriage licence	ekteskapsbevillinge(en)
+marriageable	gifteferdig
+married couple	ektefolk(et)
+marvel	under(et)
+[marry|marries|married]	ekte[r|t]
+[marry|marries|married]	ektevie[r|t]
+masculine	mannlig
+mason	murer(en)
+mass	masse(n)
+massage	massasje(n)
+master	herre(n)
+master	mester(en)
+master baker	bakermester(en)
+master builder	byggmester(en)
+master cooper	bøkkermester(en)
+master glazier	glassmester(en)
+Master of Arts	magister(en)
+master sawmiller	sagmester(en)
+master tailor	skreddermester(en)
+master/mistress	herskap(et)
+master[s|ed]	mestre[r|t]
+match stick	fyrstikk(en)
+material	material(et)
+maternal inheritance	morsarv(en)
+mathematics	mattematikk(en)
+matter of course	selvfølge(n)
+may	kan
+May	mai
+maybe	kanskje
+mayor	"ordfører(en), borgermester(en)"
+me	meg
+meadow	"eng, jord(et), mo(en)"
+meager	mager
+mean[s|t]	bety[r|dde]
+mean[s]	mene[r]
+meaning	mening(en)
+means	middel(et)
+means	midler
+the means	midlene
+meant	mente
+meanwhile	imidlertid
+measles	meslinger
+measurement	mål(et)
+measurement	måling(en)
+meat	kjøtt(et)
+meat	slakt(en)
+meatball	kjøttbolle(n)
+mechanic	mekaniker(en)
+medal	medalje(n)
+mediator	megler(en)
+medical	medisink
+medical assistance	legehjelp(en)
+medical doctor	lege(n)
+medical officer of health	distriktslege(n)
+medicine	medisin(en)
+meet[s]	møte[r]
+meeting	møte(t)
+meeting of heirs	skiftesamling(en)
+melt[s|ed]	"smelte[r|t], tine[e|t]"
+member	medlem(met)
+memorial plaque	minnetavle(n)
+memory	hukommelse(n)
+men	menn(ene)
+mental hospital	sinnsykehus(et)
+mentally deficient	"åndssvak, åndsveik"
+mentally ill	sinnsyk
+mentally retarded	tilbakestående
+mentally retarded	utviklingshemmet
+mention[s]	"nevne[r], anføre[r]"
+mentioned	"nevnt[e], anført[e]"
+mentioned above	overnevnte
+mentioned above	overstående
+mentoring	oppfølging(en)
+merchant	"handelsmann(en), kjøpmann(en)"
+merciful	nådig
+mercy	nåde(n)
+mermaid	sjøfrue(en)
+mess	rot(et)
+mess[es] up	rote[r]
+message	"melding(en), beskjed(en)"
+met	møtte
+metal	metall(et)
+metal print	ets(en)
+micro	mikro..
+micro cosmos	mikrokosmos(et)
+mid..	midt..
+middle	mitt(en)
+middle class	borgerskap(et)
+middle name	mellomnavn(et)
+midnight	midnatt(en)
+midshipman	kadett(en)
+midsummer day	jonsok(en)
+midwife	jordmor(en)
+mighty	"mektig, veldig"
+mild	mild
+military	militær(et)
+military campaign	felttog(et)
+military duty	verneplikt(en)
+milk	melk(en)
+milk blotch	brennkopper
+milkmaid	budeie(n)
+mill	"kværn(en), mølle(n)"
+miller	møller(en)
+mind	sinn(et)
+mind	forstand(en)
+of sound mind	åndsfrisk
+mine	min
+mine	gruve(n)
+miner	gruvearbeider(en)
+minister	"prest(en), pastor(en)"
+minute	minutt(et)
+minutes	protokoll(en)
+miracle	under(et)
+miscelaneous	"annet, ymse"
+miserable	ussel
+Miss	frøken
+Miss	jomfru(en)
+miss[es|ed]	savne[r|t]
+missionary	misjonær(en)
+mistake	feil(en)
+Mister	Herr
+mix[es|ed]	blande[r|t]
+mixture	blanding(en)
+mobilize[s] soldiers	utkommandere[r]
+mold	mugg(en)
+mole	moldvarp(en)
+moment	øyeblikk(et)
+Monday	mandag(en)
+monastery	kloster(et)
+money	penger
+monkey	"apekatt(en), ape(n)"
+month	måned(en)
+monthly	månedlig
+monument	minnesmerke(t)
+mood	stemning(en)
+mood	humør(et)
+moon	måne(n)
+moonlight	måneskinn(et)
+moose	elg(en)
+moral	moral(en)
+morbid humor	galgenhumor(en)
+more	"mer, flere"
+moreover	dessuten
+morning	"formiddag(en), morgen(en)"
+this morning	imorges
+mortal	drepende
+mortgage	pant(en)
+mortgage register	pantebok(en)
+mortgage[s]	pantsette[r]
+mosquito	mygg(en)
+moss	mose(n)
+most	mest
+moth	møll(en)
+mother	mor(en)
+mother-in-law	svigermor(en)
+mother's brother	morbror(en)
+mother's father	morfar(en)
+mother's mother	mormor(en)
+mother's sister	moster(en)
+motor	motor(en)
+motor boat	motorbåt(en)
+motor cycle	motorsykkel(en)
+motor mechanic	bilmekaniker(en)
+mountain	"fjell(et), ås(en)"
+mountain gap	skar(et)
+mountain pass	skar(et)
+mountain pasture	"seter(en), støl(en)"
+mousse	fromasj(en)
+mouth {mostly figurative}	gap(et)
+move in	innflytte
+move[s|d]	bevege[r|t]
+move[s|d]	flytte[r|t]
+move[s|d] very slowly	sneile[r|t]
+move[s|d] from	fraflytte[r|t]
+move[s|d] out	utflytte[r|t]
+move[s|d] slowly	sige[r|t]
+moveables	løsøre(t)
+emotionally moved	grepet
+movement	bevegelse(n)
+movie	film(en)
+movie theater	kino(en)
+moving out	utflytning(en)
+mowing season	slåttonn(en)
+Mr. = mister	hr. = Herr
+Mrs.	fru
+much	mye
+mud	gjørme(n)
+muddle	rot(et)
+muddle-headed	surrekopp(en)
+mule	muldyr(et)
+municipality	kommune(n)
+murder	mord(et)
+murder[s|ed]	myrde[r|t]
+murderer	morder(en)
+music	musikk(en)
+musician	"musiker(en), spillemann(en)"
+must	"må, skal"
+mustache	bart(en)
+muster[s|ed]	mønstre[r|t]
+mute	stum
+mutineer	opprør(en)
+mutton	får(et)
+my	mitt
+myself	"selv, sjøl"
+myth	"myte(n), sagn(et)"
+nag[s]	mase[r]
+nail	spiker(en)
+finger nail	negl(en)
+nail[s|d] together	stifte[r|t]
+naked	naken
+name	navn(et)
+name[s]	kalle[r]
+named	kalt[e]
+is named	hete[r]
+nap	lur(en)
+narcotics	narkotika(et)
+narrow	"smal, trang"
+nasty	stygg
+nation	"nasjon(en), rike(t)"
+national costume	"bunad(en), nasjonaldrakt(en)"
+the national government	staten
+National Insurance	folketrygd(en)
+national railway	statsbanene(n)
+nationality	nasjonalitet(en)
+national ..	riks..
+national assembly	riksforsamling(en)
+naughtiness	uskikkelighet(en)
+naughty children	trollpakk(et)
+naughty	uskikkelig
+nautical mile	sjømil(a|en)
+naval battle	sjøslag(et)
+naval cadet	sjøkadett(en)
+navigation	navigasjon(en)
+navigation mark	sjømerke(t)
+navigation shiping	sjøfart(en)
+navy	marine(n)
+navy service	orlogstjeneste(n)
+near	nær
+need	behov(et)
+negotiator	megler(en)
+negro	neger(en)
+neighbour	nabo(en)
+neighbourhood	"nabolag(et), grend(en), omegn(en)"
+nephew	nevø(en)
+nerve	nerve(n)
+net	nett(et)
+net	netto
+net property	nettoformue(en)
+nettle rash	elveblest(en)
+network	nettverk(et)
+never	aldri
+new	ny
+new	nytt
+New Norwegian	nynorsk
+new year	nyttår(et)
+newborn	nyfødt
+newcomer	innflytter(en)
+news	nyhet(en)
+newspaper	avis(en)
+next	"neste, andre"
+next to	ved siden av
+nice	fin
+nickname	"kallenavn(et), klengenavn(et)"
+niece	niese(n)
+night	natt(en)
+nights	netter
+the nights	nettene
+nine	ni
+nineteen	nitten
+nineteenth	nittende
+nineth	niende
+ninetieth	nittiende
+ninety	nitti
+nipple	brystvorte(n)
+no	nei
+no. = number	nr. = nummer(et)
+nobility	adel(en)
+noble	adelig
+nobleman	"adelsmann(en), fyrste(n)"
+nobody	ingen
+noice	uro(en)
+nook	krok(en)
+Nordic	nordisk
+the Nordic countries	Norden
+Norway	Norge
+Norwegian	norsk(e)
+Norwegian Railways	NSB = Norges Statsbaner
+Norwegian Recistance Movement {World War 2}	MILORG
+nor	eller
+nor this nor ..	hverken dette eller ..
+north	nord
+the North Sea	Nordsjøen
+northern	nordre
+nonsense	sludder(et)
+nose	nese(n)
+not	"ikke, ei"
+note	"merknad(den), anmerkning(en), note(n)"
+note[s]	"merke[r], registrere[r]"
+noted	registrert[e]
+nothing	"ingen, ingenting, intet, ingensomhelst"
+notice	anmerkning(en)
+notwithstanding	uaktet
+novel	annerledes
+November	november
+now	nå
+nudge[s|d]	lirke[r|t]
+nuicance	plage(n)
+number	"tall(et), nummer(et)"
+number	antall(et)
+numerous	tallrik
+nurse	"sykepleier(en), sykepleierske(n), diakon(en)"
+nurse[s|d]	pleie[r|t]
+nursing home	"sykehjem(et), pleiehjem(et)"
+oak	eik(en)
+oak tree	eiketre(et)
+oar	åre(n)
+oasis	oase(n)
+oath	ed(en)
+oats	havre(n)
+obey[s|ed] orders	adlyde[r|t]
+object	objekt(et)
+object of antiquity	fornminne(t)
+obtain[s|ed]	"skaffe[r|t], anskaffe[r|t]"
+obvious	selvfølge(n)
+occupant	beboer(en)
+occupation	stilling(en)
+occupational therapist	arbeidsterapeut(en)
+occupied	bebodd
+occurence	begivenhet(en)
+ocean	hav(et)
+October	oktober
+octopus	blekksprut(en)
+odd	underlig
+of	av
+of age	myndig
+off	av
+off print	særtrykk(et)
+offer[s]	tilby[r]
+office	kontor(et)
+office clerk	"kontorbetjent(en), kontormann(en), kontorist(en)"
+office machine	kontormaskin(en)
+office manager	kontorsjef(en)
+offspring	avkom(met)
+often	ofte
+oil	olje(n)
+old	"gammel, gamle"
+old age	alderdom(men)
+old people's home	gamlehjem(met)
+older	eldre
+oldest	eldst
+omit[s|ted]	unnlate[r|t]
+on	på
+on board	ombord
+one	en
+one and a half	halvannen
+oneself	seg
+onion	løk(en)
+onlooker	tilskuer(en)
+only	"bare, kun"
+only	eneste
+only child	enebarn
+open	åpen
+open hearth	åre(n)
+open-hearth cottage	årestue(n)
+open-hearth room	årestue(n)
+operate[s]	drive[r]
+operated	drev
+operating receipt	driftsinntekt(en)
+operation	drift(en)
+operational	istand
+opinion	"mening(en), oppfatning(en)"
+opinion[s]	mene[r]
+opinioned	mente
+opportunity	"anledning(en), sjanse(n)"
+optician	optiker(en)
+or	eller
+oral	muntlig
+orchard	frukthage(n)
+orchestra	orkester(et)
+order	orden
+order	bestilling(en)
+order[s]	bestille[r]
+order[s]	kommandere[r]
+order[s|ed]	beordre[r|t]
+ordered	kommandert[e]
+ordinary	alminnelig
+ore	malm(en)
+organ (instrument)	orgel(et)
+organ	organ(et)
+organism	organisme(n)
+organizing	planlegging(en)
+orgy	orgie(t)
+origin	opphav(et)
+original	opprinnelig
+origin	opprinnelse(n)
+orphan	foreldreløs
+orphan	hittebarn(et)
+oscilation	svingning(en)
+other	annen
+other	annet
+other	andre
+others	andre
+our	vår
+out	ut
+out of wedlock	uekte
+out of wedlock	utenomekteskaplig
+outdoor life	friluftsliv(et)
+outdoors	utendørs
+outhouse	uthus(et)
+outlay	utlegg(et)
+outline	omriss(et)
+outside	"ute, utenfor"
+outside of	utenom
+oven	ovn(en)
+over	over
+owl	ugle(n)
+own	egen
+own[s]	eie[r]
+own[s]	ha[r]
+owned	eid[e]
+owned	hadde
+owner	eier(en)
+ox	okse(n)
+team of oxen	oksespann(et)
+paddleship	hjulbåt(en)
+page	side(n)
+page number	sidenummer(et)
+paid	betalt[e]
+pain	smerte(n)
+labour pain	ve(en)
+painful	vond
+paint	maling(en)
+paint[s]	male[r]
+painted	"malt, malte"
+painter	maler(en)
+painting	maleri(et)
+pair	par(et)
+palace	slott(et)
+pale	blek
+pallet	pall(en)
+pants	bukse(n)
+paper	papir(et)
+piece of paper	lapp(en)
+paper clip	binders(en)
+parachute	fallskjerm(en)
+parasite	parasitt(en)
+parcel	pakke(n)
+pardon[s|ed]	benåde[r|t]
+parents	foreldre(ne)
+parish	"sogn(et), menighet(en), prestegjeld(et)"
+parish clerk	klokker(en)
+parish record	kirkebok(en)
+parliament	storting(et)
+parsonage	prestegård(en)
+part	"del(en), part(en)"
+part of a town	bydel(en)
+[take|took] part	delta[r|tt]
+partially	delvis
+participation	deltagelse(n)
+participator	deltager(en)
+particular leasehold	bygsel(et)
+parting word	avskedsord(et)
+partitioned	delt
+partitioning	deling(en)
+party	fest(en)
+political party	parti(et)
+pass[s|ed] exam	bestå[r|tt]
+passing	forbigående
+passiv	passiv
+passport	pass(et)
+past	fortid(en)
+paternity	farskap(et)
+path	sti(en)
+path	bane(n)
+pathless	ulendt
+patience	tålmodighet(en)
+patient	tålmodig
+pattern	"mønster(et), struktur(en)"
+pauper	fattiglem(met)
+paupers reference	fattigattest(en)
+pawn[s]	pantsette[r]
+pay	lønn(en)
+pay[s]	betale[r]
+payment	"lønning(en), utbetaling(en)"
+pea	ert(en)
+peace	fred(en)
+peace	ro(en)
+peculiar	underlig
+pedestrian	fotgjenger(en)
+pedestrian street	gågate(en)
+pedigree	stamtavle(n)
+pedigree chart	anetavle(n)
+peer[s|ed]	myse[r|t]
+pen	penn(en)
+pen	bås(en)
+pension	pensjon(en)
+Pentecost	pinse(n)
+people	"folk(et), befolkning(en)"
+pepper	pepper(et)
+perform[s]	utføre[r]
+perform[s]	yte[r]
+performed	utført[e]
+perhaps	kanskje
+periodical	tidsskrift(et)
+permission	"tillatelse(n), bevilgning(en)"
+permit[s|ed]	"tillate[r], bevilge[r|t]"
+permitted	lovlig
+person	person(en)
+person	menneske(t)
+person concerned	vedkommende
+personal	personlig
+person's number	personnummer(et)
+pest	"pest(en), plage(n)"
+pestilence	farsot(en)
+pet	kjæledyr(et)
+pet owner	matmor(en)
+pet owner	matfar(en)
+petrol station	bensinstasjon(en)
+pharmacist	apoteker(en)
+pharmacy	apotek(et)
+phase	fase(n)
+phosphorescence	morild(en)
+photo	foto(et)
+photograph	fotografi(et)
+photographer	fotograf(en)
+photographic archive	fotoarkiv(et)
+physician	lege(n)
+physician assistant	legehjelper(en)
+pick pocket	lommetyv(en)
+picture	bilde(t)
+piece	stykke(t)
+piece	stykk
+pig	"gris(en), svin(et), galt(en)"
+pike	gjedde(n)
+pilot	"flyver(en), pilot(en), fører(en)"
+ship's pilot	los(en)
+pine	furu(a|en)
+pipe	rør(et)
+pittance	almisse(n)
+placate[s]	blidgjøre[r]
+placated	blidgjorde
+place	"sted(et), plass(en), åsted(et)"
+place of arrival	ankomststed(et)
+place of birth	fødested(et)
+place of departure	avreisested(et)
+place of destination	bestemmelsessted(et)
+place of residence	bosted(et)
+place[s|d]	stille[r|t]
+placename	stedsnavn(et)
+plague	"pest(en), farsot(en)"
+plan	plan(en)
+plan[s]	planlegge[r]
+plank	planke(n)
+planned	"planla, planlagt"
+planning	planlegging(en)
+plant	plante(n)
+plastic	plast(en)
+plate	"tallerken(en), fat(et)"
+please	vær så snill
+pleased	fornøyd
+pleasurable	deilig
+plot of land	parsell(en)
+plow	plog(en)
+plumber	rørlegger(en)
+pneumonia	lungebetennelse(n)
+pocket	lomme(n)
+pod	belg(en)
+poem	dikt(et)
+point	spiss(en)
+to the point	saklig
+point[s|ed]	peke[r|t]
+pointed	spiss
+poison	gift(en)
+poisonous	giftig
+pole	stang(en)
+police	politi(et)
+politician	politiker(en)
+politics	politikk(en)
+pollution	forurensning(en)
+pool	baseng(et)
+poor	"fattig, arm, ussel"
+poor	"dårlig, ring"
+poor house	fattighus(et)
+poor man	fattigmann(en)
+Poor Man's Biscuit {Christmas cookie}	fattigmann(en)
+poor peolpe	fattigfolk(et)
+poor relief fund	fattigkasse(n)
+popular	populær
+popular education	folkeopplysning(en)
+population	folketall(et)
+population	befolkning(en)
+porridge	grøt(en)
+port	havn(en)
+portable property	innbo(et)
+portray[s|ed]	skildre[r|t]
+position	posisjon(en)
+position	plass(en)
+position	stilling(en)
+position within the family	familiestatus(en)
+position within the family	familiestilling(en)
+possess[es]	besitte[r]
+possession	besittelse(n)
+possibility	mulighet(en)
+possibility	høve(t)
+possible	mulig
+post	post(en)
+post chaise	skyssvogn(en)
+postal area	poststed(et)
+postal code	postnummer(et)
+postal service	postgang(en)
+posting inn	skysstasjon(en)
+posting station	skysstasjon(en)
+postmaster	postmester(en)
+potato	potet(en)
+potato dumplings	kumle(n)
+potter	pottemaker(en)
+poultry	"fjærfe(et), fjærkre(et)"
+povertry	armod(et)
+poverty	fattigdom(men)
+power	"kraft(en), makt(en)"
+powder	pulver(et)
+practice[s|d]	øve[r|t]
+praise[s|d]	prise[r|t]
+pray[s]	be[r]
+prayer	bønn(en)
+prayer day	bededag(en)
+pre-emption	forkjøp(et)
+preciding judge	lagmann(en)
+precious	edel
+precipitation	nedbør(en)
+predecessor	forgjenger(en)
+pregnant	gravid
+premise	forutsetning(en)
+premises	lokal(et)
+preoccupied	åndsfraværende
+preparation	forberedelse(n)
+present	nåværende
+present	"tilstede, tilstedeværende"
+preserve[s]	"bevare[r], sylte[r]"
+press[es]	trykke[r]
+pressure	trykk(et)
+presume[s]	anta[r]
+presumed	antok
+pretence	påskudd(et)
+pretend[s|ed]	late[r|t]
+pretended	lot
+pretext	påskudd(et)
+pretty	pen
+preventive	forebyggende
+previous	"forrige, foregående"
+price	pris(en)
+pride	stolthet(en)
+priest	prest(en)
+primary	primær
+primary health service	primærhelsetjeneste(n)
+prime minister	statsminister(en)
+prince	prins(en)
+princess	prinsesse(n)
+principal	rektor(en)
+principally	hovedsakelig
+print	"trykk(et), avtrykk(et)"
+print[s]	trykke[r]
+printer	boktrykker(en)
+printer	skriver(en)
+printing house	boktrykkeri(et)
+prior	tidligere
+prison	fengsel(et)
+prisoner	"fange(n), straffange(n)"
+prisoner of war	krigsfange(n)
+private	privat
+private soldier	menig(en)
+privy	do(en)
+probably	trolig
+probate	skifte(t)
+probate court	skifterett(en)
+probate estate	dødsbo(et)
+probate judge	skifteretsdommer(en)
+probate proceeding	arvesak(en)
+probate protocols	skiftebøker
+probate record	skifteprotokoll(en)
+process[es|ed]	bearbeide[r|t]
+proclaim[s]	forkynne[r]
+proclaimed	forkynte
+procure[s|d]	formidle[r|t]
+produce[s]	produsere[r]
+productive land	teig(en)
+profession	"yrke(t), fag(et)"
+professional	professionell
+professional competence	fagkompetanse(n)
+profit	"fortjeneste(n), gevinst(en), utbytte(t)"
+progenitor	stamfar(en)
+progress	"framgang(en), fremgang(en)"
+promice[s|d]	love[r|t]
+prominent	fremstående
+promontory	"nes(et), odde(n), tange(n), skag(et)"
+prompt	omgående
+pronounce[s]	uttale[r]
+pronounced	utpreget
+proof	bevis(et)
+proon	sviske(n)
+proper	"skikkelig, ordentlig"
+proper	anstendig
+property	"eiendom(men), formue(n), gods(et)"
+property tax	formueskatt(en)
+prophet	profet(en)
+prophetic	profetisk
+prosperity	velstand(en)
+proud	stolt
+prove[s|d]	bevise[r]
+provide[s|d] for	forsørge[r|t]
+provoke[s]	utløse[r]
+proximity	nærhet(en)
+Prussian	preussisk
+public	"offentlig, almen"
+public office	embete(t)
+public outdoor area	friluftsområde(t)
+the public records	statsarkivet
+Public Records Office	riksarkiv(et)
+public recreational area	friområde(t)
+public school	almueskole(n)
+public trustee	overformynder(en)
+publicly announce[s]	tinglyse[r]
+publish[es|ed]	utgi[r|tt]
+publish[es]	annonsere[r]
+publisher	forlegger(en)
+publishing company	forlag(et)
+pull[s|ed]	dra[r|tt]
+pull[s|ed]	rykke[r|t]
+pulled	dro
+pulley	talje(n)
+pulp	tremasse(n)
+pulp factory	tremassefabrikk(en)
+pulse	puls(en)
+punishing cane	ris(et)
+punishment	"straff(en), bot(en)"
+pupil	elev(en)
+pure	"ren, bar"
+purpose	"hensikt(en), formål(et)"
+purse	veske(n)
+quake	rystelse(n)
+qualified	kyndig
+qualified to vote	stemmeberettiget
+quality	kvalitet(en)
+quantity	antall(et)
+quarter	kvart
+quay	"kai(en), brygge(n)"
+quayside house	sjøhus(et)
+qube	kloss(en)
+queen	dronning(en)
+queue	kø(en)
+quick	rask
+quiet	"stille, taus"
+quiet	ro(en)
+quiz	spørrekonkurranse(n)
+quotation	sitat(et)
+quote[s]	sitere[r]
+quoted	siterte
+rabbit	kanin(en)
+race	rase(n)
+racing track for toy cars	bilbane(n)
+rack	reol(en)
+radar	radar(en)
+radio	radio(en)
+raffle ticket	lodd(et)
+railroad	jernbane(n)
+railroad company	jernbaneselskap(et)
+railroad worker	jernbanearbeider(en)
+rain	regn(et)
+rainbow	regnbue(n)
+raise[s]	opph&oslah;ye[r]
+ran	"løp, sprang"
+ran	drev
+rancid	besk
+rank	rang(en)
+rape	voldtekt(en)
+rape[s|d]	voldta[r|tt]
+raspberry	bringebær(et)
+rat	rotten(n)
+rat's nest	rottereir(et)
+rather	"heller, helst"
+rather	ganske
+raw	rå
+read (past tense)	leste
+read[s]	lese[r]
+reach[es|ed]	nå[r|dd]
+reach[es]	rekke[r]
+real	ekte
+real	skikkelig
+real estate	eiendom(men)
+real estate owner	gårdeier(en)
+real estate unit number	bnr. = bruksnummer(et)
+real estate unit number	bruksnummer(et)
+realize[s]	realisere[r]
+realize[s]	innse[r]
+reality	realitet(en)
+rear[s|ed]	oppfostre[r|t]
+rear[s|ed]	fostre[r|t]
+reasearch	forskning(en)
+reason	"årsak(en), grunn(en)"
+reason	anledning(en)
+reasonable	rimlig
+receive[s|ed]	"få[r|tt], motta[r|tt]"
+receive[s|ed] by transaction	overta[r|tt]
+received	fått
+received	overtok
+recently	nylig
+reception desk	resepsjon(en)
+recipient	mottaker(en)
+reckon[s|ed]	regne[r|t]
+record	opptegnelse(n)
+music record	plate(en)
+record[s]	"registrere[r], føre[r], anføre[r]"
+recorded	"registrert[e], ført[e], anført[e]"
+recreational area	fritidsområde(t)
+rectory	prestegård(en)
+red	rød
+red currant	rips(en)
+redeem[s]	utløse[r]
+reduce[s|d]	forringe[r|t]
+reed	siv(et)
+reef	skjær(et)
+refuse[s|d]	"nekte[r|t], avslå[r|tt]"
+refused	avslo
+regarding	vedrørende
+regiment	regiment(et)
+region of a country	landsdel(en)
+region	trakter
+regional director	distriktsjef(en)
+regional society	bygdelag(et)
+register	register(et)
+register of birth	fødselsregister(et)
+register[s]	innmelde[r]
+registration	stadfestelse(n)
+regret	anger(en)
+regret[s|ed]	angre[r|t]
+regret[s|ed]	beklage[r|t]
+regulation	forskrift(en)
+reindeer	reinsdyr(et)
+related	beslektet
+relationship	forhold(et)
+relative	slektning(en)
+relatives	slekt(en)
+relay	overføring(en)
+relay[s]	overføre[r]
+release[s]	utløse[r]
+religion	religion(en)
+religious belief	trossamfunn(et)
+remainder	rest(en)
+remainder	øvrig
+remark	"anmerkning(en), bemerkning(en)"
+remedy	middel(et)
+remember[s|ed]	huske[r|t]
+remoulade	remulade(n)
+rendezvous	stevnemøte(t)
+rent	leie(n)
+rent[s|ed]	leie[r|t]
+rented	leid[e]
+reorganization	omordning(en)
+repair	reparasjon(en)
+repair shop	verksted(et)
+repair[s]	reparere[r]
+repairman	reparatør(en)
+repeat[es|ed]	gjenta[r|tt]
+replace[s|d]	bytte[r|t]
+report[s]	melde[r]
+reported	meldt[e]
+represent[s]	representere[r]
+representation	representasjon(en)
+representative	"representant(en), agent(en)"
+repulsive	vemmelig
+reputation	omtale(n)
+request[s]	be[r]
+requirement	behov(et)
+reservation	bestilling(en)
+reserve[s]	reservere[r]
+reserved	reservert
+residence	"bosted(et), oppholdssted(et), bolig(en), bopel(en)"
+resident	beboer(en)
+residing	hjemmehørende
+resignation	avskjed(en)
+resound[s|ed]	gjalle[r|t]
+resourcefull	snarrådig
+respect	respekt(en)
+respectable	ansett
+respectable	anstendig
+respectfully	ærbødig
+responsibility	ansvar(et)
+rest	rest(en)
+rest[s]	hvile[r]
+rested	hvilt[e]
+restrict[s|ed]	"begrense[r|t], hemme[r|t]"
+result	utslag(et)
+retarded	"evneveik, sinnsvak"
+retire[s|ed]	avgå[r|tt]
+retired person	pensjonist(en)
+retirement	pensjonering(en)
+return	retur(en)
+date of return	returdato(en)
+return[s]	tilbakelevere[r]
+returned	tilbakelevert[e]
+reverberate[s|d]	gjalle[r|t]
+reverse	baklengs
+reverse	bakover
+review	omtale(n)
+review	gjennomsyn(et)
+reviewer	anmelder(en)
+reward	"belønning(en), påskjønnelse(n), lønn(en)"
+reward[es|ed]	belønne[r|t]
+rheumatic	giktbrudden
+rheumatic fever	giktfeber(en)
+rheumatism	gikt(en)
+pork rib	ribbe(n)
+ribbon	bånd(et)
+rice	ris(et)
+rich	rik
+rickets	engelsk syke
+riddle	gåte(n)
+ride[s]	ride[r]
+rider	rytter(en)
+rifle	rifle(n)
+right	rett
+right	skikkelig
+right hand side	høyre
+right away	straks
+right of use	bruksrett(en)
+right to re-purchase	gjenkjøpsrett(en)
+righteous	rettferdig
+rigid	bastant
+ring	ring(en)
+ring[s]	ringe[r]
+rioter	opprør(en)
+risk	risiko(en)
+risky	risikabel
+river	elv(en)
+river bed	elveleie(t)
+river driving	tømmerfløting(en)
+river side	bredde(n)
+road	vei(en)
+public road	alfarvei(en)
+road worker	veiarbeider(en)
+rob[s]	rane[r]
+robbed	rante
+robbery	ran(et)
+rocket	rakett(en)
+rod	"stang(en), stav(en)"
+roll	rulle(n)
+roll[s]	rulle[r]
+roof	tak(et)
+room	"rom(met), kammers(et)"
+root	rot(en)
+roots	røtter
+the roots	røttene
+rope	tau(et)
+rotate[s]	rotere[r]
+rotated	roterte
+rotten	rotten
+rough	stri
+roughly	omtrent
+round	rund
+rounded wooden box	tine(n)
+route	"rute(en), linje(n)"
+row	rekke(n)
+row[s|ed]	ro[r|dde]
+rowan	rogn(en)
+rowan tree	rognetre(et)
+rowing boat	robåt(en)
+royal	kongelig
+royal estate	krongods(et)
+rucksack	"ryggsekk(en), ransel(en), sekk(en)"
+rugged	ulendt
+ruin[s]	ødelegge[r]
+ruins	ruiner
+rule	"regel(en), forskrift(en)"
+rule[s|d]	herske[r|t]
+rumble[s|d]	buldre[r|t]
+run[s]	drive[r]
+run[s]	løpe[r]
+running water	rennende vann
+running	drift(en)
+run[s]	springe[r]
+rural area	"land(et), bygd(en)"
+rural cronicles	bygdebok(en)
+rural neightbourhood/area	grend(en)
+rural settlement	grend(en)
+rush	kikk(et)
+rush[es]	"haste[r], bruse[r]"
+rushing sound	brus(et)
+rye	rug(et)
+s.r. = senior	d.e. = den eldre
+Sabbath	sabbat(en)
+sack	sekk(en)
+sacrament	nattverd(en)
+sacrifice	offer(et)
+sad	lei seg
+saddle	"sadel(en), sal(en)"
+saddler	sadelmaker(en)
+safe	sikker
+safe to operate	driftsikkert
+safety	sikkerhet(en)
+said	sa
+sail	seil(et)
+sail[s]	seile[r]
+sailboat	seilbåt(en)
+sailed	seilte
+sailmaker	seilmager(en)
+sailor	"matros(en), sjømann(en)"
+sailor's home	sjømannshjem(met)
+saint	helgen(en)
+sale	salg(et)
+sales agency	agentur(et)
+saleswoman	"ekspeditrise(n), butikkdame(n)"
+sallow	selje(en)
+salmon	laks(en)
+salt	salt(et)
+same	samme
+same as above	ditto
+sand	sand(en)
+sang	sang
+sarcastic	spydig
+sat	satt
+satisfied	mett
+Saturday	lørdag(en)
+sauna	badstue(n)
+sausage	pølse(n)
+sausage maker	pølsemaker(en)
+sauce	saus(en)
+savage	villmann(en)
+save[s]	spare[r]
+save[s|d]	redde[r|t]
+savings	sparepenger
+saw	sag(en)
+saw	så
+sawmill	sagbruk(et)
+sawmill owner	sagbrukseier(en)
+sawmill worker	"sagarbeider(en), sagbrugsarbeider(en), bordarbeider(en)"
+say[s]	si[er]
+scale for weighing things	vekt(en)
+scalp	skalp(en)
+scant	knapp
+scanty	knapp
+scarcity	mangel(en)
+scarcity of money	pengemangel(en)
+scared	redd
+scarlet fever	skarlangensfeber(en)
+scary	skummel
+scholarship	"stipend(et), stipendium(et)"
+scholarship holder	stipendiat(en)
+school	skole(n)
+school district	skoledistrikt(et)
+school teacher	skolelærer(en)
+scissors	saks(en)
+scorch[es|ed]	svi[r|dde]
+scrap merchant	skraphandler(en)
+scratch[es]	klø[r]
+scratched	klødd[e]
+scream	rope[r]
+screen	skjerm(en)
+scribe	skriver(en)
+scrub[s]	skure[s]
+scuffle	basketak(et)
+sculptor	billedhugger(en)
+sea	"hav(et), sjø(en)"
+sea faring	sjøfarende
+seagul	måke(n)
+seal	sel(en)
+seal	"segl(et), plombe(n)"
+seaman	sjømann(en)
+seamark	sjømerke(t)
+seamen	sjøfolk(et)
+seamens's church	sjømannskirke(n)
+seamstress	"syerske(n), sypike(n)"
+search	søk(et)
+search[es]	søke[r]
+seaserpent	sjøorm(en)
+seaside	strand(en)
+seaside resident	strandsitter(en)
+season	årstid(en)
+seat	sete(t)
+seatbelt	sikkerhetsbelte(t)
+second	andre
+second	annen
+second cousins	tremenning(en)
+second hand	brukt
+second lieutenant	fenrik(en)
+second most	nest
+second-hand car	bruktbil(en)
+secondary school teacher	adjunkt(en)
+secret	hemmelig
+secretary	sekretær(en)
+secretary-general	generalssekretær(en)
+sect	sekt(en)
+section	seksjon(en)
+security	verdipapir(et)
+seduce[s]	forføre[r]
+seduced	forført[e]
+seducer	forfører(en)
+see[s]	se[r]
+see	jevnfør
+seedy	lurvete
+seek[s]	søke[r]
+seismic	seismisk
+seismic knowhow	seismikk(en)
+seize[s]	gripe[r]
+seized	grep
+seizure	anfall(et)
+sell[s]	selge[r]
+seller	selger(en)
+select[s]	kåre[r]
+selection	utvalg(et)
+send[s]	sende[r]
+senior	senior
+senior citizen ticket	honnør(en)
+senior civil servants	embetsmann(en)
+senior hight school	gymnas(et)
+senior manager	driftsjef(en)
+sense[s]	ane[r]
+sensed	ante
+sent	sendt[e]
+sentence[s]	dømme[r]
+sentenced	dømt
+separate	separat
+separate[s]	"separere[r], skille[r]"
+separated	"separert, skilt"
+September	september
+sequence of years	årrekke(n)
+sergeant	sersjant(en)
+serial number	løpenummer(et)
+serious	alvorlig
+seriousness	alvor(et)
+sermon	prake(n)
+servant	"tjener(en), husarbeider(en), tjenestekone(n), tjenestejente(n), tjenestepike(en), tjenestegutt(en)"
+servants	tjenestefolk(et)
+serve[s]	tjene[r]
+serve[s] dinner	servere[r]
+serve[s|d] prison term	sone[r|t]
+served	tjente
+service	tjeneste(n)
+settled	bosatt
+settle	bosette[r]
+settlement	rud(en)
+settler	bureiser(en)
+seven	"syv, sju"
+seventeen	sytten
+seventeenth	syttende
+seventieth	syttiende
+seventh	"syvende, sjuende"
+seventy	"søtti, sytti"
+several	flere
+severe	streng
+sewer	kloakk(en)
+sex	kjønn(et)
+have sex	ha sex
+sexton	klokker(en)
+sexual intercourse	"samleie(t), sex(en)"
+sexy girl	skreppe(n)
+shady business	lyssky
+shall	skal
+shallow	grunn
+shame	skam(men)
+shameful	skammelig
+shape	"form(en), struktur(en)"
+share	"del(en), andel(en)"
+share	"aksje(n), verdipapir(et)"
+share of inheritance	arvelodd(et)
+share[s]	dele[r]
+shareholder	aksjonær(en)
+sharp	skarp
+sharpen[s|ed] the tip	spisse[r|t]
+sharpshooter	skarpskytter(en)
+she	hun
+she-bear	binne(n)
+shed	naust(et)
+shed	skytje(en)
+sheep	"sau(en), får(et)"
+sheep stalls	sauehus(et)
+sheet	laken(et)
+sheet	plate(en)
+sheet metal	blikk(et)
+sheet metal worker	blikkenslager(en)
+sheet metal worker	platearbeider(en)
+shelf	reol(en)
+shell	skjell(et)
+shell	"skall(et), belg(en)"
+sheltered	lun
+shepherd	gjeter(en)
+shepherd boy	gjetergutt(en)
+sheriff	lensmann(en)
+shine[s]	skinne[r]
+shiny	blank
+ship	"skip(et), skute(n), båt(en)"
+ship master	skipper(en)
+ship mate	styrmann(en)
+ship[s|ed]	frakte[r|t]
+shipbuilder	"skipsbygger(en), båtbygger(en)"
+shipowner	reder(en)
+shipping company	rederi(et)
+shipwreck	forlis(et)
+shipwreck[s]	forlise[r]
+shipwrecked	forlist[e]
+shirt	skjorte(n)
+shit	dritt(et)
+shock	sjokk(et)
+shoe	sko(en)
+shoemaker	skomaker(en)
+shoot[s]	skyte[r]
+shop	"butikk(en), forretning(en)"
+shop assistant	"butikkmedarbeider(en), butikkekspeditør(en), ekspeditør(en), ekspeditrise(n)"
+shop[s|ed]	handle[r|t]
+shopgirl	ekspeditrise(n)
+shopkeeper	"handelsmann(en), kremmer(en)"
+shore	strand(en)
+shore line	bredde(n)
+short	"kort, stutt, knapp"
+shorten[s|ed]	forkorte[r|t]
+shortness	korthet(en)
+should	skulle
+shoulder	skulder(en)
+shot	"skjøt, skutt"
+shot	skudd(et)
+show[s]	vise[r]
+showed	viste
+Shrovetide	fastelaven
+shrub	busk(en)
+shudder	iling(en)
+shut down	nedla[gt]
+shut[s]	stenge[r]
+shut[s] down	nedlegge[r]
+shy	"forlegen, sjenert, sky"
+siblings	"søsken(e), barneflokk(en)"
+sick	syk
+sick call	sykebesøk(et)
+sickly	syklig
+side	side(n)
+sign	tegn(et)
+sign	skilt(et)
+sign[s]	underskrive[r]
+sign[s|ed]	undertegne[r|t]
+signal	signal(et)
+signature	underskrift(en)
+signed	underskrev
+signpost	skilt(et)
+signposting	skilting(en)
+silk	silke(n)
+silver	sølv(et)
+silver mine	sølvgrube(n)
+silver refinery	sølvverk(et)
+silver refining work	sølvverksarbeide(t)
+simmer[s]	småkoke[r]
+simple	enkel
+sin[s|ned]	synde[r|t]
+since	siden
+sing[s]	synge[r]
+single	ugift
+single item	enkel
+single person	enslig
+singular	entall
+sinker	søkke(t)
+sister-in-law	svigerinne(n)
+sister	søster(en)
+sister's daughter	søsterdatter(en)
+sister's son	søstersønn(en)
+sit[s]	sitte[r]
+situation	forhold(et)
+six	seks
+sixteen	seksten
+sixteenth	sekstende
+sixth	sjette
+sixtieth	sekstiende
+sixty	seksti
+skate[s]	skøyte[r]
+skerries	skjærgård(en)
+sketch	skisse(n)
+ski	ski(en)
+skid[s]	gli[r]
+skim[s|med]	skumme[r|t]
+skin	hud(en)
+skinny	mager
+skipper	skipper(en)
+sky	himmel (himlen)
+slander[s]	baktale[r]
+slander[s|d]	sladre[r|t]
+slandered	baktalte
+slaughter	slakt(en)
+slave	slave(n)
+slay[s]	felle[r]
+sleap[s|ed]	sove[r|t]
+sleet	sludd
+slid	skled
+slide[s]	"skli[r], gli[r]"
+slim	slank
+sloping	skrå
+slope	skråning(en)
+slow	sakte
+sly	slu
+small	"liten, små, smått, lille"
+smallpox	kopper
+smallest	minste
+smart	gløgg
+smear[s]	smøre[r]
+smeared	smurt[e]
+smear[s]	kline[r]
+smeared	klint[e]
+smile	smil(et)
+smile[s]	smile[r]
+smiled	smilt[e]
+smithy	smie(n)
+smoke	røyk(en)
+snail	sneile(n)
+snake	slange(n)
+sneak[s]	snike[r]
+sneak[s]	liste[r]
+sneaked	snek
+snooze	lur(en)
+snow	"snø(en), sne(en)"
+snow crust	skare(n)
+so	så
+so called	såkalt
+soap	såpe(n)
+social	sosial
+social centre	kulturhus(et)
+social rank	stand(en)
+social worker	sosialkurator(en)
+socially benefitial	samfunnsnyttig
+socially disadvantaged	vanskeligstilt
+society	samfunn(et)
+soda pop	brus(en)
+soft	"bløt, blaut"
+soil	jord(en)
+sold	solgt[e]
+soldier	soldat(en)
+solicitor	"advokat(en), sakfører(en)"
+solution	løsning(en)
+solve[s]	løse[r]
+some	noen
+someone	noen
+something	"noe, noen"
+son	sønn(en)
+son with allodal right	odelsgutt(en)
+son's daughter	sønnedatter(en)
+son's son	sønnesøn(en)
+son-in-law	svigersønn(en)
+song	sang(en)
+song	vise(n)
+soon	snart
+soot	sot(et)
+sorrow	sorg(en)
+sort	type(en)
+sort of	liksom
+sort[s]	sortere[r]
+sorting	sortering(en)
+soul	sjel(en)
+soul	sinn(et)
+sound	"lyd(en), låt(en)"
+sound	sund(et)
+sound boarding	stubbeloft(et)
+sour	sur
+sour cream	rømme(n)
+sour cream porridge	rømmegrøt(en)
+source	kilde(n)
+south	syd
+southern	"sydlig, søndre"
+south	"syd, sør"
+sow[s|ed]	så[r|dde]
+[sow|sows|sew]	sy[r|dde]
+Spanish	spansk
+Spanish flu	spanskesyke(n)
+spa	bad(et)
+space	"plass(en), rom(met)"
+spanning	på tvers
+spare	reserve
+spark	gnist(en)
+sparse	glissen
+spawn	rogn(en)
+speak[s]	snakke[r]
+spear	spyd(et)
+special	spesiell
+species	art(en)
+spectacles	brille(n)
+spectator	tilskuer(en)
+spectre	gjenganger(en)
+speech	tale(n)
+speech	innlegg(et)
+held a speech	talte
+hold[s] a speech	tale[r]
+speed	fart(en)
+spell[s|ed]	stave[r|t]
+spell of work	økt(en)
+spend[s] one's time	tilbringe[r]
+spin[s]	spinne[r]
+spine	ryggrad(en)
+spineless animal	bløtdyr(et)
+spinner	"spinner(en), spinnerske(n)"
+spinning wheel	rokk(en)
+spinning mill worker	spinneriarbeider(en)
+spirit	ånd(en)
+spirit	sprit(en)
+spirits	brennevin(en)
+spit [spits|spat]	spytte[r|t]
+split	sprakk
+split[s]	sprekke[r]
+spoil[s]	skamfere[r]
+sponge	svamp(en)
+sponge cake	sukkerbrød(et)
+sponsor	"sponsor(en), fadder(en)"
+spoon	skje(en)
+spouse	ektefelle(n)
+spray[s|ed]	sprute[r|t]
+spring	vår(en)
+mechanical spring	fjær(en)
+spring-time farmwork	våronne(n)
+spruce	gran(en)
+spun	spunnet
+spy	spion(en)
+[spy|spies]	spionere[r]
+squadron	skvadron(en)
+squadron leader	major(en)
+squeeze[s]	klemme[r]
+squeezed	klemt[e]
+squint[s|ed]	myse[r|t]
+squirt[s|ed]	sprute[r|t]
+square	rute(en)
+stability	stabilitet(en)
+stable	stall(en)
+stable	stabil
+stagecoach	skyssvogn(en)
+stained-glass	glassmaleri(et)
+stake	stake(n)
+stall	bås(en)
+stammer[s|ed]	stamme[r|t]
+stand[s]	stå[r]
+stand-in	vikar(en)
+standard	"standard(en), klasse(n)"
+star	stjerne(n)
+start[s]	utløse[r]
+state	stat(en)
+state	"tilstand(en), forfatning(en)"
+state church	folkekirk(en)
+state highway	riksvei(en)
+stated	sa
+station	stasjon(en)
+station master	stasjonsmester(en)
+statistics	statistikk(en)
+status	status(en)
+status	stilling(en)
+status of occupant	bostatus(en)
+stave church	stavkirke(et)
+stay[s]	"bli[r], forbli[r]"
+stay[s] at	oppholde[r]
+stayed	ble
+stayed at	oppholt
+steep slope	bratt
+steal[s]	stjele[r]
+steam	damp(en)
+steam[s|ed]	dampe[r|t]
+steam-engine	dampmaskin(en)
+steamship	dampskip(et)
+stear[s]	styre[r]
+stearing wheel	ratt(et)
+step[s|ped]	tråkke[r|t]
+stepbrother	stebror(en)
+stepchild	stebarn(et)
+stepdaughter	stedatter(en)
+stepfather	stefar(en)
+stepmother	stemor(en)
+stepsister	stesøster(en)
+stepson	stesønn(en)
+stick	"stokk(en), kølle(n)"
+stick of celery	selleristang(en)
+sticky glue	klister(et)
+stiff	stiv
+stiff muscles	støl
+still	"fortsatt, ennå"
+stillborn	dødfødt
+stir[s]	røre[r]
+stock	verdipapir(et)
+stockfish	stokkfisk(en)
+stoker	fyrbøter(en)
+stole	stjal
+stomach	mage(n)
+stomach ailment	magesyke(n)
+stomach acid	magesyre(n)
+stomach cramp	magekrampe(n)
+stomach ulcer	magesår(et)
+stone	"stein(en), sten(en)"
+stonecutter	stenhugger(en)
+stoneworker	stenarbeider(en)
+stood	sto
+stop	stopp
+stop[s|ped]	stanse[r|t]
+stop[s|ped]	stoppe[r|t]
+stop[s|ped] fire or thirst	slukke[r|t]
+storage	"lager(et), bod(en), bu(a)"
+store	butikk(en)
+store manager	butikksjef(en)
+store[s|d]	lagre[r|t]
+storehouse	stabbur(et)
+story	"fotelling(en), historie(n)"
+story	etasje(n)
+stove	ovn(en)
+straight	rett
+straighten[s|ed]	rette[r|t]
+strain	belastning(en)
+strain[s]	spenne[r]
+strait	sund(et)
+strange	"rar, underlig, snodig"
+strangle[s|d]	kverke[r|t]
+strap[s]	spenne[r]
+straw	strå(et)
+strawberry	jordb&aaelig;r(et)
+stream	elv(en)
+street	gate(n)
+street name	gatenavn(et)
+street number	gatenummer(et)
+strength	styrke(n)
+stretch	spenne(t)
+stretch[es]	spenne[r]
+stretcher	båre(n)
+string	bånd(et)
+stripped	netto
+stroke	"slag(et), hjerneslag(et), hjerneblødning(en)"
+stroke[s]	stryke[r]
+stroked	strøk
+stroll	tur(en)
+strong	sterk
+structure	"konstruksjon(en), struktur(en)"
+struggle	strid(en)
+struggle[s]	slite[r]
+struggled	slet
+student	"student(en), elev(en), skolebarn(et)"
+stupid	dum
+style	stil(en)
+subject	fag(et)
+subject area	fagområde(t)
+subparish priest	sogneprest(en)
+subsequently	deretter
+substantially	vesentlig
+successor	etterfølger(en)
+such	"sånn, sådan, slik"
+such as	såsom
+suck[s]	suge[r]
+sucked	sugd[e]
+sucking calfs	spekalv(en)
+suction	sug(et)
+sudden	brå
+suddenly	plutselig
+suffer[s]	lide[r]
+suffered	led
+suffering	lidelse(n)
+sugar	sukker(et)
+suicide	selvmord(et)
+suit[s|ed]	kle[r|dde]
+suitable	egnet
+suitcase	koffert(en)
+sum	"sum(mem), saldo(en)"
+summarily	summarisk
+summary	utdrag(et)
+summer	sommer(en)
+summons	stevning(en)
+summon[s]	stevne[r]
+sun	sol(en)
+the sun	sola
+Sunday	søndag(en)
+superior	overlegen
+supervisor	"formann(en), oppsynsmann(en), tilsynsmand(en), arbeidsleder(en)"
+supplementary tax	ekstraskatt(en)
+support	støtte(n)
+support contract	kårbrev(et)
+support of elderly people	kår
+support of poor people	føderåd(et)
+support[s|ed]	støtte[r|t]
+support[s]	underholde[r]
+supported man	kårmann(en)
+supported people	kårfolk(et)
+supported woman	kårkone(en)
+supporter	forsørger(en)
+supporting structure	bærekonstruksjon(en)
+supreme	øverst
+sure	sikker
+surely	"visst, visstnok"
+surgeon	kirug(en)
+surgery	kirugi(en)
+surname	"etternavn(et), familienavn(et), slektsnavn(et)"
+surviving	"etterlevende, etterlatte"
+survivors	"overlevende, gjenlevende"
+sway	makt(en)
+swear[s|ed]	sverge[r|t]
+sweat	svett(en)
+sweat[s|ed]	svette[r|t]
+sweater	genser(en)
+Sweden	Sverige
+Swedish	svensk
+sweet	"søt, søtt"
+sweet heart	kjæreste(n)
+swell[s] out	bule[r]
+swelled out	bulte
+swim	svømmetur(en)
+swim briefs	badebukse(n)
+swim suit	badedrakt(en)
+swim[s]	svømme[r]
+swindle	"svindel(en), bedrageri(et)"
+swing	huske(n)
+swing[s|ed] (on a swing)	huske[r|t]
+switch	bryter(en)
+swor	svor
+sword	sverd(et)
+sympathy	"sympati(en), deltagelse(n)"
+syphilis	syfilis(en)
+table cloth	duk(en)
+tadpole	rumpetroll(et)
+tailor	skredder(en)
+[take|takes|taken]	ta[r|tt]
+taken	tatt
+talk[s|ed]	snakke[r|t]
+tall	høy
+tame	tam
+tanner	garver(en)
+tap[s|ed]	tappe[r|t]
+tape[s|d]	tape[r|t]
+target	blink(et)
+tarn	tjern(et)
+tarragon	estragon(en)
+task	oppdrag(et)
+taste	smak(en)
+taste[s]	smake[r]
+tasted	smakt[e]
+tax assessment	"ligning(en), skatteligning(en)"
+tax assessment basis	ligningsgrunnlag(et)
+tax due	restskatt(en)
+tax register	skatteliste(n)
+taxation	skatt(en)
+taxation roll	skatteliste(n)
+taxi	drosje(n)
+tea	te(en)
+teacher	lærer(en)
+teachers school	lærerskole(n)
+teaching	lære(n)
+team	lag(et)
+team member	samarbeidspartner(en)
+teamster	kusk(en)
+tear[s] down	rive[r]
+tease[s|d]	erte[r|t]
+technique	teknikk(en)
+technology	"teknologi(en), teknikk(en)"
+teddybear	bamse(n)
+telegraph	telegraf(en)
+telegraph operator	telegrafist(en)
+telephone	telefon(en)
+the telephone company	televerket
+telephone number	telefonnummer(et)
+television	fjernsyn(et)
+tell[s]	fortelle[r]
+temper	"gemytt(et), sinnelag(et)"
+temperance	avhold(et)
+template	mal(en)
+temporarily	midlertidig
+tempt[s|ed]	friste[r|t]
+temptation	fristelse(n)
+tempting	fristende
+ten	ti
+tenacious	seig
+tenant	"leieboer(en), leier(en), leietager(en)"
+new tenant	innflytter(en)
+tenant farmer	"forpakter(en), leilending(en), husmann(en)"
+tenant farmer's contract	husmannsseddel(en)
+tenant farmer's daughter	husmannsdatter(en)
+tenant farmer's son	husmannssønn(en)
+tenant farmer's wife	husmannskone(n)
+tend[s]	pleie[r]
+tended	pleide
+tender	mør
+tenderness	nærhet(en)
+tent	telt(et)
+tenth	tiende
+term of years	åremål(et)
+test	prøve(n)
+testament	testament(et)
+[testify|testifies|testified]	vitne[r|t]
+[testify|testifies|testified]	bevitne[r|t]
+testimony	vitnesbyrd(et)
+text	tekst(en)
+textile	tekstil(en)
+textile engineer	tekstilingeniør(en)
+textile worker	tekstilarbeider(en)
+thank you	tusen takk
+thank you very much	takk skal du ha
+thank[s|ed]	takke[r|t]
+thanks	takk
+thanks	takk(en)
+thanks a lot	takker så mye
+that	"at, som, den, det"
+the	"den, det, de"
+theater	teater(et)
+theater play	skuespill(et)
+their	deres
+them	dem
+then	da
+therapist	terapeut(en)
+therapy	terapi(en)
+there	der
+therefore	derfor
+thesis	avhandling(en)
+these	disse
+they	de
+thick	tykk
+thief	tyv(en)
+thimble	fingerbøl(en)
+thin	tynn
+thing	ting(en)
+think[s]	tenke[r]
+third	"tredde, tredje"
+third cousin	firmenning(en)
+thirteen	tretten
+thirteenth	trettende
+thirty	"tretti, tredve"
+this	"denne, dette"
+those	de
+thought	"tenkte, synte"
+thousand	tusen
+thrash[es|ed]	slå[r|tt]
+thread	"tråd(en), line(n)"
+three	tre
+threw up	spøy
+thrifty	sparsom
+throat	hals(en)
+throat	strupe(n)
+throttle[s|ed]	kverke[r|t]
+through	"gjennom, igjennom"
+throw [throws|threw]	kaste[r|t]
+throw [throws|threw] up	spy[r|dde]
+Thursday	torsdag(en)
+thus	"slik, således"
+ticket	billett(en)
+tidy [tidies|tidied]	rydde[r|t]
+tie[s]	binde[r]
+tie[s] up	båndlegge[r]
+tied up	båndlagt
+tight	tett
+tighten[s]	spenne[r]
+timber	tømmer(et)
+timber building	tømmerbygning(en)
+timber floating	fløyting(a)
+time	"tid(en), klokke(n)"
+time period	tidsperiode(n)
+timid	spe
+tinsel	glitter(et)
+tiny	bitte
+tip	spiss(en)
+tiptoe[s|d]	liste[r|t]
+tired	"trett, mo, lei"
+title	tittel(en)
+to	"til, for"
+to do something	å gjøre noe
+today	idag
+today's	dagens
+toe	tå(en)
+toes	tær(ene)
+together	sammen
+toil	strev(et)
+toilet	do(en)
+toilet {vulgar}	dass(en)
+told	fortalte
+tomorrow	imorgen
+tonight	inatt
+too	for
+took	tok
+tooth	tann(en)
+top	topp(en)
+top	øverst
+topic	emne(t)
+topmost	øverst
+total	"total(en), saldo(en)"
+touch[es]	røre[r]
+tough	seig
+tour	reise(n)
+tour guide	reiseleder(en)
+toward	mot
+town	by(en)
+Tuesday	tirsdag(en)
+track	bane(n)
+trackless	ulendt
+trade	handel(en)
+trade	"håndverk(et), fag(et)"
+trade	næringsvei(en)
+trade and industry	næringsliv(et)
+trade union	fagforening(en)
+trade union representative	ombudsmann(en)
+trade[s|d]	handle[r|t]
+trader	handelsmann(en)
+tradesman	håndverker(en)
+tragedy	tragedie(n)
+tragic	tragisk
+train	tog(et)
+train driver	"lokfører(en), lokomotivfører(en)"
+traitor	quisling(en)
+tramp	fant(en)
+transaction charge for money exchange	vekslingsgebyr(et)
+transcript	avskrift(en)
+transfer	overdraging(en)
+transfer[s]	"overlate[r], overdra[r]"
+transfered	overdro
+transgression	overtredelse(n)
+transmission	"overføring(en), transmisjon(en)"
+transmission technology	transmisjonsteknologi(en)
+transmit[s]	overføre[r]
+transparency	gjennomsiktighet
+transparent	gjennomsiktig
+trap	felle(n)
+trapper	jeger(en)
+trash	rask(et)
+travel[s]	"reise[r], vandre[r]"
+travelled	reiste
+travellers	reisende
+travelling	reisende
+travelling bag	reiseveske(n)
+travelling exhibition	vandreutstilling(en)
+travelling salesman	handelsreisende
+treasure	skatt(en)
+treat[s|ed]	behandle[r|t]
+treat[s]	spandere[r]
+treated	spandert[e]
+treatment	kur(en)
+tree	tre(et)
+tree-stump	stubbe(n)
+tree-stump puller	stubbebryter(en)
+tribe	stamme(n)
+trip	tur(en)
+troll	troll(et)
+pack of trolls	trollpakk(et)
+trout	ørret(en)
+truck	lastebil(en)
+TRUE	sant
+trunk	stamme(n)
+trust	tillit(en)
+trust	stiftelse(n)
+truth	sanhet(en)
+truthfull	sanferdig
+[try|tries|tried]	prøve[r|t]
+tuburculosis	tuberkulose(n)
+tuberculosis	tæring(en)
+tug	rykk(et)
+tumor	svulst(en)
+tune	låt(en)
+tunnel	tunnel(en)
+turdent in sernior hight school	gymnasiast(en)
+turn	sving(en)
+turn	slyng(en)
+turn[s|ed]	snu[r|dde]
+tussle	basketak(et)
+tutor	privatlærer(en)
+twelfth	tolvte
+twelve	tolv
+twentieth	tyvende
+twenty	"tyve, tjue"
+twilight	demring[en]
+twin	tvilling(en)
+twinkle[s|d]	"blinke[r|t], blunke[r|t]"
+two	to
+two story building	toetasjers
+two-hundred	tohundre
+type	type
+typhoid fever	tyfus(en)
+typhus	nervefeber(en)
+typograher	typograf(en)
+ugly	stygg
+un..	u..
+unattended farm	ødegård(en)
+unawares	uforvarende
+uncertain	uviss
+uncle	"onkel(en), farbror(en), morbror(en)"
+undaunted	uforfærdet
+under	under
+under age	mindreårig
+under legal age	umyndig
+understand[s]	innse[r]
+undertake[s]	foreta[r]
+undesired	uønsket
+unexpectedly	uforvarende
+unfaithful	utro
+unhappy	ulykkelig
+unit	enhet(en)
+unknown	ukjent
+unmarried	ugift
+unmarried man	ungkar(en)
+unsafe	usikker
+unsure	usikker
+until	til
+unyielding	beinhard
+up	opp
+up bringing	oppdragelse(n)
+upgrade	oppgradering(en)
+upgrade[s]	oppgradere[r]
+upon	på
+upper	"øvre, øverste"
+uppermost	øverst
+upstairs	oppe
+urge	drift(en)
+is urgent	haster
+us	oss
+use	"bruk(en), nytte(n)"
+use[s]	bruke[r]
+use[s|d]	benytte[r|t]
+used	"brukt, brukte"
+used car	bruktbil(en)
+useful	nyttig
+user	bruker(en)
+user's manual	bruksanvisning(en)
+usual	vanlig
+usually	vanligvis
+vaccinate[s]	vaksinere[r]
+vaccinated	vaksinert
+vaccination	vaksinasjon(en)
+vaccination register	vaksinasjonsprotokoll(en)
+vaccine	vaksine(n)
+vacuum cleaner	støvsuger(en)
+vague	vag
+valley	dal(en)
+valuation	anslag(et)
+valuation process	taksering(en)
+valuation document	takst(en)
+value	verdi(en)
+value[s]	verdsette[r]
+value[s]	taksere[r]
+varied	forskjellig
+various	"diverse, forskjellige"
+variation	variasjon(en)
+vary [varies]	variere[r]
+vegetable garden	kjøkkenhage(en)
+vegetable plot	kjøkkenhage(en)
+vengance	hevn(en)
+venture	foretaket(et)
+verbal	muntlig
+verdict	dom(men)
+version	versjon(en)
+very	"veldig, ordentlig, svært"
+very ..	kjempe..
+very enthusiastic	helfrelst
+very nice	kjempefin
+very old person	olding(en)
+vessel	fartøy(et)
+veterinarian	"veterinær(en), dyrlege(n)"
+via	via
+vicar	pastor(en)
+victor	seier(en)
+view	utsyn(et)
+village	landsby(en)
+villagers	bygdefolk(et)
+vindictive	hevngjerrig
+vintage	årgang(en)
+violence	vold(en)
+violent	voldsom
+virgin	jomfru(en)
+virtue	dyd(en)
+virtuous	dydig
+vision	synt(et)
+visionary	vidsynt
+visit	besøk(et)
+visiting	besøkende
+visitor	"besøkende, tilreisende"
+voice	"stemme(n), mål(et)"
+volume	volum(et)
+volume	"bind(et), bok(en)"
+voluntary	frivillig
+volvulus	tarmslyng(en)
+vote	stemme(n)
+vote[s]	"stemme[r], votere[r]"
+voted	stemt[e]
+vowel	vokal(en)
+voyage	sjøreise(n)
+vulgar	platt
+vultur	gribb(en)
+waggle[s|d]	logre[r|t]
+wagon	vogn(en)
+wagon factory	vognfabrikk(en)
+wagon maker	vognmaker(en)
+waistcoat	vest(en)
+wait[s|ed]	vente[r|t]
+waiter	servitør(en)
+wake[s]|woke	vekke[r|t]
+walk[s|ed]	vandre[r|t]
+walk[s]	gå[r]
+walked	gikk
+wall	vegg(en)
+wallet	lommebok(en)
+want[s|ed]	ønske[r|t]
+wanted to	ville
+was	var
+war	krig(en)
+war ship	orlogsskip(et)
+warden	oppsynsmann(en)
+warehouse	"lager(et), pakkhus(et)"
+warehouse worker	"lagerarbeider(en), pakkhusarbeider(en)"
+warm	"varm, lun"
+warmth	varme(n)
+warn[s]	advare[r]
+warning	advarsel(en)
+warned	advarte
+wart	vorte(n)
+wash[es|ed]	vaske[r|t]
+wasteland	ødemark(en)
+watch	ur(et)
+watch-maker	urmaker(en)
+water	vann(et)
+water fall	foss(en)
+water way	led(en)
+watt	watt
+wave[s|ed]	vinke[r|t]
+way out	utvei(en)
+we	vi
+weak	"svak, mo"
+weakness	svakhet(en)
+weakness of old age	alderdomssvakhet(en)
+wealth	rikdom(men)
+weapon	våpen(et)
+weasel	beltebil(en)
+weather	vær(et)
+weather forecast	værvarsling(en)
+weaver	"vever(en), vevejente(n)"
+weaving mill	veveri(et)
+weaving mill worker	veveriarbeider(en)
+wedding	bryllup(et)
+wedding ceremony	vielse(n)
+Wednesday	onsdag(en)
+week	uke(n)
+week day	hverdag(en)
+weekend	helg(en)
+weight	"tyngde(n), vekt(en), belastning(en)"
+welcome	velkommen
+welfare officer	sosialkurator(en)
+well	"vel, bra"
+well	brønn(en)
+went	"gikk, reiste"
+were	var
+west	vest
+western	vestre
+wet	"våt, blaut"
+wet nurse	amme(n)
+Whisky	whisky(en)
+wharf	brygge(n)
+what	hva
+wheat	hvete(n)
+wheat flour	hvetemel(et)
+wheel	hjul(et)
+wheel of fortune	lykkehjul(et)
+wheelship	hjulbåt(en)
+wheelwright	hjulmaker(en)
+when	når
+where	hvor
+whether	hvorvidt
+whey	myse(n)
+which	hvilken
+which	som
+while	imens
+white	hvit
+white of an egg	eggehvite(n)
+who	hvem
+who	som
+whole	hel
+wholesaler	grossist(en)
+whose	hvis
+whooping cough	kikhoste(n)
+why	hvorfor
+wide	"bred, vid"
+with	med
+[withhold|withholds|withheld]	unndra[r|tt]
+within	"innen, i"
+width	bredde(n)
+widow	enke(n)
+widower	enkemann(en)
+widowhood	enkestand(en)
+wild	vill
+wilderness	ødemark(en)
+will	vil
+will	vilje(n)
+will	testamente(t)
+willing	villig
+willingly	gjerne
+wife	"kone(n), frue(n), hustru(en), kjerring(a)"
+wigmaker	parykkmaker(en)
+winding	slyng(en)
+window	vindu(et)
+wine	vin(en)
+winter	vinter(en)
+wire	tråd(en)
+wireless	trådløs
+wireless operator	radiotelegrafist(en)
+wisdom	visdom(en)
+wise	vis
+wish	ønske(t)
+wish[es|ed]	ønske[r|t]
+witch	heks(en)
+witchcraft	trollskap(et)
+with	"med, hos"
+without	uten
+without money	blakk
+without obligation	uforpliktende
+witness	vitne(t)
+witness[es|ed]	vitne[r|t]
+wolf	ulv(en)
+woman	kvinne(en)
+won	vant
+wonder	under(et)
+wonderful	"nydelig, herlig, flott"
+wood	"tre(et), trevirke(t)"
+wood grous	tiur(en)
+woodshed	vedskjul(et)
+woodwork	treverk(et)
+woodworker	trearbeider(en)
+wool	ull(et)
+wool product	ullvare(n)
+wool spinner	ullspinner(en)
+word	ord(et)
+word of honour	æresord(et)
+work	"arbeid(et), jobb(en)"
+art work	verk(et)
+work[s|ed]	arbeide[r|t]
+work[s|ed]	virke[r|t]
+work sloppily	slurve[r|t]
+worker	"arbeider(en), arbeidskar(en), arbeidsmann(en)"
+worker at a mill	møllearbeider(en)
+worker's wife	arbeiderkone(en)
+works	verksted(et)
+workshop	verksted(et)
+world	verden(en)
+worm	mark(en)
+worried	engstelig
+worry	engstelse(n)
+[worry|worries|worried]	engste[r|t]
+worthy	værdig
+wound	sår(et)
+wrestler	bryter(en)
+wristlet	pulsvante(n)
+write[s]	skrive[r]
+writing	skrift(en)
+written	skriftlig
+wrong	galt
+xenophobia	xenofobi(en)
+yarn	garn(et)
+year	år(et)
+year	årgang(en)
+this year	iår
+yearly	årlig
+yell	rope[r]
+yellow	"gul, gult"
+yes	ja
+yesterday	igår
+yesterday's	gårsdagens
+yet	ennå
+yield[s|ed]	yte[r|t]
+"you {singular, subject}"	du
+"you {polite, singular, subject}"	De
+"you {singular, object}"	deg
+"you {polite, singular, object}"	Dem
+you {plural}	dere
+young	ung
+younger	yngre
+youngest	"yngst, minst"
+your	"din, dine"
+yours	din
+yours sincerely	vennlig hilsen
+"yourself {polite, singular, object}"	Dem
+youth	ungdom(men)
+Zen	zen
+zoo	dyrehage(n)
+zone	sone(n)
