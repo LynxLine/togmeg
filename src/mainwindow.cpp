@@ -295,7 +295,6 @@ void MainWindow::createToolBar()
 
 	toolBar->addAction( action("app/demo") );
 	toolBar->addAction( action("app/study") );
-	toolBar->addAction( action("app/exam") );
 
     QWidget * space4 = new QWidget;
     space4->setFixedSize(10,10);
@@ -478,21 +477,6 @@ void MainWindow::quit()
 {
     close();
     qApp->closeAllWindows();
-}
-
-void MainWindow::messageReceived(const QString & message)
-{
-    qDebug() << "MainWindow::messageReceived()" << message;
-
-    if (message == "Restore") {
-        show();
-        return;
-    }
-
-    if (message == "Stop") {
-        quit();
-        return;
-    }
 }
 
 MainWindow::ViewMode MainWindow::viewMode()

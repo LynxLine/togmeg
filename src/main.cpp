@@ -3,35 +3,17 @@
 //
 
 #include <QtGui>
-#include "QtSingleApplication"
 #include <iostream>
 
-#include "logger.h"
 #include "crammero.h"
 #include "mainwindow.h"
 
 void initResources();
-void messageHandler(QtMsgType type, const char * msg);
 
 int main( int argc, char ** argv )
 {
-    //set debug handler to our handler
-    qInstallMsgHandler(messageHandler);
-
     initResources();
-    QtSingleApplication a("crammero", argc, argv );
-
-    for (int j=0; j<argc; j++) {
-        if ( QString( argv[j] ) == "/stop" ) {
-            a.sendMessage("Stop");
-            return 0;
-        }
-    }
-
-    if (a.sendMessage("Restore")) return 0;
-
-    a.initialize();
-    new Logger(&a);
+    QApplication a(argc, argv );
 
     QPixmap pmSplash(":/images/Splash.png");
     QSplashScreen * splash = new QSplashScreen(pmSplash);
@@ -69,9 +51,6 @@ int main( int argc, char ** argv )
     else if (maximized) mw->showMaximized();
     else                mw->show();
 
-    a.connect(&a, SIGNAL(messageReceived(const QString &)),
-              mw,   SLOT(messageReceived(const QString &)));
-
     splash->finish(mw);
     delete splash;
 
@@ -81,21 +60,6 @@ int main( int argc, char ** argv )
     delete mw;
 
     return result;
-}
-
-/*!
- * This is method is registered as the message Handler for Qt
- * debug, warning, critcal and fatal errors.
- */
-void messageHandler(QtMsgType type, const char *msg)
-{
-    if (Logger::instance())
-        Logger::instance()->messageHandler(type, msg);
-    else
-        fprintf(stderr, "%s\n", msg);
-
-    if (type == QtFatalMsg)
-        abort();
 }
 
 void initResources()

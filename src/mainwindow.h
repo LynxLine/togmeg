@@ -53,7 +53,6 @@ public slots:
 
     void switchFullScreen();
 
-    void messageReceived(const QString &);
     void setViewMode(MainWindow::ViewMode);
 
 signals:

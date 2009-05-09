@@ -3,7 +3,9 @@
 //
 
 #include <QtGui>
+#ifdef Q_WS_MAC
 #include <ApplicationServices/ApplicationServices.h>
+#endif
 
 #include "crammero.h"
 #include "studytask.h"
@@ -26,7 +28,9 @@ public:
     bool processOnly;
     int processOnlyCount;
     
+#ifdef Q_WS_MAC
     SpeechChannel speechChannel;
+#endif
 };
 
 /*!
@@ -59,12 +63,14 @@ ExaminateTaskController::ExaminateTaskController(StudyTaskModel * parent)
         index++;
     }
     
+#ifdef Q_WS_MAC
     OSErr theErr = noErr;
     theErr = NewSpeechChannel(NULL, &d->speechChannel);
     if (theErr != noErr) {
         qDebug() << "NewSpeechChannel() failed," << theErr;
         return;
     }
+#endif
 }
 
 /*!
@@ -72,6 +78,7 @@ ExaminateTaskController::ExaminateTaskController(StudyTaskModel * parent)
  */
 ExaminateTaskController::~ExaminateTaskController()
 {
+#ifdef Q_WS_MAC
     if (!d->speechChannel) return;
     
     OSErr theErr = noErr;
@@ -82,7 +89,7 @@ ExaminateTaskController::~ExaminateTaskController()
     theErr = DisposeSpeechChannel(d->speechChannel);
     if (theErr != noErr)
         qDebug() << "DisposeSpeechChannel() failed," << theErr;
-    
+#endif
     delete d;
 }
 
@@ -185,8 +192,11 @@ void ExaminateTaskController::processAnswer(int usedTime, QString answer)
     }
 
     QString text = d->currentEntry.answer;
+
+#ifdef Q_WS_MAC
     SpeakText(d->speechChannel , text.toLatin1().data(), text.toLatin1().size() );
-    
+#endif
+
     eventTimeMap.clear();
     d->timeLine->setCurrentTime(0);
     d->timeLine->start();
