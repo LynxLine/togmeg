@@ -7,6 +7,15 @@
 #include <ApplicationServices/ApplicationServices.h>
 #endif
 
+#ifdef Q_WS_WIN
+#include <windows.h>
+#include <atlbase.h>
+#include <windowsx.h>
+#include <commctrl.h>
+#include <sapi.h>
+#include <sphelper.h>
+#endif
+
 #include "crammero.h"
 #include "studytaskmodel.h"
 #include "studytaskcontroller.h"
@@ -21,6 +30,10 @@ public:
     
 #ifdef Q_WS_MAC
     SpeechChannel speechChannel;
+#endif
+
+#ifdef Q_WS_WIN
+    CComPtr<ISpVoice> cpVoice;
 #endif
 };
 
@@ -47,6 +60,28 @@ StudyTaskController::StudyTaskController(StudyTaskModel * parent)
         qDebug() << "NewSpeechChannel() failed," << theErr;
         return;
     }
+#endif
+
+#ifdef Q_WS_WIN
+    HRESULT hr;
+    hr = d->cpVoice.CoCreateInstance( CLSID_SpVoice );
+    if (!SUCCEEDED(hr)) 
+        return; 
+
+    QMainWindow * mw = qobject_cast<QMainWindow *>(qApp->activeWindow());
+    if (!mw) {
+        qDebug() << "No active main window";
+        return;
+    }
+
+    ULONGLONG events = SPFEI(SPEI_WORD_BOUNDARY) | SPFEI(SPEI_END_INPUT_STREAM);
+    
+    d->cpVoice->SetInterest( events, events );
+    d->cpVoice->SetNotifyWindowMessage( mw->winId(), WM_USER+5767, 0, 0 );
+    //d->initialized = true;   
+
+	//if (voiceId.isValid())
+	//	setVoice(voiceId);
 #endif
 }
 
@@ -143,6 +178,18 @@ void StudyTaskController::processAnswer(int usedTime, QString answer)
 #ifdef Q_WS_MAC
     SpeakText(d->speechChannel , text.toLatin1().data(), text.toLatin1().size() );
 #endif
+
+#ifdef Q_WS_WIN
+	WCHAR * wcText = new WCHAR[ text.length()+1 ];
+    text.toWCharArray(wcText);
+    wcText[text.length()] = 0;
+    //d->textLength = text.length();
+
+    HRESULT hr = d->cpVoice->Speak( wcText, SPF_ASYNC | SPF_IS_NOT_XML, 0 );
+    if (FAILED( hr )) qDebug() << "sapi51: Speak() is not completed";
+    delete[] wcText;
+#endif
+
     d->timeLine->setCurrentTime(0);
     d->timeLine->start();
 }
