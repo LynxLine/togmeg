@@ -6,7 +6,6 @@
 #include "examinator.h"
 
 #include "studytask.h"
-#include "tasklistmodel.h"
 #include "studytaskmodel.h"
 
 #include "taskcontroller.h"
@@ -139,27 +138,6 @@ int Examinator::entryCount()
 void Examinator::setEntryCount(int count)
 {
     emit examinatorEnabled( count >0 );
-}
-
-void Examinator::setCurrentTask(QString taskId)
-{
-    //qDebug() << "Examinator::setCurrentTask()" << taskId;
-
-    if ( taskId.isEmpty() ) {
-        d->task = 0L;
-        return;
-    }
-
-    if (d->task) {
-        disconnect(d->task, SIGNAL(entryCountChanged(int)),
-                   this,      SLOT(setEntryCount(int)));
-    }
-
-    d->task = TaskListModel::instance()->task( taskId );
-    if ( !d->task ) return;
-
-    connect(d->task, SIGNAL(entryCountChanged(int)),
-            this,      SLOT(setEntryCount(int)));
 }
 
 void Examinator::prepareNextQuestion()

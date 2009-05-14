@@ -6,7 +6,6 @@
 #include "studytask.h"
 #include "mainwindow.h"
 #include "pixmapbutton.h"
-#include "tasklistmodel.h"
 #include "taskeditorfooter.h"
 
 class TaskEditorFooter::Private {
@@ -148,22 +147,6 @@ void TaskEditorFooter::setNextItemMode(TaskEditorView::NextItemMode m)
 void TaskEditorFooter::setStudyCount(int count)
 {
     d->studyCount = count;
-    updateMessageLabel();
-}
-
-void TaskEditorFooter::setCurrentTask(QString taskId)
-{
-    d->currentTaskName.clear();
-    d->currentTaskEntryCount = 0;
-
-    if ( !taskId.isEmpty() ) {
-        StudyTask * task = TaskListModel::instance()->task( taskId );
-        if (task) {
-            d->currentTaskName = task->name();
-            d->currentTaskEntryCount = task->entryCount();
-        }
-    }
-
     updateMessageLabel();
 }
 

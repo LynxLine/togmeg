@@ -45,7 +45,6 @@ public slots:
     void processAnswer(int usedTime);
 
     void setUserAnswer(QString);
-    void setCurrentTask(QString taskId);
 
 signals:
     void stopped();

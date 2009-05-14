@@ -7,8 +7,6 @@
 
 #include "crammero.h"
 #include "studytask.h"
-#include "datacontainer.h"
-#include "tasklistmodel.h"
 #include "studytaskmodel.h"
 
 class StudyTaskModel::Private
@@ -16,7 +14,6 @@ class StudyTaskModel::Private
 public:
     static StudyTaskModel * instance;
     QList<StudyDataEntry> entries;
-    DataContainer * dataContainer;
     QString taskId;
 };
 
@@ -30,7 +27,6 @@ StudyTaskModel::StudyTaskModel(QObject * parent)
 {
     d = new Private;
     Private::instance = this;
-    d->dataContainer = 0L;
 }
 
 StudyTaskModel * StudyTaskModel::instance()
@@ -56,12 +52,10 @@ void StudyTaskModel::loadFile(QString filePath)
 {
     qDebug() << "StudyTaskModel::loadFile()," << filePath;
     
-    d->dataContainer = 0L;
     d->entries.clear();
     d->taskId.clear();
     
     disconnect(this, SIGNAL(rowCountChanged(int)),0,0);
-    
     
     QIODevice * resource = new QFile(filePath);
     if (resource->open(QIODevice::ReadOnly)) {

@@ -393,23 +393,6 @@ void MainWindow::newEntry()
     }
 }
 
-void MainWindow::setCurrentTask(QString taskId)
-{
-    d->examinator->setCurrentTask(taskId);
-
-    QString taskName = d->examinator->currentTaskName();
-    if ( taskName.isEmpty() ) setWindowTitle( tr("Crammero") );
-    else setWindowTitle( tr("%1 - Crammero").arg( taskName ) );
-
-    actionGroup("examine")->setEnabled( d->examinator->entryCount() >0 );
-}
-
-void MainWindow::openTaskEditor(QString taskId)
-{
-    if ( taskId.isEmpty() ) return;
-    setViewMode(MainWindow::TaskEditorMode);
-}
-
 void MainWindow::previousWindow()
 {
     if ( viewMode() == ExamineMode ) setViewMode(MainWindow::TaskEditorMode);

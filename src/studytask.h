@@ -37,9 +37,6 @@ signals:
     void entryCountChanged(int);
 
 private:
-    DataContainer * dataContainer();
-
-private:
     class Private;
     Private * d;
 };

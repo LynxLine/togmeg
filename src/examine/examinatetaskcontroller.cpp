@@ -10,7 +10,6 @@
 #include "crammero.h"
 #include "studytask.h"
 #include "studytaskmodel.h"
-#include "tasklistmodel.h"
 #include "examinatetaskcontroller.h"
 
 class ExaminateTaskController::Private {
@@ -40,7 +39,7 @@ ExaminateTaskController::ExaminateTaskController(StudyTaskModel * parent)
 :TaskController(parent)
 {
     d = new Private;
-    d->task = TaskListModel::instance()->task( model->taskId() );
+    //d->task = TaskListModel::instance()->task( model->taskId() );
 
     d->timeLine = new QTimeLine(1000, this);
     d->timeLine->setCurveShape(QTimeLine::LinearCurve);

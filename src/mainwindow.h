@@ -42,7 +42,6 @@ public slots:
     void exportFile();
 
     void newEntry();
-    void openTaskEditor(QString taskId);
     void previousWindow();
 
     void runDemo();
@@ -63,9 +62,6 @@ signals:
 
 protected:
     virtual void resizeEvent(QResizeEvent *);
-
-private slots:
-    void setCurrentTask(QString taskId);
 
 private:
 	void createActions();

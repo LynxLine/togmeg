@@ -6,7 +6,6 @@
 #include "crammero.h"
 #include "studytask.h"
 #include "mainwindow.h"
-#include "tasklistmodel.h"
 #include "exampropertieswidget.h"
 
 class ExamPropertiesWidget::Private {
@@ -230,6 +229,7 @@ ExamPropertiesWidget::~ExamPropertiesWidget()
 
 void ExamPropertiesWidget::setCurrentTask(QString taskId)
 {
+    /*
     StudyTask * t = TaskListModel::instance()->task( taskId );
     d->currentTask = t;
 
@@ -277,6 +277,7 @@ void ExamPropertiesWidget::setCurrentTask(QString taskId)
     d->cb_basedOnTyping->setCurrentIndex( basedOnTypingUnit );
     d->cb_limitExamTime->setCurrentIndex( limitExamTimeUnit );
     d->cb_timeForQuestion->setCurrentIndex( timeForQuestionUnit );
+     */
 }
 
 void ExamPropertiesWidget::randomizeStateChanged(int state)

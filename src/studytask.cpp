@@ -6,7 +6,6 @@
 #include <QtXml>
 #include "crammero.h"
 #include "studytask.h"
-#include "datacontainer.h"
 
 class StudyTask::Private {
 public:
@@ -26,14 +25,6 @@ StudyTask::StudyTask(QObject * parent)
     setProperty("id", app::uniqueId());
     setProperty("name", tr("New study"));
     setProperty("count", 0);
-
-    QDir storageDir(app::storagePath());
-    storageDir.mkpath( id() );
-
-    QString taskPath = app::storagePath() +id();
-    DataContainer * container = DataContainerFactory::resourceContainer( taskPath );
-
-    d->dataContainer = container;
 }
 
 /*!
@@ -43,9 +34,6 @@ StudyTask::StudyTask(DataContainer * container, QObject * parent)
 :QObject(parent)
 {
     d = new Private;
-
-    Q_ASSERT( container != 0L );
-    d->dataContainer = container;
 }
 
 /*!
@@ -53,7 +41,6 @@ StudyTask::StudyTask(DataContainer * container, QObject * parent)
  */
 StudyTask::~StudyTask()
 {
-    delete d->dataContainer;
     delete d;
 }
 
@@ -80,11 +67,6 @@ QString StudyTask::categoryId()
 void StudyTask::setCategoryId(QString id)
 {
     setProperty("category", id);
-}
-
-DataContainer * StudyTask::dataContainer()
-{
-    return d->dataContainer;
 }
 
 int StudyTask::entryCount()

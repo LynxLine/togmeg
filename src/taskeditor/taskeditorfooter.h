@@ -20,7 +20,6 @@ public:
 
 public slots:
     void setStudyCount(int);
-    void setCurrentTask(QString taskId);
     void setNextItemMode(TaskEditorView::NextItemMode);
 
 signals:
