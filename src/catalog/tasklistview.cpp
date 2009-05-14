@@ -9,12 +9,10 @@
 #include "headerview.h"
 #include "tasklistview.h"
 #include "tasklistmodel.h"
-#include "tasklistfiltermodel.h"
 
 class TaskListView::Private
 {
 public:
-    QPointer<TaskListFilterModel> filter;
     QPointer<TaskListModel> model;
     QPointer<QMenu> contextMenu;
     QPointer<HeaderView> header;
@@ -56,17 +54,13 @@ TaskListView::TaskListView(QWidget * parent)
     //d->contextMenu->addAction( tr("Properties"));
 
     d->model = new TaskListModel(this);
-    d->filter = new TaskListFilterModel( d->model );
-    d->filter->setSourceModel( d->model );
-    d->filter->sort(0, Qt::AscendingOrder);
-    d->filter->setFilterKeyColumn(0);
 
     connect(this, SIGNAL(doubleClicked(const QModelIndex &)), 
             this, SLOT(activateItem(const QModelIndex &)));
     connect(this, SIGNAL(activated(const QModelIndex &)), 
             this, SLOT(activateItem(const QModelIndex &)));
 
-    setModel( d->filter );
+    setModel( d->model );
     if ( model()->rowCount() )
         setCurrentIndex( model()->index(0,0) );
 }
@@ -79,7 +73,7 @@ TaskListView::~TaskListView()
 
 void TaskListView::activateContextMenu(const QPoint & pos)
 {
-    QModelIndex index = d->filter->mapToSource( currentIndex() );
+    QModelIndex index = currentIndex();
     if ( !index.isValid() ) return;
 
     d->contextMenu->popup( viewport()->mapToGlobal(pos) );
@@ -88,10 +82,9 @@ void TaskListView::activateContextMenu(const QPoint & pos)
 void TaskListView::addNewStudy()
 {
     StudyTask * task = new StudyTask( d->model );
-    task->setCategoryId( d->filter->categoryId() );
     d->model->addTask( task );
 
-    QModelIndex index = d->filter->mapFromSource( d->model->indexOf(task) );
+    QModelIndex index = d->model->indexOf(task);
     setCurrentIndex( index );
     edit( index );
 
@@ -115,31 +108,11 @@ void TaskListView::editCurrentStudy()
 void TaskListView::activateItem(const QModelIndex & i)
 {
     if ( !i.isValid() ) return;
-    QModelIndex index = d->filter->mapToSource( i );
+    QModelIndex index = i;
     if ( !index.isValid() ) return;
 
     StudyTask * task = d->model->task( index );
     emit studyTaskActivated( task->id() );
-}
-
-void TaskListView::applyCategoryFilter(QString categoryId)
-{
-    if ( categoryId.isEmpty() ) {
-        d->filter->clearFiltering();
-    }
-    else {
-        d->filter->setCategoryFiltering( categoryId );
-    }
-    
-    QModelIndex index = currentIndex();
-    if ( !index.isValid() ) {
-        if ( model()->rowCount() )
-            setCurrentIndex( model()->index(0,0) );
-        else
-            currentTaskChanged(QString::null);
-    }
-
-    emit rowCountChanged( model()->rowCount() );
 }
 
 QString TaskListView::currentTaskId()
@@ -149,7 +122,7 @@ QString TaskListView::currentTaskId()
         return QString::null;
     }
 
-    QModelIndex index = d->filter->mapToSource( current );
+    QModelIndex index = current;
 
     if ( !index.isValid() ) {
         return QString::null;
@@ -168,7 +141,7 @@ void TaskListView::currentChanged(const QModelIndex & current, const QModelIndex
         return;
     }
 
-    QModelIndex index = d->filter->mapToSource( current );
+    QModelIndex index = current;
 
     if ( !index.isValid() ) {
         currentTaskChanged(QString::null);

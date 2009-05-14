@@ -23,7 +23,6 @@ public slots:
     void addNewStudy();
     void editStudyName();
     void editCurrentStudy();
-    void applyCategoryFilter(QString categoryId);
 
 signals:
     void currentTaskChanged(QString taskId);
