@@ -46,21 +46,6 @@ StudyTask::StudyTask(DataContainer * container, QObject * parent)
 
     Q_ASSERT( container != 0L );
     d->dataContainer = container;
-
-    QIODevice * resource = d->dataContainer->resource("info.xml");
-    if (resource) {
-        QDomDocument doc;
-        doc.setContent( resource );
-        delete resource;
-
-        QDomElement el = doc.documentElement();
-        QDomNamedNodeMap nodeMap = el.attributes();
-        for (int i=0;i<nodeMap.count();i++) {
-            QDomAttr a = nodeMap.item(i).toAttr();
-            if (a.isNull() || a.name().isEmpty() ) continue;
-            d->properties[ a.name() ] = a.value();
-        }
-    }
 }
 
 /*!
@@ -68,21 +53,6 @@ StudyTask::StudyTask(DataContainer * container, QObject * parent)
  */
 StudyTask::~StudyTask()
 {
-    //qDebug() << "~StudyTask()";
-    QIODevice * resource = d->dataContainer->create("info.xml");
-    if (resource) {
-        QDomDocument doc("taskinfoxml");
-
-        QDomElement child = doc.createElement("studytask");
-        foreach (QString propertyName, d->properties.keys()) {
-            child.setAttribute(propertyName, property(propertyName).toString());
-        }
-        doc.appendChild(child);
-
-        resource->write(doc.toByteArray());
-        delete resource;
-    }
-
     delete d->dataContainer;
     delete d;
 }

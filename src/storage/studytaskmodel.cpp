@@ -44,7 +44,6 @@ StudyTaskModel * StudyTaskModel::instance()
 StudyTaskModel::~StudyTaskModel()
 {
     qDebug() << "~StudyTaskModel";
-    if ( d->dataContainer ) save();
     delete d;
 }
 
@@ -53,86 +52,73 @@ QString StudyTaskModel::taskId()
     return d->taskId;
 }
 
-void StudyTaskModel::load(QString taskId)
+void StudyTaskModel::loadFile(QString filePath)
 {
-    if ( d->dataContainer ) save();
-    if ( taskId == d->taskId ) return;
+    qDebug() << "StudyTaskModel::loadFile()," << filePath;
     
-    qDebug() << "StudyTaskModel::load()," << taskId;
-
     d->dataContainer = 0L;
     d->entries.clear();
     d->taskId.clear();
-
+    
     disconnect(this, SIGNAL(rowCountChanged(int)),0,0);
-
-    StudyTask * task = TaskListModel::instance()->task( taskId );
-    if ( !task ) return;
-
-    connect(this, SIGNAL(rowCountChanged(int)),
-            task, SLOT(setEntryCount(int)));
-
-    d->dataContainer = task->dataContainer();
-    d->taskId = task->id();
-        
-    QIODevice * resource = d->dataContainer->resource("content.xml");
-    if (resource) {
+    
+    
+    QIODevice * resource = new QFile(filePath);
+    if (resource->open(QIODevice::ReadOnly)) {
         QDomDocument doc;
         doc.setContent( resource );
-        delete resource;
-
+        
         QDomElement el = doc.documentElement();
         QDomNode n = el.firstChild();
         while (!n.isNull()) {
             QDomElement questionEl = n.firstChildElement("question");
             QDomElement answerEl   = n.firstChildElement("answer");
-
+            
             StudyDataEntry entry;
             entry.question = questionEl.firstChild().toText().data();
             entry.answer   = answerEl.firstChild().toText().data();
-
+            
             d->entries << entry;
-
+            
             n = n.nextSibling();
         }
     }
-
+    delete resource;
+    
     emit rowCountChanged( rowCount() );
     reset();
 }
 
-void StudyTaskModel::save()
+void StudyTaskModel::saveFile(QString filePath)
 {
-    if ( !d->dataContainer ) return;
-        
-    QIODevice * resource = d->dataContainer->create("content.xml");
-    if (resource) {
+    QIODevice * resource = new QFile(filePath);
+    if (resource->open(QIODevice::WriteOnly)) {
         QDomDocument doc("taskcontentxml");
-
+        
         QDomElement docEl = doc.createElement("content");
         doc.appendChild(docEl);
-
+        
         foreach (StudyDataEntry entry, d->entries) {
             QDomElement entryEl = doc.createElement("studyentry");
             docEl.appendChild(entryEl);
-
+            
             QDomElement questionEl = doc.createElement("question");
             entryEl.appendChild(questionEl);
-
+            
             QDomText questionTextEl = doc.createTextNode( entry.question );
             questionEl.appendChild(questionTextEl);
-
+            
             QDomElement answerEl = doc.createElement("answer");
             entryEl.appendChild(answerEl);
-
+            
             QDomText answerTextEl = doc.createTextNode( entry.answer );
             answerEl.appendChild(answerTextEl);
         }
-
+        
         resource->write(doc.toByteArray());
-
-        delete resource;
+        
     }
+    delete resource;
 }
 
 QModelIndex StudyTaskModel::addNewEntry()

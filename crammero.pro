@@ -36,7 +36,6 @@ UI_DIR = ./build/GeneratedFiles
 MOC_DIR = ./build/GeneratedFiles
 
 include("src/storage/storage.pri")
-include("src/catalog/catalog.pri")
 include("src/examine/examine.pri")
 include("src/widgets/widgets.pri")
 include("src/taskeditor/taskeditor.pri")

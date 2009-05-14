@@ -67,6 +67,11 @@ TaskEditorView::TaskEditorView(QWidget * parent)
     header()->setResizeMode(2, QHeaderView::Stretch);
 }
 
+StudyTaskModel * TaskEditorView::studyTaskModel() const
+{
+    return d->model;
+}
+
 TaskEditorView::~TaskEditorView()
 {
     qDebug() << "~TaskEditorView";
@@ -97,15 +102,6 @@ void TaskEditorView::activateContextMenu(const QPoint & pos)
 QString TaskEditorView::currentTaskId()
 {
     return d->model->taskId();
-}
-
-void TaskEditorView::openTask(QString taskId)
-{
-    d->model->load(taskId);
-    setFocus();
-
-    if ( model()->rowCount() ) QTimer::singleShot(350, this, SLOT(toFirstRow()));
-    else                       QTimer::singleShot(350, this, SLOT(addNewEntry()));
 }
 
 void TaskEditorView::toFirstRow()

@@ -7,6 +7,8 @@
 
 #include <QWidget>
 
+class TaskEditorView;
+
 /*!
  */
 class TaskEditorWidget : public QWidget
@@ -17,9 +19,10 @@ public:
     TaskEditorWidget(QWidget * parent = 0L);
     virtual ~TaskEditorWidget();
 
+    TaskEditorView * view() const;
+    
 public slots:
     void addNewEntry();
-    void setCurrentTask(QString taskId);
 
 private:
 	class Private;

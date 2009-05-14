@@ -10,9 +10,11 @@
 #include "examinator.h"
 
 #include "slidedwidget.h"
-#include "catalogwidget.h"
 #include "examinewidget.h"
 #include "taskeditorwidget.h"
+
+#include "TaskEditorView.h"
+#include "StudyTaskModel.h"
 
 #include "AppStyles.h"
 
@@ -42,7 +44,6 @@ public:
     SlidedWidget * slide;
     QStackedWidget * stack;
     
-    CatalogWidget * catalogWidget;
     ExamineWidget * examineWidget;
     TaskEditorWidget * taskEditorWidget;
 
@@ -108,8 +109,6 @@ MainWindow::MainWindow()
     d->slide = new SlidedWidget( d->stack );
     d->stack->addWidget( d->slide );
 
-    d->catalogWidget = new CatalogWidget( d->slide );
-    d->slide->addWidget( d->catalogWidget );
 
     d->taskEditorWidget = new TaskEditorWidget( d->slide );
     d->slide->addWidget( d->taskEditorWidget );
@@ -118,19 +117,12 @@ MainWindow::MainWindow()
     d->examinator = d->examineWidget->examinator();
     d->stack->addWidget( d->examineWidget );
 
-    setViewMode(MainWindow::CatalogMode);
-
-    connect(d->catalogWidget, SIGNAL(studyTaskActivated(QString)),
-            this, SLOT(openTaskEditor(QString)));
-    connect(d->catalogWidget, SIGNAL(currentTaskChanged(QString)),
-            this, SLOT(setCurrentTask(QString)));
+    setViewMode(MainWindow::TaskEditorMode);
 
     connect(d->examinator, SIGNAL(examinatorEnabled(bool)),
             actionGroup("examine"), SLOT(setEnabled(bool)));
     connect(d->examinator, SIGNAL(stopped()),
             this, SLOT(stop()));
-
-    setCurrentTask( d->catalogWidget->currentTaskId() );
 
     d->sizeGrip = new QSizeGrip(this);
     d->sizeGrip->raise();
@@ -156,7 +148,6 @@ MainWindow::~MainWindow()
 
     delete d->examineWidget;
     delete d->taskEditorWidget;
-    delete d->catalogWidget;
 
     delete d;
 }
@@ -216,6 +207,11 @@ QString MainWindow::release() const
  */
 void MainWindow::createActions()
 {
+	d->actions["app/Open"]   = new QAction (tr("Open"), this);
+	d->actions["app/Save"]   = new QAction (tr("Save"), this);
+	d->actions["app/SaveAs"] = new QAction (tr("Save As"), this);
+
+    
 	d->actions["app/exit"]   = new QAction (tr("E&xit"), this);
 	d->actions["app/import"] = new QAction (tr("&Import..."), this);
     d->actions["app/export"] = new QAction (tr("&Export..."), this);
@@ -255,6 +251,10 @@ void MainWindow::createMenuBar()
 {
     QMenu * menu;
 	menu = menuBar()->addMenu(tr("&File"));
+	menu->addAction( action("app/Open") );
+	menu->addAction( action("app/Save") );
+	menu->addAction( action("app/SaveAs") );
+	menu->addSeparator();
 	menu->addAction( action("app/exit") );
 
 	menu = menuBar()->addMenu(tr("&Edit"));
@@ -334,6 +334,10 @@ void MainWindow::createShortcuts()
  */
 void MainWindow::connectActions()
 {
+    connect( action("app/Open"),   SIGNAL(triggered()), this, SLOT(openFile()));
+    connect( action("app/Save"),   SIGNAL(triggered()), this, SLOT(saveFile()));
+    connect( action("app/SaveAs"), SIGNAL(triggered()), this, SLOT(saveFileAs()));
+
     connect( action("app/exit"),   SIGNAL(triggered()), this, SLOT(quit()));
     connect( action("app/help"),   SIGNAL(triggered()), this, SLOT(openHelp()));
     connect( action("app/about"),  SIGNAL(triggered()), this, SLOT(openAbout()));
@@ -384,10 +388,7 @@ void MainWindow::exportFile()
 
 void MainWindow::newEntry()
 {
-    if ( viewMode() == MainWindow::CatalogMode) {
-        d->catalogWidget->addNewStudy();
-    }
-    else if ( viewMode() == MainWindow::TaskEditorMode) {
+    if ( viewMode() == MainWindow::TaskEditorMode) {
         d->taskEditorWidget->addNewEntry();
     }
 }
@@ -407,41 +408,27 @@ void MainWindow::openTaskEditor(QString taskId)
 {
     if ( taskId.isEmpty() ) return;
     setViewMode(MainWindow::TaskEditorMode);
-    d->taskEditorWidget->setCurrentTask(taskId);
 }
 
 void MainWindow::previousWindow()
 {
-    if ( viewMode() == TaskEditorMode ) setViewMode(MainWindow::CatalogMode);
-    else if ( viewMode() == ExamineMode ) setViewMode(MainWindow::BrowserMode);
+    if ( viewMode() == ExamineMode ) setViewMode(MainWindow::TaskEditorMode);
 }
 
 void MainWindow::runDemo()
 {
-    QString taskId = d->examinator->currentTaskId();
-    d->taskEditorWidget->setCurrentTask(taskId);
-    if ( taskId.isEmpty() ) return;
-
     d->examinator->start( Examinator::Playing );
     setViewMode(MainWindow::ExamineMode);
 }
 
 void MainWindow::runStudy()
 {
-    QString taskId = d->examinator->currentTaskId();
-    d->taskEditorWidget->setCurrentTask(taskId);
-    if ( taskId.isEmpty() ) return;
-
     d->examinator->start( Examinator::Studying );
     setViewMode(MainWindow::ExamineMode);
 }
 
 void MainWindow::runExamine()
 {
-    QString taskId = d->examinator->currentTaskId();
-    d->taskEditorWidget->setCurrentTask(taskId);
-    if ( taskId.isEmpty() ) return;
-
     d->examinator->start( Examinator::Examinating );
     setViewMode(MainWindow::ExamineMode);
 }
@@ -487,16 +474,7 @@ MainWindow::ViewMode MainWindow::viewMode()
 void MainWindow::setViewMode(MainWindow::ViewMode m)
 {
     d->viewMode = m;
-    if (m == MainWindow::CatalogMode) {
-        //first switch stack
-        if ( d->stack->currentWidget() != d->slide ) {
-            d->stack->setCurrentWidget( d->slide );
-        }
-
-        //second switch slide
-        d->slide->setCurrentWidget( d->catalogWidget );
-    }
-    else if (m == MainWindow::TaskEditorMode) {
+    if (m == MainWindow::TaskEditorMode) {
         //first switch stack
         if ( d->stack->currentWidget() != d->slide ) {
             d->stack->setCurrentWidget( d->slide );
@@ -515,17 +493,13 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
             d->stack->setCurrentWidget( d->slide );
         }
 
-        if ( d->slide->currentWidget() == d->catalogWidget ) {
-            d->viewMode = MainWindow::CatalogMode;
-        }
-        else if ( d->slide->currentWidget() == d->taskEditorWidget ) {
+        if ( d->slide->currentWidget() == d->taskEditorWidget ) {
             d->viewMode = MainWindow::TaskEditorMode;
         }
     }
 
     action("app/back" )->setEnabled( d->viewMode==MainWindow::TaskEditorMode );
 
-    action("app/new")->setEnabled( d->viewMode==MainWindow::CatalogMode );
 
     actionGroup("examine")->setEnabled( d->examinator->entryCount() >0 );
     action("app/demo" )->setEnabled( d->viewMode!=MainWindow::ExamineMode );
@@ -579,3 +553,55 @@ void MainWindow::resizeEvent(QResizeEvent * re)
     QMainWindow::resizeEvent(re);
 }
 
+void MainWindow::openFile()
+{
+    QString path;
+    
+    path = QFileDialog::getOpenFileName(
+                                        this,
+                                        tr("Open a crammero file"), path,
+                                        tr("Xml files (*.xml);;Any file (*)")
+                                        );
+    
+    if (path.isEmpty()) return;
+    
+    d->taskEditorWidget->view()->studyTaskModel()->loadFile(path);
+    
+    bool ok = true;//project()->loadFile(path);
+    if (!ok) {
+        QMessageBox box(QMessageBox::Information, tr("Load is failed"),
+                        tr("Load of file \"%1\" is failed").arg(QFileInfo(path).fileName()),
+                        QMessageBox::Ok, this);
+        box.setInformativeText(tr("Possible format of the file is wrong."));
+        box.setWindowModality(Qt::WindowModal);
+        box.setDefaultButton(QMessageBox::Ok);
+        
+#ifdef Q_WS_WIN
+        QString text = box.text();
+        box.setText( tr("<font size='+1'>%1</font>").arg(text) );
+#endif
+        box.exec();
+    }
+    
+}
+
+void MainWindow::saveFile()
+{
+    saveFileAs();
+}
+
+void MainWindow::saveFileAs()
+{
+    QString path;
+    
+    path = QFileDialog::getSaveFileName(
+                                        this,
+                                        tr("Save a crammero file"), path,
+                                        tr("Xml files (*.xml);;Any file (*)")
+                                        );
+    
+    if (path.isEmpty()) return;
+    
+    d->taskEditorWidget->view()->studyTaskModel()->saveFile(path);
+    
+}

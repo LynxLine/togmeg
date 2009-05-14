@@ -41,8 +41,8 @@ public:
     void removeEntry(QModelIndex index);
 
 public slots:
-    void load(QString taskId);
-    void save();
+    void loadFile(QString filePath);
+    void saveFile(QString filePath);
 
 signals:
     void rowCountChanged(int);

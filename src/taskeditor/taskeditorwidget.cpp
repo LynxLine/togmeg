@@ -107,6 +107,11 @@ TaskEditorWidget::TaskEditorWidget(QWidget * parent)
     setFocusProxy( d->taskEditorView );
 }
 
+TaskEditorView * TaskEditorWidget::view() const
+{
+    return d->taskEditorView;
+}
+
 /*!
  Deletes the object.
  */
@@ -118,15 +123,4 @@ TaskEditorWidget::~TaskEditorWidget()
 void TaskEditorWidget::addNewEntry()
 {
     d->taskEditorView->addNewEntry();
-}
-
-void TaskEditorWidget::setCurrentTask(QString taskId)
-{
-    if (d->taskEditorView->currentTaskId() != taskId) {
-        d->taskEditorView->openTask(taskId);
-
-        d->examinePanel->setCurrentTask(taskId);
-        //d->studyPanel->setCurrentTask(taskId);
-        //d->playPanel->setCurrentTask(taskId);
-    }
 }

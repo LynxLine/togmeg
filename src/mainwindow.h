@@ -17,8 +17,7 @@ Q_OBJECT
 
 public:
     enum ViewMode {
-        CatalogMode = 1,
-        BrowserMode,
+        BrowserMode = 1,
         TaskEditorMode,
         ExamineMode
     };
@@ -35,6 +34,10 @@ public:
     static QFont systemFont();
 
 public slots:
+    void openFile();
+    void saveFile();
+    void saveFileAs();
+
     void importFile();
     void exportFile();
 

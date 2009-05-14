@@ -8,6 +8,8 @@
 #include <QTreeView>
 #include "crammero.h"
 
+class StudyTaskModel;
+
 /*!
  * \class TaskEditorView
  */
@@ -24,10 +26,11 @@ public:
     QString currentTaskId();
     NextItemMode nextItemMode();
 
+    StudyTaskModel * studyTaskModel() const;
+    
 public slots:
     void addNewEntry();
     void removeEntry();
-    void openTask(QString taskId);
     void setNextItemMode(TaskEditorView::NextItemMode);
 
 private slots:
