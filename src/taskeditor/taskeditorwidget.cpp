@@ -30,17 +30,10 @@ TaskEditorWidget::TaskEditorWidget(QWidget * parent)
     layout->setSpacing(0);
     setLayout(layout);
 
-    //task list area
-    QVBoxLayout * taskLayout = new QVBoxLayout;
-    taskLayout->setMargin(0);
-    taskLayout->setSpacing(0);
-    layout->addLayout(taskLayout, 0,0 );
-
     d->taskEditorView = new TaskEditorView(this);
-    taskLayout->addWidget( d->taskEditorView );
+    layout->addWidget( d->taskEditorView );
 
-    QFrame * hline1 = new QFrame;
-    {
+    QFrame * hline1 = new QFrame; {
         QPalette palette = hline1->palette();
         palette.setColor(QPalette::WindowText, "#999999");
         hline1->setPalette(palette);

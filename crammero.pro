@@ -24,6 +24,7 @@ HEADERS += \
     src/studytask.h \
     src/Utils/AppStyles.h \
     src/Utils/PixmapButton.h \
+    src/Utils/ColumnSelectorButton.h \
 
 SOURCES += \
     src/main.cpp \
@@ -32,6 +33,7 @@ SOURCES += \
     src/studytask.cpp \
     src/Utils/AppStyles.cpp \
     src/Utils/PixmapButton.cpp \
+    src/Utils/ColumnSelectorButton.cpp \
 
 UI_DIR = ./build/GeneratedFiles
 MOC_DIR = ./build/GeneratedFiles

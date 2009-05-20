@@ -8,6 +8,9 @@
 #include "taskeditorview.h"
 #include "studytaskmodel.h"
 
+#include "AppStyles.h"
+#include "ColumnSelectorButton.h"
+
 class TaskEditorView::Private
 {
 public:
@@ -26,15 +29,41 @@ TaskEditorView::TaskEditorView(QWidget * parent)
 {
     d = new Private;
     d->nextItemMode = NextItemMode(-1); //undefined;
+
+    setMouseTracking(true);
+    setSortingEnabled(false);
+    header()->setClickable(true);
     setRootIsDecorated(false);
     setAutoFillBackground(true);
     setAlternatingRowColors(true);
-    setFrameStyle(QFrame::NoFrame);
     setAllColumnsShowFocus(true);
     setAttribute(Qt::WA_MacShowFocusRect, false);
-    verticalScrollBar()->setFixedWidth(15);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-    setStyle( &app::cleanStyle );
+#ifdef Q_WS_MAC
+    header()->setFixedHeight(QFontMetrics(AppStyles::systemFont()).height()+3);
+    header()->setStyleSheet(AppStyles::mac_horHeaderStyle);
+    setFrameStyle(QFrame::NoFrame);
+    setContentsMargins(0,0,0,0);
+    setLineWidth(0);
+
+    setStyleSheet("QTreeView { \
+                  border: 0px; \
+                  }");
+#endif
+    
+    //selector button in table
+    QSize size;
+    QStyleOptionHeader opt;
+    size = style()->sizeFromContents(QStyle::CT_HeaderSection, &opt, size, this);        
+#ifdef Q_WS_MAC
+    size.setHeight(QFontMetrics(AppStyles::systemFont()).height()+3);
+#endif
+    
+    ColumnSelectorButton * b_columns = new ColumnSelectorButton(header());
+    b_columns->setFixedHeight(size.height());
+    addScrollBarWidget(b_columns, Qt::AlignTop);
+    
+    //setStyle( &app::cleanStyle );
     setEditTriggers(QAbstractItemView::EditKeyPressed);
     setNextItemMode(QAQAMode);
 

@@ -286,14 +286,14 @@ void MainWindow::createToolBar()
 
     toolBar->addAction( action("app/stop") );
     
+    toolBar->setIconSize(QSize(24, 24));
+    toolBar->setMovable(false);
+    
 #ifdef Q_WS_MAC
     setUnifiedTitleAndToolBarOnMac(true);
-    toolBar->setIconSize(QSize(24,24));
     toolBar->setStyleSheet(AppStyles::mac_toolbarStyle);
 #endif
-    
     toolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-    toolBar->setMovable(false);
 }
 
 /*!
