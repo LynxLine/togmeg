@@ -1,3 +1,6 @@
+//
+// Copyright Petrostreamz 2007
+//
 
 #include <QtGui>
 #include "AppStyles.h"
@@ -9,10 +12,14 @@
 
 const QString AppStyles::mac_toolbarStyle = "\
     QToolBar { margin: 0px; padding: 0px; spacing 3px; border: 0px; } \
-    QToolButton { border: 0px; } \
+    QToolButton { border: 1px solid rgba(0,0,0,0); border-top: 0px; border-bottom: 0px; } \
     QToolButton:checked {\
         background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\
-            stop: 0 rgba(0,0,0,0), stop: 0.5 rgba(0,0,0,50), stop: 1 rgba(0,0,0,0));\
+            stop: 0 rgba(0,0,0,0), stop: 0.5 rgba(0,0,0,39), stop: 1 rgba(0,0,0,0));\
+        border: 1px solid qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\
+            stop: 0 rgba(0,0,0,0), stop: 0.5 rgba(0,0,0,128), stop: 1 rgba(0,0,0,0)); \
+        border-top: 0px; \
+        border-bottom: 0px; \
     }";
 
 const QString AppStyles::win_toolbarStyle = "\

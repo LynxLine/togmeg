@@ -1,40 +1,40 @@
-//
-// Copyright (C) 2007 Oleksandr Yakovlyev <yshurik@gmail.com>
-//
 
-#ifndef F4BUTTON_H
-#define F4BUTTON_H
+#ifndef PIXMAPBUTTON_H
+#define PIXMAPBUTTON_H
 
 #include <QAbstractButton>
 
 /*!
- * \class PixmapButton
+ \class PixmapButton
  */
 class PixmapButton : public QAbstractButton
 {
 Q_OBJECT
 public:
     PixmapButton(QWidget * parent =0);
-    PixmapButton(QString pm, 
-                 QString pmHl,
-                 QString pmDown,
+    PixmapButton(QPixmap pm, 
+                 QPixmap pmHl,
+                 QPixmap pmDown,
                  QWidget * parent =0);
     ~PixmapButton();
 
     QPixmap pixmap();
     QPixmap pixmapHl();
+    QPixmap pixmapOff();
     QPixmap pixmapDown();
 
-    void setPixmap(QPixmap);
-    void setPixmapHl(QPixmap);
-    void setPixmapDown(QPixmap);
-
     bool isHighlighted();
+    virtual QSize sizeHint() const;
+    virtual QSize minimumSizeHint() const;
 
 signals:
     void highlighted(bool);
 
 public slots:
+    void setPixmap(QPixmap);
+    void setPixmapHl(QPixmap);
+    void setPixmapOff(QPixmap);
+    void setPixmapDown(QPixmap);
     void setHighlighted(bool);
 
 protected:
@@ -47,5 +47,4 @@ private:
     Private * d;
 };
 
-#endif
-
+#endif // PIXMAPBUTTON_H

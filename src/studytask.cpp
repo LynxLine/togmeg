@@ -10,7 +10,6 @@
 class StudyTask::Private {
 public:
     QMap<QString, QVariant> properties;
-    DataContainer * dataContainer;
 };
 
 /*!
@@ -25,15 +24,6 @@ StudyTask::StudyTask(QObject * parent)
     setProperty("id", app::uniqueId());
     setProperty("name", tr("New study"));
     setProperty("count", 0);
-}
-
-/*!
- * Creates the object and load datas from container.
- */
-StudyTask::StudyTask(DataContainer * container, QObject * parent)
-:QObject(parent)
-{
-    d = new Private;
 }
 
 /*!

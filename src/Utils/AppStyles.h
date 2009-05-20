@@ -1,7 +1,14 @@
+//
+// Copyright Petrostreamz 2007
+//
 
 #ifndef APPSTYLES_H
 #define APPSTYLES_H
 
+/*
+ \class Streamz
+ \brief Global Application Utility class 
+ */
 class AppStyles {
 public:
 

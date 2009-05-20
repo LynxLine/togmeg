@@ -7,7 +7,6 @@
 
 #include <QObject>
 #include <QVariant>
-class DataContainer;
 
 /*!
  * \class StudyTask
@@ -18,7 +17,6 @@ friend class StudyTaskModel;
 Q_OBJECT
 public:
     StudyTask(QObject * parent = 0);
-    StudyTask(DataContainer * container, QObject * parent = 0);
     virtual ~StudyTask();
 
     QString id();

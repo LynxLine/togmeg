@@ -23,7 +23,7 @@ HEADERS += \
     src/mainwindow.h \
     src/studytask.h \
     src/Utils/AppStyles.h \
-
+    src/Utils/PixmapButton.h \
 
 SOURCES += \
     src/main.cpp \
@@ -31,6 +31,7 @@ SOURCES += \
     src/mainwindow.cpp \
     src/studytask.cpp \
     src/Utils/AppStyles.cpp \
+    src/Utils/PixmapButton.cpp \
 
 UI_DIR = ./build/GeneratedFiles
 MOC_DIR = ./build/GeneratedFiles

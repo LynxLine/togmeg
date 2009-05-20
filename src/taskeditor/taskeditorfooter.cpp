@@ -64,18 +64,18 @@ TaskEditorFooter::TaskEditorFooter(QWidget * parent)
     */
 
     d->b_qqaaMode = new PixmapButton(
-        ":/images/icons/qqaa-order-button-on.png",
-        ":/images/icons/qqaa-order-button-on.png",
-        ":/images/icons/qqaa-order-button-down.png"
+        QPixmap(":/images/icons/qqaa-order-button-on.png"),
+        QPixmap(":/images/icons/qqaa-order-button-on.png"),
+        QPixmap(":/images/icons/qqaa-order-button-down.png")
     );
     
 
     //layout->addWidget( vline3 );
 
     d->b_qaqaMode = new PixmapButton(
-        ":/images/icons/qaqa-order-button.png",
-        ":/images/icons/qaqa-order-button.png",
-        ":/images/icons/qaqa-order-button-down.png"
+        QPixmap(":/images/icons/qaqa-order-button.png"),
+        QPixmap(":/images/icons/qaqa-order-button.png"),
+        QPixmap(":/images/icons/qaqa-order-button-down.png")
     );
 
     layout->addItem(new QSpacerItem(5,10, QSizePolicy::Fixed, QSizePolicy::Minimum));
