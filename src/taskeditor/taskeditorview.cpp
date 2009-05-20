@@ -5,7 +5,6 @@
 #include <QtGui>
 #include "crammero.h"
 #include "mainwindow.h"
-#include "headerview.h"
 #include "taskeditorview.h"
 #include "studytaskmodel.h"
 
@@ -15,7 +14,6 @@ public:
     QPointer<StudyTaskModel> model;
     QPointer<TaskEditorItemDelegate> delegate;
     QPointer<QMenu> contextMenu;
-    QPointer<HeaderView> header;
 
     QColor c1;
     QColor c2;
@@ -28,11 +26,6 @@ TaskEditorView::TaskEditorView(QWidget * parent)
 {
     d = new Private;
     d->nextItemMode = NextItemMode(-1); //undefined;
-    d->header = new HeaderView(Qt::Horizontal, this);
-    d->header->setFont( MainWindow::baseFont(0.95) );
-    d->header->setStretchLastSection(true);
-
-    setHeader( d->header );
     setRootIsDecorated(false);
     setAutoFillBackground(true);
     setAlternatingRowColors(true);

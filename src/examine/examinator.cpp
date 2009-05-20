@@ -11,7 +11,6 @@
 #include "taskcontroller.h"
 #include "playtaskcontroller.h"
 #include "studytaskcontroller.h"
-#include "examinatetaskcontroller.h"
 
 class Examinator::Private {
 public:
@@ -65,7 +64,6 @@ void Examinator::start(Examinator::Mode mode)
 
     if ( mode == Playing ) d->controller = new PlayTaskController( model );
     else if ( mode == Studying ) d->controller = new StudyTaskController( model );
-    else if ( mode == Examinating ) d->controller = new ExaminateTaskController( model );
 
     connect(d->controller, SIGNAL(requestNextQuestion()),
             this, SLOT(prepareNextQuestion()));
@@ -175,15 +173,13 @@ void Examinator::processAnswerEarly()
 
 void Examinator::processAnswer( int usedTime )
 {
-    if ( d->mode != Examinating && 
-         d->task->property("exam_limitExamTime").toBool()) {
+    if (d->task->property("exam_limitExamTime").toBool()) {
         //jump prohress to 100% to indicate finish
         d->timeLine->setCurrentTime( d->timeLine->duration() );
     }
     d->timeLine->stop();
 
     d->controller->processAnswer( usedTime, d->userAnswer );
-
 }
 
 Examinator::State Examinator::state()

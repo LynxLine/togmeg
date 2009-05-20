@@ -46,7 +46,6 @@ public slots:
 
     void runDemo();
     void runStudy();
-    void runExamine();
     void stop();
 
     void quit();

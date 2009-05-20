@@ -9,7 +9,6 @@
 #include "mainwindow.h"
 #include "examinator.h"
 
-#include "slidedwidget.h"
 #include "examinewidget.h"
 #include "taskeditorwidget.h"
 
@@ -41,7 +40,6 @@ public:
     MainWindow::ViewMode viewMode;
     
     //gui
-    SlidedWidget * slide;
     QStackedWidget * stack;
     
     ExamineWidget * examineWidget;
@@ -106,13 +104,9 @@ MainWindow::MainWindow()
 
     setCentralWidget( d->stack );
 
-    d->slide = new SlidedWidget( d->stack );
-    d->stack->addWidget( d->slide );
-
-
-    d->taskEditorWidget = new TaskEditorWidget( d->slide );
-    d->slide->addWidget( d->taskEditorWidget );
-
+    d->taskEditorWidget = new TaskEditorWidget( d->stack );
+    d->stack->addWidget( d->taskEditorWidget );
+    
     d->examineWidget = new ExamineWidget( d->stack );
     d->examinator = d->examineWidget->examinator();
     d->stack->addWidget( d->examineWidget );
@@ -217,10 +211,9 @@ void MainWindow::createActions()
     d->actions["app/export"] = new QAction (tr("&Export..."), this);
     d->actions["app/print"]  = new QAction (tr("&Print..."), this);
 
-	d->actions["app/back" ] = new QAction (QIcon(":/images/icons/Backward.png"), tr("&Backward"), this);
 	d->actions["app/forward" ]  = new QAction (tr("&Forward"), this);
 
-	d->actions["app/new"       ] = new QAction (QIcon(":/images/icons/AddTableRow.png"), tr("&New Study"), this);
+	d->actions["app/new"] = new QAction (QIcon(":/images/icons/Add.png"), tr("&Add Row"), this);
 
 	d->actions["app/undo" ] = new QAction (tr("&Undo"), this);
 	d->actions["app/redo" ] = new QAction (tr("&Redo"), this);
@@ -229,8 +222,7 @@ void MainWindow::createActions()
     d->actions["app/paste"] = new QAction (tr("&Paste"), this);
 
     d->actions["app/demo" ] = new QAction (QIcon(":/images/icons/Play.png"   ), tr("&Play"), this);
-    d->actions["app/study"] = new QAction (QIcon(":/images/icons/study-32x32.png"  ), tr("&Study"), this);
-    d->actions["app/exam" ] = new QAction (QIcon(":/images/icons/examine-32x32.png"), tr("&Examinate"), this);
+    d->actions["app/study"] = new QAction (QIcon(":/images/icons/Record.png" ), tr("&Study"), this);
     d->actions["app/stop" ] = new QAction (QIcon(":/images/icons/Stop.png"   ), tr("&Stop"), this);
 
     d->actions["app/about"]         = new QAction (tr("&About"), this);
@@ -241,7 +233,6 @@ void MainWindow::createActions()
     d->actionGroups["examine"]->setExclusive(false);
     d->actionGroups["examine"]->addAction( d->actions["app/demo" ] );
     d->actionGroups["examine"]->addAction( d->actions["app/study" ] );
-    d->actionGroups["examine"]->addAction( d->actions["app/exam" ] );
 }
 
 /*!
@@ -263,7 +254,6 @@ void MainWindow::createMenuBar()
 	menu = menuBar()->addMenu(tr("&Run"));
 	menu->addAction( action("app/demo") );
 	menu->addAction( action("app/study") );
-	menu->addAction( action("app/exam") );
 	menu->addSeparator();
 	menu->addAction( action("app/stop") );
 
@@ -280,12 +270,6 @@ void MainWindow::createToolBar()
     QWidget * space1 = new QWidget;
     space1->setFixedSize(5,10);
     toolBar->addWidget(space1);
-
-	toolBar->addAction( action("app/back") );
-
-    QWidget * space2 = new QWidget;
-    space2->setFixedSize(20,10);
-    toolBar->addWidget(space2);
 
 	toolBar->addAction( action("app/new") );
 
@@ -326,7 +310,6 @@ void MainWindow::createShortcuts()
     action("app/copy")       ->setShortcut(tr("Ctrl+C"));
     action("app/paste")      ->setShortcut(tr("Ctrl+V"));
     action("app/help")       ->setShortcut(tr("F1"));
-    action("app/back")       ->setShortcut(QKeySequence(Qt::ALT+Qt::Key_Left ));
 }
 
 /*!
@@ -347,13 +330,9 @@ void MainWindow::connectActions()
     connect( action("app/import"), SIGNAL(triggered()), this, SLOT(importFile()));
     connect( action("app/export"), SIGNAL(triggered()), this, SLOT(exportFile()));
 
-    connect( action("app/back"),   SIGNAL(triggered()), this, SLOT(previousWindow()));
-
     connect( action("app/demo" ), SIGNAL(triggered()), this, SLOT(runDemo()));
     connect( action("app/study"), SIGNAL(triggered()), this, SLOT(runStudy()));
-    connect( action("app/exam" ), SIGNAL(triggered()), this, SLOT(runExamine()));
     connect( action("app/stop" ), SIGNAL(triggered()), this, SLOT(stop()));
-
 }
 
 /*!
@@ -410,12 +389,6 @@ void MainWindow::runStudy()
     setViewMode(MainWindow::ExamineMode);
 }
 
-void MainWindow::runExamine()
-{
-    d->examinator->start( Examinator::Examinating );
-    setViewMode(MainWindow::ExamineMode);
-}
-
 void MainWindow::stop()
 {
     if ( d->examinator->state() != Examinator::Stopped ) {
@@ -459,12 +432,9 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
     d->viewMode = m;
     if (m == MainWindow::TaskEditorMode) {
         //first switch stack
-        if ( d->stack->currentWidget() != d->slide ) {
-            d->stack->setCurrentWidget( d->slide );
+        if ( d->stack->currentWidget() != d->taskEditorWidget ) {
+            d->stack->setCurrentWidget( d->taskEditorWidget );
         }
-
-        //second switch slide
-        d->slide->setCurrentWidget( d->taskEditorWidget );
     }
     else if (m == MainWindow::ExamineMode) {
         //just switch stack
@@ -472,22 +442,16 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
     }
     else if (m == MainWindow::BrowserMode) {
         //just switch stack
-        if ( d->stack->currentWidget() != d->slide ) {
-            d->stack->setCurrentWidget( d->slide );
+        if ( d->stack->currentWidget() != d->taskEditorWidget ) {
+            d->stack->setCurrentWidget( d->taskEditorWidget );
         }
 
-        if ( d->slide->currentWidget() == d->taskEditorWidget ) {
-            d->viewMode = MainWindow::TaskEditorMode;
-        }
+        d->viewMode = MainWindow::TaskEditorMode;
     }
-
-    action("app/back" )->setEnabled( d->viewMode==MainWindow::TaskEditorMode );
-
 
     actionGroup("examine")->setEnabled( d->examinator->entryCount() >0 );
     action("app/demo" )->setEnabled( d->viewMode!=MainWindow::ExamineMode );
     action("app/study")->setEnabled( d->viewMode!=MainWindow::ExamineMode );
-    action("app/exam" )->setEnabled( d->viewMode!=MainWindow::ExamineMode );
     action("app/stop" )->setEnabled( d->viewMode==MainWindow::ExamineMode );
 
     emit viewModeChanged( d->viewMode );

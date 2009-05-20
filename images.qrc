@@ -3,23 +3,10 @@
     <file>images/crammero.ico</file>
 
     <file>images/icons/Play.png</file>
-    <file>images/icons/study-32x32.png</file>
     <file>images/icons/Stop.png</file>
-
-    <file>images/icons/AddTableRow.png</file>
+    <file>images/icons/Add.png</file>
     <file>images/icons/Remove.png</file>
-
-    <file>images/icons/Backward.png</file>
-
-    <file>images/icons/add-button-30x22.png</file>
-    <file>images/icons/add-button-pressed-30x22.png</file>
-    <file>images/icons/remove-button-30x22.png</file>
-    <file>images/icons/remove-button-pressed-30x22.png</file>
-    <file>images/icons/bg-bottom-category.png</file>
-
-    <file>images/icons/library-icon-20x20.png</file>
-    <file>images/icons/category-icon-20x20.png</file>
-
+    <file>images/icons/Record.png</file>
     <file>images/icons/qaqa-order-button.png</file>
     <file>images/icons/qaqa-order-button-on.png</file>
     <file>images/icons/qaqa-order-button-down.png</file>
@@ -28,18 +15,9 @@
     <file>images/icons/qqaa-order-button-down.png</file>
 
     <file>images/bg-question-mark.png</file>
-    <file>images/bg-header-view-horizontal.png</file>
-
-    <file>images/tab.png</file>
-    <file>images/tab-on.png</file>
-    <file>images/bg-tab.png</file>
-
     <file>images/button-play.png</file>
     <file>images/button-play-pressed.png</file>
     <file>images/button-pause.png</file>
     <file>images/button-pause-pressed.png</file>
-    <file>images/button-rename-study.png</file>
-    <file>images/button-rename-study-on.png</file>
-
 </qresource>
 </RCC>

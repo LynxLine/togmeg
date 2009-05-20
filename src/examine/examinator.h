@@ -17,7 +17,6 @@ public:
     enum Mode {
         Playing = 0,
         Studying,
-        Examinating,
     };
     enum State {
         Processing = 0,

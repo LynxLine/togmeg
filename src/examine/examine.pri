@@ -6,7 +6,6 @@ HEADERS += \
     src/examine/taskcontroller.h \
     src/examine/playtaskcontroller.h \
     src/examine/studytaskcontroller.h \
-    src/examine/examinatetaskcontroller.h \
     \
     src/examine/examinewidget.h \
     src/examine/questionwidget.h \
@@ -18,7 +17,6 @@ SOURCES += \
     src/examine/taskcontroller.cpp \
     src/examine/playtaskcontroller.cpp \
     src/examine/studytaskcontroller.cpp \
-    src/examine/examinatetaskcontroller.cpp \
     \
     src/examine/examinewidget.cpp \
     src/examine/questionwidget.cpp \

@@ -3,27 +3,18 @@
 //
 
 #include <QtGui>
-#include "tabbar.h"
 #include "mainwindow.h"
 #include "pixmapbutton.h"
 #include "gradientwidget.h"
 #include "taskeditorview.h"
 #include "taskeditorfooter.h"
 #include "taskeditorwidget.h"
-#include "playpropertieswidget.h"
-#include "studypropertieswidget.h"
-#include "exampropertieswidget.h"
 
 class TaskEditorWidget::Private
 {
 public:
     TaskEditorView * taskEditorView;
     TaskEditorFooter * taskEditorFooter;
-
-    //GradientWidget * generalPanel;
-    ExamPropertiesWidget * examinePanel;
-    //StudyPropertiesWidget * studyPanel;
-    //PlayPropertiesWidget * playPanel;
 };
 
 /*!
@@ -66,43 +57,6 @@ TaskEditorWidget::TaskEditorWidget(QWidget * parent)
     d->taskEditorFooter->setNextItemMode( d->taskEditorView->nextItemMode() );
     connect(d->taskEditorFooter, SIGNAL(nextItemModeChanged(TaskEditorView::NextItemMode)),
             d->taskEditorView, SLOT(setNextItemMode(TaskEditorView::NextItemMode)));
-
-    QFrame * vline = new QFrame;
-    {
-        QPalette palette = vline->palette();
-        palette.setColor(QPalette::WindowText, "#999999");
-        vline->setPalette(palette);
-        vline->setFrameStyle(QFrame::VLine | QFrame::Plain);
-        vline->setFixedWidth(1);
-        vline->setLineWidth(1);
-    }
-    layout->addWidget( vline, 0,1, 3,1);
-
-    //properties layout
-    QVBoxLayout * propertiesAreaLayout = new QVBoxLayout;
-    propertiesAreaLayout->setMargin(0);
-    propertiesAreaLayout->setSpacing(0);
-    layout->addLayout( propertiesAreaLayout, 0,2, 3,1 );
-
-    TabBar * tab = new TabBar;
-    tab->setFixedWidth(250);
-    tab->setFont(MainWindow::baseFont(0.90, QFont::Bold));
-    propertiesAreaLayout->addWidget( tab );
-
-    QStackedWidget * stack = new QStackedWidget;
-    stack->setFixedWidth(250);
-    propertiesAreaLayout->addWidget( stack );
-
-    connect(tab, SIGNAL(currentChanged(int)),
-            stack, SLOT(setCurrentIndex(int)));
-
-    d->examinePanel = new ExamPropertiesWidget;
-    //d->studyPanel   = new StudyPropertiesWidget;
-    //d->playPanel    = new PlayPropertiesWidget;
-
-    //stack->insertWidget( tab->addTab( tr("Play")),    d->playPanel    );
-    //stack->insertWidget( tab->addTab( tr("Study")),   d->studyPanel   );
-    stack->insertWidget( tab->addTab( tr("Exam")),    d->examinePanel );
 
     setFocusProxy( d->taskEditorView );
 }
