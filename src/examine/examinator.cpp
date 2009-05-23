@@ -5,7 +5,6 @@
 #include <QtCore>
 #include "examinator.h"
 
-#include "studytask.h"
 #include "studytaskmodel.h"
 
 #include "taskcontroller.h"
@@ -14,24 +13,25 @@
 
 class Examinator::Private {
 public:
-    StudyTask * task;
     QTimeLine * timeLine;
 
     Mode mode;
     State state;
     QString userAnswer;
+    
+    QPointer<StudyTaskModel> model;
     QPointer<TaskController> controller;
 };
 
 /*!
  * Creates the object.
  */
-Examinator::Examinator(QObject * parent)
-:QObject(parent)
+Examinator::Examinator(StudyTaskModel * model)
+:QObject(model)
 {
     d = new Private;
-   
-    d->task = 0L;
+    d->model = model;
+
     d->timeLine = new QTimeLine(10000, this);
     d->timeLine->setCurveShape(QTimeLine::LinearCurve);
     d->timeLine->setFrameRange(0,100);
@@ -56,14 +56,10 @@ Examinator::~Examinator()
 
 void Examinator::start(Examinator::Mode mode)
 {
-    Q_ASSERT( d->task );
-
-    StudyTaskModel * model = StudyTaskModel::instance();
-
     d->mode = mode;
 
-    if ( mode == Playing ) d->controller = new PlayTaskController( model );
-    else if ( mode == Studying ) d->controller = new StudyTaskController( model );
+    if ( mode == Playing ) d->controller = new PlayTaskController( d->model );
+    else if ( mode == Studying ) d->controller = new StudyTaskController( d->model );
 
     connect(d->controller, SIGNAL(requestNextQuestion()),
             this, SLOT(prepareNextQuestion()));
@@ -75,7 +71,6 @@ void Examinator::start(Examinator::Mode mode)
             d->controller, SLOT(collectUserEvent(int, int)));
 
     //update widget
-    emit taskNameChanged( d->task->name() );
     emit modeChanged( mode );
 
     setState(Processing);
@@ -84,8 +79,6 @@ void Examinator::start(Examinator::Mode mode)
 
 void Examinator::stop()
 {
-    Q_ASSERT( d->task );
-
     setState(Stopped);
     delete d->controller;
 
@@ -97,40 +90,19 @@ void Examinator::stop()
 
 void Examinator::continuePlay()
 {
-    Q_ASSERT( d->task );
-
     setState(Processing);
     d->timeLine->start();
 }
 
 void Examinator::pause()
 {
-    Q_ASSERT( d->task );
-
     setState(Paused);
     d->timeLine->stop();
 }
 
-QString Examinator::currentTaskId()
-{
-    if ( !d->task )
-        return QString::null;
-
-    return d->task->id();
-}
-
-QString Examinator::currentTaskName()
-{
-    if ( !d->task )
-        return QString::null;
-
-    return d->task->name();
-}
-
 int Examinator::entryCount()
 {
-    if ( !d->task ) return 0;
-    return d->task->entryCount();
+    return d->model->rowCount();
 }
 
 void Examinator::setEntryCount(int count)
@@ -173,12 +145,7 @@ void Examinator::processAnswerEarly()
 
 void Examinator::processAnswer( int usedTime )
 {
-    if (d->task->property("exam_limitExamTime").toBool()) {
-        //jump prohress to 100% to indicate finish
-        d->timeLine->setCurrentTime( d->timeLine->duration() );
-    }
     d->timeLine->stop();
-
     d->controller->processAnswer( usedTime, d->userAnswer );
 }
 

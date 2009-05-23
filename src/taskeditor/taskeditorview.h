@@ -23,7 +23,6 @@ public:
     };
     TaskEditorView(QWidget * parent = 0);
     virtual ~TaskEditorView();
-    QString currentTaskId();
     NextItemMode nextItemMode();
 
     StudyTaskModel * studyTaskModel() const;

@@ -26,7 +26,6 @@ public:
         ColumnCount
     };
     StudyTaskModel(QObject * parent = 0L);
-    static StudyTaskModel * instance();
     virtual ~StudyTaskModel();
     QString taskId();
 

@@ -6,6 +6,8 @@
 #include "mainwindow.h"
 #include "timelinewidget.h"
 
+#include "AppStyles.h"
+
 class TimeLineWidget::Private {
 public:
     QLabel * l_reaction;
@@ -24,7 +26,7 @@ TimeLineWidget::TimeLineWidget(QWidget * parent)
 {
     d = new Private;
 
-    setFont( MainWindow::baseFont(0.95) );
+    setFont(AppStyles::systemFont());
 
     QGridLayout * layout = new QGridLayout;
     layout->setSpacing(5);

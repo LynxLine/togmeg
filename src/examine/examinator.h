@@ -6,6 +6,7 @@
 #define EXAMINATOR_H
 
 #include <QObject>
+class StudyTaskModel;
 
 /*!
  * \class Examinator
@@ -26,12 +27,10 @@ public:
         IndicatingMismatch,
     };
 
-    Examinator(QObject * parent = 0);
+    Examinator(StudyTaskModel * model);
     virtual ~Examinator();
 
     State state();
-    QString currentTaskId();
-    QString currentTaskName();
     int entryCount();
 
 public slots:

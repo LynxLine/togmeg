@@ -3,7 +3,6 @@
 //
 
 #include <QtGui>
-#include "studytask.h"
 #include "mainwindow.h"
 #include "pixmapbutton.h"
 #include "taskeditorfooter.h"
@@ -41,37 +40,12 @@ TaskEditorFooter::TaskEditorFooter(QWidget * parent)
     layout->setMargin(0);
     setLayout(layout);
 
-    /*
-    QFrame * vline2 = new QFrame;
-    {
-        QPalette palette = vline2->palette();
-        palette.setColor(QPalette::WindowText, "#999999");
-        vline2->setPalette(palette);
-        vline2->setFrameStyle(QFrame::VLine | QFrame::Plain);
-        vline2->setFixedWidth(1);
-        vline2->setLineWidth(1);
-    }
-
-    QFrame * vline3 = new QFrame;
-    {
-        QPalette palette = vline3->palette();
-        palette.setColor(QPalette::WindowText, "#999999");
-        vline3->setPalette(palette);
-        vline3->setFrameStyle(QFrame::VLine | QFrame::Plain);
-        vline3->setFixedWidth(1);
-        vline3->setLineWidth(1);
-    }
-    */
-
     d->b_qqaaMode = new PixmapButton(
         QPixmap(":/images/icons/qqaa-order-button-on.png"),
         QPixmap(":/images/icons/qqaa-order-button-on.png"),
         QPixmap(":/images/icons/qqaa-order-button-down.png")
     );
     
-
-    //layout->addWidget( vline3 );
-
     d->b_qaqaMode = new PixmapButton(
         QPixmap(":/images/icons/qaqa-order-button.png"),
         QPixmap(":/images/icons/qaqa-order-button.png"),
@@ -83,18 +57,8 @@ TaskEditorFooter::TaskEditorFooter(QWidget * parent)
     layout->addWidget( d->b_qaqaMode );
     layout->addItem(new QSpacerItem(10,10, QSizePolicy::MinimumExpanding, QSizePolicy::Minimum));
 
-    //layout->addWidget( vline2 );
-
-
     connect(d->b_qaqaMode, SIGNAL(pressed()), this, SLOT(toQAQAMode()));
     connect(d->b_qqaaMode, SIGNAL(pressed()), this, SLOT(toQQAAMode()));
-
-    /*
-    d->l_message = new QLabel;
-    d->l_message->setAlignment( Qt::AlignCenter );
-    d->l_message->setFont( MainWindow::baseFont(0.95) );
-    layout->addWidget( d->l_message );
-    */
 
     QPalette palette = this->palette();
     palette.setColor(QPalette::WindowText, "#505050");
@@ -142,30 +106,4 @@ void TaskEditorFooter::setNextItemMode(TaskEditorView::NextItemMode m)
 
     d->nextItemMode = m;
     emit nextItemModeChanged(m);
-}
-
-void TaskEditorFooter::setStudyCount(int count)
-{
-    d->studyCount = count;
-    updateMessageLabel();
-}
-
-void TaskEditorFooter::updateMessageLabel()
-{
-    /*
-    if ( d->currentTaskName.isEmpty() ) {
-        d->l_message->setText(
-            tr("Studies: %1")
-                .arg( d->studyCount )
-        );
-    }
-    else {
-        d->l_message->setText(
-            tr("Studies: %1, Current: %2, %3 Questions")
-                .arg( d->studyCount )
-                .arg( d->currentTaskName )
-                .arg( d->currentTaskEntryCount )
-        );
-    }
-    */
 }

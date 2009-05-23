@@ -28,10 +28,11 @@ public:
 /*!
  Crestes ExamineWidget
  */
-ExamineWidget::ExamineWidget(QWidget * parent)
+ExamineWidget::ExamineWidget(Examinator * examinator, QWidget * parent)
 :QWidget(parent)
 {
     d = new Private;
+    d->examinator = examinator;
 
     QVBoxLayout * layout = new QVBoxLayout;
     layout->setMargin(0);
@@ -114,9 +115,6 @@ ExamineWidget::ExamineWidget(QWidget * parent)
     footerLayout->setColumnStretch(4,70);
     footerLayout->setColumnStretch(5,05);
 
-    //examinator
-    d->examinator = new Examinator(this);
-
     connect(d->examinator, SIGNAL(tick(int)),
             d->progress,     SLOT(setValue(int)));
     connect(d->examinator, SIGNAL(taskNameChanged(QString)),
@@ -163,11 +161,6 @@ void ExamineWidget::resizeEvent(QResizeEvent * re)
     palette.setBrush(QPalette::Window, QBrush(linearGradient));
     setAutoFillBackground(true);
     setPalette(palette);
-}
-
-Examinator * ExamineWidget::examinator()
-{
-    return d->examinator;
 }
 
 void ExamineWidget::setTaskName(QString name)

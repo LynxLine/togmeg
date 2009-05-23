@@ -19,14 +19,12 @@ public:
     virtual ~TaskEditorFooter();
 
 public slots:
-    void setStudyCount(int);
     void setNextItemMode(TaskEditorView::NextItemMode);
 
 signals:
     void nextItemModeChanged(TaskEditorView::NextItemMode);
 
 private slots:
-    void updateMessageLabel();
     void toQAQAMode();
     void toQQAAMode();
 

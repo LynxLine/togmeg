@@ -6,7 +6,6 @@
 #include <QtCore>
 
 #include "crammero.h"
-#include "studytask.h"
 #include "studytaskmodel.h"
 
 class StudyTaskModel::Private
@@ -14,10 +13,7 @@ class StudyTaskModel::Private
 public:
     static StudyTaskModel * instance;
     QList<StudyDataEntry> entries;
-    QString taskId;
 };
-
-StudyTaskModel * StudyTaskModel::Private::instance = 0L;
 
 /*!
  Crestes StudyTaskModel
@@ -26,12 +22,7 @@ StudyTaskModel::StudyTaskModel(QObject * parent)
 :QAbstractListModel(parent)
 {
     d = new Private;
-    Private::instance = this;
-}
-
-StudyTaskModel * StudyTaskModel::instance()
-{
-    return Private::instance;
+    addNewEntry();
 }
 
 /*!
@@ -43,17 +34,11 @@ StudyTaskModel::~StudyTaskModel()
     delete d;
 }
 
-QString StudyTaskModel::taskId()
-{
-    return d->taskId;
-}
-
 void StudyTaskModel::loadFile(QString filePath)
 {
     qDebug() << "StudyTaskModel::loadFile()," << filePath;
     
     d->entries.clear();
-    d->taskId.clear();
     
     disconnect(this, SIGNAL(rowCountChanged(int)),0,0);
     

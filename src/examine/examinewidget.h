@@ -13,10 +13,8 @@ class ExamineWidget : public QWidget
 Q_OBJECT
 
 public:
-    ExamineWidget(QWidget * parent = 0L);
+    ExamineWidget(Examinator *, QWidget * parent);
     virtual ~ExamineWidget();
-
-    Examinator * examinator();
 
 protected:
     virtual void resizeEvent(QResizeEvent *);

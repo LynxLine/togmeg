@@ -15,12 +15,6 @@ int main( int argc, char ** argv )
     initResources();
     QApplication a(argc, argv );
 
-    QPixmap pmSplash(":/images/Splash.png");
-    QSplashScreen * splash = new QSplashScreen(pmSplash);
-    splash->show();
-
-    a.connect(&a, SIGNAL(lastWindowClosed()), 
-              &a,   SLOT(quit()) );
 
 #ifndef Q_WS_MAC
     QIcon icon(":/images/crammeroicon.png");
@@ -36,30 +30,21 @@ int main( int argc, char ** argv )
     //register types
     qRegisterMetaType<QModelIndex>("QModelIndex");
 
-    // prepare storage
-    QDir storageDir;
-    storageDir.mkpath(app::storagePath());
-
     //main window
-    MainWindow * mw = new MainWindow;
+    MainWindow mw;
 
     QSettings s;
     bool maximized = s.value("geometry/maximized", false).toBool();
     bool fullscreen = s.value("geometry/fullscreen", false).toBool();
 
-    if (fullscreen)     mw->showFullScreen();
-    else if (maximized) mw->showMaximized();
-    else                mw->show();
+    if (fullscreen)     mw.showFullScreen();
+    else if (maximized) mw.showMaximized();
+    else                mw.show();
 
-    splash->finish(mw);
-    delete splash;
+    a.connect(&a, SIGNAL(lastWindowClosed()), 
+              &a,   SLOT(quit()) );
 
-    int result = a.exec();
-
-    // remove all widgets
-    delete mw;
-
-    return result;
+    return a.exec();
 }
 
 void initResources()

@@ -63,7 +63,6 @@ TaskEditorView::TaskEditorView(QWidget * parent)
     b_columns->setFixedHeight(size.height());
     addScrollBarWidget(b_columns, Qt::AlignTop);
     
-    //setStyle( &app::cleanStyle );
     setEditTriggers(QAbstractItemView::EditKeyPressed);
     setNextItemMode(QAQAMode);
 
@@ -119,11 +118,6 @@ void TaskEditorView::activateContextMenu(const QPoint & pos)
     if ( !index.isValid() ) return;
 
     d->contextMenu->popup( viewport()->mapToGlobal(pos) );
-}
-
-QString TaskEditorView::currentTaskId()
-{
-    return d->model->taskId();
 }
 
 void TaskEditorView::toFirstRow()

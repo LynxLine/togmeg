@@ -39,15 +39,13 @@ public:
     QMap<QString, QAction *> actions;
     MainWindow::ViewMode viewMode;
     
+    QPointer<StudyTaskModel> model;
+    QPointer<Examinator> examinator;
+    
     //gui
     QStackedWidget * stack;
-    
     ExamineWidget * examineWidget;
     TaskEditorWidget * taskEditorWidget;
-
-    Examinator * examinator;
-
-    QSizeGrip * sizeGrip;
 };
 
 MainWindow * MainWindow::Private::instance = 0L;
@@ -60,6 +58,9 @@ MainWindow::MainWindow()
 {
     d = new Private(this);
 
+    d->model = new StudyTaskModel(this);
+    d->examinator = new Examinator(d->model);
+    
     //setup palette
     {
         QPalette palette = this->palette();
@@ -93,38 +94,20 @@ MainWindow::MainWindow()
 	statusBar()->hide();
 
     d->stack = new QStackedWidget(this);
-
-#ifdef Q_WS_WIN
-    d->stack->setFont( baseFont() );
-#endif
-
-#ifdef Q_WS_MAC
-    d->stack->setFont( baseFont(0.97) );
-#endif
-
     setCentralWidget( d->stack );
 
     d->taskEditorWidget = new TaskEditorWidget( d->stack );
     d->stack->addWidget( d->taskEditorWidget );
     
-    d->examineWidget = new ExamineWidget( d->stack );
-    d->examinator = d->examineWidget->examinator();
+    d->examineWidget = new ExamineWidget(d->examinator, d->stack );
     d->stack->addWidget( d->examineWidget );
 
     setViewMode(MainWindow::TaskEditorMode);
 
     connect(d->examinator, SIGNAL(examinatorEnabled(bool)),
-            actionGroup("examine"), SLOT(setEnabled(bool)));
+            actionGroup("Play"), SLOT(setEnabled(bool)));
     connect(d->examinator, SIGNAL(stopped()),
             this, SLOT(stop()));
-
-    d->sizeGrip = new QSizeGrip(this);
-    d->sizeGrip->raise();
-#ifdef Q_WS_MAC
-    QPalette palette = d->sizeGrip->palette();
-    palette.setColor(QPalette::Window, QColor(0,0,0,0));
-    d->sizeGrip->setPalette( palette );
-#endif
 }
 
 /*!
@@ -201,38 +184,26 @@ QString MainWindow::release() const
  */
 void MainWindow::createActions()
 {
-	d->actions["app/Open"]   = new QAction (tr("Open"), this);
-	d->actions["app/Save"]   = new QAction (tr("Save"), this);
-	d->actions["app/SaveAs"] = new QAction (tr("Save As"), this);
+	d->actions["Open"]   = new QAction (tr("Open..."), this);
+	d->actions["Close"]  = new QAction (tr("Close"), this);
+	d->actions["Save"]   = new QAction (tr("Save"), this);
+	d->actions["SaveAs"] = new QAction (tr("Save As..."), this);
+	d->actions["Quit"]   = new QAction (tr("E&xit"), this);
 
-    
-	d->actions["app/exit"]   = new QAction (tr("E&xit"), this);
-	d->actions["app/import"] = new QAction (tr("&Import..."), this);
-    d->actions["app/export"] = new QAction (tr("&Export..."), this);
-    d->actions["app/print"]  = new QAction (tr("&Print..."), this);
+	d->actions["Add"] = new QAction (QIcon(":/images/icons/Add.png"), tr("&Add Row"), this);
 
-	d->actions["app/forward" ]  = new QAction (tr("&Forward"), this);
+    d->actions["Play" ] = new QAction (QIcon(":/images/icons/Play.png"   ), tr("&Play"), this);
+    d->actions["Study"] = new QAction (QIcon(":/images/icons/Record.png" ), tr("&Study"), this);
+    d->actions["Stop" ] = new QAction (QIcon(":/images/icons/Stop.png"   ), tr("&Stop"), this);
 
-	d->actions["app/new"] = new QAction (QIcon(":/images/icons/Add.png"), tr("&Add Row"), this);
+    d->actions["About"]         = new QAction (tr("&About"), this);
+    d->actions["Help"]          = new QAction (tr("Crammero &Help"), this);
+    d->actions["CheckUpdates"] = new QAction (tr("Check for Updates Now"), this);
 
-	d->actions["app/undo" ] = new QAction (tr("&Undo"), this);
-	d->actions["app/redo" ] = new QAction (tr("&Redo"), this);
-    d->actions["app/cut"  ] = new QAction (tr("Cu&t"), this);
-    d->actions["app/copy" ] = new QAction (tr("&Copy"), this);
-    d->actions["app/paste"] = new QAction (tr("&Paste"), this);
-
-    d->actions["app/demo" ] = new QAction (QIcon(":/images/icons/Play.png"   ), tr("&Play"), this);
-    d->actions["app/study"] = new QAction (QIcon(":/images/icons/Record.png" ), tr("&Study"), this);
-    d->actions["app/stop" ] = new QAction (QIcon(":/images/icons/Stop.png"   ), tr("&Stop"), this);
-
-    d->actions["app/about"]         = new QAction (tr("&About"), this);
-    d->actions["app/help"]          = new QAction (tr("Crammero &Help"), this);
-    d->actions["app/check_updates"] = new QAction (tr("Check for Updates Now"), this);
-
-    d->actionGroups["examine"] = new QActionGroup(this);
-    d->actionGroups["examine"]->setExclusive(false);
-    d->actionGroups["examine"]->addAction( d->actions["app/demo" ] );
-    d->actionGroups["examine"]->addAction( d->actions["app/study" ] );
+    d->actionGroups["Play"] = new QActionGroup(this);
+    d->actionGroups["Play"]->setExclusive(false);
+    d->actionGroups["Play"]->addAction( d->actions["Play" ] );
+    d->actionGroups["Play"]->addAction( d->actions["Study" ] );
 }
 
 /*!
@@ -242,49 +213,36 @@ void MainWindow::createMenuBar()
 {
     QMenu * menu;
 	menu = menuBar()->addMenu(tr("&File"));
-	menu->addAction( action("app/Open") );
-	menu->addAction( action("app/Save") );
-	menu->addAction( action("app/SaveAs") );
+	menu->addAction( action("Open") );
 	menu->addSeparator();
-	menu->addAction( action("app/exit") );
+	menu->addAction( action("Close") );
+	menu->addAction( action("Save") );
+	menu->addAction( action("SaveAs") );
+	menu->addSeparator();
+	menu->addAction( action("Quit") );
 
 	menu = menuBar()->addMenu(tr("&Edit"));
-    menu->addAction( action("app/new") );
+    menu->addAction( action("Add") );
 
 	menu = menuBar()->addMenu(tr("&Run"));
-	menu->addAction( action("app/demo") );
-	menu->addAction( action("app/study") );
+	menu->addAction( action("Play") );
+	menu->addAction( action("Study") );
 	menu->addSeparator();
-	menu->addAction( action("app/stop") );
+	menu->addAction( action("Stop") );
 
     menu = menuBar()->addMenu(tr("&Help"));
-	menu->addAction( action("app/about") );
+	menu->addAction( action("About") );
     menu->addSeparator();
-    menu->addAction( action("app/check_updates") );
+    menu->addAction( action("CheckUpdates") );
 }
 
 void MainWindow::createToolBar()
 {
 	QToolBar * toolBar = addToolBar(tr("Toolbar"));
-
-    QWidget * space1 = new QWidget;
-    space1->setFixedSize(5,10);
-    toolBar->addWidget(space1);
-
-	toolBar->addAction( action("app/new") );
-
-    QWidget * space3 = new QWidget;
-    space3->setFixedSize(20,10);
-    toolBar->addWidget(space3);
-
-	toolBar->addAction( action("app/demo") );
-	toolBar->addAction( action("app/study") );
-
-    QWidget * space4 = new QWidget;
-    space4->setFixedSize(10,10);
-    toolBar->addWidget(space4);
-
-    toolBar->addAction( action("app/stop") );
+	toolBar->addAction( action("Add") );
+	toolBar->addAction( action("Play") );
+	toolBar->addAction( action("Study") );
+    toolBar->addAction( action("Stop") );
     
     toolBar->setIconSize(QSize(24, 24));
     toolBar->setMovable(false);
@@ -302,14 +260,12 @@ void MainWindow::createToolBar()
 void MainWindow::createShortcuts()
 {
     // shortcuts
-    action("app/print")      ->setShortcut(tr("Ctrl+P"));
-    action("app/exit")       ->setShortcut(tr("Ctrl+Q"));
-    action("app/undo")       ->setShortcut(tr("Ctrl+U"));
-    action("app/redo")       ->setShortcut(tr("Ctrl+Y"));
-    action("app/cut")        ->setShortcut(tr("Ctrl+X"));
-    action("app/copy")       ->setShortcut(tr("Ctrl+C"));
-    action("app/paste")      ->setShortcut(tr("Ctrl+V"));
-    action("app/help")       ->setShortcut(tr("F1"));
+    action("Open")       ->setShortcut(tr("Ctrl+O"));
+    action("Close")      ->setShortcut(tr("Ctrl+W"));
+    action("Save")       ->setShortcut(tr("Ctrl+S"));
+    action("SaveAs")     ->setShortcut(tr("Shift+Ctrl+S"));
+    action("Quit")       ->setShortcut(tr("Ctrl+Q"));
+    action("Help")   ->setShortcut(tr("F1"));
 }
 
 /*!
@@ -317,52 +273,20 @@ void MainWindow::createShortcuts()
  */
 void MainWindow::connectActions()
 {
-    connect( action("app/Open"),   SIGNAL(triggered()), this, SLOT(openFile()));
-    connect( action("app/Save"),   SIGNAL(triggered()), this, SLOT(saveFile()));
-    connect( action("app/SaveAs"), SIGNAL(triggered()), this, SLOT(saveFileAs()));
+    connect( action("Open"),   SIGNAL(triggered()), this, SLOT(openFile()));
+    connect( action("Close"),  SIGNAL(triggered()), this, SLOT(close()));
+    connect( action("Save"),   SIGNAL(triggered()), this, SLOT(saveFile()));
+    connect( action("SaveAs"), SIGNAL(triggered()), this, SLOT(saveFileAs()));
 
-    connect( action("app/exit"),   SIGNAL(triggered()), this, SLOT(quit()));
-    connect( action("app/help"),   SIGNAL(triggered()), this, SLOT(openHelp()));
-    connect( action("app/about"),  SIGNAL(triggered()), this, SLOT(openAbout()));
+    connect( action("Quit"),   SIGNAL(triggered()), this, SLOT(quit()));
+    connect( action("Help"),   SIGNAL(triggered()), this, SLOT(openHelp()));
+    connect( action("About"),  SIGNAL(triggered()), this, SLOT(openAbout()));
 
-    connect( action("app/new"),    SIGNAL(triggered()), this, SLOT(newEntry()));
+    connect( action("Add"),    SIGNAL(triggered()), this, SLOT(newEntry()));
 
-    connect( action("app/import"), SIGNAL(triggered()), this, SLOT(importFile()));
-    connect( action("app/export"), SIGNAL(triggered()), this, SLOT(exportFile()));
-
-    connect( action("app/demo" ), SIGNAL(triggered()), this, SLOT(runDemo()));
-    connect( action("app/study"), SIGNAL(triggered()), this, SLOT(runStudy()));
-    connect( action("app/stop" ), SIGNAL(triggered()), this, SLOT(stop()));
-}
-
-/*!
- Shows file open dialog.
- */
-void MainWindow::importFile()
-{
-    /*
-	QString filePath = QFileDialog::getOpenFileName(this,
-        "Choose a file to open", ".", "Tasks (*.zip)" );
-
-    if ( !filePath.isEmpty() ) {
-        QFileInfo fi(filePath);
-    }
-    */
-}
-
-/*!
- Shows file save dialog.
- */
-void MainWindow::exportFile()
-{
-    /*
-	QString filePath = QFileDialog::getSaveFileName(this,
-        "Choose a file to open", ".", "Tasks (*.zip)" );
-
-    if ( !filePath.isEmpty() ) {
-        QFileInfo fi(filePath);
-    }
-    */
+    connect( action("Play" ), SIGNAL(triggered()), this, SLOT(runDemo()));
+    connect( action("Study"), SIGNAL(triggered()), this, SLOT(runStudy()));
+    connect( action("Stop" ), SIGNAL(triggered()), this, SLOT(stop()));
 }
 
 void MainWindow::newEntry()
@@ -449,10 +373,10 @@ void MainWindow::setViewMode(MainWindow::ViewMode m)
         d->viewMode = MainWindow::TaskEditorMode;
     }
 
-    actionGroup("examine")->setEnabled( d->examinator->entryCount() >0 );
-    action("app/demo" )->setEnabled( d->viewMode!=MainWindow::ExamineMode );
-    action("app/study")->setEnabled( d->viewMode!=MainWindow::ExamineMode );
-    action("app/stop" )->setEnabled( d->viewMode==MainWindow::ExamineMode );
+    //actionGroup("Play")->setEnabled( d->examinator->entryCount() >0 );
+    action("Play" )->setEnabled( d->viewMode!=MainWindow::ExamineMode );
+    action("Study")->setEnabled( d->viewMode!=MainWindow::ExamineMode );
+    action("Stop" )->setEnabled( d->viewMode==MainWindow::ExamineMode );
 
     emit viewModeChanged( d->viewMode );
 }
@@ -493,19 +417,11 @@ QFont MainWindow::systemFont()
     return instance()->font();
 }
 
-void MainWindow::resizeEvent(QResizeEvent * re)
-{
-    QSize size = re->size();
-    d->sizeGrip->move( size.width()-d->sizeGrip->width(), size.height()-d->sizeGrip->height() );
-    QMainWindow::resizeEvent(re);
-}
-
 void MainWindow::openFile()
 {
     QString path;
     
-    path = QFileDialog::getOpenFileName(
-                                        this,
+    path = QFileDialog::getOpenFileName(this,
                                         tr("Open a crammero file"), path,
                                         tr("Xml files (*.xml);;Any file (*)")
                                         );
@@ -541,8 +457,7 @@ void MainWindow::saveFileAs()
 {
     QString path;
     
-    path = QFileDialog::getSaveFileName(
-                                        this,
+    path = QFileDialog::getSaveFileName(this,
                                         tr("Save a crammero file"), path,
                                         tr("Xml files (*.xml);;Any file (*)")
                                         );

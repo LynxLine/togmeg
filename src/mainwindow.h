@@ -38,9 +38,6 @@ public slots:
     void saveFile();
     void saveFileAs();
 
-    void importFile();
-    void exportFile();
-
     void newEntry();
     void previousWindow();
 
@@ -58,9 +55,6 @@ public slots:
 
 signals:
     void viewModeChanged(MainWindow::ViewMode);
-
-protected:
-    virtual void resizeEvent(QResizeEvent *);
 
 private:
 	void createActions();

@@ -21,7 +21,7 @@ INCLUDEPATH += src/Utils
 HEADERS += \
     src/crammero.h \
     src/mainwindow.h \
-    src/studytask.h \
+    src/studytaskmodel.h \
     src/Utils/AppStyles.h \
     src/Utils/PixmapButton.h \
     src/Utils/ColumnSelectorButton.h \
@@ -30,7 +30,7 @@ SOURCES += \
     src/main.cpp \
     src/crammero.cpp \
     src/mainwindow.cpp \
-    src/studytask.cpp \
+    src/studytaskmodel.cpp \
     src/Utils/AppStyles.cpp \
     src/Utils/PixmapButton.cpp \
     src/Utils/ColumnSelectorButton.cpp \
@@ -38,7 +38,6 @@ SOURCES += \
 UI_DIR = ./build/GeneratedFiles
 MOC_DIR = ./build/GeneratedFiles
 
-include("src/storage/storage.pri")
 include("src/examine/examine.pri")
 include("src/widgets/widgets.pri")
 include("src/taskeditor/taskeditor.pri")

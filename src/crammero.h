@@ -13,8 +13,6 @@
 
 namespace app {
 
-    QString storagePath();
-    QString uniqueId(int length = 10);
     extern QWindowsStyle cleanStyle;
 
     //typos in minute
