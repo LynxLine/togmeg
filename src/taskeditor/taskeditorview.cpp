@@ -24,10 +24,11 @@ public:
     NextItemMode nextItemMode;
 };
 
-TaskEditorView::TaskEditorView(QWidget * parent)
+TaskEditorView::TaskEditorView(StudyTaskModel * model, QWidget * parent)
 :QTreeView(parent) 
 {
     d = new Private;
+    d->model = model;
     d->nextItemMode = NextItemMode(-1); //undefined;
 
     setMouseTracking(true);
@@ -79,8 +80,7 @@ TaskEditorView::TaskEditorView(QWidget * parent)
     d->contextMenu->addSeparator();
     d->contextMenu->addAction( tr("&Remove"), this, SLOT(removeEntry()));
 
-    d->model = new StudyTaskModel(this);
-    setModel( d->model );
+    setModel( model );
 
     header()->setDefaultAlignment(Qt::AlignLeft);
     header()->setResizeMode(0, QHeaderView::ResizeToContents);

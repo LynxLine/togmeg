@@ -31,7 +31,6 @@ public:
 
     MainWindow::ViewMode viewMode();
     static QFont baseFont(qreal multiplier = 1.0, int weight = 20);
-    static QFont systemFont();
 
 public slots:
     void openFile();

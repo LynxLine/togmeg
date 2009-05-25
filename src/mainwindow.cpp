@@ -54,7 +54,7 @@ MainWindow * MainWindow::Private::instance = 0L;
  Creates new MainWindow
  */
 MainWindow::MainWindow()
-:QMainWindow(0L, Qt::Window)
+:QMainWindow()
 {
     d = new Private(this);
 
@@ -96,7 +96,7 @@ MainWindow::MainWindow()
     d->stack = new QStackedWidget(this);
     setCentralWidget( d->stack );
 
-    d->taskEditorWidget = new TaskEditorWidget( d->stack );
+    d->taskEditorWidget = new TaskEditorWidget(d->model, d->stack);
     d->stack->addWidget( d->taskEditorWidget );
     
     d->examineWidget = new ExamineWidget(d->examinator, d->stack );
@@ -260,11 +260,11 @@ void MainWindow::createToolBar()
 void MainWindow::createShortcuts()
 {
     // shortcuts
-    action("Open")       ->setShortcut(tr("Ctrl+O"));
-    action("Close")      ->setShortcut(tr("Ctrl+W"));
-    action("Save")       ->setShortcut(tr("Ctrl+S"));
-    action("SaveAs")     ->setShortcut(tr("Shift+Ctrl+S"));
-    action("Quit")       ->setShortcut(tr("Ctrl+Q"));
+    action("Open")   ->setShortcut(tr("Ctrl+O"));
+    action("Close")  ->setShortcut(tr("Ctrl+W"));
+    action("Save")   ->setShortcut(tr("Ctrl+S"));
+    action("SaveAs") ->setShortcut(tr("Shift+Ctrl+S"));
+    action("Quit")   ->setShortcut(tr("Ctrl+Q"));
     action("Help")   ->setShortcut(tr("F1"));
 }
 
@@ -284,9 +284,9 @@ void MainWindow::connectActions()
 
     connect( action("Add"),    SIGNAL(triggered()), this, SLOT(newEntry()));
 
-    connect( action("Play" ), SIGNAL(triggered()), this, SLOT(runDemo()));
-    connect( action("Study"), SIGNAL(triggered()), this, SLOT(runStudy()));
-    connect( action("Stop" ), SIGNAL(triggered()), this, SLOT(stop()));
+    connect( action("Play" ),  SIGNAL(triggered()), this, SLOT(runDemo()));
+    connect( action("Study"),  SIGNAL(triggered()), this, SLOT(runStudy()));
+    connect( action("Stop" ),  SIGNAL(triggered()), this, SLOT(stop()));
 }
 
 void MainWindow::newEntry()
@@ -405,16 +405,10 @@ QFont MainWindow::baseFont(qreal multiplier, int weight)
         initialized = true;
     }
 
-
     QFont font( "Verdana", 10, weight );
     font.setStyleStrategy(QFont::PreferAntialias);
     font.setPointSizeF(basePointSize * multiplier);
     return font;
-}
-
-QFont MainWindow::systemFont()
-{
-    return instance()->font();
 }
 
 void MainWindow::openFile()
@@ -423,14 +417,17 @@ void MainWindow::openFile()
     
     path = QFileDialog::getOpenFileName(this,
                                         tr("Open a crammero file"), path,
-                                        tr("Xml files (*.xml);;Any file (*)")
+                                        tr("Tab delimited files (*.tab);;Xml files (*.xml);;Any file (*)")
                                         );
     
     if (path.isEmpty()) return;
     
-    d->taskEditorWidget->view()->studyTaskModel()->loadFile(path);
+    qDebug() << path;
+    if (path.endsWith(".xml", Qt::CaseInsensitive))
+        d->model->loadXmlFile(path);
+    else d->model->loadTabFile(path);
     
-    bool ok = true;//project()->loadFile(path);
+    bool ok = true;
     if (!ok) {
         QMessageBox box(QMessageBox::Information, tr("Load is failed"),
                         tr("Load of file \"%1\" is failed").arg(QFileInfo(path).fileName()),
@@ -459,11 +456,12 @@ void MainWindow::saveFileAs()
     
     path = QFileDialog::getSaveFileName(this,
                                         tr("Save a crammero file"), path,
-                                        tr("Xml files (*.xml);;Any file (*)")
+                                        tr("Tab delimited files (*.tab);;Xml files (*.xml);;Any file (*)")
                                         );
     
     if (path.isEmpty()) return;
     
-    d->taskEditorWidget->view()->studyTaskModel()->saveFile(path);
-    
+    if (path.endsWith(".xml", Qt::CaseInsensitive))
+        d->model->saveXmlFile(path);
+    else d->model->saveTabFile(path);
 }

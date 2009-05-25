@@ -20,7 +20,7 @@ public:
 /*!
  Crestes TaskEditorWidget
  */
-TaskEditorWidget::TaskEditorWidget(QWidget * parent)
+TaskEditorWidget::TaskEditorWidget(StudyTaskModel * model, QWidget * parent)
 :QWidget(parent)
 {
     d = new Private;
@@ -30,7 +30,7 @@ TaskEditorWidget::TaskEditorWidget(QWidget * parent)
     layout->setSpacing(0);
     setLayout(layout);
 
-    d->taskEditorView = new TaskEditorView(this);
+    d->taskEditorView = new TaskEditorView(model, this);
     layout->addWidget( d->taskEditorView );
 
     QFrame * hline1 = new QFrame; {

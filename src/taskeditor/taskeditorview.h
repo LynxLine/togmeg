@@ -21,7 +21,7 @@ public:
         QAQAMode = 0,
         QQAAMode,
     };
-    TaskEditorView(QWidget * parent = 0);
+    TaskEditorView(StudyTaskModel * model, QWidget * parent = 0);
     virtual ~TaskEditorView();
     NextItemMode nextItemMode();
 

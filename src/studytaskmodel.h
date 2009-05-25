@@ -40,11 +40,10 @@ public:
     void removeEntry(QModelIndex index);
 
 public slots:
-    void loadFile(QString filePath);
-    void saveFile(QString filePath);
-
-signals:
-    void rowCountChanged(int);
+    void loadTabFile(QString filePath);
+    void loadXmlFile(QString filePath);
+    void saveTabFile(QString filePath);
+    void saveXmlFile(QString filePath);
 
 private:
 	class Private;

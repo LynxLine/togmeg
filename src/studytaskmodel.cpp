@@ -34,18 +34,39 @@ StudyTaskModel::~StudyTaskModel()
     delete d;
 }
 
-void StudyTaskModel::loadFile(QString filePath)
+void StudyTaskModel::loadTabFile(QString filePath)
 {
-    qDebug() << "StudyTaskModel::loadFile()," << filePath;
+    qDebug() << "StudyTaskModel::loadTabFile()," << filePath;
     
     d->entries.clear();
     
-    disconnect(this, SIGNAL(rowCountChanged(int)),0,0);
+    QFile f(filePath);
+    if (f.open(QIODevice::ReadOnly)) {
+        while (!f.atEnd()) {
+            QString line = QString::fromUtf8(f.readLine());
+            QStringList args = line.split("\t");
+            if (args.count() <2) continue;
+            
+            StudyDataEntry entry;
+            entry.question = args[0];
+            entry.answer   = args[1];
+            d->entries << entry;
+        }
+    }
     
-    QIODevice * resource = new QFile(filePath);
-    if (resource->open(QIODevice::ReadOnly)) {
+    reset();
+}
+
+void StudyTaskModel::loadXmlFile(QString filePath)
+{
+    qDebug() << "StudyTaskModel::loadXmlFile()," << filePath;
+    
+    d->entries.clear();
+    
+    QFile f(filePath);
+    if (f.open(QIODevice::ReadOnly)) {
         QDomDocument doc;
-        doc.setContent( resource );
+        doc.setContent(&f);
         
         QDomElement el = doc.documentElement();
         QDomNode n = el.firstChild();
@@ -62,16 +83,28 @@ void StudyTaskModel::loadFile(QString filePath)
             n = n.nextSibling();
         }
     }
-    delete resource;
     
-    emit rowCountChanged( rowCount() );
     reset();
 }
 
-void StudyTaskModel::saveFile(QString filePath)
+void StudyTaskModel::saveTabFile(QString filePath)
 {
-    QIODevice * resource = new QFile(filePath);
-    if (resource->open(QIODevice::WriteOnly)) {
+    QFile f(filePath);
+    if (f.open(QIODevice::WriteOnly)) {
+        foreach (StudyDataEntry entry, d->entries) {
+            if (entry.question.isEmpty() && entry.answer.isEmpty())
+                continue;
+            
+            QString line = entry.question+"\t"+entry.answer+"\n";
+            f.write(line.toUtf8());
+        }
+    }
+}
+
+void StudyTaskModel::saveXmlFile(QString filePath)
+{
+    QFile f(filePath);
+    if (f.open(QIODevice::WriteOnly)) {
         QDomDocument doc("taskcontentxml");
         
         QDomElement docEl = doc.createElement("content");
@@ -94,10 +127,8 @@ void StudyTaskModel::saveFile(QString filePath)
             answerEl.appendChild(answerTextEl);
         }
         
-        resource->write(doc.toByteArray());
-        
+        f.write(doc.toByteArray());
     }
-    delete resource;
 }
 
 QModelIndex StudyTaskModel::addNewEntry()
@@ -107,7 +138,6 @@ QModelIndex StudyTaskModel::addNewEntry()
     d->entries << entry;
     endInsertRows();
 
-    emit rowCountChanged( rowCount() );
     return index( d->entries.count()-1,1 );
 }
 
@@ -120,8 +150,6 @@ void StudyTaskModel::removeEntry(QModelIndex index)
     beginRemoveRows(QModelIndex(), i, i);
     d->entries.removeAt(i);
     endRemoveRows();
-
-    emit rowCountChanged( rowCount() );
 }
 
 int StudyTaskModel::rowCount(const QModelIndex & parent) const
