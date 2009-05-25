@@ -48,13 +48,14 @@ void StudyTaskModel::loadTabFile(QString filePath)
             if (args.count() <2) continue;
             
             StudyDataEntry entry;
-            entry.question = args[0];
-            entry.answer   = args[1];
+            entry.question = args[0].simplified();
+            entry.answer   = args[1].simplified();
             d->entries << entry;
         }
     }
     
     reset();
+    addNewEntry();
 }
 
 void StudyTaskModel::loadXmlFile(QString filePath)
@@ -85,6 +86,7 @@ void StudyTaskModel::loadXmlFile(QString filePath)
     }
     
     reset();
+    addNewEntry();
 }
 
 void StudyTaskModel::saveTabFile(QString filePath)
