@@ -422,6 +422,12 @@ void MainWindow::openFile()
     
     if (path.isEmpty()) return;
     
+    openFile(path);
+}
+
+void MainWindow::openFile(QString path)
+{
+    
     qDebug() << path;
     if (path.endsWith(".xml", Qt::CaseInsensitive))
         d->model->loadXmlFile(path);

@@ -34,6 +34,7 @@ public:
 
 public slots:
     void openFile();
+    void openFile(QString);
     void saveFile();
     void saveFileAs();
 

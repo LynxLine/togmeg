@@ -21,4 +21,24 @@ namespace app {
 
 }; //namespace
 
+class Application : public QApplication {
+Q_OBJECT
+public:
+    Application(int argc, char **argv);
+    virtual ~Application();
+
+    QString buildId() const;
+
+signals:
+    //! Emits when application gets QEvent::FileOpen event
+    void fileOpenRequest(QString);
+    
+protected:
+    virtual bool event(QEvent *);
+    
+private:
+    class Private;
+    Private * d;
+};
+
 #endif // CRAMMERO_H

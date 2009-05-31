@@ -56,6 +56,10 @@ win32:RC_FILE = images/crammero.rc
     }
 }
 
+macx {
+    QMAKE_INFO_PLIST = Resources/Crammero.plist
+}
+
 macx-g++ {
     # section for batch building
     # from command line on mac osx.

@@ -13,7 +13,7 @@ void initResources();
 int main( int argc, char ** argv )
 {
     initResources();
-    QApplication a(argc, argv );
+    Application a(argc, argv );
 
 
 #ifndef Q_WS_MAC
@@ -41,6 +41,8 @@ int main( int argc, char ** argv )
     else if (maximized) mw.showMaximized();
     else                mw.show();
 
+    a.connect(&a, SIGNAL(fileOpenRequest(QString)),
+              &mw,  SLOT(openFile(QString)));
     a.connect(&a, SIGNAL(lastWindowClosed()), 
               &a,   SLOT(quit()) );
 
