@@ -22,9 +22,10 @@
 
 class StudyTaskController::Private {
 public:
-    Private():index(0) {;}
+    Private():index(0),isLastFailed(false) {;}
 
     int index;
+    bool isLastFailed;
     QTimeLine * timeLine;
     ControllerDataEntry currentEntry;
     
@@ -121,7 +122,8 @@ ControllerDataEntry StudyTaskController::next()
 {
     QString question;
     while ( question.isEmpty() ) {
-        d->index = rand() % model->rowCount();
+        if (!d->isLastFailed)
+            d->index = rand() % model->rowCount();
         QModelIndex i = model->index(d->index, StudyTaskModel::QuestionColumn);
         question = model->data(i).toString();
     }
@@ -156,10 +158,14 @@ void StudyTaskController::processAnswer(int usedTime, QString answer)
     }
 
     if ( d->currentEntry.answer != answer.toLower().simplified() ) {
+        d->isLastFailed = !d->isLastFailed;
+
         emit indicateMismatching();
         d->timeLine->setDuration( 1000 );
     }
     else {
+        d->isLastFailed = false;
+
         emit indicateMatching();
         d->timeLine->setDuration( 300 );
 
@@ -174,7 +180,7 @@ void StudyTaskController::processAnswer(int usedTime, QString answer)
         }
     }
     
-    QString text = d->currentEntry.answer;
+    QString text = "  "+d->currentEntry.answer+"  ";
 #ifdef Q_WS_MAC
     SpeakText(d->speechChannel , text.toLatin1().data(), text.toLatin1().size() );
 #endif

@@ -46,6 +46,11 @@ int main( int argc, char ** argv )
     a.connect(&a, SIGNAL(lastWindowClosed()), 
               &a,   SLOT(quit()) );
 
+    if (argc > 1) {
+        for (int i =1; i< argc; i++)
+            mw.openFile(argv[i]);
+    }
+
     return a.exec();
 }
 

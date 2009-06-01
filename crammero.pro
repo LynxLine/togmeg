@@ -47,7 +47,11 @@ RESOURCES += images.qrc
 mac:ICON = images/crammero.icns
 mac:QMAKE_INFO_PLIST = info.plist
 
-win32:RC_FILE = images/crammero.rc
+win32 {
+    RC_FILE = images/crammero.rc
+    DEFINES += _CRT_SECURE_NO_DEPRECATE
+    DEFINES += _CRT_NONSTDC_NO_DEPRECATE
+}
 
 !debug_and_release|build_pass {
     CONFIG(debug, debug|release) {
