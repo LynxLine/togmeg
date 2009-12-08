@@ -53,18 +53,20 @@ win32 {
     DEFINES += _CRT_NONSTDC_NO_DEPRECATE
 }
 
-!debug_and_release|build_pass {
-    CONFIG(debug, debug|release) {
-        TARGET = $$member(TARGET, 0)d
-        CONFIG += console
-    }
-}
+#!debug_and_release|build_pass {
+#    CONFIG(debug, debug|release) {
+#        TARGET = $$member(TARGET, 0)d
+#        CONFIG += console
+#    }
+#}
 
 macx {
+    LIBS += -framework CoreFoundation -lz
+    LIBS += -framework AppKit -framework Carbon
     QMAKE_INFO_PLIST = Resources/Crammero.plist
 }
 
-macx-g++ {
+macx-g++1 {
     # section for batch building
     # from command line on mac osx.
     
