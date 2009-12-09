@@ -1,24 +1,24 @@
 
-INCLUDEPATH += src/examine
+INCLUDEPATH += $$PWD
 
 HEADERS += \
-    src/examine/examinator.h \
-    src/examine/taskcontroller.h \
-    src/examine/playtaskcontroller.h \
-    src/examine/studytaskcontroller.h \
+    $$PWD/examinator.h \
+    $$PWD/taskcontroller.h \
+    $$PWD/playtaskcontroller.h \
+    $$PWD/studytaskcontroller.h \
     \
-    src/examine/examinewidget.h \
-    src/examine/questionwidget.h \
-    src/examine/answerwidget.h \
+    $$PWD/examinewidget.h \
+    $$PWD/questionwidget.h \
+    $$PWD/answerwidget.h \
 
 
 SOURCES += \
-    src/examine/examinator.cpp \
-    src/examine/taskcontroller.cpp \
-    src/examine/playtaskcontroller.cpp \
-    src/examine/studytaskcontroller.cpp \
+    $$PWD/examinator.cpp \
+    $$PWD/taskcontroller.cpp \
+    $$PWD/playtaskcontroller.cpp \
+    $$PWD/studytaskcontroller.cpp \
     \
-    src/examine/examinewidget.cpp \
-    src/examine/questionwidget.cpp \
-    src/examine/answerwidget.cpp \
+    $$PWD/examinewidget.cpp \
+    $$PWD/questionwidget.cpp \
+    $$PWD/answerwidget.cpp \
 

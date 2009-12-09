@@ -1,16 +1,16 @@
 
-INCLUDEPATH += src/widgets
+INCLUDEPATH += $$PWD
 
 HEADERS += \
-    src/widgets/itemdelegate.h \
-    src/widgets/gradientwidget.h \
-    src/widgets/roundedlineedit.h \
-    src/widgets/roundedgradientwidget.h \
+    $$PWD/itemdelegate.h \
+    $$PWD/gradientwidget.h \
+    $$PWD/roundedlineedit.h \
+    $$PWD/roundedgradientwidget.h \
 
 
 SOURCES += \
-    src/widgets/itemdelegate.cpp \
-    src/widgets/gradientwidget.cpp \
-    src/widgets/roundedlineedit.cpp \
-    src/widgets/roundedgradientwidget.cpp \
+    $$PWD/itemdelegate.cpp \
+    $$PWD/gradientwidget.cpp \
+    $$PWD/roundedlineedit.cpp \
+    $$PWD/roundedgradientwidget.cpp \
 

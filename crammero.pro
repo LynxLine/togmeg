@@ -10,37 +10,31 @@ CONFIG += warn_on
 CONFIG += debug_and_release
 CONFIG += precompile_header
 
-HEADERS += src/stable.h
-PRECOMPILED_HEADER = src/stable.h
+HEADERS += Code/stable.h
+PRECOMPILED_HEADER = Code/stable.h
 
 QT += xml
 
-INCLUDEPATH += src
-INCLUDEPATH += src/Utils
+INCLUDEPATH += Code
 
 HEADERS += \
-    src/crammero.h \
-    src/mainwindow.h \
-    src/studytaskmodel.h \
-    src/Utils/AppStyles.h \
-    src/Utils/PixmapButton.h \
-    src/Utils/ColumnSelectorButton.h \
+    Code/crammero.h \
+    Code/mainwindow.h \
+    Code/studytaskmodel.h \
 
 SOURCES += \
-    src/main.cpp \
-    src/crammero.cpp \
-    src/mainwindow.cpp \
-    src/studytaskmodel.cpp \
-    src/Utils/AppStyles.cpp \
-    src/Utils/PixmapButton.cpp \
-    src/Utils/ColumnSelectorButton.cpp \
+    Code/main.cpp \
+    Code/crammero.cpp \
+    Code/mainwindow.cpp \
+    Code/studytaskmodel.cpp \
 
 UI_DIR = ./build/GeneratedFiles
 MOC_DIR = ./build/GeneratedFiles
 
-include("src/examine/examine.pri")
-include("src/widgets/widgets.pri")
-include("src/taskeditor/taskeditor.pri")
+include(Code/examine/examine.pri)
+include(Code/widgets/widgets.pri)
+include(Code/taskeditor/taskeditor.pri)
+include(Code/Utils/Utils.pri)
 
 RESOURCES += images.qrc
 
