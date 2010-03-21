@@ -29,7 +29,7 @@ AnswerWidget::AnswerWidget(QWidget * parent)
     setFont( MainWindow::baseFont(3, QFont::Bold) );
 
     d->le_answer = new AnswerLineEdit;
-    d->le_answer->setAlignment(Qt::AlignLeft);
+    d->le_answer->setAlignment(Qt::AlignCenter);
 
     {
         QFontMetrics fm(font()); 

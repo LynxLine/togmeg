@@ -125,7 +125,9 @@ ControllerDataEntry PlayTaskController::next()
     QString text = entry.answer;
 
 #ifdef Q_WS_MAC
-    SpeakText(d->speechChannel , text.toLatin1().data(), text.toLatin1().size() );
+    QTextCodec * tc = QTextCodec::codecForName("Apple Roman");
+    QByteArray enc = tc->fromUnicode(text);    
+    SpeakText(d->speechChannel , enc.data(), enc.size() );
 #endif
 
 #ifdef Q_WS_WIN

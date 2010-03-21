@@ -29,7 +29,7 @@ QuestionWidget::QuestionWidget(QWidget * parent)
     setFont( MainWindow::baseFont(3, QFont::Bold) );
 
     d->l_question = new QLabel;
-    d->l_question->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    d->l_question->setAlignment(Qt::AlignCenter);
     d->l_question->setFont( MainWindow::baseFont(3, QFont::Bold) );
 
     {

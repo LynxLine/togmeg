@@ -39,7 +39,7 @@ ExamineWidget::ExamineWidget(Examinator * examinator, QWidget * parent)
     layout->setSpacing(0);
     setLayout(layout);
 
-    QHBoxLayout * contentLayout = new QHBoxLayout;
+    QVBoxLayout * contentLayout = new QVBoxLayout;
     contentLayout->setMargin(20);
     contentLayout->setSpacing(5);
     
