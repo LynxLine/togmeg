@@ -3,9 +3,9 @@
 //
 
 #include <QtGui>
-#include "mainwindow.h"
+#include "CrammeroWindow.h"
 #include "pixmapbutton.h"
-#include "taskeditorfooter.h"
+#include "Footer.h"
 
 class TaskEditorFooter::Private {
 public:

@@ -17,7 +17,7 @@
 #endif
 
 #include "crammero.h"
-#include "studytaskmodel.h"
+#include "CramFileModel.h"
 #include "studytaskcontroller.h"
 
 class StudyTaskController::Private {

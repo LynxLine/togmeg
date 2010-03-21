@@ -6,7 +6,7 @@
 #include <QtCore>
 
 #include "crammero.h"
-#include "studytaskmodel.h"
+#include "CramFileModel.h"
 
 class StudyTaskModel::Private
 {

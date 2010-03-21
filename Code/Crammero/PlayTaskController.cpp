@@ -16,7 +16,7 @@
 #include <sphelper.h>
 #endif
 
-#include "studytaskmodel.h"
+#include "CramFileModel.h"
 #include "playtaskcontroller.h"
 
 class PlayTaskController::Private {

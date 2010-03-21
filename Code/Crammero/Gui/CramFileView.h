@@ -56,7 +56,7 @@ private:
 	Private * d;
 };
 
-#include "itemdelegate.h"
+#include "CramFileDelegate.h"
 
 class TaskEditorItemDelegate : public ItemDelegate
 {

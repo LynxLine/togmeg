@@ -4,7 +4,7 @@
 
 #include <QtGui>
 #include "taskcontroller.h"
-#include "studytaskmodel.h"
+#include "CramFileModel.h"
 
 /*!
  * Creates the object.

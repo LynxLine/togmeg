@@ -6,7 +6,7 @@
 #define TASKEDITORFOOTER_H
 
 #include <QWidget>
-#include "taskeditorview.h"
+#include "CramFileView.h"
 
 /*!
  * \class TaskEditorFooter

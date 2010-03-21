@@ -6,7 +6,7 @@
 #include <iostream>
 
 #include "crammero.h"
-#include "mainwindow.h"
+#include "CrammeroWindow.h"
 
 void initResources();
 

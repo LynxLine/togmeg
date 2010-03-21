@@ -4,7 +4,7 @@
 
 #include <QtGui>
 #include "questionwidget.h"
-#include "mainwindow.h"
+#include "CrammeroWindow.h"
 
 class QuestionWidget::Private {
 public:

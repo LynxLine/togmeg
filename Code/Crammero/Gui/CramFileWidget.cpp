@@ -3,12 +3,12 @@
 //
 
 #include <QtGui>
-#include "mainwindow.h"
+#include "CrammeroWindow.h"
 #include "pixmapbutton.h"
 #include "gradientwidget.h"
-#include "taskeditorview.h"
-#include "taskeditorfooter.h"
-#include "taskeditorwidget.h"
+#include "CramFileView.h"
+#include "Footer.h"
+#include "CramFileWidget.h"
 
 class TaskEditorWidget::Private
 {

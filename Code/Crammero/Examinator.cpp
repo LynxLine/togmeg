@@ -5,7 +5,7 @@
 #include <QtCore>
 #include "examinator.h"
 
-#include "studytaskmodel.h"
+#include "CramFileModel.h"
 
 #include "taskcontroller.h"
 #include "playtaskcontroller.h"

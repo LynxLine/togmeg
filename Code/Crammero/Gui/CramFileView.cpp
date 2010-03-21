@@ -4,9 +4,9 @@
 
 #include <QtGui>
 #include "crammero.h"
-#include "mainwindow.h"
-#include "taskeditorview.h"
-#include "studytaskmodel.h"
+#include "CrammeroWindow.h"
+#include "CramFileView.h"
+#include "CramFileModel.h"
 
 #include "AppStyles.h"
 #include "ColumnSelectorButton.h"

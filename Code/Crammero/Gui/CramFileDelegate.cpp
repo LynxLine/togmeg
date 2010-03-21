@@ -4,7 +4,7 @@
 
 #include <QtGui>
 #include "crammero.h"
-#include "itemdelegate.h"
+#include "CramFileDelegate.h"
 
 void ItemDelegate::registerEditor(QWidget * editor) const
 {

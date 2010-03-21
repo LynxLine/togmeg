@@ -10,7 +10,7 @@
 #include "questionwidget.h"
 #include "answerwidget.h"
 #include "examinator.h"
-#include "mainwindow.h"
+#include "CrammeroWindow.h"
 
 class ExamineWidget::Private
 {

@@ -6,14 +6,14 @@
 #include <QtCore>
 
 #include "crammero.h"
-#include "mainwindow.h"
+#include "CrammeroWindow.h"
 #include "examinator.h"
 
 #include "examinewidget.h"
-#include "taskeditorwidget.h"
+#include "CramFileWidget.h"
 
-#include "TaskEditorView.h"
-#include "StudyTaskModel.h"
+#include "CramFileView.h"
+#include "CramFileModel.h"
 
 #include "AppStyles.h"
 
