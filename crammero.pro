@@ -2,39 +2,24 @@
 unix:TEMPLATE = app
 win32:TEMPLATE = vcapp
 
-unix:TARGET = crammero
-win32:TARGET = ../crammero
+unix:TARGET = Crammero
+win32:TARGET = ../Crammero
 
 CONFIG += qt
 CONFIG += warn_on
 CONFIG += debug_and_release
 CONFIG += precompile_header
 
+QT += gui xml
+
 HEADERS += Code/stable.h
 PRECOMPILED_HEADER = Code/stable.h
-
-QT += xml
-
-INCLUDEPATH += Code
-
-HEADERS += \
-    Code/crammero.h \
-    Code/mainwindow.h \
-    Code/studytaskmodel.h \
-
-SOURCES += \
-    Code/main.cpp \
-    Code/crammero.cpp \
-    Code/mainwindow.cpp \
-    Code/studytaskmodel.cpp \
 
 UI_DIR = ./build/GeneratedFiles
 MOC_DIR = ./build/GeneratedFiles
 
-include(Code/examine/examine.pri)
-include(Code/widgets/widgets.pri)
-include(Code/taskeditor/taskeditor.pri)
 include(Code/Utils/Utils.pri)
+include(Code/Crammero/Crammero.pri)
 
 RESOURCES += images.qrc
 
