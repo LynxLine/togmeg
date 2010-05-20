@@ -32,11 +32,13 @@ public:
     MainWindow::ViewMode viewMode();
     static QFont baseFont(qreal multiplier = 1.0, int weight = 20);
 
+    bool allowToClose();
+
 public slots:
     void openFile();
     void openFile(QString);
-    void saveFile();
-    void saveFileAs();
+    bool saveFile();
+    bool saveFileAs();
 
     void newEntry();
     void previousWindow();
@@ -56,12 +58,17 @@ public slots:
 signals:
     void viewModeChanged(MainWindow::ViewMode);
 
-private:
+protected:
+    virtual void closeEvent(QCloseEvent *);
+
+private slots:
 	void createActions();
     void connectActions();
     void createShortcuts();
     void createMenuBar();
     void createToolBar();
+    void readSettings();
+    void saveSettings();
 
     QString release() const;
 

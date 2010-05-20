@@ -13,6 +13,8 @@ class StudyTaskModel::Private
 public:
     static StudyTaskModel * instance;
     QList<StudyDataEntry> entries;
+    bool isModified;
+    QString filePath;
 };
 
 /*!
@@ -22,7 +24,11 @@ StudyTaskModel::StudyTaskModel(QObject * parent)
 :QAbstractListModel(parent)
 {
     d = new Private;
+    d->isModified = false;
     addNewEntry();
+    
+    connect(this, SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)),
+            this, SLOT(setModified()));
 }
 
 /*!
@@ -30,7 +36,6 @@ StudyTaskModel::StudyTaskModel(QObject * parent)
  */
 StudyTaskModel::~StudyTaskModel()
 {
-    qDebug() << "~StudyTaskModel";
     delete d;
 }
 
@@ -39,6 +44,7 @@ void StudyTaskModel::loadTabFile(QString filePath)
     qDebug() << "StudyTaskModel::loadTabFile()," << filePath;
     
     d->entries.clear();
+    d->filePath = filePath;
     
     QFile f(filePath);
     if (f.open(QIODevice::ReadOnly)) {
@@ -63,6 +69,7 @@ void StudyTaskModel::loadXmlFile(QString filePath)
     qDebug() << "StudyTaskModel::loadXmlFile()," << filePath;
     
     d->entries.clear();
+    d->filePath = filePath;
     
     QFile f(filePath);
     if (f.open(QIODevice::ReadOnly)) {
@@ -89,7 +96,7 @@ void StudyTaskModel::loadXmlFile(QString filePath)
     addNewEntry();
 }
 
-void StudyTaskModel::saveTabFile(QString filePath)
+bool StudyTaskModel::saveTabFile(QString filePath)
 {
     QFile f(filePath);
     if (f.open(QIODevice::WriteOnly)) {
@@ -100,10 +107,15 @@ void StudyTaskModel::saveTabFile(QString filePath)
             QString line = entry.question+"\t"+entry.answer+"\n";
             f.write(line.toUtf8());
         }
+        
+        d->filePath = filePath;
+        return true;
     }
+    
+    return false;
 }
 
-void StudyTaskModel::saveXmlFile(QString filePath)
+bool StudyTaskModel::saveXmlFile(QString filePath)
 {
     QFile f(filePath);
     if (f.open(QIODevice::WriteOnly)) {
@@ -130,7 +142,12 @@ void StudyTaskModel::saveXmlFile(QString filePath)
         }
         
         f.write(doc.toByteArray());
+
+        d->filePath = filePath;
+        return true;
     }
+    
+    return false;
 }
 
 QModelIndex StudyTaskModel::addNewEntry()
@@ -184,23 +201,24 @@ QVariant StudyTaskModel::data(const QModelIndex & index, int role) const
     return QVariant();
 }
 
-bool StudyTaskModel::setData(const QModelIndex & index, const QVariant & value, int role)
+bool StudyTaskModel::setData(const QModelIndex & i, const QVariant & value, int role)
 {
-    if ( !index.isValid() ) return false;
-    if ( index.row() < 0 || index.row() >= d->entries.count() ) return false;
+    if ( !i.isValid() ) return false;
+    if ( i.row() < 0 || i.row() >= d->entries.count() ) return false;
 
     if (role == Qt::DisplayRole || role == Qt::EditRole) {
-        if ( index.column() == QuestionColumn ) d->entries[ index.row() ].question = value.toString();
-        if ( index.column() == AnswerColumn   ) d->entries[ index.row() ].answer   = value.toString();
+        if ( i.column() == QuestionColumn ) d->entries[ i.row() ].question = value.toString();
+        if ( i.column() == AnswerColumn   ) d->entries[ i.row() ].answer   = value.toString();
 
         //analize last row
-        QModelIndex lastQ = this->index( rowCount()-1, QuestionColumn);
-        QModelIndex lastA = this->index( rowCount()-1, AnswerColumn);
+        QModelIndex lastQ = index( rowCount()-1, QuestionColumn);
+        QModelIndex lastA = index( rowCount()-1, AnswerColumn);
         if (!data(lastQ, Qt::DisplayRole).toString().isEmpty() ||
             !data(lastA, Qt::DisplayRole).toString().isEmpty()) {
             addNewEntry();
         }
 
+        emit dataChanged(i,i);
         return true;
     }
 
@@ -234,4 +252,19 @@ Qt::ItemFlags StudyTaskModel::flags(const QModelIndex &index) const
 
     if ( index.column() == IdColumn ) return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
+}
+
+bool StudyTaskModel::isModified() const
+{
+    return d->isModified;
+}
+
+void StudyTaskModel::setModified(bool f)
+{
+    d->isModified = f;
+}
+
+QString StudyTaskModel::filePath() const
+{
+    return d->filePath;
 }

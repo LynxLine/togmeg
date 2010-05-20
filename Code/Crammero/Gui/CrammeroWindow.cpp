@@ -22,6 +22,15 @@
 #endif
 
 #define DEFAULT_SIZE QRect(30, 60, 700, 650)
+#define S_RECENTFILES    "CrammeroWindow/RecentFiles"
+#define S_WINGEOMETRY    "CrammeroWindow/Geometry"
+#define S_WINDOWSTATE    "CrammeroWindow/WindowState"
+#define S_STATUSBARSHOWN "CrammeroWindow/StatusBarVisible"
+#define S_HIDDENCOLUMNS  "CrammeroWindow/HiddenColumns"
+#define S_COLUMNSIZES    "CrammeroWindow/ColumnSizes"
+#define S_LINKSUPDATES   "CrammeroWindow/LinksUpdates"
+#define S_CONTENTFONT    "CrammeroWindow/ContentFont"
+#define THUMB_SIZE 80
 
 void logMessageHandler(QtMsgType type, const char *msg);
 
@@ -278,7 +287,7 @@ void MainWindow::connectActions()
     connect( action("Save"),   SIGNAL(triggered()), this, SLOT(saveFile()));
     connect( action("SaveAs"), SIGNAL(triggered()), this, SLOT(saveFileAs()));
 
-    connect( action("Quit"),   SIGNAL(triggered()), this, SLOT(quit()));
+    connect( action("Quit"),   SIGNAL(triggered()), this, SLOT(close()));
     connect( action("Help"),   SIGNAL(triggered()), this, SLOT(openHelp()));
     connect( action("About"),  SIGNAL(triggered()), this, SLOT(openAbout()));
 
@@ -427,11 +436,11 @@ void MainWindow::openFile()
 
 void MainWindow::openFile(QString path)
 {
-    
     qDebug() << path;
     if (path.endsWith(".xml", Qt::CaseInsensitive))
         d->model->loadXmlFile(path);
     else d->model->loadTabFile(path);
+    d->model->setModified(false);
     
     bool ok = true;
     if (!ok) {
@@ -451,23 +460,113 @@ void MainWindow::openFile(QString path)
     
 }
 
-void MainWindow::saveFile()
+bool MainWindow::saveFile()
 {
-    saveFileAs();
+    return saveFileAs();
 }
 
-void MainWindow::saveFileAs()
+bool MainWindow::saveFileAs()
 {
-    QString path;
+    QString path = "words.tab";
     
     path = QFileDialog::getSaveFileName(this,
                                         tr("Save a crammero file"), path,
                                         tr("Tab delimited files (*.tab);;Xml files (*.xml);;Any file (*)")
                                         );
     
-    if (path.isEmpty()) return;
+    if (path.isEmpty()) return false;
     
+    bool ok = false;
     if (path.endsWith(".xml", Qt::CaseInsensitive))
-        d->model->saveXmlFile(path);
-    else d->model->saveTabFile(path);
+        ok = d->model->saveXmlFile(path);
+    else ok = d->model->saveTabFile(path);
+    
+    d->model->setModified(false);
+    return ok;
+}
+
+bool MainWindow::allowToClose()
+{
+    if (!d->model->isModified())
+        return true;
+    
+    QString fileName = d->model->filePath();
+    bool wasEmpty = false;
+    if (fileName.isEmpty()) {
+        fileName = "Untitled";
+        wasEmpty = true;
+    }
+    
+    QMessageBox box(QMessageBox::Information, tr("Save Project?"),
+                    tr("Do you want to save the changes to \"%1\" Project before closing?").arg(fileName),
+                    QMessageBox::Discard | QMessageBox::Cancel | QMessageBox::Save, this);
+    box.setInformativeText(tr("If you don't save, your changes will be lost."));
+    box.setWindowModality(Qt::WindowModal);
+    box.setDefaultButton(QMessageBox::Save);
+    
+    static_cast<QPushButton *>(box.button(QMessageBox::Discard))->setMinimumWidth(90);
+    static_cast<QPushButton *>(box.button(QMessageBox::Cancel))->setMinimumWidth(90);
+    static_cast<QPushButton *>(box.button(QMessageBox::Save))->setMinimumWidth(90);
+    
+#ifdef Q_WS_WIN
+    QString text = box.text();
+    box.setText( tr("<font size='+1'>%1</font>").arg(text) );
+    static_cast<QPushButton *>(box.button(QMessageBox::Discard))->setText(tr("Don't Save"));
+    static_cast<QPushButton *>(box.button(QMessageBox::Save))->setText(tr("Save"));
+#endif
+    
+    switch (box.exec()) {
+        case QMessageBox::Save: {
+            bool ok = false;
+            ok = saveFile();
+            if (!ok) return false;
+            break;
+        }
+        case QMessageBox::Discard: {
+            break;
+        }
+        case QMessageBox::Cancel:
+            return false;
+    }
+    
+    return true;
+}
+
+void MainWindow::closeEvent(QCloseEvent * event)
+{
+    if (!allowToClose())
+        return event->ignore();
+    
+    saveSettings();
+    event->accept();
+}
+
+/*!
+ Loads and apply settings of MainWindow such as geometry, position, state,
+ maximized/minimized/normal, state of docking widgets etc.
+ */
+void MainWindow::readSettings()
+{
+    QSettings s;
+    QByteArray geom = s.value(S_WINGEOMETRY).toByteArray();
+    QByteArray state = s.value(S_WINDOWSTATE).toByteArray();
+	
+    if (!geom.isEmpty())
+		restoreGeometry(geom);
+	else resize(900, 600);
+    
+    if (!state.isEmpty())
+        restoreState(state);
+}
+
+/*!
+ */
+void MainWindow::saveSettings()
+{
+    QByteArray geometry = saveGeometry();
+    QByteArray state = saveState();
+    
+    QSettings s;
+    s.setValue(S_WINGEOMETRY, geometry );
+    s.setValue(S_WINDOWSTATE, state );
 }
