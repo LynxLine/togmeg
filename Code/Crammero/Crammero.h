@@ -6,6 +6,7 @@
 #define CRAMMERO_H
 
 #include <QString>
+#include <QApplication>
 #include <QWindowsStyle>
 
 #define CB_TIME_SECONDS 0
