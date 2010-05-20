@@ -45,7 +45,7 @@ macx {
     QMAKE_INFO_PLIST = Resources/Crammero.plist
 }
 
-macx-g++1 {
+macx-g++ {
     # section for batch building
     # from command line on mac osx.
     
