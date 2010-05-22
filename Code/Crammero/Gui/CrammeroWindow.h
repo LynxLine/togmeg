@@ -34,7 +34,6 @@ public:
 public slots:
     virtual void openFile();
     virtual void openFile(QString);
-    virtual bool saveFile();
     virtual bool saveFileAs();
 
     void newEntry();

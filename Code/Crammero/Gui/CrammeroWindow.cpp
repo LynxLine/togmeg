@@ -392,11 +392,6 @@ void MainWindow::openFile(QString path)
     
 }
 
-bool MainWindow::saveFile()
-{
-    return saveFileAs();
-}
-
 bool MainWindow::saveFileAs()
 {
     QString path = "words.tab";
