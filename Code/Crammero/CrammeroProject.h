@@ -18,7 +18,11 @@ public:
     virtual ~CrammeroProject();
     
     CramFileModel * model() const;
-        
+      
+    virtual QString extension() const;
+    virtual QStringList extensions() const;
+    virtual QString fileDialogFilter() const;
+    
 public slots:
     virtual bool loadFile(QString filePath);
     virtual bool saveFile(QString filePath);

@@ -391,23 +391,3 @@ void MainWindow::openFile(QString path)
     }
     
 }
-
-bool MainWindow::saveFileAs()
-{
-    QString path = "words.tab";
-    
-    path = QFileDialog::getSaveFileName(this,
-                                        tr("Save a crammero file"), path,
-                                        tr("Tab delimited files (*.tab);;Xml files (*.xml);;Any file (*)")
-                                        );
-    
-    if (path.isEmpty()) return false;
-    
-    bool ok = false;
-    if (path.endsWith(".xml", Qt::CaseInsensitive))
-        ok = project()->model()->saveXmlFile(path);
-    else ok = project()->model()->saveTabFile(path);
-    
-    project()->setModified(false);
-    return ok;
-}

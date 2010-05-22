@@ -56,13 +56,11 @@ bool CrammeroProject::saveFile(QString filePath)
 {
     setFilePath(filePath);
     
-    /*
-    QFile file(filePath);    
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-        return false;
-    
-    Write_Project_XML(file);
-     */
+    bool ok = false;
+    if (filePath.endsWith(".xml", Qt::CaseInsensitive))
+        ok = model()->saveXmlFile(filePath);
+    else ok = model()->saveTabFile(filePath);    
+    if (!ok) return false;
     
     return BaseProject::saveFile(filePath);
 }
@@ -86,4 +84,18 @@ CramFileModel * CrammeroProject::model() const
     if (!d->model)
         d->model = createModel();
     return d->model;
+}
+
+// Extensions and file dialog flters
+
+QString CrammeroProject::extension() const {
+    return "tab";
+}
+
+QStringList CrammeroProject::extensions() const {
+    return QStringList() << "tab" << "xml";
+}
+
+QString CrammeroProject::fileDialogFilter() const {
+    return tr("Tab delimited files (*.tab);;Xml files (*.xml);;Any file (*)");
 }
