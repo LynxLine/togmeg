@@ -6,12 +6,11 @@
 #define MAINWINDOW_H
 
 #include <QAction>
-#include <QMainWindow>
-#define _action(name) MainWindow::instance()->action(name)
+#include "BaseWindow.h"
 
 /*!
  */
-class MainWindow : public QMainWindow
+class MainWindow : public BaseWindow
 {
 Q_OBJECT
 
@@ -22,23 +21,17 @@ public:
         ExamineMode
     };
 	
-    MainWindow();
+    MainWindow(BaseProject * project, QWidget * parent = 0, Qt::WFlags flags = 0);
     virtual ~MainWindow();
-    static MainWindow * instance();
-
-    QAction * action(QString name);
-    QActionGroup * actionGroup(QString name);
 
     MainWindow::ViewMode viewMode();
     static QFont baseFont(qreal multiplier = 1.0, int weight = 20);
 
-    bool allowToClose();
-
 public slots:
-    void openFile();
-    void openFile(QString);
-    bool saveFile();
-    bool saveFileAs();
+    virtual void openFile();
+    virtual void openFile(QString);
+    virtual bool saveFile();
+    virtual bool saveFileAs();
 
     void newEntry();
     void previousWindow();
@@ -52,14 +45,10 @@ public slots:
     void openAbout();
 
     void switchFullScreen();
-
     void setViewMode(MainWindow::ViewMode);
 
 signals:
     void viewModeChanged(MainWindow::ViewMode);
-
-protected:
-    virtual void closeEvent(QCloseEvent *);
 
 private slots:
 	void createActions();
@@ -67,9 +56,7 @@ private slots:
     void createShortcuts();
     void createMenuBar();
     void createToolBar();
-    void readSettings();
-    void saveSettings();
-
+    
     QString release() const;
 
 private:

@@ -9,6 +9,8 @@
 #include "CrammeroWindow.h"
 #include "examinator.h"
 
+#include "BaseProject.h"
+
 #include "examinewidget.h"
 #include "CramFileWidget.h"
 
@@ -21,31 +23,10 @@
 #include "qt_windows.h"
 #endif
 
-#define DEFAULT_SIZE QRect(30, 60, 700, 650)
-#define S_RECENTFILES    "CrammeroWindow/RecentFiles"
-#define S_WINGEOMETRY    "CrammeroWindow/Geometry"
-#define S_WINDOWSTATE    "CrammeroWindow/WindowState"
-#define S_STATUSBARSHOWN "CrammeroWindow/StatusBarVisible"
-#define S_HIDDENCOLUMNS  "CrammeroWindow/HiddenColumns"
-#define S_COLUMNSIZES    "CrammeroWindow/ColumnSizes"
-#define S_LINKSUPDATES   "CrammeroWindow/LinksUpdates"
-#define S_CONTENTFONT    "CrammeroWindow/ContentFont"
-#define THUMB_SIZE 80
-
-void logMessageHandler(QtMsgType type, const char *msg);
-
 class MainWindow::Private
 {
 public:
-    Private(MainWindow * p)
-    :viewMode(MainWindow::ViewMode(-1)) {
-        instance = p;
-    }
-
-    static MainWindow * instance;
-
-    QMap<QString, QActionGroup *> actionGroups;
-    QMap<QString, QAction *> actions;
+    MainWindow * instance;
     MainWindow::ViewMode viewMode;
     
     QPointer<StudyTaskModel> model;
@@ -57,40 +38,20 @@ public:
     TaskEditorWidget * taskEditorWidget;
 };
 
-MainWindow * MainWindow::Private::instance = 0L;
-
 /*!
  Creates new MainWindow
  */
-MainWindow::MainWindow()
-:QMainWindow()
+MainWindow::MainWindow(BaseProject * proj, QWidget * parent, Qt::WFlags flags)
+:BaseWindow(proj, parent, flags)
 {
-    d = new Private(this);
+    d = new Private;
+    d->instance = this;
+    d->viewMode = MainWindow::ViewMode(-1);
 
     d->model = new StudyTaskModel(this);
     d->examinator = new Examinator(d->model);
     
-    //setup palette
-    {
-        QPalette palette = this->palette();
-        palette.setColor(QPalette::Base, "#FFFFFF");
-        palette.setColor(QPalette::AlternateBase, "#EDF3FE");
-        palette.setColor(QPalette::Active,   QPalette::Highlight, "#3875D7");
-        palette.setColor(QPalette::Inactive, QPalette::Highlight, "#A4B4CB");
-        palette.setColor(QPalette::Active,   QPalette::HighlightedText, "#FFFFFF");
-        palette.setColor(QPalette::Inactive, QPalette::HighlightedText, "#FFFFFF");
-        palette.setColor(QPalette::Disabled, QPalette::HighlightedText, "#FFFFFF");
-        setPalette( palette );
-    }
-
     QSettings s;
-
-    //first geometry properies
-    QByteArray ba = s.value("geometry/application").toByteArray();
-    if (ba.isEmpty()) {
-        setGeometry( DEFAULT_SIZE );
-    }
-    else restoreGeometry(ba);
 
     setWindowTitle("Crammero");
     
@@ -117,6 +78,10 @@ MainWindow::MainWindow()
             actionGroup("Play"), SLOT(setEnabled(bool)));
     connect(d->examinator, SIGNAL(stopped()),
             this, SLOT(stop()));
+    connect(d->model, SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)),
+            project(), SLOT(setModified()));
+    
+    readSettings();
 }
 
 /*!
@@ -129,46 +94,11 @@ MainWindow::~MainWindow()
     s.setValue("geometry/maximized", isMaximized());
     s.setValue("geometry/fullscreen", isFullScreen());
     s.sync();
-    
-    d->actions.clear();
 
     delete d->examineWidget;
     delete d->taskEditorWidget;
 
     delete d;
-}
-
-/*!
- Returns the MainWindow object.
- Useful for accessing from other classes.
- */
-MainWindow * MainWindow::instance()
-{
-    return MainWindow::Private::instance;
-}
-
-/*!
- Returns QAction object by name.
- */
-QAction * MainWindow::action(QString name)
-{
-    if (!d->actions.contains(name))
-        qDebug() << "Not found action: " << name;
-
-    Q_ASSERT(d->actions[name]);
-    return d->actions[name];
-}
-
-/*!
- Returns QActionGroup object by name.
- */
-QActionGroup * MainWindow::actionGroup(QString name)
-{
-    if (!d->actionGroups.contains(name))
-        qDebug() << "Not found action: " << name;
-
-    Q_ASSERT(d->actionGroups[name]);
-    return d->actionGroups[name];
 }
 
 /*!
@@ -193,26 +123,26 @@ QString MainWindow::release() const
  */
 void MainWindow::createActions()
 {
-	d->actions["Open"]   = new QAction (tr("Open..."), this);
-	d->actions["Close"]  = new QAction (tr("Close"), this);
-	d->actions["Save"]   = new QAction (tr("Save"), this);
-	d->actions["SaveAs"] = new QAction (tr("Save As..."), this);
-	d->actions["Quit"]   = new QAction (tr("E&xit"), this);
+	setAction("Open"   , new QAction (tr("Open..."), this));
+	setAction("Close"  , new QAction (tr("Close"), this));
+	setAction("Save"   , new QAction (tr("Save"), this));
+	setAction("SaveAs" , new QAction (tr("Save As..."), this));
+	setAction("Quit"   , new QAction (tr("E&xit"), this));
 
-	d->actions["Add"] = new QAction (QIcon(":/images/icons/Add.png"), tr("&Add Row"), this);
+	setAction("Add" , new QAction (QIcon(":/images/icons/Add.png"), tr("&Add Row"), this));
 
-    d->actions["Play" ] = new QAction (QIcon(":/images/icons/Play.png"   ), tr("&Play"), this);
-    d->actions["Study"] = new QAction (QIcon(":/images/icons/Record.png" ), tr("&Study"), this);
-    d->actions["Stop" ] = new QAction (QIcon(":/images/icons/Stop.png"   ), tr("&Stop"), this);
+    setAction("Play"  , new QAction (QIcon(":/images/icons/Play.png"   ), tr("&Play"), this));
+    setAction("Study" , new QAction (QIcon(":/images/icons/Record.png" ), tr("&Study"), this));
+    setAction("Stop"  , new QAction (QIcon(":/images/icons/Stop.png"   ), tr("&Stop"), this));
 
-    d->actions["About"]         = new QAction (tr("&About"), this);
-    d->actions["Help"]          = new QAction (tr("Crammero &Help"), this);
-    d->actions["CheckUpdates"] = new QAction (tr("Check for Updates Now"), this);
+    setAction("About"         , new QAction (tr("&About"), this));
+    setAction("Help"          , new QAction (tr("Crammero &Help"), this));
+    setAction("CheckUpdates" , new QAction (tr("Check for Updates Now"), this));
 
-    d->actionGroups["Play"] = new QActionGroup(this);
-    d->actionGroups["Play"]->setExclusive(false);
-    d->actionGroups["Play"]->addAction( d->actions["Play" ] );
-    d->actionGroups["Play"]->addAction( d->actions["Study" ] );
+    setActionGroup("Play", new QActionGroup(this));
+    actionGroup("Play")->setExclusive(false);
+    actionGroup("Play")->addAction(action("Play"));
+    actionGroup("Play")->addAction(action("Study"));
 }
 
 /*!
@@ -440,7 +370,7 @@ void MainWindow::openFile(QString path)
     if (path.endsWith(".xml", Qt::CaseInsensitive))
         d->model->loadXmlFile(path);
     else d->model->loadTabFile(path);
-    d->model->setModified(false);
+    project()->setModified(false);
     
     bool ok = true;
     if (!ok) {
@@ -481,92 +411,6 @@ bool MainWindow::saveFileAs()
         ok = d->model->saveXmlFile(path);
     else ok = d->model->saveTabFile(path);
     
-    d->model->setModified(false);
+    project()->setModified(false);
     return ok;
-}
-
-bool MainWindow::allowToClose()
-{
-    if (!d->model->isModified())
-        return true;
-    
-    QString fileName = d->model->filePath();
-    bool wasEmpty = false;
-    if (fileName.isEmpty()) {
-        fileName = "Untitled";
-        wasEmpty = true;
-    }
-    
-    QMessageBox box(QMessageBox::Information, tr("Save Project?"),
-                    tr("Do you want to save the changes to \"%1\" Project before closing?").arg(fileName),
-                    QMessageBox::Discard | QMessageBox::Cancel | QMessageBox::Save, this);
-    box.setInformativeText(tr("If you don't save, your changes will be lost."));
-    box.setWindowModality(Qt::WindowModal);
-    box.setDefaultButton(QMessageBox::Save);
-    
-    static_cast<QPushButton *>(box.button(QMessageBox::Discard))->setMinimumWidth(90);
-    static_cast<QPushButton *>(box.button(QMessageBox::Cancel))->setMinimumWidth(90);
-    static_cast<QPushButton *>(box.button(QMessageBox::Save))->setMinimumWidth(90);
-    
-#ifdef Q_WS_WIN
-    QString text = box.text();
-    box.setText( tr("<font size='+1'>%1</font>").arg(text) );
-    static_cast<QPushButton *>(box.button(QMessageBox::Discard))->setText(tr("Don't Save"));
-    static_cast<QPushButton *>(box.button(QMessageBox::Save))->setText(tr("Save"));
-#endif
-    
-    switch (box.exec()) {
-        case QMessageBox::Save: {
-            bool ok = false;
-            ok = saveFile();
-            if (!ok) return false;
-            break;
-        }
-        case QMessageBox::Discard: {
-            break;
-        }
-        case QMessageBox::Cancel:
-            return false;
-    }
-    
-    return true;
-}
-
-void MainWindow::closeEvent(QCloseEvent * event)
-{
-    if (!allowToClose())
-        return event->ignore();
-    
-    saveSettings();
-    event->accept();
-}
-
-/*!
- Loads and apply settings of MainWindow such as geometry, position, state,
- maximized/minimized/normal, state of docking widgets etc.
- */
-void MainWindow::readSettings()
-{
-    QSettings s;
-    QByteArray geom = s.value(S_WINGEOMETRY).toByteArray();
-    QByteArray state = s.value(S_WINDOWSTATE).toByteArray();
-	
-    if (!geom.isEmpty())
-		restoreGeometry(geom);
-	else resize(900, 600);
-    
-    if (!state.isEmpty())
-        restoreState(state);
-}
-
-/*!
- */
-void MainWindow::saveSettings()
-{
-    QByteArray geometry = saveGeometry();
-    QByteArray state = saveState();
-    
-    QSettings s;
-    s.setValue(S_WINGEOMETRY, geometry );
-    s.setValue(S_WINDOWSTATE, state );
 }

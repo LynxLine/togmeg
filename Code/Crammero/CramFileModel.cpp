@@ -26,9 +26,6 @@ StudyTaskModel::StudyTaskModel(QObject * parent)
     d = new Private;
     d->isModified = false;
     addNewEntry();
-    
-    connect(this, SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)),
-            this, SLOT(setModified()));
 }
 
 /*!
@@ -252,16 +249,6 @@ Qt::ItemFlags StudyTaskModel::flags(const QModelIndex &index) const
 
     if ( index.column() == IdColumn ) return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
-}
-
-bool StudyTaskModel::isModified() const
-{
-    return d->isModified;
-}
-
-void StudyTaskModel::setModified(bool f)
-{
-    d->isModified = f;
 }
 
 QString StudyTaskModel::filePath() const

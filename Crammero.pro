@@ -17,6 +17,7 @@ PRECOMPILED_HEADER = Code/stable.h
 
 UI_DIR = ./build/GeneratedFiles
 MOC_DIR = ./build/GeneratedFiles
+RCC_DIR = ./build/GeneratedFiles
 
 include(Code/Utils/Utils.pri)
 include(Code/Crammero/Crammero.pri)

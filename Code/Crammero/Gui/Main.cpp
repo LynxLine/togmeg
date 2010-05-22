@@ -6,7 +6,9 @@
 #include <iostream>
 
 #include "crammero.h"
+
 #include "CrammeroWindow.h"
+#include "BaseProject.h"
 
 void initResources();
 
@@ -14,7 +16,6 @@ int main( int argc, char ** argv )
 {
     initResources();
     Application a(argc, argv );
-
 
 #ifndef Q_WS_MAC
     QIcon icon(":/images/crammeroicon.png");
@@ -31,7 +32,8 @@ int main( int argc, char ** argv )
     qRegisterMetaType<QModelIndex>("QModelIndex");
 
     //main window
-    MainWindow mw;
+    BaseProject * p = new BaseProject(&a);
+    MainWindow mw(p);
 
     QSettings s;
     bool maximized = s.value("geometry/maximized", false).toBool();

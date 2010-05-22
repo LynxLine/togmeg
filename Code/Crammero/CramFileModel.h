@@ -39,11 +39,9 @@ public:
     QModelIndex addNewEntry();
     void removeEntry(QModelIndex index);
 
-    bool isModified() const;
     QString filePath() const;
     
 public slots:
-    void setModified(bool=true);
     void loadTabFile(QString filePath);
     void loadXmlFile(QString filePath);
     bool saveTabFile(QString filePath);
