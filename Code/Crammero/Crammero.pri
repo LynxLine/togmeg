@@ -1,6 +1,5 @@
 
 INCLUDEPATH += $$PWD
-INCLUDEPATH += $$PWD/Gui
 
 HEADERS += \
     $$PWD/Crammero.h \
@@ -9,6 +8,7 @@ HEADERS += \
     $$PWD/playtaskcontroller.h \
     $$PWD/studytaskcontroller.h \
     $$PWD/CramFileModel.h \
+    $$PWD/CrammeroProject.h \
 
 SOURCES += \
     $$PWD/Crammero.cpp \
@@ -17,6 +17,9 @@ SOURCES += \
     $$PWD/playtaskcontroller.cpp \
     $$PWD/studytaskcontroller.cpp \
     $$PWD/CramFileModel.cpp \
+    $$PWD/CrammeroProject.cpp \
+
+INCLUDEPATH += $$PWD/Gui
 
 HEADERS += \
     $$PWD/Gui/CrammeroWindow.h \

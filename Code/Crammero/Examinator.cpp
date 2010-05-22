@@ -19,14 +19,14 @@ public:
     State state;
     QString userAnswer;
     
-    QPointer<StudyTaskModel> model;
+    QPointer<CramFileModel> model;
     QPointer<TaskController> controller;
 };
 
 /*!
  * Creates the object.
  */
-Examinator::Examinator(StudyTaskModel * model)
+Examinator::Examinator(CramFileModel * model)
 :QObject(model)
 {
     d = new Private;

@@ -14,7 +14,7 @@ class PlayTaskController : public TaskController
 {
 Q_OBJECT
 public:
-    PlayTaskController(StudyTaskModel * parent = 0);
+    PlayTaskController(CramFileModel * parent = 0);
     virtual ~PlayTaskController();
 
     virtual bool hasNext();

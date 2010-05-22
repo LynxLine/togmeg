@@ -8,7 +8,7 @@
 #include "crammero.h"
 
 #include "CrammeroWindow.h"
-#include "BaseProject.h"
+#include "CrammeroProject.h"
 
 void initResources();
 
@@ -32,7 +32,7 @@ int main( int argc, char ** argv )
     qRegisterMetaType<QModelIndex>("QModelIndex");
 
     //main window
-    BaseProject * p = new BaseProject(&a);
+    CrammeroProject * p = new CrammeroProject(&a);
     MainWindow mw(p);
 
     QSettings s;

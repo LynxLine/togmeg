@@ -20,7 +20,7 @@ public:
 /*!
  Crestes TaskEditorWidget
  */
-TaskEditorWidget::TaskEditorWidget(StudyTaskModel * model, QWidget * parent)
+TaskEditorWidget::TaskEditorWidget(CramFileModel * model, QWidget * parent)
 :QWidget(parent)
 {
     d = new Private;

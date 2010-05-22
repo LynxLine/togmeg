@@ -6,7 +6,7 @@
 #define EXAMINATOR_H
 
 #include <QObject>
-class StudyTaskModel;
+class CramFileModel;
 
 /*!
  * \class Examinator
@@ -27,7 +27,7 @@ public:
         IndicatingMismatch,
     };
 
-    Examinator(StudyTaskModel * model);
+    Examinator(CramFileModel * model);
     virtual ~Examinator();
 
     State state();

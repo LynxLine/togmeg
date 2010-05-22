@@ -14,7 +14,7 @@ public:
     QString answer;
 };
 
-class StudyTaskModel : public QAbstractListModel
+class CramFileModel : public QAbstractListModel
 {
 Q_OBJECT
 
@@ -25,8 +25,8 @@ public:
         AnswerColumn,
         ColumnCount
     };
-    StudyTaskModel(QObject * parent = 0L);
-    virtual ~StudyTaskModel();
+    CramFileModel(QObject * parent = 0L);
+    virtual ~CramFileModel();
     QString taskId();
 
     Qt::ItemFlags flags(const QModelIndex &index) const;
@@ -38,6 +38,7 @@ public:
 
     QModelIndex addNewEntry();
     void removeEntry(QModelIndex index);
+    void clear();
 
     QString filePath() const;
     

@@ -8,6 +8,8 @@
 #include <QAction>
 #include "BaseWindow.h"
 
+class CrammeroProject;
+
 /*!
  */
 class MainWindow : public BaseWindow
@@ -21,12 +23,14 @@ public:
         ExamineMode
     };
 	
-    MainWindow(BaseProject * project, QWidget * parent = 0, Qt::WFlags flags = 0);
+    MainWindow(CrammeroProject * project, QWidget * parent = 0, Qt::WFlags flags = 0);
     virtual ~MainWindow();
 
     MainWindow::ViewMode viewMode();
     static QFont baseFont(qreal multiplier = 1.0, int weight = 20);
 
+    CrammeroProject * project() const;
+    
 public slots:
     virtual void openFile();
     virtual void openFile(QString);

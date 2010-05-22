@@ -5,11 +5,11 @@
 #include <QtGui>
 #include <QtCore>
 
-#include "crammero.h"
 #include "CrammeroWindow.h"
-#include "examinator.h"
+#include "CrammeroProject.h"
 
-#include "BaseProject.h"
+#include "crammero.h"
+#include "examinator.h"
 
 #include "examinewidget.h"
 #include "CramFileWidget.h"
@@ -29,10 +29,8 @@ public:
     MainWindow * instance;
     MainWindow::ViewMode viewMode;
     
-    QPointer<StudyTaskModel> model;
     QPointer<Examinator> examinator;
     
-    //gui
     QStackedWidget * stack;
     ExamineWidget * examineWidget;
     TaskEditorWidget * taskEditorWidget;
@@ -41,15 +39,14 @@ public:
 /*!
  Creates new MainWindow
  */
-MainWindow::MainWindow(BaseProject * proj, QWidget * parent, Qt::WFlags flags)
+MainWindow::MainWindow(CrammeroProject * proj, QWidget * parent, Qt::WFlags flags)
 :BaseWindow(proj, parent, flags)
 {
     d = new Private;
     d->instance = this;
     d->viewMode = MainWindow::ViewMode(-1);
 
-    d->model = new StudyTaskModel(this);
-    d->examinator = new Examinator(d->model);
+    d->examinator = new Examinator(project()->model());
     
     QSettings s;
 
@@ -66,7 +63,7 @@ MainWindow::MainWindow(BaseProject * proj, QWidget * parent, Qt::WFlags flags)
     d->stack = new QStackedWidget(this);
     setCentralWidget( d->stack );
 
-    d->taskEditorWidget = new TaskEditorWidget(d->model, d->stack);
+    d->taskEditorWidget = new TaskEditorWidget(project()->model(), d->stack);
     d->stack->addWidget( d->taskEditorWidget );
     
     d->examineWidget = new ExamineWidget(d->examinator, d->stack );
@@ -78,7 +75,7 @@ MainWindow::MainWindow(BaseProject * proj, QWidget * parent, Qt::WFlags flags)
             actionGroup("Play"), SLOT(setEnabled(bool)));
     connect(d->examinator, SIGNAL(stopped()),
             this, SLOT(stop()));
-    connect(d->model, SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)),
+    connect(project()->model(), SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)),
             project(), SLOT(setModified()));
     
     readSettings();
@@ -99,6 +96,11 @@ MainWindow::~MainWindow()
     delete d->taskEditorWidget;
 
     delete d;
+}
+
+CrammeroProject * MainWindow::project() const
+{
+    return dynamic_cast<CrammeroProject *>(BaseWindow::project());
 }
 
 /*!
@@ -368,8 +370,8 @@ void MainWindow::openFile(QString path)
 {
     qDebug() << path;
     if (path.endsWith(".xml", Qt::CaseInsensitive))
-        d->model->loadXmlFile(path);
-    else d->model->loadTabFile(path);
+        project()->model()->loadXmlFile(path);
+    else project()->model()->loadTabFile(path);
     project()->setModified(false);
     
     bool ok = true;
@@ -408,8 +410,8 @@ bool MainWindow::saveFileAs()
     
     bool ok = false;
     if (path.endsWith(".xml", Qt::CaseInsensitive))
-        ok = d->model->saveXmlFile(path);
-    else ok = d->model->saveTabFile(path);
+        ok = project()->model()->saveXmlFile(path);
+    else ok = project()->model()->saveTabFile(path);
     
     project()->setModified(false);
     return ok;

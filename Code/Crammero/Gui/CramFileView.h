@@ -8,7 +8,7 @@
 #include <QTreeView>
 #include "crammero.h"
 
-class StudyTaskModel;
+class CramFileModel;
 
 /*!
  * \class TaskEditorView
@@ -21,11 +21,11 @@ public:
         QAQAMode = 0,
         QQAAMode,
     };
-    TaskEditorView(StudyTaskModel * model, QWidget * parent = 0);
+    TaskEditorView(CramFileModel * model, QWidget * parent = 0);
     virtual ~TaskEditorView();
     NextItemMode nextItemMode();
 
-    StudyTaskModel * studyTaskModel() const;
+    CramFileModel * studyTaskModel() const;
     
 public slots:
     void addNewEntry();

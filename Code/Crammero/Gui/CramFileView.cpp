@@ -14,7 +14,7 @@
 class TaskEditorView::Private
 {
 public:
-    QPointer<StudyTaskModel> model;
+    QPointer<CramFileModel> model;
     QPointer<TaskEditorItemDelegate> delegate;
     QPointer<QMenu> contextMenu;
 
@@ -24,7 +24,7 @@ public:
     NextItemMode nextItemMode;
 };
 
-TaskEditorView::TaskEditorView(StudyTaskModel * model, QWidget * parent)
+TaskEditorView::TaskEditorView(CramFileModel * model, QWidget * parent)
 :QTreeView(parent) 
 {
     d = new Private;
@@ -88,7 +88,7 @@ TaskEditorView::TaskEditorView(StudyTaskModel * model, QWidget * parent)
     header()->setResizeMode(2, QHeaderView::Stretch);
 }
 
-StudyTaskModel * TaskEditorView::studyTaskModel() const
+CramFileModel * TaskEditorView::studyTaskModel() const
 {
     return d->model;
 }
@@ -123,7 +123,7 @@ void TaskEditorView::activateContextMenu(const QPoint & pos)
 void TaskEditorView::toFirstRow()
 {
     if ( d->model->rowCount() ) {
-        QModelIndex index = model()->index(0, StudyTaskModel::QuestionColumn);
+        QModelIndex index = model()->index(0, CramFileModel::QuestionColumn);
         QMetaObject::invokeMethod(this, "setCurrentIndex", Qt::QueuedConnection, Q_ARG(QModelIndex, index));
     }
 }
@@ -197,15 +197,15 @@ void TaskEditorView::editNextItem()
 
     if ( !currentIndex().isValid() ) return;
     int nextRow = currentIndex().row();
-    if ( currentIndex().column() == StudyTaskModel::QuestionColumn) {
-        QModelIndex next = model()->index( nextRow, StudyTaskModel::AnswerColumn );
+    if ( currentIndex().column() == CramFileModel::QuestionColumn) {
+        QModelIndex next = model()->index( nextRow, CramFileModel::AnswerColumn );
         setCurrentIndex(next);
     }
-    else if ( currentIndex().column() == StudyTaskModel::AnswerColumn) {
+    else if ( currentIndex().column() == CramFileModel::AnswerColumn) {
         if (nextRow < model()->rowCount()-1)
             nextRow++;
 
-        QModelIndex next = model()->index( nextRow, StudyTaskModel::QuestionColumn );
+        QModelIndex next = model()->index( nextRow, CramFileModel::QuestionColumn );
         setCurrentIndex(next);
     }
 }
@@ -214,15 +214,15 @@ void TaskEditorView::editPreviousItem()
 {
     if ( !currentIndex().isValid() ) return;
     int previousRow = currentIndex().row();
-    if ( currentIndex().column() == StudyTaskModel::QuestionColumn) {
+    if ( currentIndex().column() == CramFileModel::QuestionColumn) {
         if (previousRow > 0)
             previousRow--;
 
-        QModelIndex previous = model()->index( previousRow, StudyTaskModel::AnswerColumn );
+        QModelIndex previous = model()->index( previousRow, CramFileModel::AnswerColumn );
         setCurrentIndex(previous);
     }
-    else if ( currentIndex().column() == StudyTaskModel::AnswerColumn) {
-        QModelIndex previous = model()->index( previousRow, StudyTaskModel::QuestionColumn );
+    else if ( currentIndex().column() == CramFileModel::AnswerColumn) {
+        QModelIndex previous = model()->index( previousRow, CramFileModel::QuestionColumn );
         setCurrentIndex(previous);
     }
 }
@@ -254,11 +254,11 @@ void TaskEditorView::currentChanged(const QModelIndex & current, const QModelInd
     QTreeView::currentChanged(current, previous);
     if ( !current.isValid() ) return;
 
-    if ( current.column() == StudyTaskModel::QuestionColumn ||
-         current.column() == StudyTaskModel::AnswerColumn)
+    if ( current.column() == CramFileModel::QuestionColumn ||
+         current.column() == CramFileModel::AnswerColumn)
         edit(current);
     else {
-        QModelIndex index = model()->index( current.row(), StudyTaskModel::QuestionColumn );
+        QModelIndex index = model()->index( current.row(), CramFileModel::QuestionColumn );
         setCurrentIndex(index);
     }
 }
@@ -368,7 +368,7 @@ void TaskEditorView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
                     painter->drawLine(x,y, x+w,y);
                     painter->drawLine(x,y+h, x+w,y+h);
 
-                    if ( headerSection == StudyTaskModel::AnswerColumn ) {
+                    if ( headerSection == CramFileModel::AnswerColumn ) {
                         painter->drawLine(x+w-1,y, x+w-1,y+h);
                     }
                 }

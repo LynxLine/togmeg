@@ -36,7 +36,7 @@ public:
 /*!
  * Creates the object.
  */
-PlayTaskController::PlayTaskController(StudyTaskModel * parent)
+PlayTaskController::PlayTaskController(CramFileModel * parent)
 :TaskController(parent)
 {
     d = new Private;
@@ -97,7 +97,7 @@ bool PlayTaskController::hasNext()
 {
     int nextIndex = d->index;
     while ( nextIndex < model->rowCount() ) {
-        QModelIndex i = model->index(nextIndex, StudyTaskModel::QuestionColumn);
+        QModelIndex i = model->index(nextIndex, CramFileModel::QuestionColumn);
         QString question = model->data(i).toString();
         if ( !question.isEmpty() ) break;
         nextIndex++;
@@ -108,7 +108,7 @@ bool PlayTaskController::hasNext()
 ControllerDataEntry PlayTaskController::next()
 {
     while ( d->index < model->rowCount() ) {
-        QModelIndex i = model->index(d->index, StudyTaskModel::QuestionColumn);
+        QModelIndex i = model->index(d->index, CramFileModel::QuestionColumn);
         QString question = model->data(i).toString();
         if ( !question.isEmpty() ) break;
         d->index++;
@@ -116,8 +116,8 @@ ControllerDataEntry PlayTaskController::next()
 
     ControllerDataEntry entry;
 
-    entry.answer = model->data( model->index(d->index, StudyTaskModel::AnswerColumn) ).toString();
-    entry.question = model->data( model->index(d->index, StudyTaskModel::QuestionColumn) ).toString();
+    entry.answer = model->data( model->index(d->index, CramFileModel::AnswerColumn) ).toString();
+    entry.question = model->data( model->index(d->index, CramFileModel::QuestionColumn) ).toString();
 
     entry.totalTime = 5000; //temp
     entry.startTime = 0; //temp

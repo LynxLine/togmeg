@@ -8,19 +8,19 @@
 #include "crammero.h"
 #include "CramFileModel.h"
 
-class StudyTaskModel::Private
+class CramFileModel::Private
 {
 public:
-    static StudyTaskModel * instance;
+    static CramFileModel * instance;
     QList<StudyDataEntry> entries;
     bool isModified;
     QString filePath;
 };
 
 /*!
- Crestes StudyTaskModel
+ Crestes CramFileModel
  */
-StudyTaskModel::StudyTaskModel(QObject * parent)
+CramFileModel::CramFileModel(QObject * parent)
 :QAbstractListModel(parent)
 {
     d = new Private;
@@ -31,14 +31,14 @@ StudyTaskModel::StudyTaskModel(QObject * parent)
 /*!
  Deletes the object.
  */
-StudyTaskModel::~StudyTaskModel()
+CramFileModel::~CramFileModel()
 {
     delete d;
 }
 
-void StudyTaskModel::loadTabFile(QString filePath)
+void CramFileModel::loadTabFile(QString filePath)
 {
-    qDebug() << "StudyTaskModel::loadTabFile()," << filePath;
+    qDebug() << "CramFileModel::loadTabFile()," << filePath;
     
     d->entries.clear();
     d->filePath = filePath;
@@ -61,9 +61,9 @@ void StudyTaskModel::loadTabFile(QString filePath)
     addNewEntry();
 }
 
-void StudyTaskModel::loadXmlFile(QString filePath)
+void CramFileModel::loadXmlFile(QString filePath)
 {
-    qDebug() << "StudyTaskModel::loadXmlFile()," << filePath;
+    qDebug() << "CramFileModel::loadXmlFile()," << filePath;
     
     d->entries.clear();
     d->filePath = filePath;
@@ -93,7 +93,7 @@ void StudyTaskModel::loadXmlFile(QString filePath)
     addNewEntry();
 }
 
-bool StudyTaskModel::saveTabFile(QString filePath)
+bool CramFileModel::saveTabFile(QString filePath)
 {
     QFile f(filePath);
     if (f.open(QIODevice::WriteOnly)) {
@@ -112,7 +112,7 @@ bool StudyTaskModel::saveTabFile(QString filePath)
     return false;
 }
 
-bool StudyTaskModel::saveXmlFile(QString filePath)
+bool CramFileModel::saveXmlFile(QString filePath)
 {
     QFile f(filePath);
     if (f.open(QIODevice::WriteOnly)) {
@@ -147,7 +147,7 @@ bool StudyTaskModel::saveXmlFile(QString filePath)
     return false;
 }
 
-QModelIndex StudyTaskModel::addNewEntry()
+QModelIndex CramFileModel::addNewEntry()
 {
     beginInsertRows(QModelIndex(), d->entries.count(), d->entries.count());
     StudyDataEntry entry;
@@ -157,7 +157,7 @@ QModelIndex StudyTaskModel::addNewEntry()
     return index( d->entries.count()-1,1 );
 }
 
-void StudyTaskModel::removeEntry(QModelIndex index)
+void CramFileModel::removeEntry(QModelIndex index)
 {
     if ( !index.isValid() ) return;
     if ( index.row() < 0 || index.row() >= d->entries.count() ) return;
@@ -168,19 +168,26 @@ void StudyTaskModel::removeEntry(QModelIndex index)
     endRemoveRows();
 }
 
-int StudyTaskModel::rowCount(const QModelIndex & parent) const
+void CramFileModel::clear()
+{
+    beginResetModel();
+    d->entries.clear();
+    endResetModel();
+}
+
+int CramFileModel::rowCount(const QModelIndex & parent) const
 {
     Q_UNUSED(parent);
     return d->entries.count();
 }
 
-int StudyTaskModel::columnCount(const QModelIndex & parent) const
+int CramFileModel::columnCount(const QModelIndex & parent) const
 {
     Q_UNUSED(parent);
     return ColumnCount;
 }
 
-QVariant StudyTaskModel::data(const QModelIndex & index, int role) const
+QVariant CramFileModel::data(const QModelIndex & index, int role) const
 {
     if ( !index.isValid() ) return QVariant();
     if ( index.row() < 0 || index.row() >= d->entries.count() ) return QVariant();
@@ -198,7 +205,7 @@ QVariant StudyTaskModel::data(const QModelIndex & index, int role) const
     return QVariant();
 }
 
-bool StudyTaskModel::setData(const QModelIndex & i, const QVariant & value, int role)
+bool CramFileModel::setData(const QModelIndex & i, const QVariant & value, int role)
 {
     if ( !i.isValid() ) return false;
     if ( i.row() < 0 || i.row() >= d->entries.count() ) return false;
@@ -222,7 +229,7 @@ bool StudyTaskModel::setData(const QModelIndex & i, const QVariant & value, int 
     return false;
 }
 
-QVariant StudyTaskModel::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant CramFileModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     Q_UNUSED(orientation);
 
@@ -242,7 +249,7 @@ QVariant StudyTaskModel::headerData(int section, Qt::Orientation orientation, in
     return QVariant();
 }
 
-Qt::ItemFlags StudyTaskModel::flags(const QModelIndex &index) const 
+Qt::ItemFlags CramFileModel::flags(const QModelIndex &index) const 
 {
     if ( !index.isValid() ) return Qt::ItemIsDropEnabled;
     if ( index.row() < 0 || index.row() >= d->entries.count() ) return Qt::ItemIsDropEnabled;
@@ -251,7 +258,7 @@ Qt::ItemFlags StudyTaskModel::flags(const QModelIndex &index) const
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
 }
 
-QString StudyTaskModel::filePath() const
+QString CramFileModel::filePath() const
 {
     return d->filePath;
 }

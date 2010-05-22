@@ -8,7 +8,7 @@
 #include <QWidget>
 
 class TaskEditorView;
-class StudyTaskModel;
+class CramFileModel;
 
 /*!
  */
@@ -17,7 +17,7 @@ class TaskEditorWidget : public QWidget
 Q_OBJECT
 
 public:
-    TaskEditorWidget(StudyTaskModel * model, QWidget * parent = 0L);
+    TaskEditorWidget(CramFileModel * model, QWidget * parent = 0L);
     virtual ~TaskEditorWidget();
 
     TaskEditorView * view() const;

@@ -9,7 +9,7 @@
 /*!
  * Creates the object.
  */
-TaskController::TaskController(StudyTaskModel * parent)
+TaskController::TaskController(CramFileModel * parent)
 :QObject(parent), model(parent)
 {
 }
