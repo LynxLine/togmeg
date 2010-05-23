@@ -149,6 +149,12 @@ void FileNavigationView::mousePressEvent(QMouseEvent * me)
     }
 }
 
+void FileNavigationView::resizeEvent(QResizeEvent * re)
+{
+    QTreeView::resizeEvent(re);
+    emit widthChanged(re->size().width());
+}
+
 //
 // FileNavigationViewDelegate
 //

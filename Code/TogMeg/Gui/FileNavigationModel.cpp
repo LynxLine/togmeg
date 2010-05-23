@@ -53,8 +53,9 @@ QVariant FileNavigationModel::data(const QModelIndex & index, int role) const
         if ( index.column() == ColName ) 
             return d->entries[ index.row() ].fileName();
         else if ( index.column() == ColLinks ) {
-            int linkCount = 0;
-            return linkCount;
+            //int linkCount = 0;
+            //return linkCount;
+            return QVariant();
         }
     }
     

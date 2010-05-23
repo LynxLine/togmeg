@@ -16,12 +16,14 @@ public:
     void setModel(FileNavigationModel *);
     
 signals:
+    void widthChanged(int);
     void openFileRequest(const QString &);
     void filterLinksByFilePath(QString filePath);
     
 protected:
     virtual void leaveEvent(QEvent * e);
     virtual void showEvent(QShowEvent * se);
+    virtual void resizeEvent(QResizeEvent * re);
     virtual void keyReleaseEvent(QKeyEvent * ke);
     virtual void mouseMoveEvent(QMouseEvent * me);
     virtual void mousePressEvent(QMouseEvent * me);

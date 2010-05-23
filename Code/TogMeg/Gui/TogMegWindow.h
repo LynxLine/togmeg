@@ -55,6 +55,7 @@ private slots:
     void createToolBar();
     
     QString release() const;
+    void adjustSpacerInToolBar(int);
 
 private:
 	class Private;

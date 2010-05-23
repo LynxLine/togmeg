@@ -39,6 +39,7 @@ public:
     QPointer<TaskEditorWidget> taskEditorWidget;
     
     QPointer<QDockWidget> filesDock;
+    QPointer<QWidget> toolBarLeftSpacer;
 };
 
 /*!
@@ -186,10 +187,20 @@ void TogMegWindow::createMenuBar()
 void TogMegWindow::createToolBar()
 {
 	QToolBar * toolBar = addToolBar(tr("Toolbar"));
+    
+    d->toolBarLeftSpacer = new QWidget;
+    d->toolBarLeftSpacer->setFixedHeight(0);
+    toolBar->addWidget(d->toolBarLeftSpacer);
+    
 	toolBar->addAction( action("Play") );
 	toolBar->addAction( action("Study") );
     toolBar->addAction( action("Stop") );
-    
+
+    QWidget * sp1 = new QWidget;
+    sp1->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    sp1->setFixedHeight(0);
+    toolBar->addWidget(sp1);
+
     toolBar->setIconSize(QSize(24, 24));
     toolBar->setMovable(false);
     
@@ -366,6 +377,8 @@ QDockWidget * TogMegWindow::filesDock() const
 
         d->filesView = new FileNavigationView;
         d->filesView->setModel(d->filesModel);
+        connect(d->filesView, SIGNAL(widthChanged(int)),
+                this, SLOT(adjustSpacerInToolBar(int)));
         
         d->filesDock = new QDockWidget(d->instance);
         d->filesDock->setMinimumWidth(200);
@@ -382,4 +395,9 @@ QDockWidget * TogMegWindow::filesDock() const
     }
     
     return d->filesDock;
+}
+
+void TogMegWindow::adjustSpacerInToolBar(int w)
+{
+    d->toolBarLeftSpacer->setFixedWidth(w);
 }
