@@ -27,7 +27,8 @@ public:
     static QFont baseFont(qreal multiplier = 1.0, int weight = 20);
 
     TogMegProject * project() const;
-    
+    QDockWidget * filesDock() const;
+
 public slots:
     void newEntry();
     void previousWindow();

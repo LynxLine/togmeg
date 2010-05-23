@@ -24,7 +24,7 @@ int main( int argc, char ** argv )
     // qsettings stuff
     QCoreApplication::setOrganizationName("LynxLine");
     QCoreApplication::setOrganizationDomain("lynxline.com");
-    QCoreApplication::setApplicationName("crammero");
+    QCoreApplication::setApplicationName("TagMeg");
 
     //register types
     qRegisterMetaType<QModelIndex>("QModelIndex");
@@ -32,7 +32,7 @@ int main( int argc, char ** argv )
     //main window
     TogMegProject * p = new TogMegProject(&a);
     a.connect(&a, SIGNAL(fileOpenRequest(QString)),
-              p,  SLOT(openFile(QString)));
+              p,  SLOT(loadFile(QString)));
 
     if (argc > 1) {
         for (int i =1; i< argc; i++) {

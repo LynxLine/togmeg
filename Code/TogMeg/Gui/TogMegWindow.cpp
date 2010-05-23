@@ -29,12 +29,16 @@ public:
     TogMegWindow * instance;
     TogMegWindow::ViewMode viewMode;
     
-    QPointer<FileNavigationView> fileView;
+    QPointer<FileNavigationModel> filesModel;
+    QPointer<FileNavigationView> filesView;
+    
     QPointer<Examinator> examinator;
     
     QPointer<QStackedWidget> stack;
     QPointer<ExamineWidget> examineWidget;
     QPointer<TaskEditorWidget> taskEditorWidget;
+    
+    QPointer<QDockWidget> filesDock;
 };
 
 /*!
@@ -58,23 +62,14 @@ TogMegWindow::TogMegWindow(TogMegProject * proj, QWidget * parent, Qt::WFlags fl
     connectActions();
     createMenuBar();
     createToolBar();
-	
-	statusBar()->hide();
+    filesDock();
 
-    QSplitter * contentWidget = new QSplitter(Qt::Horizontal);
-#ifdef Q_WS_MAC
-    //contentWidget->setStyleSheet("QSplitter::handle {background: #a0a0a0;}");
-    //contentWidget->setHandleWidth(1);
-#endif
-    
-    d->fileView = new FileNavigationView;
-    connect(d->fileView, SIGNAL(openFileRequest(const QString &)),
-            this, SLOT(openFileForVariables(const QString &)));
+	statusBar()->hide();
     
     d->stack = new QStackedWidget(this);
+    setCentralWidget(d->stack);
 
     d->taskEditorWidget = new TaskEditorWidget(project()->model(), d->stack);
-    
     d->examineWidget = new ExamineWidget(d->examinator, d->stack );
 
     d->stack->addWidget( d->taskEditorWidget );
@@ -89,13 +84,6 @@ TogMegWindow::TogMegWindow(TogMegProject * proj, QWidget * parent, Qt::WFlags fl
     connect(project()->model(), SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)),
             project(), SLOT(setModified()));
     
-    contentWidget->addWidget(d->fileView);
-    contentWidget->addWidget(d->stack);
-    
-    contentWidget->setStretchFactor(0,1);
-    contentWidget->setStretchFactor(1,3);
-    
-    setCentralWidget(contentWidget);
     readSettings();
 }
 
@@ -198,7 +186,6 @@ void TogMegWindow::createMenuBar()
 void TogMegWindow::createToolBar()
 {
 	QToolBar * toolBar = addToolBar(tr("Toolbar"));
-	toolBar->addAction( action("Add") );
 	toolBar->addAction( action("Play") );
 	toolBar->addAction( action("Study") );
     toolBar->addAction( action("Stop") );
@@ -235,7 +222,7 @@ void TogMegWindow::connectActions()
     connect( action("Open"),   SIGNAL(triggered()), this, SLOT(openFile()));
     connect( action("Close"),  SIGNAL(triggered()), this, SLOT(close()));
     connect( action("Save"),   SIGNAL(triggered()), this, SLOT(saveFile()));
-    connect( action("SaveAs"), SIGNAL(triggered()), this, SLOT(saveFileAs()));
+    connect( action("SaveAs"), SIGNAL(triggered()), this, SLOT(saveAsFile()));
 
     connect( action("Quit"),   SIGNAL(triggered()), this, SLOT(close()));
     connect( action("Help"),   SIGNAL(triggered()), this, SLOT(openHelp()));
@@ -368,4 +355,31 @@ QFont TogMegWindow::baseFont(qreal multiplier, int weight)
     font.setStyleStrategy(QFont::PreferAntialias);
     font.setPointSizeF(basePointSize * multiplier);
     return font;
+}
+
+QDockWidget * TogMegWindow::filesDock() const
+{    
+    if (!d->filesDock) {
+        QString path = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+        d->filesModel = new FileNavigationModel(d->instance);
+        d->filesModel->setRootPath(path);
+
+        d->filesView = new FileNavigationView;
+        d->filesView->setModel(d->filesModel);
+        
+        d->filesDock = new QDockWidget(d->instance);
+        d->filesDock->setMinimumWidth(200);
+        d->filesDock->setWidget(d->filesView);
+        d->filesDock->setObjectName("Files");
+        d->instance->addDockWidget(Qt::LeftDockWidgetArea, d->filesDock);
+        /*
+        connect(d->propertiesDock, SIGNAL(detachWindow()), d->instance, SLOT(detachPropsWindow()));
+        connect(d->propertiesDock, SIGNAL(closeWindow()), d->instance, SLOT(closePropsWindow()));
+        connect(d->propertiesDock, SIGNAL(dockWindow()), d->instance, SLOT(dockPropsWindow()));
+        connect(this, SIGNAL(plotTabChanged(int)), d->propertiesDock->data(), SLOT(setCurrentPlotView(int)));
+        connect(this, SIGNAL(plotTabChanged(int)), d->propertiesDock->props(), SLOT(setCurrentPlotView(int)));
+         */
+    }
+    
+    return d->filesDock;
 }

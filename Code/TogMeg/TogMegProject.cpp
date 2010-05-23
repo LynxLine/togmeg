@@ -12,6 +12,12 @@ TogMegProject::TogMegProject(QObject * parent)
 :BaseProject(parent)
 {
     d = new Private;
+    QString path = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+    if (!QFileInfo(path).exists()) {
+        QDir dir(QDir::homePath());
+        dir.mkpath(path);
+    }
+    QDir::setCurrent(path);
 }
 
 TogMegProject::~TogMegProject()
