@@ -316,16 +316,20 @@ void TogMegWindow::setViewMode(TogMegWindow::ViewMode m)
         //first switch stack
         if ( d->stack->currentWidget() != d->taskEditorWidget ) {
             d->stack->setCurrentWidget( d->taskEditorWidget );
+            d->filesDock->setVisible(false);
         }
     }
     else if (m == TogMegWindow::ExamineMode) {
         //just switch stack
         d->stack->setCurrentWidget( d->examineWidget );
+        d->filesDock->setVisible(false);
     }
     else if (m == TogMegWindow::BrowserMode) {
         //just switch stack
         if ( d->stack->currentWidget() != d->taskEditorWidget ) {
             d->stack->setCurrentWidget( d->taskEditorWidget );
+            if (!d->filesDock->isVisible())
+                d->filesDock->setVisible(true);
         }
 
         d->viewMode = TogMegWindow::TaskEditorMode;
