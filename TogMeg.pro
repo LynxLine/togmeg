@@ -24,21 +24,21 @@ include(Code/TogMeg/TogMeg.pri)
 
 RESOURCES += images.qrc
 
-mac:ICON = images/crammero.icns
+mac:ICON = Resources/TogMeg.icns
 mac:QMAKE_INFO_PLIST = Resources/TogMeg.plist
 
 win32 {
-    RC_FILE = images/crammero.rc
+    RC_FILE = Resources/TogMeg.rc
     DEFINES += _CRT_SECURE_NO_DEPRECATE
     DEFINES += _CRT_NONSTDC_NO_DEPRECATE
 }
 
-#!debug_and_release|build_pass {
-#    CONFIG(debug, debug|release) {
-#        TARGET = $$member(TARGET, 0)d
-#        CONFIG += console
-#    }
-#}
+!debug_and_release|build_pass {
+    CONFIG(debug, debug|release) {
+        TARGET = $$member(TARGET, 0)d
+        CONFIG += console
+    }
+}
 
 macx {
     LIBS += -framework CoreFoundation -lz
@@ -149,7 +149,7 @@ macx-g++ {
         }
         else {
             # debug batch build
-            TARGET = "crammerod"
+            TARGET = "TogMegd"
         }
     }
 }

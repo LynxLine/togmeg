@@ -77,6 +77,7 @@ TogMegWindow::TogMegWindow(TogMegProject * proj, QWidget * parent, Qt::WFlags fl
     d->stack->addWidget( d->examineWidget );
 
     setViewMode(TogMegWindow::TaskEditorMode);
+    d->taskEditorWidget->setFocus();
 
     connect(d->examinator, SIGNAL(examinatorEnabled(bool)),
             actionGroup("Play"), SLOT(setEnabled(bool)));
@@ -384,7 +385,13 @@ QDockWidget * TogMegWindow::filesDock() const
         d->filesDock->setMinimumWidth(200);
         d->filesDock->setWidget(d->filesView);
         d->filesDock->setObjectName("Files");
+        d->filesDock->setFeatures(QDockWidget::NoDockWidgetFeatures);
         d->instance->addDockWidget(Qt::LeftDockWidgetArea, d->filesDock);
+        
+        QWidget * title = new QWidget;
+        title->setFixedHeight(0);
+        d->filesDock->setTitleBarWidget(title);
+        
         /*
         connect(d->propertiesDock, SIGNAL(detachWindow()), d->instance, SLOT(detachPropsWindow()));
         connect(d->propertiesDock, SIGNAL(closeWindow()), d->instance, SLOT(closePropsWindow()));

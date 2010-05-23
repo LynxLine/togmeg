@@ -1,5 +1,5 @@
 
-#include <QtCore>
+#include <QtGui>
 #include "TogMegProject.h"
 #include "TogMegFileModel.h"
 
