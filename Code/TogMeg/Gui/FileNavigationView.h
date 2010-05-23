@@ -10,7 +10,7 @@ class FileNavigationView : public QTreeView
 {
     Q_OBJECT
 public:        
-    FileNavigationView(QWidget * parent);
+    FileNavigationView(QWidget * parent = 0L);
     virtual ~FileNavigationView();
 
     void setModel(FileNavigationModel *);

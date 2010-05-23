@@ -29,11 +29,12 @@ public:
     TogMegWindow * instance;
     TogMegWindow::ViewMode viewMode;
     
+    QPointer<FileNavigationView> fileView;
     QPointer<Examinator> examinator;
     
-    QStackedWidget * stack;
-    ExamineWidget * examineWidget;
-    TaskEditorWidget * taskEditorWidget;
+    QPointer<QStackedWidget> stack;
+    QPointer<ExamineWidget> examineWidget;
+    QPointer<TaskEditorWidget> taskEditorWidget;
 };
 
 /*!
@@ -60,13 +61,23 @@ TogMegWindow::TogMegWindow(TogMegProject * proj, QWidget * parent, Qt::WFlags fl
 	
 	statusBar()->hide();
 
+    QSplitter * contentWidget = new QSplitter(Qt::Horizontal);
+#ifdef Q_WS_MAC
+    //contentWidget->setStyleSheet("QSplitter::handle {background: #a0a0a0;}");
+    //contentWidget->setHandleWidth(1);
+#endif
+    
+    d->fileView = new FileNavigationView;
+    connect(d->fileView, SIGNAL(openFileRequest(const QString &)),
+            this, SLOT(openFileForVariables(const QString &)));
+    
     d->stack = new QStackedWidget(this);
-    setCentralWidget( d->stack );
 
     d->taskEditorWidget = new TaskEditorWidget(project()->model(), d->stack);
-    d->stack->addWidget( d->taskEditorWidget );
     
     d->examineWidget = new ExamineWidget(d->examinator, d->stack );
+
+    d->stack->addWidget( d->taskEditorWidget );
     d->stack->addWidget( d->examineWidget );
 
     setViewMode(TogMegWindow::TaskEditorMode);
@@ -78,6 +89,13 @@ TogMegWindow::TogMegWindow(TogMegProject * proj, QWidget * parent, Qt::WFlags fl
     connect(project()->model(), SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)),
             project(), SLOT(setModified()));
     
+    contentWidget->addWidget(d->fileView);
+    contentWidget->addWidget(d->stack);
+    
+    contentWidget->setStretchFactor(0,1);
+    contentWidget->setStretchFactor(1,3);
+    
+    setCentralWidget(contentWidget);
     readSettings();
 }
 
