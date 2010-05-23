@@ -138,11 +138,6 @@ void TaskEditorView::removeEntry()
     scrollTo(currentIndex());
 }
 
-void TaskEditorView::paintEvent(QPaintEvent * pe)
-{
-    QTreeView::paintEvent(pe);
-}
-
 void TaskEditorView::keyPressEvent(QKeyEvent * ke)
 {
     //qDebug() << "TaskEditorView::keyPressEvent()";
@@ -329,8 +324,8 @@ void TaskEditorView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
             );
 
             if (headerIndex) {
-                painter->drawLine(r.x(), r.y(), 
-                                  r.x(), r.y()+r.height()
+                painter->drawLine(r.x()-1, r.y(), 
+                                  r.x()-1, r.y()+r.height()
                 );
             }
         }
