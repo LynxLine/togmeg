@@ -29,9 +29,6 @@ public:
     TogMegProject * project() const;
     
 public slots:
-    virtual void openFile();
-    virtual void openFile(QString);
-
     void newEntry();
     void previousWindow();
 

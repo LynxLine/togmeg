@@ -40,8 +40,8 @@ public:
     QString filePath() const;
     
 public slots:
-    void loadTabFile(QString filePath);
-    void loadXmlFile(QString filePath);
+    bool loadTabFile(QString filePath);
+    bool loadXmlFile(QString filePath);
     bool saveTabFile(QString filePath);
     bool saveXmlFile(QString filePath);
 

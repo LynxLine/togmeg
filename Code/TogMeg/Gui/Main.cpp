@@ -12,6 +12,8 @@ int main( int argc, char ** argv )
 {
     initResources();
     Application a(argc, argv );
+    a.connect(&a, SIGNAL(lastWindowClosed()), 
+              &a,   SLOT(quit()) );
 
 #ifndef Q_WS_MAC
     QIcon icon(":/images/crammeroicon.png");
@@ -29,26 +31,26 @@ int main( int argc, char ** argv )
 
     //main window
     TogMegProject * p = new TogMegProject(&a);
+    a.connect(&a, SIGNAL(fileOpenRequest(QString)),
+              p,  SLOT(openFile(QString)));
+
+    if (argc > 1) {
+        for (int i =1; i< argc; i++) {
+            if (QFileInfo(argv[i]).exists())
+                p->loadFile(argv[i]);
+        }
+    }
+    
     TogMegWindow mw(p);
 
     QSettings s;
     bool maximized = s.value("geometry/maximized", false).toBool();
     bool fullscreen = s.value("geometry/fullscreen", false).toBool();
-
+    
     if (fullscreen)     mw.showFullScreen();
     else if (maximized) mw.showMaximized();
     else                mw.show();
-
-    a.connect(&a, SIGNAL(fileOpenRequest(QString)),
-              &mw,  SLOT(openFile(QString)));
-    a.connect(&a, SIGNAL(lastWindowClosed()), 
-              &a,   SLOT(quit()) );
-
-    if (argc > 1) {
-        for (int i =1; i< argc; i++)
-            mw.openFile(argv[i]);
-    }
-
+    
     return a.exec();
 }
 

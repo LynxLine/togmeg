@@ -33,61 +33,65 @@ TogMegFileModel::~TogMegFileModel()
     delete d;
 }
 
-void TogMegFileModel::loadTabFile(QString filePath)
+bool TogMegFileModel::loadTabFile(QString filePath)
 {
-    qDebug() << "TogMegFileModel::loadTabFile()," << filePath;
-    
+    QFile f(filePath);
+    if (!f.open(QIODevice::ReadOnly))
+        return false;
+
+    beginResetModel();
     d->entries.clear();
     d->filePath = filePath;
     
-    QFile f(filePath);
-    if (f.open(QIODevice::ReadOnly)) {
-        while (!f.atEnd()) {
-            QString line = QString::fromUtf8(f.readLine());
-            QStringList args = line.split("\t");
-            if (args.count() <2) continue;
-            
-            StudyDataEntry entry;
-            entry.question = args[0].simplified();
-            entry.answer   = args[1].simplified();
-            d->entries << entry;
-        }
+    while (!f.atEnd()) {
+        QString line = QString::fromUtf8(f.readLine());
+        QStringList args = line.split("\t");
+        if (args.count() <2) continue;
+        
+        StudyDataEntry entry;
+        entry.question = args[0].simplified();
+        entry.answer   = args[1].simplified();
+        d->entries << entry;
     }
     
-    reset();
+    endResetModel();
     addNewEntry();
+    
+    return true;
 }
 
-void TogMegFileModel::loadXmlFile(QString filePath)
+bool TogMegFileModel::loadXmlFile(QString filePath)
 {
-    qDebug() << "TogMegFileModel::loadXmlFile()," << filePath;
+    QFile f(filePath);
+    if (!f.open(QIODevice::ReadOnly))
+        return false;
     
+    beginResetModel();
     d->entries.clear();
     d->filePath = filePath;
+
+    QDomDocument doc;
+    doc.setContent(&f);
     
-    QFile f(filePath);
-    if (f.open(QIODevice::ReadOnly)) {
-        QDomDocument doc;
-        doc.setContent(&f);
+    QDomElement el = doc.documentElement();
+    QDomNode n = el.firstChild();
+    while (!n.isNull()) {
+        QDomElement questionEl = n.firstChildElement("question");
+        QDomElement answerEl   = n.firstChildElement("answer");
         
-        QDomElement el = doc.documentElement();
-        QDomNode n = el.firstChild();
-        while (!n.isNull()) {
-            QDomElement questionEl = n.firstChildElement("question");
-            QDomElement answerEl   = n.firstChildElement("answer");
-            
-            StudyDataEntry entry;
-            entry.question = questionEl.firstChild().toText().data();
-            entry.answer   = answerEl.firstChild().toText().data();
-            
-            d->entries << entry;
-            
-            n = n.nextSibling();
-        }
+        StudyDataEntry entry;
+        entry.question = questionEl.firstChild().toText().data();
+        entry.answer   = answerEl.firstChild().toText().data();
+        
+        d->entries << entry;
+        
+        n = n.nextSibling();
     }
     
-    reset();
+    endResetModel();
     addNewEntry();
+    
+    return true;
 }
 
 bool TogMegFileModel::saveTabFile(QString filePath)

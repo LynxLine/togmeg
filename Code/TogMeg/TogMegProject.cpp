@@ -29,21 +29,11 @@ bool TogMegProject::loadFile(QString filePath)
     setFilePath(filePath);
     QDir::setCurrent(folderPath());
     
-    /*
-    QTime time = QTime::currentTime();
-    
-    QString log;
-    QTextStream out(&log);
-    XML_Reader reader(this, TogMegProject::Xml::Tag, file, &out);
-    XML_Reader::ErrorLevel err = reader.Read_XML();
-    
-    if ( err > XML_Reader::WARNING ) {
-        qDebug() << reader.errorString();
-        return false;
-    }
-     */
-    
-    //qDebug() << "Project loading time(msecs):" << time.msecsTo(QTime::currentTime());
+    bool ok = false;
+    if (filePath.endsWith(".xml", Qt::CaseInsensitive))
+        ok = model()->loadXmlFile(filePath);
+    else ok = model()->loadTabFile(filePath);
+    if (!ok) return false;
     
     return BaseProject::loadFile(filePath);
 }
