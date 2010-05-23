@@ -25,7 +25,7 @@ include(Code/TogMeg/TogMeg.pri)
 RESOURCES += images.qrc
 
 mac:ICON = images/crammero.icns
-mac:QMAKE_INFO_PLIST = info.plist
+mac:QMAKE_INFO_PLIST = Resources/TogMeg.plist
 
 win32 {
     RC_FILE = images/crammero.rc
