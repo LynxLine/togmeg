@@ -9,7 +9,6 @@
 #include "Examinator.h"
 
 #include "ExamineWidget.h"
-#include "TogMegFileWidget.h"
 
 #include "TogMegFileEdit.h"
 #include "TogMegFileModel.h"
@@ -36,7 +35,7 @@ public:
     
     QPointer<QStackedWidget> stack;
     QPointer<ExamineWidget> examineWidget;
-    QPointer<TaskEditorWidget> taskEditorWidget;
+    QPointer<TogMegFileEdit> editor;
     
     QPointer<QDockWidget> filesDock;
     QPointer<QWidget> toolBarLeftSpacer;
@@ -70,14 +69,11 @@ TogMegWindow::TogMegWindow(TogMegProject * proj, QWidget * parent, Qt::WFlags fl
     d->stack = new QStackedWidget(this);
     setCentralWidget(d->stack);
 
-    d->taskEditorWidget = new TaskEditorWidget(project()->model(), d->stack);
+    d->editor = new TogMegFileEdit(project()->model(), d->stack);
     d->examineWidget = new ExamineWidget(d->examinator, d->stack );
 
-    d->stack->addWidget( d->taskEditorWidget );
+    d->stack->addWidget( d->editor );
     d->stack->addWidget( d->examineWidget );
-
-    setViewMode(TogMegWindow::TaskEditorMode);
-    d->taskEditorWidget->setFocus();
 
     connect(d->examinator, SIGNAL(examinatorEnabled(bool)),
             actionGroup("Play"), SLOT(setEnabled(bool)));
@@ -87,6 +83,10 @@ TogMegWindow::TogMegWindow(TogMegProject * proj, QWidget * parent, Qt::WFlags fl
             project(), SLOT(setModified()));
     
     readSettings();
+    
+    setViewMode(TogMegWindow::TaskEditorMode);
+    d->editor->setNextItemMode(TogMegFileEdit::QQAAMode);
+    d->editor->setFocus();    
 }
 
 /*!
@@ -101,7 +101,7 @@ TogMegWindow::~TogMegWindow()
     s.sync();
 
     delete d->examineWidget;
-    delete d->taskEditorWidget;
+    delete d->editor;
 
     delete d;
 }
@@ -145,6 +145,17 @@ void TogMegWindow::createActions()
     setAction("Study" , new QAction (QIcon(":/images/icons/Record.png" ), tr("&Study"), this));
     setAction("Stop"  , new QAction (QIcon(":/images/icons/Stop.png"   ), tr("&Stop"), this));
 
+    setAction("NextByRows"  , new QAction (tr("By Rows"), this));
+    setAction("NextByCells"  , new QAction (tr("By Cells"), this));
+    action("NextByRows")->setCheckable(true);
+    action("NextByCells")->setCheckable(true);
+    
+    setActionGroup("NextBy", new QActionGroup(this));
+    actionGroup("NextBy")->setExclusive(true);
+    actionGroup("NextBy")->addAction(action("NextByRows"));
+    actionGroup("NextBy")->addAction(action("NextByCells"));
+    action("NextByRows")->setChecked(true);
+    
     setAction("About"         , new QAction (tr("&About"), this));
     setAction("Help"          , new QAction (tr("TogMeg &Help"), this));
     setAction("CheckUpdates" , new QAction (tr("Check for Updates Now"), this));
@@ -192,15 +203,24 @@ void TogMegWindow::createToolBar()
     d->toolBarLeftSpacer = new QWidget;
     d->toolBarLeftSpacer->setFixedHeight(0);
     toolBar->addWidget(d->toolBarLeftSpacer);
+
+    toolBar->addAction( action("NextByRows") );
+	toolBar->addAction( action("NextByCells") );
+
+    QWidget * sp1 = new QWidget;
+    sp1->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    sp1->setFixedWidth(40);
+    sp1->setFixedHeight(0);
+    toolBar->addWidget(sp1);
     
 	toolBar->addAction( action("Play") );
 	toolBar->addAction( action("Study") );
     toolBar->addAction( action("Stop") );
 
-    QWidget * sp1 = new QWidget;
-    sp1->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
-    sp1->setFixedHeight(0);
-    toolBar->addWidget(sp1);
+    QWidget * sp_exp = new QWidget;
+    sp_exp->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    sp_exp->setFixedHeight(0);
+    toolBar->addWidget(sp_exp);
 
     toolBar->setIconSize(QSize(24, 24));
     toolBar->setMovable(false);
@@ -241,6 +261,8 @@ void TogMegWindow::connectActions()
     connect( action("About"),  SIGNAL(triggered()), this, SLOT(openAbout()));
 
     connect( action("Add"),    SIGNAL(triggered()), this, SLOT(newEntry()));
+    connect( action("NextByRows"),   SIGNAL(triggered()), this, SLOT(setNextByRows()));
+    connect( action("NextByCells"),   SIGNAL(triggered()), this, SLOT(setNextByCells()));
 
     connect( action("Play" ),  SIGNAL(triggered()), this, SLOT(runDemo()));
     connect( action("Study"),  SIGNAL(triggered()), this, SLOT(runStudy()));
@@ -250,7 +272,7 @@ void TogMegWindow::connectActions()
 void TogMegWindow::newEntry()
 {
     if ( viewMode() == TogMegWindow::TaskEditorMode) {
-        d->taskEditorWidget->addNewEntry();
+        d->editor->addNewEntry();
     }
 }
 
@@ -314,8 +336,8 @@ void TogMegWindow::setViewMode(TogMegWindow::ViewMode m)
     d->viewMode = m;
     if (m == TogMegWindow::TaskEditorMode) {
         //first switch stack
-        if ( d->stack->currentWidget() != d->taskEditorWidget ) {
-            d->stack->setCurrentWidget( d->taskEditorWidget );
+        if ( d->stack->currentWidget() != d->editor ) {
+            d->stack->setCurrentWidget( d->editor );
             d->filesDock->setVisible(false);
         }
     }
@@ -326,8 +348,8 @@ void TogMegWindow::setViewMode(TogMegWindow::ViewMode m)
     }
     else if (m == TogMegWindow::BrowserMode) {
         //just switch stack
-        if ( d->stack->currentWidget() != d->taskEditorWidget ) {
-            d->stack->setCurrentWidget( d->taskEditorWidget );
+        if ( d->stack->currentWidget() != d->editor ) {
+            d->stack->setCurrentWidget( d->editor );
             if (!d->filesDock->isVisible())
                 d->filesDock->setVisible(true);
         }
@@ -411,4 +433,14 @@ QDockWidget * TogMegWindow::filesDock() const
 void TogMegWindow::adjustSpacerInToolBar(int w)
 {
     d->toolBarLeftSpacer->setFixedWidth(w);
+}
+
+void TogMegWindow::setNextByRows()
+{
+    d->editor->setNextItemMode(TogMegFileEdit::QQAAMode);
+}
+
+void TogMegWindow::setNextByCells()
+{
+    d->editor->setNextItemMode(TogMegFileEdit::QAQAMode);
 }

@@ -3,8 +3,9 @@
 #define TASKEDITORWIDGET_H
 
 #include <QWidget>
+#include "TogMegFileEdit.h"
 
-class TaskEditorView;
+class TagMegFileEdit;
 class TogMegFileModel;
 
 /*!
@@ -17,10 +18,11 @@ public:
     TaskEditorWidget(TogMegFileModel * model, QWidget * parent = 0L);
     virtual ~TaskEditorWidget();
 
-    TaskEditorView * view() const;
+    TagMegFileEdit * view() const;
     
 public slots:
     void addNewEntry();
+    void setNextItemMode(TagMegFileEdit::NextItemMode);
 
 private:
 	class Private;

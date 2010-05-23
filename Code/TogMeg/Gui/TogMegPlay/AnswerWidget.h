@@ -23,6 +23,7 @@ public slots:
     void setExaminatorState(Examinator::State);
 
 signals:
+    void stop();
     void userAnswerChanged(QString);
     void commitAnswer(QString);
     void userEvent(int msecs, int eventType);
@@ -30,6 +31,7 @@ signals:
 private slots:
     void textChanged(const QString &);
     void returnPressed();
+    void escapePressed();
 
 protected:
     void paintEvent(QPaintEvent *);
@@ -56,6 +58,7 @@ public slots:
     void reset();
 
 signals:
+    void escapePressed();
     void userEvent(int msecs, int eventType);
 
 protected:

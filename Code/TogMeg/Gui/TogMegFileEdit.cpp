@@ -8,7 +8,7 @@
 #include "AppStyles.h"
 #include "ColumnSelectorButton.h"
 
-class TaskEditorView::Private
+class TogMegFileEdit::Private
 {
 public:
     QPointer<TogMegFileModel> model;
@@ -21,7 +21,7 @@ public:
     NextItemMode nextItemMode;
 };
 
-TaskEditorView::TaskEditorView(TogMegFileModel * model, QWidget * parent)
+TogMegFileEdit::TogMegFileEdit(TogMegFileModel * model, QWidget * parent)
 :QTreeView(parent) 
 {
     d = new Private;
@@ -85,23 +85,22 @@ TaskEditorView::TaskEditorView(TogMegFileModel * model, QWidget * parent)
     header()->setResizeMode(2, QHeaderView::Stretch);
 }
 
-TogMegFileModel * TaskEditorView::studyTaskModel() const
+TogMegFileModel * TogMegFileEdit::studyTaskModel() const
 {
     return d->model;
 }
 
-TaskEditorView::~TaskEditorView()
+TogMegFileEdit::~TogMegFileEdit()
 {
-    qDebug() << "~TaskEditorView";
     delete d;
 }
 
-TaskEditorView::NextItemMode TaskEditorView::nextItemMode()
+TogMegFileEdit::NextItemMode TogMegFileEdit::nextItemMode()
 {
     return d->nextItemMode;
 }
 
-void TaskEditorView::setNextItemMode(NextItemMode m)
+void TogMegFileEdit::setNextItemMode(NextItemMode m)
 {
     if ( d->nextItemMode == m ) return;
     d->nextItemMode = m;
@@ -109,7 +108,7 @@ void TaskEditorView::setNextItemMode(NextItemMode m)
     emit nextItemModeChanged(m);
 }
 
-void TaskEditorView::activateContextMenu(const QPoint & pos)
+void TogMegFileEdit::activateContextMenu(const QPoint & pos)
 {
     QModelIndex index = currentIndex();
     if ( !index.isValid() ) return;
@@ -117,7 +116,7 @@ void TaskEditorView::activateContextMenu(const QPoint & pos)
     d->contextMenu->popup( viewport()->mapToGlobal(pos) );
 }
 
-void TaskEditorView::toFirstRow()
+void TogMegFileEdit::toFirstRow()
 {
     if ( d->model->rowCount() ) {
         QModelIndex index = model()->index(0, TogMegFileModel::QuestionColumn);
@@ -125,22 +124,22 @@ void TaskEditorView::toFirstRow()
     }
 }
 
-void TaskEditorView::addNewEntry()
+void TogMegFileEdit::addNewEntry()
 {
     QModelIndex index = d->model->addNewEntry();
     setCurrentIndex( index );
 }
 
-void TaskEditorView::removeEntry()
+void TogMegFileEdit::removeEntry()
 {
     QModelIndex index = currentIndex();
     d->model->removeEntry( index );
     scrollTo(currentIndex());
 }
 
-void TaskEditorView::keyPressEvent(QKeyEvent * ke)
+void TogMegFileEdit::keyPressEvent(QKeyEvent * ke)
 {
-    //qDebug() << "TaskEditorView::keyPressEvent()";
+    //qDebug() << "TogMegFileEdit::keyPressEvent()";
     if (ke->key() == Qt::Key_Up) {
         int previousRow = currentIndex().row();
         if (previousRow <= 0) return;
@@ -161,7 +160,7 @@ void TaskEditorView::keyPressEvent(QKeyEvent * ke)
         QTreeView::keyPressEvent(ke);
 }
 
-void TaskEditorView::editNextItemUsingMode()
+void TogMegFileEdit::editNextItemUsingMode()
 {
     //qDebug() << "editNextItemUsingMode()" << nextItemMode();
 
@@ -183,7 +182,7 @@ void TaskEditorView::editNextItemUsingMode()
     }
 }
 
-void TaskEditorView::editNextItem()
+void TogMegFileEdit::editNextItem()
 {
     qDebug() << "editNextItem()";
 
@@ -202,7 +201,7 @@ void TaskEditorView::editNextItem()
     }
 }
 
-void TaskEditorView::editPreviousItem()
+void TogMegFileEdit::editPreviousItem()
 {
     if ( !currentIndex().isValid() ) return;
     int previousRow = currentIndex().row();
@@ -219,9 +218,9 @@ void TaskEditorView::editPreviousItem()
     }
 }
 
-void TaskEditorView::closeEditor(QWidget * editor, QAbstractItemDelegate::EndEditHint hint)
+void TogMegFileEdit::closeEditor(QWidget * editor, QAbstractItemDelegate::EndEditHint hint)
 {
-    //qDebug() << "TaskEditorView::closeEditor()" << hint;
+    //qDebug() << "TogMegFileEdit::closeEditor()" << hint;
 
     if (hint == QAbstractItemDelegate::EditNextItem) {
         QTreeView::closeEditor(editor, QAbstractItemDelegate::NoHint);
@@ -239,9 +238,9 @@ void TaskEditorView::closeEditor(QWidget * editor, QAbstractItemDelegate::EndEdi
         QTreeView::closeEditor(editor, hint);
 }
 
-void TaskEditorView::currentChanged(const QModelIndex & current, const QModelIndex & previous)
+void TogMegFileEdit::currentChanged(const QModelIndex & current, const QModelIndex & previous)
 {
-    //qDebug() << "TaskEditorView::currentChanged" << current.row() << current.column();
+    //qDebug() << "TogMegFileEdit::currentChanged" << current.row() << current.column();
 
     QTreeView::currentChanged(current, previous);
     if ( !current.isValid() ) return;
@@ -255,7 +254,7 @@ void TaskEditorView::currentChanged(const QModelIndex & current, const QModelInd
     }
 }
 
-void TaskEditorView::drawRow(QPainter *painter, const QStyleOptionViewItem &option,
+void TogMegFileEdit::drawRow(QPainter *painter, const QStyleOptionViewItem &option,
                         const QModelIndex &index) const
 {
     QStyleOptionViewItemV2 opt = option;

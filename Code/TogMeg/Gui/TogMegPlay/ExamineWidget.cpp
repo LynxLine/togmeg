@@ -131,6 +131,8 @@ ExamineWidget::ExamineWidget(Examinator * examinator, QWidget * parent)
             d->examinator,     SLOT(setUserAnswer(QString)));
     connect(d->answerWidget, SIGNAL(commitAnswer(QString)),
             d->examinator,     SLOT(processAnswerEarly()));
+    connect(d->answerWidget, SIGNAL(stop()),
+            d->examinator,     SLOT(stop()));
     connect(d->answerWidget, SIGNAL(userEvent(int, int)),
             d->examinator,   SIGNAL(userEvent(int, int)));
 
@@ -142,7 +144,6 @@ ExamineWidget::ExamineWidget(Examinator * examinator, QWidget * parent)
  */
 ExamineWidget::~ExamineWidget()
 {
-    qDebug() << "~ExamineWidget()";
     delete d;
 }
 

@@ -8,9 +8,9 @@
 class TogMegFileModel;
 
 /*!
- * \class TaskEditorView
+ * \class TogMegFileEdit
  */
-class TaskEditorView : public QTreeView
+class TogMegFileEdit : public QTreeView
 {
 Q_OBJECT
 public:
@@ -18,8 +18,8 @@ public:
         QAQAMode = 0,
         QQAAMode,
     };
-    TaskEditorView(TogMegFileModel * model, QWidget * parent = 0);
-    virtual ~TaskEditorView();
+    TogMegFileEdit(TogMegFileModel * model, QWidget * parent = 0);
+    virtual ~TogMegFileEdit();
     NextItemMode nextItemMode();
 
     TogMegFileModel * studyTaskModel() const;
@@ -27,14 +27,14 @@ public:
 public slots:
     void addNewEntry();
     void removeEntry();
-    void setNextItemMode(TaskEditorView::NextItemMode);
+    void setNextItemMode(TogMegFileEdit::NextItemMode);
 
 private slots:
     void toFirstRow();
     void activateContextMenu(const QPoint &);
 
 signals:
-    void nextItemModeChanged(TaskEditorView::NextItemMode);
+    void nextItemModeChanged(TogMegFileEdit::NextItemMode);
 
 protected:
     virtual void keyPressEvent(QKeyEvent * ke);

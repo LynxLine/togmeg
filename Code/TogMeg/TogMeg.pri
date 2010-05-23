@@ -22,20 +22,16 @@ SOURCES += \
 INCLUDEPATH += $$PWD/Gui
 
 HEADERS += \
-    $$PWD/Gui/Footer.h \
     $$PWD/Gui/TogMegWindow.h \
     $$PWD/Gui/TogMegFileEdit.h \
-    $$PWD/Gui/TogMegFileWidget.h \
     $$PWD/Gui/TogMegFileDelegate.h \
     $$PWD/Gui/FileNavigationView.h \
     $$PWD/Gui/FileNavigationModel.h \
 
 SOURCES += \
     $$PWD/Gui/Main.cpp \
-    $$PWD/Gui/Footer.cpp \
     $$PWD/Gui/TogMegWindow.cpp \
     $$PWD/Gui/TogMegFileEdit.cpp \
-    $$PWD/Gui/TogMegFileWidget.cpp \
     $$PWD/Gui/TogMegFileDelegate.cpp \
     $$PWD/Gui/FileNavigationView.cpp \
     $$PWD/Gui/FileNavigationModel.cpp \

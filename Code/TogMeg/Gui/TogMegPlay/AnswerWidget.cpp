@@ -36,6 +36,8 @@ AnswerWidget::AnswerWidget(QWidget * parent)
         d->le_answer->setPalette(p);
     }
     
+    connect(d->le_answer, SIGNAL(escapePressed()),
+            this,           SLOT(escapePressed()));
     connect(d->le_answer, SIGNAL(returnPressed()),
             this,           SLOT(returnPressed()));
     connect(d->le_answer, SIGNAL(textChanged(const QString &)),
@@ -114,6 +116,11 @@ void AnswerWidget::textChanged(const QString & text)
 void AnswerWidget::returnPressed()
 {
     emit commitAnswer( answer() );
+}
+
+void AnswerWidget::escapePressed()
+{
+    emit stop();
 }
 
 void AnswerWidget::setExaminatorMode(Examinator::Mode mode)
@@ -227,4 +234,7 @@ void AnswerLineEdit::keyPressEvent(QKeyEvent * ke)
     }
     else
         emit userEvent(msecs, int(SymbolTyped));
+    
+    if (ke->key() == Qt::Key_Escape)
+        emit escapePressed();
 }

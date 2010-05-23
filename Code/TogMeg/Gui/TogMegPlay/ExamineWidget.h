@@ -10,7 +10,7 @@ class ExamineWidget : public QWidget
 Q_OBJECT
 
 public:
-    ExamineWidget(Examinator *, QWidget * parent);
+    ExamineWidget(Examinator *, QWidget * parent = 0L);
     virtual ~ExamineWidget();
 
 protected:

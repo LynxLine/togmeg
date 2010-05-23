@@ -53,6 +53,8 @@ private slots:
     void createShortcuts();
     void createMenuBar();
     void createToolBar();
+    void setNextByRows();
+    void setNextByCells();
     
     QString release() const;
     void adjustSpacerInToolBar(int);
