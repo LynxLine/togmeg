@@ -10,7 +10,7 @@
 #include "questionwidget.h"
 #include "answerwidget.h"
 #include "examinator.h"
-#include "CrammeroWindow.h"
+#include "TogMegWindow.h"
 
 class ExamineWidget::Private
 {

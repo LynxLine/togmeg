@@ -3,7 +3,7 @@
 //
 
 #include <QtGui>
-#include "CrammeroWindow.h"
+#include "TogMegWindow.h"
 #include "timelinewidget.h"
 
 #include "AppStyles.h"

@@ -4,7 +4,7 @@
 
 #include <QtGui>
 #include "questionwidget.h"
-#include "CrammeroWindow.h"
+#include "TogMegWindow.h"
 
 class QuestionWidget::Private {
 public:
@@ -26,11 +26,11 @@ QuestionWidget::QuestionWidget(QWidget * parent)
     layout->setSpacing(0);
     setLayout(layout);
 
-    setFont( MainWindow::baseFont(3, QFont::Bold) );
+    setFont( TogMegWindow::baseFont(3, QFont::Bold) );
 
     d->l_question = new QLabel;
     d->l_question->setAlignment(Qt::AlignCenter);
-    d->l_question->setFont( MainWindow::baseFont(3, QFont::Bold) );
+    d->l_question->setFont( TogMegWindow::baseFont(3, QFont::Bold) );
 
     {
         QPalette p = d->l_question->palette();
@@ -42,7 +42,7 @@ QuestionWidget::QuestionWidget(QWidget * parent)
 
     setMaximumHeight(150);
     setMinimumHeight(150);
-    setWindowTitleFont( MainWindow::baseFont(1.1, QFont::Bold) );
+    setWindowTitleFont( TogMegWindow::baseFont(1.1, QFont::Bold) );
     setWindowTitle(tr("Question"));
 
     if (gradient().type() == QGradient::LinearGradient) {

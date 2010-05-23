@@ -5,8 +5,8 @@
 #include <QtGui>
 #include <QtCore>
 
-#include "CrammeroWindow.h"
-#include "CrammeroProject.h"
+#include "TogMegWindow.h"
+#include "TogMegProject.h"
 
 #include "crammero.h"
 #include "examinator.h"
@@ -17,17 +17,20 @@
 #include "CramFileView.h"
 #include "CramFileModel.h"
 
+#include "FileNavigationView.h"
+#include "FileNavigationModel.h"
+
 #include "AppStyles.h"
 
 #ifdef Q_WS_WIN
 #include "qt_windows.h"
 #endif
 
-class MainWindow::Private
+class TogMegWindow::Private
 {
 public:
-    MainWindow * instance;
-    MainWindow::ViewMode viewMode;
+    TogMegWindow * instance;
+    TogMegWindow::ViewMode viewMode;
     
     QPointer<Examinator> examinator;
     
@@ -37,20 +40,20 @@ public:
 };
 
 /*!
- Creates new MainWindow
+ Creates new TogMegWindow
  */
-MainWindow::MainWindow(CrammeroProject * proj, QWidget * parent, Qt::WFlags flags)
+TogMegWindow::TogMegWindow(TogMegProject * proj, QWidget * parent, Qt::WFlags flags)
 :BaseWindow(proj, parent, flags)
 {
     d = new Private;
     d->instance = this;
-    d->viewMode = MainWindow::ViewMode(-1);
+    d->viewMode = TogMegWindow::ViewMode(-1);
 
     d->examinator = new Examinator(project()->model());
     
     QSettings s;
 
-    setWindowTitle("Crammero");
+    setWindowTitle("TogMeg");
     
 	createActions();
     createShortcuts();
@@ -69,7 +72,7 @@ MainWindow::MainWindow(CrammeroProject * proj, QWidget * parent, Qt::WFlags flag
     d->examineWidget = new ExamineWidget(d->examinator, d->stack );
     d->stack->addWidget( d->examineWidget );
 
-    setViewMode(MainWindow::TaskEditorMode);
+    setViewMode(TogMegWindow::TaskEditorMode);
 
     connect(d->examinator, SIGNAL(examinatorEnabled(bool)),
             actionGroup("Play"), SLOT(setEnabled(bool)));
@@ -84,7 +87,7 @@ MainWindow::MainWindow(CrammeroProject * proj, QWidget * parent, Qt::WFlags flag
 /*!
  Deletes the object.
  */
-MainWindow::~MainWindow()
+TogMegWindow::~TogMegWindow()
 {
     QSettings s;
     if (!isMaximized() && !isFullScreen()) s.setValue("geometry/application", saveGeometry());    
@@ -98,15 +101,15 @@ MainWindow::~MainWindow()
     delete d;
 }
 
-CrammeroProject * MainWindow::project() const
+TogMegProject * TogMegWindow::project() const
 {
-    return dynamic_cast<CrammeroProject *>(BaseWindow::project());
+    return dynamic_cast<TogMegProject *>(BaseWindow::project());
 }
 
 /*!
  Returns current build number
  */
-QString MainWindow::release() const
+QString TogMegWindow::release() const
 {
     QString date(__DATE__);
     QString m = date.left(3);
@@ -123,7 +126,7 @@ QString MainWindow::release() const
 /*!
  Creates main actions for the application.
  */
-void MainWindow::createActions()
+void TogMegWindow::createActions()
 {
 	setAction("Open"   , new QAction (tr("Open..."), this));
 	setAction("Close"  , new QAction (tr("Close"), this));
@@ -138,7 +141,7 @@ void MainWindow::createActions()
     setAction("Stop"  , new QAction (QIcon(":/images/icons/Stop.png"   ), tr("&Stop"), this));
 
     setAction("About"         , new QAction (tr("&About"), this));
-    setAction("Help"          , new QAction (tr("Crammero &Help"), this));
+    setAction("Help"          , new QAction (tr("TogMeg &Help"), this));
     setAction("CheckUpdates" , new QAction (tr("Check for Updates Now"), this));
 
     setActionGroup("Play", new QActionGroup(this));
@@ -150,7 +153,7 @@ void MainWindow::createActions()
 /*!
  Creates menubar and add actions.
  */
-void MainWindow::createMenuBar()
+void TogMegWindow::createMenuBar()
 {
     QMenu * menu;
 	menu = menuBar()->addMenu(tr("&File"));
@@ -177,7 +180,7 @@ void MainWindow::createMenuBar()
     menu->addAction( action("CheckUpdates") );
 }
 
-void MainWindow::createToolBar()
+void TogMegWindow::createToolBar()
 {
 	QToolBar * toolBar = addToolBar(tr("Toolbar"));
 	toolBar->addAction( action("Add") );
@@ -198,7 +201,7 @@ void MainWindow::createToolBar()
 /*!
  Creates action shortcuts.
  */
-void MainWindow::createShortcuts()
+void TogMegWindow::createShortcuts()
 {
     // shortcuts
     action("Open")   ->setShortcut(tr("Ctrl+O"));
@@ -212,7 +215,7 @@ void MainWindow::createShortcuts()
 /*!
  Connects actions to appropriate slots.
  */
-void MainWindow::connectActions()
+void TogMegWindow::connectActions()
 {
     connect( action("Open"),   SIGNAL(triggered()), this, SLOT(openFile()));
     connect( action("Close"),  SIGNAL(triggered()), this, SLOT(close()));
@@ -230,34 +233,34 @@ void MainWindow::connectActions()
     connect( action("Stop" ),  SIGNAL(triggered()), this, SLOT(stop()));
 }
 
-void MainWindow::newEntry()
+void TogMegWindow::newEntry()
 {
-    if ( viewMode() == MainWindow::TaskEditorMode) {
+    if ( viewMode() == TogMegWindow::TaskEditorMode) {
         d->taskEditorWidget->addNewEntry();
     }
 }
 
-void MainWindow::previousWindow()
+void TogMegWindow::previousWindow()
 {
-    if ( viewMode() == ExamineMode ) setViewMode(MainWindow::TaskEditorMode);
+    if ( viewMode() == ExamineMode ) setViewMode(TogMegWindow::TaskEditorMode);
 }
 
-void MainWindow::runDemo()
+void TogMegWindow::runDemo()
 {
     d->examinator->start( Examinator::Playing );
-    setViewMode(MainWindow::ExamineMode);
+    setViewMode(TogMegWindow::ExamineMode);
 }
 
-void MainWindow::runStudy()
+void TogMegWindow::runStudy()
 {
     d->examinator->start( Examinator::Studying );
-    setViewMode(MainWindow::ExamineMode);
+    setViewMode(TogMegWindow::ExamineMode);
 }
 
-void MainWindow::stop()
+void TogMegWindow::stop()
 {
     if ( d->examinator->state() != Examinator::Stopped ) {
-        setViewMode(MainWindow::BrowserMode);
+        setViewMode(TogMegWindow::BrowserMode);
         d->examinator->stop();
     }
 }
@@ -265,64 +268,64 @@ void MainWindow::stop()
 /*!
  * Opens default browser directed to help page
  */
-void MainWindow::openHelp()
+void TogMegWindow::openHelp()
 {
     QString url = QString("http://www.lynxline.com");
     QDesktopServices::openUrl(url);
 }
 
-void MainWindow::openAbout()
+void TogMegWindow::openAbout()
 {
 }
 
-void MainWindow::switchFullScreen()
+void TogMegWindow::switchFullScreen()
 {
     if (isFullScreen()) showNormal();
     else                showFullScreen();
 }
 
-void MainWindow::quit()
+void TogMegWindow::quit()
 {
     close();
     qApp->closeAllWindows();
 }
 
-MainWindow::ViewMode MainWindow::viewMode()
+TogMegWindow::ViewMode TogMegWindow::viewMode()
 {
     return d->viewMode;
 }
 
-void MainWindow::setViewMode(MainWindow::ViewMode m)
+void TogMegWindow::setViewMode(TogMegWindow::ViewMode m)
 {
     d->viewMode = m;
-    if (m == MainWindow::TaskEditorMode) {
+    if (m == TogMegWindow::TaskEditorMode) {
         //first switch stack
         if ( d->stack->currentWidget() != d->taskEditorWidget ) {
             d->stack->setCurrentWidget( d->taskEditorWidget );
         }
     }
-    else if (m == MainWindow::ExamineMode) {
+    else if (m == TogMegWindow::ExamineMode) {
         //just switch stack
         d->stack->setCurrentWidget( d->examineWidget );
     }
-    else if (m == MainWindow::BrowserMode) {
+    else if (m == TogMegWindow::BrowserMode) {
         //just switch stack
         if ( d->stack->currentWidget() != d->taskEditorWidget ) {
             d->stack->setCurrentWidget( d->taskEditorWidget );
         }
 
-        d->viewMode = MainWindow::TaskEditorMode;
+        d->viewMode = TogMegWindow::TaskEditorMode;
     }
 
     //actionGroup("Play")->setEnabled( d->examinator->entryCount() >0 );
-    action("Play" )->setEnabled( d->viewMode!=MainWindow::ExamineMode );
-    action("Study")->setEnabled( d->viewMode!=MainWindow::ExamineMode );
-    action("Stop" )->setEnabled( d->viewMode==MainWindow::ExamineMode );
+    action("Play" )->setEnabled( d->viewMode!=TogMegWindow::ExamineMode );
+    action("Study")->setEnabled( d->viewMode!=TogMegWindow::ExamineMode );
+    action("Stop" )->setEnabled( d->viewMode==TogMegWindow::ExamineMode );
 
     emit viewModeChanged( d->viewMode );
 }
 
-QFont MainWindow::baseFont(qreal multiplier, int weight)
+QFont TogMegWindow::baseFont(qreal multiplier, int weight)
 {
     static qreal basePointSize = 1.0;
     static bool initialized = false;
@@ -352,7 +355,7 @@ QFont MainWindow::baseFont(qreal multiplier, int weight)
     return font;
 }
 
-void MainWindow::openFile()
+void TogMegWindow::openFile()
 {
     QString path;
     
@@ -366,7 +369,7 @@ void MainWindow::openFile()
     openFile(path);
 }
 
-void MainWindow::openFile(QString path)
+void TogMegWindow::openFile(QString path)
 {
     qDebug() << path;
     if (path.endsWith(".xml", Qt::CaseInsensitive))

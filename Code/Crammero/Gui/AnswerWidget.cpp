@@ -4,7 +4,7 @@
 
 #include <QtGui>
 #include "answerwidget.h"
-#include "CrammeroWindow.h"
+#include "TogMegWindow.h"
 
 class AnswerWidget::Private {
 public:
@@ -26,7 +26,7 @@ AnswerWidget::AnswerWidget(QWidget * parent)
     layout->setSpacing(0);
     setLayout(layout);
 
-    setFont( MainWindow::baseFont(3, QFont::Bold) );
+    setFont( TogMegWindow::baseFont(3, QFont::Bold) );
 
     d->le_answer = new AnswerLineEdit;
     d->le_answer->setAlignment(Qt::AlignCenter);
@@ -51,7 +51,7 @@ AnswerWidget::AnswerWidget(QWidget * parent)
 
     setMaximumHeight(150);
     setMinimumHeight(150);
-    setWindowTitleFont( MainWindow::baseFont(1.1, QFont::Bold) );
+    setWindowTitleFont( TogMegWindow::baseFont(1.1, QFont::Bold) );
     setWindowTitle(tr("Answer"));
 
     QLinearGradient gradient;
@@ -79,7 +79,7 @@ void AnswerWidget::paintEvent(QPaintEvent * pe)
     qreal w = qreal(width());
     qreal h = qreal(height());
 
-    QFont f = MainWindow::baseFont(0.93);
+    QFont f = TogMegWindow::baseFont(0.93);
     f.setItalic(true);
     QFontMetrics fm(f);
 

@@ -4,7 +4,7 @@
 
 #include <QtGui>
 #include "crammero.h"
-#include "CrammeroWindow.h"
+#include "TogMegWindow.h"
 #include "CramFileView.h"
 #include "CramFileModel.h"
 

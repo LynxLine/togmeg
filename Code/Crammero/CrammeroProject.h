@@ -2,20 +2,20 @@
 // Copyright Oleksandr Iakovliev, 2010
 //
 
-#ifndef CrammeroPoject_H
-#define CrammeroPoject_H
+#ifndef TogMegPoject_H
+#define TogMegPoject_H
 
 #include "BaseProject.h"
 
 class CramFileModel;
 
-class CrammeroProject : public BaseProject
+class TogMegProject : public BaseProject
 {		
 Q_OBJECT
 friend class CramFileModel;
 public:  
-    CrammeroProject(QObject * parent);
-    virtual ~CrammeroProject();
+    TogMegProject(QObject * parent);
+    virtual ~TogMegProject();
     
     CramFileModel * model() const;
       
@@ -36,4 +36,4 @@ private:
     Private * d;
 };
 
-#endif // CrammeroPoject_H
+#endif // TogMegPoject_H

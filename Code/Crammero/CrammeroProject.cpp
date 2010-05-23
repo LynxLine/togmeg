@@ -3,27 +3,27 @@
 //
 
 #include <QtCore>
-#include "CrammeroProject.h"
+#include "TogMegProject.h"
 
 #include "CramFileModel.h"
 
-class CrammeroProject::Private {
+class TogMegProject::Private {
 public:
     QPointer<CramFileModel> model;
 };
 
-CrammeroProject::CrammeroProject(QObject * parent)
+TogMegProject::TogMegProject(QObject * parent)
 :BaseProject(parent)
 {
     d = new Private;
 }
 
-CrammeroProject::~CrammeroProject()
+TogMegProject::~TogMegProject()
 {
     delete d;
 }
 
-bool CrammeroProject::loadFile(QString filePath)
+bool TogMegProject::loadFile(QString filePath)
 {    
     QFile file( filePath );
     if ( !file.open( QIODevice::ReadOnly | QIODevice::Text ) )
@@ -38,7 +38,7 @@ bool CrammeroProject::loadFile(QString filePath)
     
     QString log;
     QTextStream out(&log);
-    XML_Reader reader(this, CrammeroProject::Xml::Tag, file, &out);
+    XML_Reader reader(this, TogMegProject::Xml::Tag, file, &out);
     XML_Reader::ErrorLevel err = reader.Read_XML();
     
     if ( err > XML_Reader::WARNING ) {
@@ -52,7 +52,7 @@ bool CrammeroProject::loadFile(QString filePath)
     return BaseProject::loadFile(filePath);
 }
 
-bool CrammeroProject::saveFile(QString filePath)
+bool TogMegProject::saveFile(QString filePath)
 {
     setFilePath(filePath);
     
@@ -65,7 +65,7 @@ bool CrammeroProject::saveFile(QString filePath)
     return BaseProject::saveFile(filePath);
 }
 
-void CrammeroProject::clear()
+void TogMegProject::clear()
 {
     model()->clear();
     BaseProject::clear();
@@ -74,12 +74,12 @@ void CrammeroProject::clear()
 /*!
  Factory method to create model object.
  */
-CramFileModel * CrammeroProject::createModel() const
+CramFileModel * TogMegProject::createModel() const
 {
-    return new CramFileModel(const_cast<CrammeroProject *>(this));
+    return new CramFileModel(const_cast<TogMegProject *>(this));
 }
 
-CramFileModel * CrammeroProject::model() const
+CramFileModel * TogMegProject::model() const
 {
     if (!d->model)
         d->model = createModel();
@@ -88,14 +88,14 @@ CramFileModel * CrammeroProject::model() const
 
 // Extensions and file dialog flters
 
-QString CrammeroProject::extension() const {
+QString TogMegProject::extension() const {
     return "tab";
 }
 
-QStringList CrammeroProject::extensions() const {
+QStringList TogMegProject::extensions() const {
     return QStringList() << "tab" << "xml";
 }
 
-QString CrammeroProject::fileDialogFilter() const {
+QString TogMegProject::fileDialogFilter() const {
     return tr("Tab delimited files (*.tab);;Xml files (*.xml);;Any file (*)");
 }

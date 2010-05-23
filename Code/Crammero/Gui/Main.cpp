@@ -7,8 +7,8 @@
 
 #include "crammero.h"
 
-#include "CrammeroWindow.h"
-#include "CrammeroProject.h"
+#include "TogMegWindow.h"
+#include "TogMegProject.h"
 
 void initResources();
 
@@ -32,8 +32,8 @@ int main( int argc, char ** argv )
     qRegisterMetaType<QModelIndex>("QModelIndex");
 
     //main window
-    CrammeroProject * p = new CrammeroProject(&a);
-    MainWindow mw(p);
+    TogMegProject * p = new TogMegProject(&a);
+    TogMegWindow mw(p);
 
     QSettings s;
     bool maximized = s.value("geometry/maximized", false).toBool();

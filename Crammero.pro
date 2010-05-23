@@ -2,8 +2,8 @@
 unix:TEMPLATE = app
 win32:TEMPLATE = vcapp
 
-unix:TARGET = Crammero
-win32:TARGET = ../Crammero
+unix:TARGET = TogMeg
+win32:TARGET = ../TogMeg
 
 CONFIG += qt
 CONFIG += warn_on
@@ -20,7 +20,7 @@ MOC_DIR = ./build/GeneratedFiles
 RCC_DIR = ./build/GeneratedFiles
 
 include(Code/Utils/Utils.pri)
-include(Code/Crammero/Crammero.pri)
+include(Code/TogMeg/TogMeg.pri)
 
 RESOURCES += images.qrc
 
@@ -43,7 +43,7 @@ win32 {
 macx {
     LIBS += -framework CoreFoundation -lz
     LIBS += -framework AppKit -framework Carbon
-    QMAKE_INFO_PLIST = Resources/Crammero.plist
+    QMAKE_INFO_PLIST = Resources/TogMeg.plist
 }
 
 macx-g++ {
@@ -64,8 +64,8 @@ macx-g++ {
             CONFIG += x86 ppc
             CONFIG -= precompile_header
 
-            TARGET = "Crammero"
-            BUNDLETARGET = "Crammero.app"
+            TARGET = "TogMeg"
+            BUNDLETARGET = "TogMeg.app"
 
             QMAKE_PRE_LINK = \
                 rm -rf $${BUNDLETARGET}/Contents/plugins; \

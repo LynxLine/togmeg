@@ -34,6 +34,8 @@ HEADERS += \
     $$PWD/Gui/gradientwidget.h \
     $$PWD/Gui/roundedlineedit.h \
     $$PWD/Gui/roundedgradientwidget.h \
+    $$PWD/Gui/FileNavigationView.h \
+    $$PWD/Gui/FileNavigationModel.h \
 
 SOURCES += \
     $$PWD/Gui/Main.cpp \
@@ -49,4 +51,6 @@ SOURCES += \
     $$PWD/Gui/gradientwidget.cpp \
     $$PWD/Gui/roundedlineedit.cpp \
     $$PWD/Gui/roundedgradientwidget.cpp \
+    $$PWD/Gui/FileNavigationView.cpp \
+    $$PWD/Gui/FileNavigationModel.cpp \
 

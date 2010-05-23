@@ -3,7 +3,7 @@
 //
 
 #include <QtGui>
-#include "CrammeroWindow.h"
+#include "TogMegWindow.h"
 #include "pixmapbutton.h"
 #include "Footer.h"
 

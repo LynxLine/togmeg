@@ -8,11 +8,11 @@
 #include <QAction>
 #include "BaseWindow.h"
 
-class CrammeroProject;
+class TogMegProject;
 
 /*!
  */
-class MainWindow : public BaseWindow
+class TogMegWindow : public BaseWindow
 {
 Q_OBJECT
 
@@ -23,13 +23,13 @@ public:
         ExamineMode
     };
 	
-    MainWindow(CrammeroProject * project, QWidget * parent = 0, Qt::WFlags flags = 0);
-    virtual ~MainWindow();
+    TogMegWindow(TogMegProject * project, QWidget * parent = 0, Qt::WFlags flags = 0);
+    virtual ~TogMegWindow();
 
-    MainWindow::ViewMode viewMode();
+    TogMegWindow::ViewMode viewMode();
     static QFont baseFont(qreal multiplier = 1.0, int weight = 20);
 
-    CrammeroProject * project() const;
+    TogMegProject * project() const;
     
 public slots:
     virtual void openFile();
@@ -47,10 +47,10 @@ public slots:
     void openAbout();
 
     void switchFullScreen();
-    void setViewMode(MainWindow::ViewMode);
+    void setViewMode(TogMegWindow::ViewMode);
 
 signals:
-    void viewModeChanged(MainWindow::ViewMode);
+    void viewModeChanged(TogMegWindow::ViewMode);
 
 private slots:
 	void createActions();
