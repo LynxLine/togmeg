@@ -273,8 +273,8 @@ void TogMegWindow::runStudy()
 
 void TogMegWindow::stop()
 {
+    setViewMode(TogMegWindow::BrowserMode);
     if ( d->examinator->state() != Examinator::Stopped ) {
-        setViewMode(TogMegWindow::BrowserMode);
         d->examinator->stop();
     }
 }
