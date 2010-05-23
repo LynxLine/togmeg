@@ -8,14 +8,14 @@
 #include "TogMegWindow.h"
 #include "TogMegProject.h"
 
-#include "crammero.h"
-#include "examinator.h"
+#include "TogMeg.h"
+#include "Examinator.h"
 
-#include "examinewidget.h"
-#include "CramFileWidget.h"
+#include "ExamineWidget.h"
+#include "TogMegFileWidget.h"
 
-#include "CramFileView.h"
-#include "CramFileModel.h"
+#include "TogMegFileEdit.h"
+#include "TogMegFileModel.h"
 
 #include "FileNavigationView.h"
 #include "FileNavigationModel.h"

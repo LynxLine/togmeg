@@ -4,12 +4,11 @@
 
 #include <QtCore>
 #include "TogMegProject.h"
-
-#include "CramFileModel.h"
+#include "TogMegFileModel.h"
 
 class TogMegProject::Private {
 public:
-    QPointer<CramFileModel> model;
+    QPointer<TogMegFileModel> model;
 };
 
 TogMegProject::TogMegProject(QObject * parent)
@@ -74,12 +73,12 @@ void TogMegProject::clear()
 /*!
  Factory method to create model object.
  */
-CramFileModel * TogMegProject::createModel() const
+TogMegFileModel * TogMegProject::createModel() const
 {
-    return new CramFileModel(const_cast<TogMegProject *>(this));
+    return new TogMegFileModel(const_cast<TogMegProject *>(this));
 }
 
-CramFileModel * TogMegProject::model() const
+TogMegFileModel * TogMegProject::model() const
 {
     if (!d->model)
         d->model = createModel();

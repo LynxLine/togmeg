@@ -2,55 +2,61 @@
 INCLUDEPATH += $$PWD
 
 HEADERS += \
-    $$PWD/Crammero.h \
-    $$PWD/examinator.h \
-    $$PWD/taskcontroller.h \
-    $$PWD/playtaskcontroller.h \
-    $$PWD/studytaskcontroller.h \
-    $$PWD/CramFileModel.h \
-    $$PWD/CrammeroProject.h \
+    $$PWD/TogMeg.h \
+    $$PWD/TogMegProject.h \
+    $$PWD/TogMegFileModel.h \
+    $$PWD/Examinator.h \
+    $$PWD/TaskController.h \
+    $$PWD/PlayTaskController.h \
+    $$PWD/StudyTaskController.h \
 
 SOURCES += \
-    $$PWD/Crammero.cpp \
-    $$PWD/examinator.cpp \
-    $$PWD/taskcontroller.cpp \
-    $$PWD/playtaskcontroller.cpp \
-    $$PWD/studytaskcontroller.cpp \
-    $$PWD/CramFileModel.cpp \
-    $$PWD/CrammeroProject.cpp \
+    $$PWD/TogMeg.cpp \
+    $$PWD/TogMegProject.cpp \
+    $$PWD/TogMegFileModel.cpp \
+    $$PWD/Examinator.cpp \
+    $$PWD/TaskController.cpp \
+    $$PWD/PlayTaskController.cpp \
+    $$PWD/StudyTaskController.cpp \
 
 INCLUDEPATH += $$PWD/Gui
 
 HEADERS += \
-    $$PWD/Gui/CrammeroWindow.h \
-    $$PWD/Gui/CramFileView.h \
-    $$PWD/Gui/CramFileWidget.h \
     $$PWD/Gui/Footer.h \
-    $$PWD/Gui/timelinewidget.h \
-    $$PWD/Gui/examinewidget.h \
-    $$PWD/Gui/questionwidget.h \
-    $$PWD/Gui/answerwidget.h \
-    $$PWD/Gui/CramFileDelegate.h \
-    $$PWD/Gui/gradientwidget.h \
-    $$PWD/Gui/roundedlineedit.h \
-    $$PWD/Gui/roundedgradientwidget.h \
+    $$PWD/Gui/TogMegWindow.h \
+    $$PWD/Gui/TogMegFileEdit.h \
+    $$PWD/Gui/TogMegFileWidget.h \
+    $$PWD/Gui/TogMegFileDelegate.h \
     $$PWD/Gui/FileNavigationView.h \
     $$PWD/Gui/FileNavigationModel.h \
 
 SOURCES += \
     $$PWD/Gui/Main.cpp \
-    $$PWD/Gui/CrammeroWindow.cpp \
-    $$PWD/Gui/CramFileView.cpp \
-    $$PWD/Gui/CramFileWidget.cpp \
     $$PWD/Gui/Footer.cpp \
-    $$PWD/Gui/timelinewidget.cpp \
-    $$PWD/Gui/examinewidget.cpp \
-    $$PWD/Gui/questionwidget.cpp \
-    $$PWD/Gui/answerwidget.cpp \
-    $$PWD/Gui/CramFileDelegate.cpp \
-    $$PWD/Gui/gradientwidget.cpp \
-    $$PWD/Gui/roundedlineedit.cpp \
-    $$PWD/Gui/roundedgradientwidget.cpp \
+    $$PWD/Gui/TogMegWindow.cpp \
+    $$PWD/Gui/TogMegFileEdit.cpp \
+    $$PWD/Gui/TogMegFileWidget.cpp \
+    $$PWD/Gui/TogMegFileDelegate.cpp \
     $$PWD/Gui/FileNavigationView.cpp \
     $$PWD/Gui/FileNavigationModel.cpp \
+
+INCLUDEPATH += $$PWD/Gui/TogMegPlay
+
+HEADERS += \
+    $$PWD/Gui/TogMegPlay/TimeLineWidget.h \
+    $$PWD/Gui/TogMegPlay/ExamineWidget.h \
+    $$PWD/Gui/TogMegPlay/QuestionWidget.h \
+    $$PWD/Gui/TogMegPlay/AnswerWidget.h \
+    $$PWD/Gui/TogMegPlay/GradientWidget.h \
+    $$PWD/Gui/TogMegPlay/RoundedLineEdit.h \
+    $$PWD/Gui/TogMegPlay/RoundedGradientWidget.h \
+
+SOURCES += \
+    $$PWD/Gui/TogMegPlay/TimelineWidget.cpp \
+    $$PWD/Gui/TogMegPlay/ExamineWidget.cpp \
+    $$PWD/Gui/TogMegPlay/QuestionWidget.cpp \
+    $$PWD/Gui/TogMegPlay/AnswerWidget.cpp \
+    $$PWD/Gui/TogMegPlay/GradientWidget.cpp \
+    $$PWD/Gui/TogMegPlay/RoundedLineEdit.cpp \
+    $$PWD/Gui/TogMegPlay/roundedgradientwidget.cpp \
 

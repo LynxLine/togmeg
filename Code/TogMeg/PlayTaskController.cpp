@@ -16,8 +16,8 @@
 #include <sphelper.h>
 #endif
 
-#include "CramFileModel.h"
-#include "playtaskcontroller.h"
+#include "TogMegFileModel.h"
+#include "PlayTaskController.h"
 
 class PlayTaskController::Private {
 public:
@@ -36,7 +36,7 @@ public:
 /*!
  * Creates the object.
  */
-PlayTaskController::PlayTaskController(CramFileModel * parent)
+PlayTaskController::PlayTaskController(TogMegFileModel * parent)
 :TaskController(parent)
 {
     d = new Private;
@@ -97,7 +97,7 @@ bool PlayTaskController::hasNext()
 {
     int nextIndex = d->index;
     while ( nextIndex < model->rowCount() ) {
-        QModelIndex i = model->index(nextIndex, CramFileModel::QuestionColumn);
+        QModelIndex i = model->index(nextIndex, TogMegFileModel::QuestionColumn);
         QString question = model->data(i).toString();
         if ( !question.isEmpty() ) break;
         nextIndex++;
@@ -108,7 +108,7 @@ bool PlayTaskController::hasNext()
 ControllerDataEntry PlayTaskController::next()
 {
     while ( d->index < model->rowCount() ) {
-        QModelIndex i = model->index(d->index, CramFileModel::QuestionColumn);
+        QModelIndex i = model->index(d->index, TogMegFileModel::QuestionColumn);
         QString question = model->data(i).toString();
         if ( !question.isEmpty() ) break;
         d->index++;
@@ -116,8 +116,8 @@ ControllerDataEntry PlayTaskController::next()
 
     ControllerDataEntry entry;
 
-    entry.answer = model->data( model->index(d->index, CramFileModel::AnswerColumn) ).toString();
-    entry.question = model->data( model->index(d->index, CramFileModel::QuestionColumn) ).toString();
+    entry.answer = model->data( model->index(d->index, TogMegFileModel::AnswerColumn) ).toString();
+    entry.question = model->data( model->index(d->index, TogMegFileModel::QuestionColumn) ).toString();
 
     entry.totalTime = 5000; //temp
     entry.startTime = 0; //temp

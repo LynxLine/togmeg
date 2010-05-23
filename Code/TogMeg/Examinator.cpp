@@ -5,11 +5,11 @@
 #include <QtCore>
 #include "examinator.h"
 
-#include "CramFileModel.h"
+#include "TogMegFileModel.h"
 
-#include "taskcontroller.h"
-#include "playtaskcontroller.h"
-#include "studytaskcontroller.h"
+#include "TaskController.h"
+#include "PlayTaskController.h"
+#include "StudyTaskController.h"
 
 class Examinator::Private {
 public:
@@ -19,14 +19,14 @@ public:
     State state;
     QString userAnswer;
     
-    QPointer<CramFileModel> model;
+    QPointer<TogMegFileModel> model;
     QPointer<TaskController> controller;
 };
 
 /*!
  * Creates the object.
  */
-Examinator::Examinator(CramFileModel * model)
+Examinator::Examinator(TogMegFileModel * model)
 :QObject(model)
 {
     d = new Private;

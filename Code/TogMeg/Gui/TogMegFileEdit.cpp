@@ -3,10 +3,10 @@
 //
 
 #include <QtGui>
-#include "crammero.h"
+#include "TogMeg.h"
 #include "TogMegWindow.h"
-#include "CramFileView.h"
-#include "CramFileModel.h"
+#include "TogMegFileEdit.h"
+#include "TogMegFileModel.h"
 
 #include "AppStyles.h"
 #include "ColumnSelectorButton.h"
@@ -14,7 +14,7 @@
 class TaskEditorView::Private
 {
 public:
-    QPointer<CramFileModel> model;
+    QPointer<TogMegFileModel> model;
     QPointer<TaskEditorItemDelegate> delegate;
     QPointer<QMenu> contextMenu;
 
@@ -24,7 +24,7 @@ public:
     NextItemMode nextItemMode;
 };
 
-TaskEditorView::TaskEditorView(CramFileModel * model, QWidget * parent)
+TaskEditorView::TaskEditorView(TogMegFileModel * model, QWidget * parent)
 :QTreeView(parent) 
 {
     d = new Private;
@@ -88,7 +88,7 @@ TaskEditorView::TaskEditorView(CramFileModel * model, QWidget * parent)
     header()->setResizeMode(2, QHeaderView::Stretch);
 }
 
-CramFileModel * TaskEditorView::studyTaskModel() const
+TogMegFileModel * TaskEditorView::studyTaskModel() const
 {
     return d->model;
 }
@@ -123,7 +123,7 @@ void TaskEditorView::activateContextMenu(const QPoint & pos)
 void TaskEditorView::toFirstRow()
 {
     if ( d->model->rowCount() ) {
-        QModelIndex index = model()->index(0, CramFileModel::QuestionColumn);
+        QModelIndex index = model()->index(0, TogMegFileModel::QuestionColumn);
         QMetaObject::invokeMethod(this, "setCurrentIndex", Qt::QueuedConnection, Q_ARG(QModelIndex, index));
     }
 }
@@ -197,15 +197,15 @@ void TaskEditorView::editNextItem()
 
     if ( !currentIndex().isValid() ) return;
     int nextRow = currentIndex().row();
-    if ( currentIndex().column() == CramFileModel::QuestionColumn) {
-        QModelIndex next = model()->index( nextRow, CramFileModel::AnswerColumn );
+    if ( currentIndex().column() == TogMegFileModel::QuestionColumn) {
+        QModelIndex next = model()->index( nextRow, TogMegFileModel::AnswerColumn );
         setCurrentIndex(next);
     }
-    else if ( currentIndex().column() == CramFileModel::AnswerColumn) {
+    else if ( currentIndex().column() == TogMegFileModel::AnswerColumn) {
         if (nextRow < model()->rowCount()-1)
             nextRow++;
 
-        QModelIndex next = model()->index( nextRow, CramFileModel::QuestionColumn );
+        QModelIndex next = model()->index( nextRow, TogMegFileModel::QuestionColumn );
         setCurrentIndex(next);
     }
 }
@@ -214,15 +214,15 @@ void TaskEditorView::editPreviousItem()
 {
     if ( !currentIndex().isValid() ) return;
     int previousRow = currentIndex().row();
-    if ( currentIndex().column() == CramFileModel::QuestionColumn) {
+    if ( currentIndex().column() == TogMegFileModel::QuestionColumn) {
         if (previousRow > 0)
             previousRow--;
 
-        QModelIndex previous = model()->index( previousRow, CramFileModel::AnswerColumn );
+        QModelIndex previous = model()->index( previousRow, TogMegFileModel::AnswerColumn );
         setCurrentIndex(previous);
     }
-    else if ( currentIndex().column() == CramFileModel::AnswerColumn) {
-        QModelIndex previous = model()->index( previousRow, CramFileModel::QuestionColumn );
+    else if ( currentIndex().column() == TogMegFileModel::AnswerColumn) {
+        QModelIndex previous = model()->index( previousRow, TogMegFileModel::QuestionColumn );
         setCurrentIndex(previous);
     }
 }
@@ -254,11 +254,11 @@ void TaskEditorView::currentChanged(const QModelIndex & current, const QModelInd
     QTreeView::currentChanged(current, previous);
     if ( !current.isValid() ) return;
 
-    if ( current.column() == CramFileModel::QuestionColumn ||
-         current.column() == CramFileModel::AnswerColumn)
+    if ( current.column() == TogMegFileModel::QuestionColumn ||
+         current.column() == TogMegFileModel::AnswerColumn)
         edit(current);
     else {
-        QModelIndex index = model()->index( current.row(), CramFileModel::QuestionColumn );
+        QModelIndex index = model()->index( current.row(), TogMegFileModel::QuestionColumn );
         setCurrentIndex(index);
     }
 }
@@ -368,7 +368,7 @@ void TaskEditorView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
                     painter->drawLine(x,y, x+w,y);
                     painter->drawLine(x,y+h, x+w,y+h);
 
-                    if ( headerSection == CramFileModel::AnswerColumn ) {
+                    if ( headerSection == TogMegFileModel::AnswerColumn ) {
                         painter->drawLine(x+w-1,y, x+w-1,y+h);
                     }
                 }

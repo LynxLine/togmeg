@@ -14,7 +14,7 @@ public:
     QString answer;
 };
 
-class CramFileModel : public QAbstractListModel
+class TogMegFileModel : public QAbstractListModel
 {
 Q_OBJECT
 
@@ -25,8 +25,8 @@ public:
         AnswerColumn,
         ColumnCount
     };
-    CramFileModel(QObject * parent = 0L);
-    virtual ~CramFileModel();
+    TogMegFileModel(QObject * parent = 0L);
+    virtual ~TogMegFileModel();
     QString taskId();
 
     Qt::ItemFlags flags(const QModelIndex &index) const;

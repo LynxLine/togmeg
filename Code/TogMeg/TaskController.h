@@ -7,7 +7,7 @@
 
 #include <QMap>
 #include <QObject>
-class CramFileModel;
+class TogMegFileModel;
 
 class ControllerDataEntry {
 public:
@@ -27,7 +27,7 @@ class TaskController : public QObject
 {
 Q_OBJECT
 public:
-    TaskController(CramFileModel * parent);
+    TaskController(TogMegFileModel * parent);
     virtual ~TaskController();
 
     virtual bool hasNext() = 0;
@@ -48,7 +48,7 @@ signals:
     void indicateMatching();
 
 protected:
-    CramFileModel * model;
+    TogMegFileModel * model;
     QMap<int, int> eventTimeMap;
 };
 

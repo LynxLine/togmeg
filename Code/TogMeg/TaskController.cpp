@@ -3,13 +3,13 @@
 //
 
 #include <QtGui>
-#include "taskcontroller.h"
-#include "CramFileModel.h"
+#include "TaskController.h"
+#include "TogMegFileModel.h"
 
 /*!
  * Creates the object.
  */
-TaskController::TaskController(CramFileModel * parent)
+TaskController::TaskController(TogMegFileModel * parent)
 :QObject(parent), model(parent)
 {
 }

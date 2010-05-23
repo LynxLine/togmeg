@@ -5,8 +5,7 @@
 #include <QtGui>
 #include <iostream>
 
-#include "crammero.h"
-
+#include "TogMeg.h"
 #include "TogMegWindow.h"
 #include "TogMegProject.h"
 

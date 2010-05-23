@@ -5,22 +5,22 @@
 #include <QtXml>
 #include <QtCore>
 
-#include "crammero.h"
-#include "CramFileModel.h"
+#include "TogMeg.h"
+#include "TogMegFileModel.h"
 
-class CramFileModel::Private
+class TogMegFileModel::Private
 {
 public:
-    static CramFileModel * instance;
+    static TogMegFileModel * instance;
     QList<StudyDataEntry> entries;
     bool isModified;
     QString filePath;
 };
 
 /*!
- Crestes CramFileModel
+ Crestes TogMegFileModel
  */
-CramFileModel::CramFileModel(QObject * parent)
+TogMegFileModel::TogMegFileModel(QObject * parent)
 :QAbstractListModel(parent)
 {
     d = new Private;
@@ -31,14 +31,14 @@ CramFileModel::CramFileModel(QObject * parent)
 /*!
  Deletes the object.
  */
-CramFileModel::~CramFileModel()
+TogMegFileModel::~TogMegFileModel()
 {
     delete d;
 }
 
-void CramFileModel::loadTabFile(QString filePath)
+void TogMegFileModel::loadTabFile(QString filePath)
 {
-    qDebug() << "CramFileModel::loadTabFile()," << filePath;
+    qDebug() << "TogMegFileModel::loadTabFile()," << filePath;
     
     d->entries.clear();
     d->filePath = filePath;
@@ -61,9 +61,9 @@ void CramFileModel::loadTabFile(QString filePath)
     addNewEntry();
 }
 
-void CramFileModel::loadXmlFile(QString filePath)
+void TogMegFileModel::loadXmlFile(QString filePath)
 {
-    qDebug() << "CramFileModel::loadXmlFile()," << filePath;
+    qDebug() << "TogMegFileModel::loadXmlFile()," << filePath;
     
     d->entries.clear();
     d->filePath = filePath;
@@ -93,7 +93,7 @@ void CramFileModel::loadXmlFile(QString filePath)
     addNewEntry();
 }
 
-bool CramFileModel::saveTabFile(QString filePath)
+bool TogMegFileModel::saveTabFile(QString filePath)
 {
     QFile f(filePath);
     if (f.open(QIODevice::WriteOnly)) {
@@ -112,7 +112,7 @@ bool CramFileModel::saveTabFile(QString filePath)
     return false;
 }
 
-bool CramFileModel::saveXmlFile(QString filePath)
+bool TogMegFileModel::saveXmlFile(QString filePath)
 {
     QFile f(filePath);
     if (f.open(QIODevice::WriteOnly)) {
@@ -147,7 +147,7 @@ bool CramFileModel::saveXmlFile(QString filePath)
     return false;
 }
 
-QModelIndex CramFileModel::addNewEntry()
+QModelIndex TogMegFileModel::addNewEntry()
 {
     beginInsertRows(QModelIndex(), d->entries.count(), d->entries.count());
     StudyDataEntry entry;
@@ -157,7 +157,7 @@ QModelIndex CramFileModel::addNewEntry()
     return index( d->entries.count()-1,1 );
 }
 
-void CramFileModel::removeEntry(QModelIndex index)
+void TogMegFileModel::removeEntry(QModelIndex index)
 {
     if ( !index.isValid() ) return;
     if ( index.row() < 0 || index.row() >= d->entries.count() ) return;
@@ -168,26 +168,26 @@ void CramFileModel::removeEntry(QModelIndex index)
     endRemoveRows();
 }
 
-void CramFileModel::clear()
+void TogMegFileModel::clear()
 {
     beginResetModel();
     d->entries.clear();
     endResetModel();
 }
 
-int CramFileModel::rowCount(const QModelIndex & parent) const
+int TogMegFileModel::rowCount(const QModelIndex & parent) const
 {
     Q_UNUSED(parent);
     return d->entries.count();
 }
 
-int CramFileModel::columnCount(const QModelIndex & parent) const
+int TogMegFileModel::columnCount(const QModelIndex & parent) const
 {
     Q_UNUSED(parent);
     return ColumnCount;
 }
 
-QVariant CramFileModel::data(const QModelIndex & index, int role) const
+QVariant TogMegFileModel::data(const QModelIndex & index, int role) const
 {
     if ( !index.isValid() ) return QVariant();
     if ( index.row() < 0 || index.row() >= d->entries.count() ) return QVariant();
@@ -205,7 +205,7 @@ QVariant CramFileModel::data(const QModelIndex & index, int role) const
     return QVariant();
 }
 
-bool CramFileModel::setData(const QModelIndex & i, const QVariant & value, int role)
+bool TogMegFileModel::setData(const QModelIndex & i, const QVariant & value, int role)
 {
     if ( !i.isValid() ) return false;
     if ( i.row() < 0 || i.row() >= d->entries.count() ) return false;
@@ -229,7 +229,7 @@ bool CramFileModel::setData(const QModelIndex & i, const QVariant & value, int r
     return false;
 }
 
-QVariant CramFileModel::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant TogMegFileModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     Q_UNUSED(orientation);
 
@@ -249,7 +249,7 @@ QVariant CramFileModel::headerData(int section, Qt::Orientation orientation, int
     return QVariant();
 }
 
-Qt::ItemFlags CramFileModel::flags(const QModelIndex &index) const 
+Qt::ItemFlags TogMegFileModel::flags(const QModelIndex &index) const 
 {
     if ( !index.isValid() ) return Qt::ItemIsDropEnabled;
     if ( index.row() < 0 || index.row() >= d->entries.count() ) return Qt::ItemIsDropEnabled;
@@ -258,7 +258,7 @@ Qt::ItemFlags CramFileModel::flags(const QModelIndex &index) const
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
 }
 
-QString CramFileModel::filePath() const
+QString TogMegFileModel::filePath() const
 {
     return d->filePath;
 }

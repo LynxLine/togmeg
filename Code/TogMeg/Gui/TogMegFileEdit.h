@@ -6,9 +6,9 @@
 #define TASKEDITORVIEW_H
 
 #include <QTreeView>
-#include "crammero.h"
+#include "TogMeg.h"
 
-class CramFileModel;
+class TogMegFileModel;
 
 /*!
  * \class TaskEditorView
@@ -21,11 +21,11 @@ public:
         QAQAMode = 0,
         QQAAMode,
     };
-    TaskEditorView(CramFileModel * model, QWidget * parent = 0);
+    TaskEditorView(TogMegFileModel * model, QWidget * parent = 0);
     virtual ~TaskEditorView();
     NextItemMode nextItemMode();
 
-    CramFileModel * studyTaskModel() const;
+    TogMegFileModel * studyTaskModel() const;
     
 public slots:
     void addNewEntry();
@@ -56,7 +56,7 @@ private:
 	Private * d;
 };
 
-#include "CramFileDelegate.h"
+#include "TogMegFileDelegate.h"
 
 class TaskEditorItemDelegate : public ItemDelegate
 {

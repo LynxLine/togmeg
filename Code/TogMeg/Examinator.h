@@ -6,7 +6,7 @@
 #define EXAMINATOR_H
 
 #include <QObject>
-class CramFileModel;
+class TogMegFileModel;
 
 /*!
  * \class Examinator
@@ -27,7 +27,7 @@ public:
         IndicatingMismatch,
     };
 
-    Examinator(CramFileModel * model);
+    Examinator(TogMegFileModel * model);
     virtual ~Examinator();
 
     State state();

@@ -16,9 +16,9 @@
 #include <sphelper.h>
 #endif
 
-#include "crammero.h"
-#include "CramFileModel.h"
-#include "studytaskcontroller.h"
+#include "TogMeg.h"
+#include "TogMegFileModel.h"
+#include "StudyTaskController.h"
 
 class StudyTaskController::Private {
 public:
@@ -41,7 +41,7 @@ public:
 /*!
  * Creates the object.
  */
-StudyTaskController::StudyTaskController(CramFileModel * parent)
+StudyTaskController::StudyTaskController(TogMegFileModel * parent)
 :TaskController(parent)
 {
     d = new Private;
@@ -110,7 +110,7 @@ bool StudyTaskController::hasNext()
 {
     int nextIndex = 0;
     while ( nextIndex < model->rowCount() ) {
-        QModelIndex i = model->index(nextIndex, CramFileModel::QuestionColumn);
+        QModelIndex i = model->index(nextIndex, TogMegFileModel::QuestionColumn);
         QString question = model->data(i).toString();
         if ( !question.isEmpty() ) break;
         nextIndex++;
@@ -124,14 +124,14 @@ ControllerDataEntry StudyTaskController::next()
     while ( question.isEmpty() ) {
         if (!d->isLastFailed)
             d->index = rand() % model->rowCount();
-        QModelIndex i = model->index(d->index, CramFileModel::QuestionColumn);
+        QModelIndex i = model->index(d->index, TogMegFileModel::QuestionColumn);
         question = model->data(i).toString();
     }
 
     ControllerDataEntry entry;
 
-    entry.answer = model->data( model->index(d->index, CramFileModel::AnswerColumn) ).toString();
-    entry.question = model->data( model->index(d->index, CramFileModel::QuestionColumn) ).toString();
+    entry.answer = model->data( model->index(d->index, TogMegFileModel::AnswerColumn) ).toString();
+    entry.question = model->data( model->index(d->index, TogMegFileModel::QuestionColumn) ).toString();
 
     int typingSpeed = app::typingSpeed(); //symbols in minute
     if ( typingSpeed <= 0 ) typingSpeed = 60;

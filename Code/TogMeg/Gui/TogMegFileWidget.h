@@ -8,7 +8,7 @@
 #include <QWidget>
 
 class TaskEditorView;
-class CramFileModel;
+class TogMegFileModel;
 
 /*!
  */
@@ -17,7 +17,7 @@ class TaskEditorWidget : public QWidget
 Q_OBJECT
 
 public:
-    TaskEditorWidget(CramFileModel * model, QWidget * parent = 0L);
+    TaskEditorWidget(TogMegFileModel * model, QWidget * parent = 0L);
     virtual ~TaskEditorWidget();
 
     TaskEditorView * view() const;

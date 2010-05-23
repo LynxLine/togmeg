@@ -14,7 +14,7 @@ class StudyTaskController : public TaskController
 {
 Q_OBJECT
 public:
-    StudyTaskController(CramFileModel * parent = 0);
+    StudyTaskController(TogMegFileModel * parent = 0);
     virtual ~StudyTaskController();
 
     virtual bool hasNext();

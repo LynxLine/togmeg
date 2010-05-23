@@ -7,17 +7,17 @@
 
 #include "BaseProject.h"
 
-class CramFileModel;
+class TogMegFileModel;
 
 class TogMegProject : public BaseProject
 {		
 Q_OBJECT
-friend class CramFileModel;
+friend class TogMegFileModel;
 public:  
     TogMegProject(QObject * parent);
     virtual ~TogMegProject();
     
-    CramFileModel * model() const;
+    TogMegFileModel * model() const;
       
     virtual QString extension() const;
     virtual QStringList extensions() const;
@@ -29,7 +29,7 @@ public slots:
     virtual void clear();
 
 protected:
-    virtual CramFileModel * createModel() const;
+    virtual TogMegFileModel * createModel() const;
     
 private:
     class Private;

@@ -3,8 +3,8 @@
 //
 
 #include <QtGui>
-#include "crammero.h"
-#include "CramFileDelegate.h"
+#include "TogMeg.h"
+#include "TogMegFileDelegate.h"
 
 void ItemDelegate::registerEditor(QWidget * editor) const
 {

@@ -4,7 +4,7 @@
 
 #include <QtGui>
 #include <time.h>
-#include "crammero.h"
+#include "TogMeg.h"
 using namespace app;
 
 QWindowsStyle app::cleanStyle;

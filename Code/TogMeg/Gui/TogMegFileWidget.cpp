@@ -6,9 +6,9 @@
 #include "TogMegWindow.h"
 #include "pixmapbutton.h"
 #include "gradientwidget.h"
-#include "CramFileView.h"
+#include "TogMegFileEdit.h"
 #include "Footer.h"
-#include "CramFileWidget.h"
+#include "TogMegFileWidget.h"
 
 class TaskEditorWidget::Private
 {
@@ -20,7 +20,7 @@ public:
 /*!
  Crestes TaskEditorWidget
  */
-TaskEditorWidget::TaskEditorWidget(CramFileModel * model, QWidget * parent)
+TaskEditorWidget::TaskEditorWidget(TogMegFileModel * model, QWidget * parent)
 :QWidget(parent)
 {
     d = new Private;
