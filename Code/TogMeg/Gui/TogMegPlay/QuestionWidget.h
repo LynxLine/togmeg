@@ -1,6 +1,3 @@
-//
-// Copyright (C) 2007 Oleksandr Yakovlyev <yshurik@gmail.com>
-//
 
 #ifndef QUESTIONWIDGET_H
 #define QUESTIONWIDGET_H

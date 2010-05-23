@@ -1,6 +1,3 @@
-//
-// Copyright (C) 2007 Oleksandr Yakovlyev <yshurik@gmail.com>
-//
 
 #ifndef TASKCONTROLLER_H
 #define TASKCONTROLLER_H

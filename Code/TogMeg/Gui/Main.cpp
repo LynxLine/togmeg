@@ -1,6 +1,3 @@
-//
-// Copyright (C) 2007 CafeScribe
-//
 
 #include <QtGui>
 #include <iostream>

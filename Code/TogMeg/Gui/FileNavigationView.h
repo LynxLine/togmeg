@@ -1,6 +1,3 @@
-//
-// Copyright Petrostreamz 2008
-//
 
 #ifndef FILENAVIGATIONVIEW_H
 #define FILENAVIGATIONVIEW_H

@@ -1,6 +1,3 @@
-//
-// Copyright (C) 2007 Oleksandr Yakovlyev <yshurik@gmail.com>
-//
 
 #ifndef PLAYTASKCONTROLLER_H
 #define PLAYTASKCONTROLLER_H

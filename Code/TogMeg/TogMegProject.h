@@ -1,6 +1,3 @@
-//
-// Copyright Oleksandr Iakovliev, 2010
-//
 
 #ifndef TogMegPoject_H
 #define TogMegPoject_H

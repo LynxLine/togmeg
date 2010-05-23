@@ -1,6 +1,3 @@
-//
-// Copyright (C) 2007 CafeScribe
-//
 
 #ifndef CRAMMERO_H
 #define CRAMMERO_H

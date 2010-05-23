@@ -1,6 +1,3 @@
-//
-// Copyright (C) 2007 Oleksandr Yakovlyev <yshurik@gmail.com>
-//
 
 #ifndef STUDYTASKCONTROLLER_H
 #define STUDYTASKCONTROLLER_H

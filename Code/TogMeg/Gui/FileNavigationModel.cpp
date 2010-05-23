@@ -1,6 +1,3 @@
-//
-// Copyright Petrostreamz 2008
-//
 
 #include <QtGui>
 #include "FileNavigationModel.h"

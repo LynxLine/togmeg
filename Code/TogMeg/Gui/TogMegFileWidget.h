@@ -1,6 +1,3 @@
-//
-// Copyright (C) 2007 Oleksandr Yakovlyev <yshurik@gmail.com>
-//
 
 #ifndef TASKEDITORWIDGET_H
 #define TASKEDITORWIDGET_H

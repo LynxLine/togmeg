@@ -1,6 +1,3 @@
-//
-// Copyright Oleksandr Iakovliev, 2010
-//
 
 #include <QtCore>
 #include "TogMegProject.h"
