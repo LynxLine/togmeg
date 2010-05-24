@@ -173,6 +173,8 @@ void TogMegFileModel::clear()
 {
     beginResetModel();
     d->entries.clear();
+    StudyDataEntry entry;
+    d->entries << entry;
     endResetModel();
 }
 

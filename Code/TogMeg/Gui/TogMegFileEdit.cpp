@@ -83,6 +83,8 @@ TogMegFileEdit::TogMegFileEdit(TogMegFileModel * model, QWidget * parent)
     header()->setResizeMode(0, QHeaderView::ResizeToContents);
     header()->setResizeMode(1, QHeaderView::Stretch);
     header()->setResizeMode(2, QHeaderView::Stretch);
+    
+    connect(model, SIGNAL(modelAboutToBeReset()), this, SLOT(modelAboutToBeReset()));
 }
 
 TogMegFileModel * TogMegFileEdit::studyTaskModel() const
@@ -139,7 +141,6 @@ void TogMegFileEdit::removeEntry()
 
 void TogMegFileEdit::keyPressEvent(QKeyEvent * ke)
 {
-    //qDebug() << "TogMegFileEdit::keyPressEvent()";
     if (ke->key() == Qt::Key_Up) {
         int previousRow = currentIndex().row();
         if (previousRow <= 0) return;
@@ -147,6 +148,7 @@ void TogMegFileEdit::keyPressEvent(QKeyEvent * ke)
 
         QModelIndex previous = model()->index( previousRow, currentIndex().column() );
         setCurrentIndex(previous);
+        return ke->accept();
     }
     else if (ke->key() == Qt::Key_Down) {
         int nextRow = currentIndex().row();
@@ -155,9 +157,10 @@ void TogMegFileEdit::keyPressEvent(QKeyEvent * ke)
 
         QModelIndex next = model()->index( nextRow, currentIndex().column() );
         setCurrentIndex(next);
+        return ke->accept();
     }
-    else
-        QTreeView::keyPressEvent(ke);
+    
+    return QTreeView::keyPressEvent(ke);
 }
 
 void TogMegFileEdit::editNextItemUsingMode()
@@ -373,6 +376,11 @@ void TogMegFileEdit::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
     }
 }
 
+void TogMegFileEdit::modelAboutToBeReset()
+{
+    setCurrentIndex(QModelIndex()); 
+}
+
 //
 // Item Delegate
 //
@@ -495,22 +503,14 @@ void TaskEditorItemDelegate::editPreviousItem()
 
 void TaskItemEditor::keyPressEvent(QKeyEvent * ke)
 {
-    if ( !selectedText().isEmpty() || ke->modifiers() ) {
-        QLineEdit::keyPressEvent(ke);
-        return;
-    }
-
-    if ( cursorPosition() == 0 && ke->key() == Qt::Key_Left) {
-        QLineEdit::keyPressEvent(ke);
-        emit editPreviousItem();
-        return;
-    }
-
-    if ( cursorPosition() == text().length() && ke->key() == Qt::Key_Right) {
-        QLineEdit::keyPressEvent(ke);
-        emit editNextItem();
-        return;
-    }
-
     QLineEdit::keyPressEvent(ke);
+
+    if ( !selectedText().isEmpty() || ke->modifiers() )
+        return;
+
+    if ( cursorPosition() == 0 && ke->key() == Qt::Key_Left)
+        emit editPreviousItem();
+
+    if ( cursorPosition() == text().length() && ke->key() == Qt::Key_Right)
+        emit editNextItem();
 }

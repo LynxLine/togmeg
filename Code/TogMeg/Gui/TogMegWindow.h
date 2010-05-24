@@ -30,6 +30,7 @@ public:
     QDockWidget * filesDock() const;
 
 public slots:
+    void newFile();
     void newEntry();
     void previousWindow();
 

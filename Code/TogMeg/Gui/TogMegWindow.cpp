@@ -59,6 +59,7 @@ TogMegWindow::TogMegWindow(TogMegProject * proj, QWidget * parent, Qt::WFlags fl
     connectActions();
     createMenuBar();
     createToolBar();
+    updateFileMenu();
     filesDock();
 
 	statusBar()->hide();
@@ -370,6 +371,8 @@ QDockWidget * TogMegWindow::filesDock() const
         d->filesView->setModel(d->filesModel);
         connect(d->filesView, SIGNAL(widthChanged(int)),
                 this, SLOT(adjustSpacerInToolBar(int)));
+        connect(d->filesView, SIGNAL(openFileRequest(QString)),
+                this, SLOT(openFile(QString)));
         
         d->filesDock = new QDockWidget(d->instance);
         d->filesDock->setMinimumWidth(200);
@@ -399,4 +402,18 @@ void TogMegWindow::setNextByRows()
 void TogMegWindow::setNextByCells()
 {
     d->editor->setNextItemMode(TogMegFileEdit::QAQAMode);
+}
+
+void TogMegWindow::newFile()
+{
+    if (!allowToClose())
+        return;
+
+    stop();
+    project()->clear();
+    updateWindowTitle();
+    
+    setViewMode(TogMegWindow::TaskEditorMode);
+    d->editor->setFocus();
+    d->editor->setCurrentIndex(d->editor->model()->index(0,0));
 }

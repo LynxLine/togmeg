@@ -44,15 +44,19 @@ int FileNavigationModel::columnCount(const QModelIndex & parent) const
     return ColCount;
 }
 
-QVariant FileNavigationModel::data(const QModelIndex & index, int role) const
+QVariant FileNavigationModel::data(const QModelIndex & i, int role) const
 {
-    if ( !index.isValid() ) return QVariant();
-    if ( index.row() < 0 || index.row() >= d->entries.count() ) return QVariant();
+    if ( !i.isValid() ) return QVariant();
+    if ( i.row() < 0 || i.row() >= d->entries.count() ) return QVariant();
     
     if (role == Qt::DisplayRole || role == Qt::EditRole) {
-        if ( index.column() == ColName ) 
-            return d->entries[ index.row() ].fileName();
-        else if ( index.column() == ColLinks ) {
+        if ( i.column() == ColName ) {
+            QString fileName = d->entries[ i.row() ].fileName();
+            if (fileName.endsWith(".tab", Qt::CaseInsensitive))
+                fileName = fileName.left(fileName.length()-4);
+            return fileName;
+        }
+        else if ( i.column() == ColLinks ) {
             //int linkCount = 0;
             //return linkCount;
             return QVariant();
@@ -60,15 +64,20 @@ QVariant FileNavigationModel::data(const QModelIndex & index, int role) const
     }
     
     if (role == Qt::DecorationRole) {
-        if ( index.column() == ColName )
-            if (d->entries[ index.row() ].isDir())
-                return d->iconProvider.icon( d->entries[ index.row() ].filePath() );
+        if ( i.column() == ColName )
+            if (d->entries[ i.row() ].isDir())
+                return d->iconProvider.icon( d->entries[ i.row() ].filePath() );
+            else {
+                QPixmap pm(16,16);
+                pm.fill(QColor(0,0,0, 0));
+                return QIcon(pm);
+            }
     }
     
-    if (role == Qt::TextAlignmentRole && index.column() == ColName) {
+    if (role == Qt::TextAlignmentRole && i.column() == ColName) {
         return int(Qt::AlignLeft | Qt::AlignVCenter);
     }
-    else if (role == Qt::TextAlignmentRole && index.column() == ColLinks) {
+    else if (role == Qt::TextAlignmentRole && i.column() == ColLinks) {
         return int(Qt::AlignHCenter | Qt::AlignVCenter);
     }
     
@@ -141,7 +150,10 @@ void FileNavigationModel::loadPathContent(const QString & p)
     d->path = fp.mid(rootPath().length());
 
     QDir dir(rootPath()+path());
-    d->entries = dir.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot, QDir::Name | QDir::DirsFirst);
+    QStringList nameFilters;
+    nameFilters << "*.tab" << "*.xml";
+    d->entries = dir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name | QDir::DirsFirst);
+    d->entries += dir.entryInfoList(nameFilters, QDir::Files | QDir::NoDotAndDotDot, QDir::Name | QDir::DirsFirst);
     if (!path().isEmpty())
         d->entries.prepend(QFileInfo(rootPath()+".."));
     reset();

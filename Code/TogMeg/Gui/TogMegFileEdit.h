@@ -31,6 +31,7 @@ public slots:
 
 private slots:
     void toFirstRow();
+    void modelAboutToBeReset();
     void activateContextMenu(const QPoint &);
 
 signals:
