@@ -50,7 +50,6 @@ signals:
 private slots:
 	void createActions();
     void connectActions();
-    void createShortcuts();
     void createMenuBar();
     void createToolBar();
     void setNextByRows();

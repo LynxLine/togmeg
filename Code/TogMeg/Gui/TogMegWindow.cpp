@@ -53,12 +53,9 @@ TogMegWindow::TogMegWindow(TogMegProject * proj, QWidget * parent, Qt::WFlags fl
 
     d->examinator = new Examinator(project()->model());
     
-    QSettings s;
-
     setWindowTitle("TogMeg");
     
 	createActions();
-    createShortcuts();
     connectActions();
     createMenuBar();
     createToolBar();
@@ -133,12 +130,8 @@ QString TogMegWindow::release() const
  */
 void TogMegWindow::createActions()
 {
-	setAction("Open"   , new QAction (tr("Open..."), this));
-	setAction("Close"  , new QAction (tr("Close"), this));
-	setAction("Save"   , new QAction (tr("Save"), this));
-	setAction("SaveAs" , new QAction (tr("Save As..."), this));
-	setAction("Quit"   , new QAction (tr("E&xit"), this));
-
+    BaseWindow::createActions();
+    
 	setAction("Add" , new QAction (QIcon(":/images/icons/Add.png"), tr("&Add Row"), this));
 
     setAction("Play"  , new QAction (QIcon(":/images/icons/Play.png"   ), tr("&Play"), this));
@@ -172,15 +165,6 @@ void TogMegWindow::createActions()
 void TogMegWindow::createMenuBar()
 {
     QMenu * menu;
-	menu = menuBar()->addMenu(tr("&File"));
-	menu->addAction( action("Open") );
-	menu->addSeparator();
-	menu->addAction( action("Close") );
-	menu->addAction( action("Save") );
-	menu->addAction( action("SaveAs") );
-	menu->addSeparator();
-	menu->addAction( action("Quit") );
-
 	menu = menuBar()->addMenu(tr("&Edit"));
     menu->addAction( action("Add") );
 
@@ -233,30 +217,10 @@ void TogMegWindow::createToolBar()
 }
 
 /*!
- Creates action shortcuts.
- */
-void TogMegWindow::createShortcuts()
-{
-    // shortcuts
-    action("Open")   ->setShortcut(tr("Ctrl+O"));
-    action("Close")  ->setShortcut(tr("Ctrl+W"));
-    action("Save")   ->setShortcut(tr("Ctrl+S"));
-    action("SaveAs") ->setShortcut(tr("Shift+Ctrl+S"));
-    action("Quit")   ->setShortcut(tr("Ctrl+Q"));
-    action("Help")   ->setShortcut(tr("F1"));
-}
-
-/*!
  Connects actions to appropriate slots.
  */
 void TogMegWindow::connectActions()
 {
-    connect( action("Open"),   SIGNAL(triggered()), this, SLOT(openFile()));
-    connect( action("Close"),  SIGNAL(triggered()), this, SLOT(close()));
-    connect( action("Save"),   SIGNAL(triggered()), this, SLOT(saveFile()));
-    connect( action("SaveAs"), SIGNAL(triggered()), this, SLOT(saveAsFile()));
-
-    connect( action("Quit"),   SIGNAL(triggered()), this, SLOT(close()));
     connect( action("Help"),   SIGNAL(triggered()), this, SLOT(openHelp()));
     connect( action("About"),  SIGNAL(triggered()), this, SLOT(openAbout()));
 
@@ -417,14 +381,6 @@ QDockWidget * TogMegWindow::filesDock() const
         QWidget * title = new QWidget;
         title->setFixedHeight(0);
         d->filesDock->setTitleBarWidget(title);
-        
-        /*
-        connect(d->propertiesDock, SIGNAL(detachWindow()), d->instance, SLOT(detachPropsWindow()));
-        connect(d->propertiesDock, SIGNAL(closeWindow()), d->instance, SLOT(closePropsWindow()));
-        connect(d->propertiesDock, SIGNAL(dockWindow()), d->instance, SLOT(dockPropsWindow()));
-        connect(this, SIGNAL(plotTabChanged(int)), d->propertiesDock->data(), SLOT(setCurrentPlotView(int)));
-        connect(this, SIGNAL(plotTabChanged(int)), d->propertiesDock->props(), SLOT(setCurrentPlotView(int)));
-         */
     }
     
     return d->filesDock;
