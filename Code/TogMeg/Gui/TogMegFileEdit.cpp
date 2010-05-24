@@ -435,7 +435,7 @@ QWidget * TaskEditorItemDelegate::createEditor(QWidget * parent, const QStyleOpt
 {
     Q_UNUSED(o);
     QLineEdit * le = new TaskItemEditor(parent);
-    le->setStyle( &app::cleanStyle );
+    //le->setStyle( &app::cleanStyle );
     le->setFrame(false);
     {
         QPalette palette = le->palette();

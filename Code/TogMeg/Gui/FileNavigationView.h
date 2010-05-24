@@ -45,6 +45,7 @@ public:
     virtual ~FileNavigationViewDelegate();
     
     QPoint mousePos;
+    virtual QSize sizeHint(const QStyleOptionViewItem &, const QModelIndex &) const;
     virtual void paint(QPainter * p, const QStyleOptionViewItem & o, const QModelIndex & i) const;
     
 private:

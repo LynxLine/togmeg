@@ -32,6 +32,14 @@ FileNavigationModel::~FileNavigationModel()
     delete d;
 }
 
+Qt::ItemFlags FileNavigationModel::flags(const QModelIndex &index) const 
+{
+    if ( !index.isValid() ) return Qt::ItemIsDropEnabled;
+    if ( index.row() < 0 || index.row() >= d->entries.count() ) return Qt::ItemIsDropEnabled;
+    
+    return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
+}
+
 int FileNavigationModel::rowCount(const QModelIndex & parent) const
 {
     Q_UNUSED(parent);
@@ -83,6 +91,31 @@ QVariant FileNavigationModel::data(const QModelIndex & i, int role) const
     
     return QVariant();
 }
+
+bool FileNavigationModel::setData(const QModelIndex & i, const QVariant & value, int role)
+{
+    if ( !i.isValid() ) return false;
+    if ( i.row() < 0 || i.row() >= d->entries.count() ) return false;
+    
+    if (role == Qt::DisplayRole || role == Qt::EditRole) {
+        if (i.column() == ColName) {
+            QString newName = value.toString();
+            if (d->entries[i.row()].isFile() && !newName.endsWith(".tab"))
+                newName += ".tab";
+            
+            QFile f(d->entries[i.row()].absoluteFilePath());
+            bool ok = f.rename(newName);
+            if (!ok) return false;
+
+            d->entries[i.row()].setFile(f);
+            emit dataChanged(i,i);
+            return true;
+        }
+    }
+    
+    return false;
+}
+
 
 QVariant FileNavigationModel::headerData(int section, Qt::Orientation orientation, int role) const
 {

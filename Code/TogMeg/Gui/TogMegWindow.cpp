@@ -16,7 +16,9 @@
 #include "FileNavigationView.h"
 #include "FileNavigationModel.h"
 
+#include "IconSet.h"
 #include "AppStyles.h"
+#include "PixmapButton.h"
 
 #ifdef Q_WS_WIN
 #include "qt_windows.h"
@@ -374,9 +376,39 @@ QDockWidget * TogMegWindow::filesDock() const
         connect(d->filesView, SIGNAL(openFileRequest(QString)),
                 this, SLOT(openFile(QString)));
         
+        QWidget * filesWidget = new QWidget;
+        QVBoxLayout * filesLayout = new QVBoxLayout;
+        filesLayout->setSpacing(0);
+        filesLayout->setMargin(0);
+        filesWidget->setLayout(filesLayout);
+        
+        filesLayout->addWidget(d->filesView);
+        
+        QHBoxLayout * buttonsLayout = new QHBoxLayout;
+        buttonsLayout->setSpacing(2);
+        buttonsLayout->setMargin(2);
+        filesLayout->addLayout(buttonsLayout);
+        
+        PixmapButton * tb_add = new PixmapButton;
+        PixmapButton * tb_del = new PixmapButton;
+        
+        tb_add->setPixmap(EmbPixmap("AddButtonSmall"));
+        tb_add->setPixmapHl(EmbPixmap("AddButtonSmall"));
+        tb_add->setPixmapDown(EmbPixmap("AddButtonSmallPressed"));
+        tb_add->setPixmapOff(EmbPixmap("AddButtonSmallOff"));
+        
+        tb_del->setPixmap(EmbPixmap("RemoveButtonSmall"));
+        tb_del->setPixmapHl(EmbPixmap("RemoveButtonSmall"));
+        tb_del->setPixmapDown(EmbPixmap("RemoveButtonSmallPressed"));
+        tb_del->setPixmapOff(EmbPixmap("RemoveButtonSmallOff"));
+        
+        buttonsLayout->addWidget(tb_add);
+        buttonsLayout->addWidget(tb_del);
+        buttonsLayout->addItem(new QSpacerItem(10,10,QSizePolicy::MinimumExpanding, QSizePolicy::Minimum));
+        
         d->filesDock = new QDockWidget(d->instance);
         d->filesDock->setMinimumWidth(200);
-        d->filesDock->setWidget(d->filesView);
+        d->filesDock->setWidget(filesWidget);
         d->filesDock->setObjectName("Files");
         d->filesDock->setFeatures(QDockWidget::NoDockWidgetFeatures);
         d->instance->addDockWidget(Qt::LeftDockWidgetArea, d->filesDock);

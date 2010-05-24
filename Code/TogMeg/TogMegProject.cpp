@@ -85,9 +85,10 @@ QString TogMegProject::extension() const {
 }
 
 QStringList TogMegProject::extensions() const {
-    return QStringList() << "tab" << "xml";
+    return QStringList() << "tab"; // << "xml";
 }
 
 QString TogMegProject::fileDialogFilter() const {
-    return tr("Tab delimited files (*.tab);;Xml files (*.xml);;Any file (*)");
+    //return tr("Tab delimited files (*.tab);;Xml files (*.xml);;Any file (*)");
+    return tr("Tab delimited files (*.tab);;Any file (*)");
 }

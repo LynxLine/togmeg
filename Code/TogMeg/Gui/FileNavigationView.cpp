@@ -20,13 +20,16 @@ FileNavigationView::FileNavigationView(QWidget * parent)
     setHeaderHidden(true);
     setMouseTracking(true);
     setRootIsDecorated(false);
-    setUniformRowHeights(false);
+    setUniformRowHeights(true);
     setAllColumnsShowFocus(true);
     setAlternatingRowColors(false);
+    setContentsMargins(0,5,0,0);
+    setEditTriggers(QAbstractItemView::SelectedClicked | 
+                    QAbstractItemView::AnyKeyPressed);
     setAttribute(Qt::WA_MacShowFocusRect, false);
 #ifdef Q_WS_MAC
     setFrameStyle(QFrame::NoFrame);
-    setContentsMargins(1,1,1,1);
+    setContentsMargins(1,60,1,1);
     setLineWidth(0);
 #endif
 
@@ -175,6 +178,13 @@ FileNavigationViewDelegate::~FileNavigationViewDelegate()
     delete d;
 }
 
+QSize FileNavigationViewDelegate::sizeHint(const QStyleOptionViewItem & o, const QModelIndex & i) const
+{
+    QSize s = QItemDelegate::sizeHint(o,i);
+    if (s.height() < 20) s.setHeight(20);
+    return s;
+}
+    
 void FileNavigationViewDelegate::paint(QPainter * p, const QStyleOptionViewItem & o, const QModelIndex & i) const
 {
     d->i = i;

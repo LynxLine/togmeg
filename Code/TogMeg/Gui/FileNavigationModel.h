@@ -21,12 +21,14 @@ public:
     FileNavigationModel(QObject * parent);
     virtual ~FileNavigationModel();
     
+    Qt::ItemFlags flags(const QModelIndex &index) const;
     virtual int rowCount(const QModelIndex & parent = QModelIndex()) const;
     virtual int columnCount(const QModelIndex & parent = QModelIndex()) const;
     
-    virtual QVariant data(const QModelIndex & index, int role) const;
+    virtual QVariant data(const QModelIndex & i, int role) const;
     virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
-    
+    virtual bool setData(const QModelIndex & i, const QVariant & v, int role);
+        
     QFileInfo * fileInfo(const QModelIndex &) const;
     
     QString rootPath() const;
