@@ -3,20 +3,20 @@
 #include "TogMeg.h"
 #include "TogMegFileDelegate.h"
 
-void ItemDelegate::registerEditor(QWidget * editor) const
+void TogMegFileDelegate::registerEditor(QWidget * editor) const
 {
     connect(editor, SIGNAL(destroyed(QObject *)), this, SLOT(deactivateEditor(QObject *)));
     editors << editor;
 }
 
-void ItemDelegate::deactivateEditor(QObject * o)
+void TogMegFileDelegate::deactivateEditor(QObject * o)
 {
     QWidget * editor = ::qobject_cast<QWidget*>(o);
     if ( !editors.contains(editor) ) return;
     editors.removeAll(editor);
 }
 
-void ItemDelegate::setEditorData(QWidget * editor, const QModelIndex & i) const
+void TogMegFileDelegate::setEditorData(QWidget * editor, const QModelIndex & i) const
 {
     QVariant v = i.data(Qt::EditRole);
     QByteArray n = editor->metaObject()->userProperty().name();
@@ -24,14 +24,14 @@ void ItemDelegate::setEditorData(QWidget * editor, const QModelIndex & i) const
         editor->setProperty(n, v);
 }
 
-void ItemDelegate::setModelData(QWidget * editor, QAbstractItemModel * model, const QModelIndex & i) const
+void TogMegFileDelegate::setModelData(QWidget * editor, QAbstractItemModel * model, const QModelIndex & i) const
 {
     QByteArray n = editor->metaObject()->userProperty().name();
     if (!n.isEmpty())
         model->setData(i, editor->property(n), Qt::EditRole);
 }
 
-bool ItemDelegate::eventFilter(QObject * o, QEvent * e)
+bool TogMegFileDelegate::eventFilter(QObject * o, QEvent * e)
 {
     QWidget * editor = ::qobject_cast<QWidget*>(o);
     if (!editor)
@@ -96,7 +96,7 @@ bool ItemDelegate::eventFilter(QObject * o, QEvent * e)
     return false;
 }
 
-void ItemDelegate::commitDataAndCloseEditor(QWidget * editor)
+void TogMegFileDelegate::commitDataAndCloseEditor(QWidget * editor)
 {
     emit commitData(editor);
     emit closeEditor(editor, QAbstractItemDelegate::SubmitModelCache);

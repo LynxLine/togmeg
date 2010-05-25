@@ -117,11 +117,11 @@ void FileNavigationView::leaveEvent(QEvent * e)
 
 void FileNavigationView::mouseMoveEvent(QMouseEvent * me)
 {
+    QTreeView::mouseMoveEvent(me);
+
     if (!d->model) return;
 
     d->delegate->mousePos = me->pos();
-    QTreeView::mouseMoveEvent(me);
- 
     if (d->prevUnderMouse.isValid())
         update(d->prevUnderMouse);
     

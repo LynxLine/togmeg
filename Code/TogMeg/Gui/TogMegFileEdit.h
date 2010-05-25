@@ -55,11 +55,11 @@ private:
 
 #include "TogMegFileDelegate.h"
 
-class TaskEditorItemDelegate : public ItemDelegate
+class TaskEditorItemDelegate : public TogMegFileDelegate
 {
 Q_OBJECT
 public:
-    TaskEditorItemDelegate(QAbstractItemView * parent = 0):ItemDelegate(parent) {;}
+    TaskEditorItemDelegate(QAbstractItemView * parent = 0):TogMegFileDelegate(parent) {;}
     
     //view
     virtual QSize sizeHint(const QStyleOptionViewItem & o, const QModelIndex & i) const;

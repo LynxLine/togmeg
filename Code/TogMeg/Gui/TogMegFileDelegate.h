@@ -7,13 +7,13 @@
 class QAbstractItemModel;
 
 /*!
- * \class ItemDelegate
+ * \class TogMegFileDelegate
  */
-class ItemDelegate : public QAbstractItemDelegate
+class TogMegFileDelegate : public QAbstractItemDelegate
 {
 Q_OBJECT
 public:
-    ItemDelegate(QAbstractItemView * parent):QAbstractItemDelegate(parent), view(parent) {;}
+    TogMegFileDelegate(QAbstractItemView * parent):QAbstractItemDelegate(parent), view(parent) {;}
     virtual bool eventFilter(QObject * object, QEvent * event);
 
     //editor

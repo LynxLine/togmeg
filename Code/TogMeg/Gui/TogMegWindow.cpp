@@ -135,6 +135,7 @@ void TogMegWindow::createActions()
 {
     BaseWindow::createActions();
     
+    //setAction("NewStudy", new )
 	setAction("Add" , new QAction (QIcon(":/images/icons/Add.png"), tr("&Add Row"), this));
 
     setAction("Play"  , new QAction (QIcon(":/images/icons/Play.png"   ), tr("&Play"), this));
