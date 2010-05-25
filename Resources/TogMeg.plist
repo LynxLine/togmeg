@@ -24,15 +24,15 @@
 	<key>CFBundleExecutable</key>
 	<string>@EXECUTABLE@</string>
 	<key>CFBundleGetInfoString</key>
-	<string>Crammero 1.0, Copyright © 2009, LynxLine.</string>
+	<string>TogMeg 1.0, Copyright © 2009, LynxLine.</string>
 	<key>CFBundleIconFile</key>
 	<string>@ICON@</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.lynxline.crammero</string>
+	<string>com.lynxline.togmeg</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Crammero</string>
+	<string>TogMeg</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

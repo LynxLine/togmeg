@@ -24,9 +24,6 @@ include(Code/TogMeg/TogMeg.pri)
 
 RESOURCES += images.qrc
 
-mac:ICON = Resources/TogMeg.icns
-mac:QMAKE_INFO_PLIST = Resources/TogMeg.plist
-
 win32 {
     RC_FILE = Resources/TogMeg.rc
     DEFINES += _CRT_SECURE_NO_DEPRECATE
@@ -41,6 +38,7 @@ win32 {
 }
 
 macx {
+    ICON = Resources/TogMeg.icns
     LIBS += -framework CoreFoundation -lz
     LIBS += -framework AppKit -framework Carbon
     QMAKE_INFO_PLIST = Resources/TogMeg.plist
