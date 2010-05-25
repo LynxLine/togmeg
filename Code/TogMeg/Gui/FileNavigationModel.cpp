@@ -36,6 +36,8 @@ Qt::ItemFlags FileNavigationModel::flags(const QModelIndex &index) const
 {
     if ( !index.isValid() ) return Qt::ItemIsDropEnabled;
     if ( index.row() < 0 || index.row() >= d->entries.count() ) return Qt::ItemIsDropEnabled;
+    if ( index.column() == ColName && index.data().toString() == "..")
+        return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
     
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
 }
