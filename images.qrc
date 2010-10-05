@@ -1,23 +1,23 @@
-<!DOCTYPE RCC><RCC version="1.0">
-<qresource>
-    <file>images/crammero.ico</file>
-
-    <file>images/icons/Play.png</file>
-    <file>images/icons/Stop.png</file>
-    <file>images/icons/Add.png</file>
-    <file>images/icons/Remove.png</file>
-    <file>images/icons/Record.png</file>
-    <file>images/icons/qaqa-order-button.png</file>
-    <file>images/icons/qaqa-order-button-on.png</file>
-    <file>images/icons/qaqa-order-button-down.png</file>
-    <file>images/icons/qqaa-order-button.png</file>
-    <file>images/icons/qqaa-order-button-on.png</file>
-    <file>images/icons/qqaa-order-button-down.png</file>
-
-    <file>images/bg-question-mark.png</file>
-    <file>images/button-play.png</file>
-    <file>images/button-play-pressed.png</file>
-    <file>images/button-pause.png</file>
-    <file>images/button-pause-pressed.png</file>
-</qresource>
+<RCC>
+    <qresource prefix="/">
+        <file>images/crammero.ico</file>
+        <file>images/icons/Play.png</file>
+        <file>images/icons/Stop.png</file>
+        <file>images/icons/Add.png</file>
+        <file>images/icons/Remove.png</file>
+        <file>images/icons/Record.png</file>
+        <file>images/icons/qaqa-order-button.png</file>
+        <file>images/icons/qaqa-order-button-on.png</file>
+        <file>images/icons/qaqa-order-button-down.png</file>
+        <file>images/icons/qqaa-order-button.png</file>
+        <file>images/icons/qqaa-order-button-on.png</file>
+        <file>images/icons/qqaa-order-button-down.png</file>
+        <file>images/bg-question-mark.png</file>
+        <file>images/button-play.png</file>
+        <file>images/button-play-pressed.png</file>
+        <file>images/button-pause.png</file>
+        <file>images/button-pause-pressed.png</file>
+        <file>images/icons/Arrows-Hor.png</file>
+        <file>images/icons/Arrows-Ver.png</file>
+    </qresource>
 </RCC>

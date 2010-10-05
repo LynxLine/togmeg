@@ -142,8 +142,8 @@ void TogMegWindow::createActions()
     setAction("Study" , new QAction (QIcon(":/images/icons/Record.png" ), tr("&Study"), this));
     setAction("Stop"  , new QAction (QIcon(":/images/icons/Stop.png"   ), tr("&Stop"), this));
 
-    setAction("NextByRows"  , new QAction (tr("By Rows"), this));
-    setAction("NextByCells"  , new QAction (tr("By Cells"), this));
+    setAction("NextByRows"  , new QAction(QIcon(":/images/icons/Arrows-Hor.png"), tr("By Rows"), this));
+    setAction("NextByCells"  , new QAction(QIcon(":/images/icons/Arrows-Ver.png"), tr("By Cells"), this));
     action("NextByRows")->setCheckable(true);
     action("NextByCells")->setCheckable(true);
     
