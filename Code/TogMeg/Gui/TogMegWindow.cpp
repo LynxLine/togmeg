@@ -210,7 +210,7 @@ void TogMegWindow::createToolBar()
     sp_exp->setFixedHeight(0);
     toolBar->addWidget(sp_exp);
 
-    toolBar->setIconSize(QSize(24, 24));
+    toolBar->setIconSize(QSize(32, 32));
     toolBar->setMovable(false);
     
 #ifdef Q_WS_MAC
