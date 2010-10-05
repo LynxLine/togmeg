@@ -59,6 +59,7 @@ TogMegFileEdit::TogMegFileEdit(TogMegFileModel * model, QWidget * parent)
     
     ColumnSelectorButton * b_columns = new ColumnSelectorButton(header());
     b_columns->setFixedHeight(size.height());
+    b_columns->setPixmap(QPixmap());
     addScrollBarWidget(b_columns, Qt::AlignTop);
     
     setEditTriggers(QAbstractItemView::EditKeyPressed);

@@ -47,7 +47,6 @@ Examinator::Examinator(TogMegFileModel * model)
  */
 Examinator::~Examinator()
 {
-    qDebug() << "~Examinator()";
     delete d;
 }
 
