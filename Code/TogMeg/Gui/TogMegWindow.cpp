@@ -142,8 +142,8 @@ void TogMegWindow::createActions()
     setAction("Study" , new QAction (QIcon(":/images/icons/Record.png" ), tr("&Study"), this));
     setAction("Stop"  , new QAction (QIcon(":/images/icons/Stop.png"   ), tr("&Stop"), this));
 
-    setAction("NextByRows"  , new QAction(QIcon(":/images/icons/Arrows-Hor.png"), tr("By Rows"), this));
-    setAction("NextByCells"  , new QAction(QIcon(":/images/icons/Arrows-Ver.png"), tr("By Cells"), this));
+    setAction("NextByRows"  , new QAction(QIcon(":/images/icons/Arrows-Ver.png"), tr("By Rows"), this));
+    setAction("NextByCells"  , new QAction(QIcon(":/images/icons/Arrows-Hor.png"), tr("By Cells"), this));
     action("NextByRows")->setCheckable(true);
     action("NextByCells")->setCheckable(true);
     
@@ -210,7 +210,7 @@ void TogMegWindow::createToolBar()
     sp_exp->setFixedHeight(0);
     toolBar->addWidget(sp_exp);
 
-    toolBar->setIconSize(QSize(32, 32));
+    toolBar->setIconSize(QSize(24, 24));
     toolBar->setMovable(false);
     
 #ifdef Q_WS_MAC

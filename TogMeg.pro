@@ -43,3 +43,110 @@ macx {
     LIBS += -framework AppKit -framework Carbon
     QMAKE_INFO_PLIST = Resources/TogMeg.plist
 }
+
+macx-g++ {
+    # section for batch building
+    # from command line on mac osx.
+    QMAKE_MACOSX_DEPLOYMENT_TARGET=10.5
+
+    !debug_and_release|build_pass {
+        CONFIG(release, debug|release) {
+            # release build from console: we build application
+            # bundle with everything embedded into this bundle
+            # it builds universal binaries, so pch is disabled
+            # use QMAKESPEC=macx-g++ for such build
+
+            CONFIG += x86
+            CONFIG -= precompile_header
+
+            TARGET = TogMeg
+            BUNDLETARGET = TogMeg.app
+
+            QMAKE_PRE_LINK = \
+                rm -rf $${BUNDLETARGET}/Contents/plugins; \
+                rm -rf $${BUNDLETARGET}/Contents/Frameworks
+
+            QMAKE_POST_LINK = \
+                mkdir -p $${BUNDLETARGET}/Contents/Frameworks; \
+                cp -R /Library/Frameworks/QtCore.framework \
+                      /Library/Frameworks/QtGui.framework \
+                      /Library/Frameworks/QtXml.framework \
+                      $${BUNDLETARGET}/Contents/Frameworks; \
+                cp Resources/plot.icns $${BUNDLETARGET}/Contents/Resources; \
+                \
+                install_name_tool -id @executable_path/../Frameworks/QtCore.framework/Versions/4/QtCore \
+                                $${BUNDLETARGET}/Contents/Frameworks/QtCore.framework/Versions/4/QtCore; \
+                install_name_tool -id @executable_path/../Frameworks/QtGui.framework/Versions/4/QtGui \
+                                $${BUNDLETARGET}/Contents/Frameworks/QtGui.framework/Versions/4/QtGui; \
+                install_name_tool -id @executable_path/../Frameworks/QtXml.framework/Versions/4/QtXml \
+                                $${BUNDLETARGET}/Contents/Frameworks/QtXml.framework/Versions/4/QtXml; \
+                \
+                install_name_tool -change QtCore.framework/Versions/4/QtCore \
+                                @executable_path/../Frameworks/QtCore.framework/Versions/4/QtCore $(TARGET); \
+                install_name_tool -change QtGui.framework/Versions/4/QtGui \
+                                @executable_path/../Frameworks/QtGui.framework/Versions/4/QtGui $(TARGET); \
+                install_name_tool -change QtXml.framework/Versions/4/QtXml \
+                                @executable_path/../Frameworks/QtXml.framework/Versions/4/QtXml $(TARGET); \
+                \
+                install_name_tool -change QtCore.framework/Versions/4/QtCore \
+                                @executable_path/../Frameworks/QtCore.framework/Versions/4/QtCore \
+                                $${BUNDLETARGET}/Contents/Frameworks/QtGui.framework/Versions/4/QtGui; \
+                install_name_tool -change QtCore.framework/Versions/4/QtCore \
+                                @executable_path/../Frameworks/QtCore.framework/Versions/4/QtCore \
+                                $${BUNDLETARGET}/Contents/Frameworks/QtXml.framework/Versions/4/QtXml; \
+                \
+                otool -L $(TARGET); \
+                mkdir -p $${BUNDLETARGET}/Contents/plugins; \
+                cp -R /Developer/Applications/Qt/plugins/imageformats $${BUNDLETARGET}/Contents/plugins; \
+                \
+                install_name_tool -change QtCore.framework/Versions/4/QtCore \
+                                @executable_path/../Frameworks/QtCore.framework/Versions/4/QtCore \
+                                $${BUNDLETARGET}/Contents/plugins/imageformats/libqjpeg.dylib; \
+                install_name_tool -change QtGui.framework/Versions/4/QtGui \
+                                @executable_path/../Frameworks/QtGui.framework/Versions/4/QtGui \
+                                $${BUNDLETARGET}/Contents/plugins/imageformats/libqjpeg.dylib; \
+                \
+                install_name_tool -change QtCore.framework/Versions/4/QtCore \
+                                @executable_path/../Frameworks/QtCore.framework/Versions/4/QtCore \
+                                $${BUNDLETARGET}/Contents/plugins/imageformats/libqgif.dylib; \
+                install_name_tool -change QtGui.framework/Versions/4/QtGui \
+                                @executable_path/../Frameworks/QtGui.framework/Versions/4/QtGui \
+                                $${BUNDLETARGET}/Contents/plugins/imageformats/libqgif.dylib; \
+                \
+                install_name_tool -change QtCore.framework/Versions/4/QtCore \
+                                @executable_path/../Frameworks/QtCore.framework/Versions/4/QtCore \
+                                $${BUNDLETARGET}/Contents/plugins/imageformats/libqmng.dylib; \
+                install_name_tool -change QtGui.framework/Versions/4/QtGui \
+                                @executable_path/../Frameworks/QtGui.framework/Versions/4/QtGui \
+                                $${BUNDLETARGET}/Contents/plugins/imageformats/libqmng.dylib; \
+                \
+                install_name_tool -change QtCore.framework/Versions/4/QtCore \
+                                @executable_path/../Frameworks/QtCore.framework/Versions/4/QtCore \
+                                $${BUNDLETARGET}/Contents/plugins/imageformats/libqsvg.dylib; \
+                install_name_tool -change QtGui.framework/Versions/4/QtGui \
+                                @executable_path/../Frameworks/QtGui.framework/Versions/4/QtGui \
+                                $${BUNDLETARGET}/Contents/plugins/imageformats/libqsvg.dylib; \
+                \
+                install_name_tool -change QtCore.framework/Versions/4/QtCore \
+                                @executable_path/../Frameworks/QtCore.framework/Versions/4/QtCore \
+                                $${BUNDLETARGET}/Contents/plugins/imageformats/libqtiff.dylib; \
+                install_name_tool -change QtGui.framework/Versions/4/QtGui \
+                                @executable_path/../Frameworks/QtGui.framework/Versions/4/QtGui \
+                                $${BUNDLETARGET}/Contents/plugins/imageformats/libqtiff.dylib; \
+                \
+                install_name_tool -change QtCore.framework/Versions/4/QtCore \
+                                @executable_path/../Frameworks/QtCore.framework/Versions/4/QtCore \
+                                $${BUNDLETARGET}/Contents/plugins/imageformats/libqico.dylib; \
+                install_name_tool -change QtGui.framework/Versions/4/QtGui \
+                                @executable_path/../Frameworks/QtGui.framework/Versions/4/QtGui \
+                                $${BUNDLETARGET}/Contents/plugins/imageformats/libqico.dylib; \
+                \
+                echo "Ok"
+        }
+        else {
+            # debug batch build
+            TARGET = TogMeg
+        }
+    }
+}
+
