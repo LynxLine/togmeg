@@ -27,6 +27,7 @@ public:
 public slots:
     void addNewEntry();
     void removeEntry();
+    void swapQA();
     void setNextItemMode(TogMegFileEdit::NextItemMode);
 
 private slots:

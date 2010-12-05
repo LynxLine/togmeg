@@ -137,6 +137,7 @@ void TogMegWindow::createActions()
     
     //setAction("NewStudy", new )
 	setAction("Add" , new QAction (QIcon(":/images/icons/Add.png"), tr("&Add Row"), this));
+    setAction("Swap", new QAction(tr("Swap QA"), this));
 
     setAction("Play"  , new QAction (QIcon(":/images/icons/Play.png"   ), tr("&Play"), this));
     setAction("Study" , new QAction (QIcon(":/images/icons/Record.png" ), tr("&Study"), this));
@@ -171,6 +172,7 @@ void TogMegWindow::createMenuBar()
     QMenu * menu;
 	menu = menuBar()->addMenu(tr("&Edit"));
     menu->addAction( action("Add") );
+    menu->addAction( action("Swap") );
 
 	menu = menuBar()->addMenu(tr("&Run"));
 	menu->addAction( action("Play") );
@@ -229,6 +231,7 @@ void TogMegWindow::connectActions()
     connect( action("About"),  SIGNAL(triggered()), this, SLOT(openAbout()));
 
     connect( action("Add"),    SIGNAL(triggered()), this, SLOT(newEntry()));
+    connect( action("Swap"),    SIGNAL(triggered()), this, SLOT(swapQA()));
     connect( action("NextByRows"),   SIGNAL(triggered()), this, SLOT(setNextByRows()));
     connect( action("NextByCells"),   SIGNAL(triggered()), this, SLOT(setNextByCells()));
 
@@ -241,6 +244,13 @@ void TogMegWindow::newEntry()
 {
     if ( viewMode() == TogMegWindow::TaskEditorMode) {
         d->editor->addNewEntry();
+    }
+}
+
+void TogMegWindow::swapQA()
+{
+    if ( viewMode() == TogMegWindow::TaskEditorMode) {
+        d->editor->swapQA();
     }
 }
 
@@ -439,8 +449,11 @@ void TogMegWindow::setNextByCells()
 
 void TogMegWindow::newFile()
 {
-    if (!allowToClose())
+    QString fileName = project()->fileName();
+    if (fileName.isEmpty() && !allowToClose())
         return;
+    else
+        saveFile();
 
     stop();
     project()->clear();
@@ -449,4 +462,35 @@ void TogMegWindow::newFile()
     setViewMode(TogMegWindow::TaskEditorMode);
     d->editor->setFocus();
     d->editor->setCurrentIndex(d->editor->model()->index(0,0));
+
+    if (project()->isModified())
+        saveAsFile();
 }
+
+bool TogMegWindow::openFile(QString path)
+{
+    if (project()->isModified()) {
+        QString fileName = project()->fileName();
+        if (fileName.isEmpty() && !allowToClose())
+            return false;
+        else
+            saveFile();
+    }
+
+    return BaseWindow::openFile(path);
+}
+
+void TogMegWindow::closeEvent(QCloseEvent * event)
+{
+    if (project()->isModified()) {
+        QString fileName = project()->fileName();
+        if (fileName.isEmpty() && !allowToClose())
+            return;
+        else
+            saveFile();
+    }
+
+    saveSettings();
+    event->accept();
+}
+

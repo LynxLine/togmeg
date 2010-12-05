@@ -169,6 +169,17 @@ void TogMegFileModel::removeEntry(QModelIndex index)
     endRemoveRows();
 }
 
+void TogMegFileModel::swapQA(QModelIndex mi)
+{
+    if ( !mi.isValid() ) return;
+    if ( mi.row() < 0 || mi.row() >= d->entries.count() ) return;
+
+    int i = mi.row();
+
+    qSwap(d->entries[i].answer, d->entries[i].question);
+    emit dataChanged(index(i,0), index(i, ColumnCount));
+}
+
 void TogMegFileModel::clear()
 {
     beginResetModel();

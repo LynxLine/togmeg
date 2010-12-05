@@ -31,7 +31,9 @@ public:
 
 public slots:
     void newFile();
+    bool openFile(QString path);
     void newEntry();
+    void swapQA();
     void previousWindow();
 
     void runDemo();
@@ -47,6 +49,9 @@ public slots:
 
 signals:
     void viewModeChanged(TogMegWindow::ViewMode);
+
+protected:
+    virtual void closeEvent(QCloseEvent *);
 
 private slots:
 	void createActions();

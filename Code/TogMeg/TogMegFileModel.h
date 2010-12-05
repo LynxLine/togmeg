@@ -35,6 +35,7 @@ public:
 
     QModelIndex addNewEntry();
     void removeEntry(QModelIndex index);
+    void swapQA(QModelIndex index);
     void clear();
 
     QString filePath() const;

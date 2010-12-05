@@ -140,6 +140,13 @@ void TogMegFileEdit::removeEntry()
     scrollTo(currentIndex());
 }
 
+void TogMegFileEdit::swapQA()
+{
+    QModelIndex index = currentIndex();
+    d->model->swapQA( index );
+    scrollTo(currentIndex());
+}
+
 void TogMegFileEdit::keyPressEvent(QKeyEvent * ke)
 {
     if (ke->key() == Qt::Key_Up) {

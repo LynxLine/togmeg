@@ -42,9 +42,6 @@ FileNavigationView::FileNavigationView(QWidget * parent)
 
     d->delegate = new FileNavigationViewDelegate(this);
     setItemDelegate(d->delegate);
-
-    connect(this, SIGNAL(doubleClicked(const QModelIndex &)),
-            this, SLOT(activateItem(const QModelIndex &)));    
 }
 
 FileNavigationView::~FileNavigationView()
@@ -58,6 +55,9 @@ void FileNavigationView::setModel(FileNavigationModel * m)
     QTreeView::setModel(m);
     header()->setResizeMode(FileNavigationModel::ColName, QHeaderView::Stretch);
     header()->setResizeMode(FileNavigationModel::ColLinks, QHeaderView::ResizeToContents);
+
+    connect(selectionModel(), SIGNAL(currentChanged(const QModelIndex &, const QModelIndex &)),
+            this, SLOT(activateItem(const QModelIndex &)));
 }
 
 void FileNavigationView::showEvent(QShowEvent * se)
