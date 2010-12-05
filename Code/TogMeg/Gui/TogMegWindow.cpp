@@ -450,8 +450,10 @@ void TogMegWindow::setNextByCells()
 void TogMegWindow::newFile()
 {
     QString fileName = project()->fileName();
-    if (fileName.isEmpty() && !allowToClose())
-        return;
+    if (fileName.isEmpty()) {
+        if (!allowToClose())
+            return;
+    }
     else
         saveFile();
 
@@ -471,8 +473,10 @@ bool TogMegWindow::openFile(QString path)
 {
     if (project()->isModified()) {
         QString fileName = project()->fileName();
-        if (fileName.isEmpty() && !allowToClose())
-            return false;
+        if (fileName.isEmpty()) {
+            if (!allowToClose())
+                return false;
+        }
         else
             saveFile();
     }
@@ -484,8 +488,10 @@ void TogMegWindow::closeEvent(QCloseEvent * event)
 {
     if (project()->isModified()) {
         QString fileName = project()->fileName();
-        if (fileName.isEmpty() && !allowToClose())
-            return;
+        if (fileName.isEmpty()) {
+            if (!allowToClose())
+                return;
+        }
         else
             saveFile();
     }

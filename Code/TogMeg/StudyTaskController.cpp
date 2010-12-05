@@ -1,17 +1,6 @@
 
 #include <QtGui>
-#ifdef Q_WS_MAC
-#include <ApplicationServices/ApplicationServices.h>
-#endif
-
-#ifdef Q_WS_WIN
-#include <windows.h>
-#include <atlbase.h>
-#include <windowsx.h>
-#include <commctrl.h>
-#include <sapi.h>
-#include <sphelper.h>
-#endif
+#include "SpeechChannelBase.h"
 
 #include "TogMeg.h"
 #include "TogMegFileModel.h"
@@ -26,13 +15,7 @@ public:
     QTimeLine * timeLine;
     ControllerDataEntry currentEntry;
     
-#ifdef Q_WS_MAC
-    SpeechChannel speechChannel;
-#endif
-
-#ifdef Q_WS_WIN
-    CComPtr<ISpVoice> cpVoice;
-#endif
+    QPointer<SpeechChannelBase> speech;
 };
 
 /*!
@@ -42,6 +25,7 @@ StudyTaskController::StudyTaskController(TogMegFileModel * parent)
 :TaskController(parent)
 {
     d = new Private;
+    d->speech = SpeechChannelBase::Create(this);
 
     d->timeLine = new QTimeLine(1000, this);
     d->timeLine->setCurveShape(QTimeLine::LinearCurve);
@@ -50,37 +34,6 @@ StudyTaskController::StudyTaskController(TogMegFileModel * parent)
 
     connect(d->timeLine, SIGNAL(finished()),
             this, SLOT(readyForNext()), Qt::QueuedConnection);
-    
-#ifdef Q_WS_MAC
-    OSErr theErr = noErr;
-    theErr = NewSpeechChannel(NULL, &d->speechChannel);
-    if (theErr != noErr) {
-        qDebug() << "NewSpeechChannel() failed," << theErr;
-        return;
-    }
-#endif
-
-#ifdef Q_WS_WIN
-    HRESULT hr;
-    hr = d->cpVoice.CoCreateInstance( CLSID_SpVoice );
-    if (!SUCCEEDED(hr)) 
-        return; 
-
-    QMainWindow * mw = qobject_cast<QMainWindow *>(qApp->activeWindow());
-    if (!mw) {
-        qDebug() << "No active main window";
-        return;
-    }
-
-    ULONGLONG events = SPFEI(SPEI_WORD_BOUNDARY) | SPFEI(SPEI_END_INPUT_STREAM);
-    
-    d->cpVoice->SetInterest( events, events );
-    d->cpVoice->SetNotifyWindowMessage( mw->winId(), WM_USER+5767, 0, 0 );
-    //d->initialized = true;   
-
-	//if (voiceId.isValid())
-	//	setVoice(voiceId);
-#endif
 }
 
 /*!
@@ -88,18 +41,6 @@ StudyTaskController::StudyTaskController(TogMegFileModel * parent)
  */
 StudyTaskController::~StudyTaskController()
 {
-#ifdef Q_WS_MAC
-    if (!d->speechChannel) return;
-    
-    OSErr theErr = noErr;
-    theErr = StopSpeech(d->speechChannel);
-    if (theErr != noErr)
-        qDebug() << "StopSpeech() failed," << theErr;
-    
-    theErr = DisposeSpeechChannel(d->speechChannel);
-    if (theErr != noErr)
-        qDebug() << "DisposeSpeechChannel() failed," << theErr;
-#endif
     delete d;
 }
 
@@ -178,23 +119,7 @@ void StudyTaskController::processAnswer(int usedTime, QString answer)
     }
     
     QString text = "  "+d->currentEntry.answer+"  ";
-#ifdef Q_WS_MAC
-    QTextCodec * tc = QTextCodec::codecForName("Apple Roman");
-    QByteArray enc = tc->fromUnicode(text);    
-    SpeakText(d->speechChannel , enc.data(), enc.size() );
-#endif
-
-#ifdef Q_WS_WIN
-	WCHAR * wcText = new WCHAR[ text.length()+1 ];
-    text.toWCharArray(wcText);
-    wcText[text.length()] = 0;
-    //d->textLength = text.length();
-
-    HRESULT hr = d->cpVoice->Speak( wcText, SPF_ASYNC | SPF_IS_NOT_XML, 0 );
-    if (FAILED( hr )) qDebug() << "sapi51: Speak() is not completed";
-    delete[] wcText;
-#endif
-
+    d->speech->start(text);
     d->timeLine->setCurrentTime(0);
     d->timeLine->start();
 }
