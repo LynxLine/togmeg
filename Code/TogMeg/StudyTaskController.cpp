@@ -48,7 +48,7 @@ bool StudyTaskController::hasNext()
 {
     int nextIndex = 0;
     while ( nextIndex < model->rowCount() ) {
-        QModelIndex i = model->index(nextIndex, TogMegFileModel::QuestionColumn);
+        QModelIndex i = model->index(nextIndex, TogMegFileModel::ColQ);
         QString question = model->data(i).toString();
         if ( !question.isEmpty() ) break;
         nextIndex++;
@@ -62,14 +62,14 @@ ControllerDataEntry StudyTaskController::next()
     while ( question.isEmpty() ) {
         if (!d->isLastFailed)
             d->index = rand() % model->rowCount();
-        QModelIndex i = model->index(d->index, TogMegFileModel::QuestionColumn);
+        QModelIndex i = model->index(d->index, TogMegFileModel::ColQ);
         question = model->data(i).toString();
     }
 
     ControllerDataEntry entry;
 
-    entry.answer = model->data( model->index(d->index, TogMegFileModel::AnswerColumn) ).toString();
-    entry.question = model->data( model->index(d->index, TogMegFileModel::QuestionColumn) ).toString();
+    entry.answer = model->data( model->index(d->index, TogMegFileModel::ColA) ).toString();
+    entry.question = model->data( model->index(d->index, TogMegFileModel::ColQ) ).toString();
 
     int typingSpeed = app::typingSpeed(); //symbols in minute
     if ( typingSpeed <= 0 ) typingSpeed = 60;

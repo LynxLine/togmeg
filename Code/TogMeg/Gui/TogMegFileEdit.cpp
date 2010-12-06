@@ -122,7 +122,7 @@ void TogMegFileEdit::activateContextMenu(const QPoint & pos)
 void TogMegFileEdit::toFirstRow()
 {
     if ( d->model->rowCount() ) {
-        QModelIndex index = model()->index(0, TogMegFileModel::QuestionColumn);
+        QModelIndex index = model()->index(0, TogMegFileModel::ColQ);
         QMetaObject::invokeMethod(this, "setCurrentIndex", Qt::QueuedConnection, Q_ARG(QModelIndex, index));
     }
 }
@@ -199,15 +199,15 @@ void TogMegFileEdit::editNextItem()
 
     if ( !currentIndex().isValid() ) return;
     int nextRow = currentIndex().row();
-    if ( currentIndex().column() == TogMegFileModel::QuestionColumn) {
-        QModelIndex next = model()->index( nextRow, TogMegFileModel::AnswerColumn );
+    if ( currentIndex().column() == TogMegFileModel::ColQ) {
+        QModelIndex next = model()->index( nextRow, TogMegFileModel::ColA );
         setCurrentIndex(next);
     }
-    else if ( currentIndex().column() == TogMegFileModel::AnswerColumn) {
+    else if ( currentIndex().column() == TogMegFileModel::ColA) {
         if (nextRow < model()->rowCount()-1)
             nextRow++;
 
-        QModelIndex next = model()->index( nextRow, TogMegFileModel::QuestionColumn );
+        QModelIndex next = model()->index( nextRow, TogMegFileModel::ColQ );
         setCurrentIndex(next);
     }
 }
@@ -216,15 +216,15 @@ void TogMegFileEdit::editPreviousItem()
 {
     if ( !currentIndex().isValid() ) return;
     int previousRow = currentIndex().row();
-    if ( currentIndex().column() == TogMegFileModel::QuestionColumn) {
+    if ( currentIndex().column() == TogMegFileModel::ColQ) {
         if (previousRow > 0)
             previousRow--;
 
-        QModelIndex previous = model()->index( previousRow, TogMegFileModel::AnswerColumn );
+        QModelIndex previous = model()->index( previousRow, TogMegFileModel::ColA );
         setCurrentIndex(previous);
     }
-    else if ( currentIndex().column() == TogMegFileModel::AnswerColumn) {
-        QModelIndex previous = model()->index( previousRow, TogMegFileModel::QuestionColumn );
+    else if ( currentIndex().column() == TogMegFileModel::ColA) {
+        QModelIndex previous = model()->index( previousRow, TogMegFileModel::ColQ );
         setCurrentIndex(previous);
     }
 }
@@ -256,11 +256,11 @@ void TogMegFileEdit::currentChanged(const QModelIndex & current, const QModelInd
     QTreeView::currentChanged(current, previous);
     if ( !current.isValid() ) return;
 
-    if ( current.column() == TogMegFileModel::QuestionColumn ||
-         current.column() == TogMegFileModel::AnswerColumn)
+    if ( current.column() == TogMegFileModel::ColQ ||
+         current.column() == TogMegFileModel::ColA)
         edit(current);
     else {
-        QModelIndex index = model()->index( current.row(), TogMegFileModel::QuestionColumn );
+        QModelIndex index = model()->index( current.row(), TogMegFileModel::ColQ );
         setCurrentIndex(index);
     }
 }
@@ -370,7 +370,7 @@ void TogMegFileEdit::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
                     painter->drawLine(x,y, x+w,y);
                     painter->drawLine(x,y+h, x+w,y+h);
 
-                    if ( headerSection == TogMegFileModel::AnswerColumn ) {
+                    if ( headerSection == TogMegFileModel::ColA ) {
                         painter->drawLine(x+w-1,y, x+w-1,y+h);
                     }
                 }
@@ -442,26 +442,36 @@ void TaskEditorItemDelegate::paint(QPainter * p, const QStyleOptionViewItem & o,
 QWidget * TaskEditorItemDelegate::createEditor(QWidget * parent, const QStyleOptionViewItem & o, const QModelIndex & i) const
 {
     Q_UNUSED(o);
-    QLineEdit * le = new TaskItemEditor(parent);
-    //le->setStyle( &app::cleanStyle );
-    le->setFrame(false);
-    {
-        QPalette palette = le->palette();
-        
-        QBrush fill;
-        if (i.row() & 1)  fill = parent->palette().brush(QPalette::AlternateBase);
-        else fill = parent->palette().brush(QPalette::Base);
-        
-        palette.setBrush(QPalette::Base, fill);
-        le->setPalette(palette);
+    if (i.row() > 0) {
+        QLineEdit * le = new TaskItemEditor(parent);
+        //le->setStyle( &app::cleanStyle );
+        le->setFrame(false);
+        {
+            QPalette palette = le->palette();
+
+            QBrush fill;
+            if (i.row() & 1)  fill = parent->palette().brush(QPalette::AlternateBase);
+            else fill = parent->palette().brush(QPalette::Base);
+
+            palette.setBrush(QPalette::Base, fill);
+            le->setPalette(palette);
+        }
+        parent->setFocusProxy(le);
+        registerEditor(le);
+
+        connect(le, SIGNAL(editNextItem()), this, SLOT(editNextItem()));
+        connect(le, SIGNAL(editPreviousItem()), this, SLOT(editPreviousItem()));
+        return le;
     }
-    parent->setFocusProxy(le);
-    registerEditor(le);
+    else if (i.row() == 0) {
+        QComboBox * cb = new QComboBox(parent);
+        cb->setFont(AppStyles::systemFont());
+        //cb->setAttribute(Qt::WA_MacShowFocusRect, false);
+        //cb->setAttribute(Qt::WA_MacSmallSize);
+        return cb;
+    }
 
-    connect(le, SIGNAL(editNextItem()), this, SLOT(editNextItem()));
-    connect(le, SIGNAL(editPreviousItem()), this, SLOT(editPreviousItem()));
-
-    return le;
+    return TogMegFileDelegate::createEditor(parent, o, i);
 }
 
 void TaskEditorItemDelegate::updateEditorGeometry(QWidget * editor, const QStyleOptionViewItem & o, const QModelIndex & i) const
@@ -478,18 +488,63 @@ void TaskEditorItemDelegate::updateEditorGeometry(QWidget * editor, const QStyle
     }
 
     QRect r = o.rect;
-    r.adjust(drect.width()+2,2, -2,-2);
-    editor->setGeometry( r );
+    if (i.row() >0) {
+        r.adjust(drect.width()+2,2, -2,-2);
+        editor->setGeometry(r);
+    }
+    else {
+        r.adjust(0,0,0,-2);
+        editor->setGeometry(r);
+    }
 }
 
 void TaskEditorItemDelegate::setEditorData(QWidget * editor, const QModelIndex & i) const
 {
     QVariant v = i.data(Qt::EditRole);
-    QLineEdit * le = qobject_cast<QLineEdit *>(editor);
-    if (!le) return;
+    if (i.row() > 0) {
+        QLineEdit * le = qobject_cast<QLineEdit *>(editor);
+        if (!le) return;
 
-    le->setText(v.toString());
+        le->setText(v.toString());
+    }
+    else if (i.row() == 0) {
+        QComboBox * cb = qobject_cast<QComboBox *>(editor);
+        if (!cb) return;
+
+        cb->clear();
+
+        QVariantMap vm = v.toMap();
+        QString current = i.data(Qt::DisplayRole).toString();
+        QVariant currentData;
+
+        cb->addItem(tr("None"), QVariant());
+        cb->insertSeparator(cb->count());
+
+        foreach(QString name, vm.keys()) {
+            cb->addItem(name, vm[name]);
+            if (name == current)
+                currentData = vm[name];
+        }
+
+        if (!currentData.isNull())
+            cb->setCurrentIndex(cb->findData(currentData));
+    }
 }
+
+void TaskEditorItemDelegate::setModelData(QWidget * editor, QAbstractItemModel * m, const QModelIndex & i) const
+{
+    if (i.row() >0)
+        return TogMegFileDelegate::setModelData(editor, m, i);
+
+    if (i.row() == 0) {
+        QComboBox * cb = qobject_cast<QComboBox *>(editor);
+        if (!cb) return;
+
+        QVariant v = cb->itemData(cb->currentIndex());
+        m->setData(i, v);
+    }
+}
+
 
 void TaskEditorItemDelegate::editNextItem()
 {

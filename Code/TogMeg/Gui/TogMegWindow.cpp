@@ -154,6 +154,8 @@ void TogMegWindow::createActions()
     actionGroup("NextBy")->addAction(action("NextByCells"));
     action("NextByRows")->setChecked(true);
     
+    action("Swap")->setShortcut(QKeySequence("Ctrl+U"));
+
     setAction("About"         , new QAction (tr("&About"), this));
     setAction("Help"          , new QAction (tr("TogMeg &Help"), this));
     setAction("CheckUpdates" , new QAction (tr("Check for Updates Now"), this));

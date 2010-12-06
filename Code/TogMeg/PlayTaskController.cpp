@@ -7,7 +7,7 @@
 
 class PlayTaskController::Private {
 public:
-    Private():index(0) {;}
+    Private():index(1) {;}
 
     int index;
     QPointer<SpeechChannelBase> speech;
@@ -35,7 +35,7 @@ bool PlayTaskController::hasNext()
 {
     int nextIndex = d->index;
     while ( nextIndex < model->rowCount() ) {
-        QModelIndex i = model->index(nextIndex, TogMegFileModel::QuestionColumn);
+        QModelIndex i = model->index(nextIndex, TogMegFileModel::ColQ);
         QString question = model->data(i).toString();
         if ( !question.isEmpty() ) break;
         nextIndex++;
@@ -46,7 +46,7 @@ bool PlayTaskController::hasNext()
 ControllerDataEntry PlayTaskController::next()
 {
     while ( d->index < model->rowCount() ) {
-        QModelIndex i = model->index(d->index, TogMegFileModel::QuestionColumn);
+        QModelIndex i = model->index(d->index, TogMegFileModel::ColQ);
         QString question = model->data(i).toString();
         if ( !question.isEmpty() ) break;
         d->index++;
@@ -54,15 +54,16 @@ ControllerDataEntry PlayTaskController::next()
 
     ControllerDataEntry entry;
 
-    entry.answer = model->data( model->index(d->index, TogMegFileModel::AnswerColumn) ).toString();
-    entry.question = model->data( model->index(d->index, TogMegFileModel::QuestionColumn) ).toString();
+    entry.answer = model->index(d->index, TogMegFileModel::ColA).data().toString();
+    entry.question = model->index(d->index, TogMegFileModel::ColQ).data().toString();
 
     entry.totalTime = 5000; //temp
     entry.startTime = 0; //temp
 
     QString text = entry.answer;
 
-    d->speech->start(text);
+    //d->speech->start(text);
+    model->setData(model->index(d->index, TogMegFileModel::ColA), true, TogMegFileModel::SpeechRole);
     d->index++;
 
     return entry;

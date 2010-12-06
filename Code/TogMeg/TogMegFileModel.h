@@ -17,11 +17,15 @@ Q_OBJECT
 
 public:
     enum Columns {
-        IdColumn = 0,
-        QuestionColumn,
-        AnswerColumn,
+        ColId = 0,
+        ColQ,
+        ColA,
         ColumnCount
     };
+    enum Role {
+        SpeechRole = Qt::UserRole +100,
+    };
+
     TogMegFileModel(QObject * parent = 0L);
     virtual ~TogMegFileModel();
     QString taskId();

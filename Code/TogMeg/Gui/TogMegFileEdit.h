@@ -72,6 +72,7 @@ public:
 
     //data
     virtual void setEditorData(QWidget * editor, const QModelIndex & i) const;
+    virtual void setModelData(QWidget * editor, QAbstractItemModel * m, const QModelIndex & i) const;
 
 private slots:
     void editNextItem();
