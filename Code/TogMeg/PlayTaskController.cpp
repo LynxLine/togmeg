@@ -10,7 +10,6 @@ public:
     Private():index(1) {;}
 
     int index;
-    QPointer<SpeechChannelBase> speech;
 };
 
 /*!
@@ -20,7 +19,14 @@ PlayTaskController::PlayTaskController(TogMegFileModel * parent)
 :TaskController(parent)
 {
     d = new Private;
-    d->speech = SpeechChannelBase::Create(this);
+/*
+    d->timeLine = new QTimeLine(3000, this);
+    d->timeLine->setCurveShape(QTimeLine::LinearCurve);
+    d->timeLine->setFrameRange(0,100);
+    d->timeLine->setLoopCount(1);
+
+    connect(d->timeLine, SIGNAL(finished()),
+            this, SLOT(readyForNext()), Qt::QueuedConnection);*/
 }
 
 /*!
@@ -60,10 +66,8 @@ ControllerDataEntry PlayTaskController::next()
     entry.totalTime = 5000; //temp
     entry.startTime = 0; //temp
 
-    QString text = entry.answer;
-
-    //d->speech->start(text);
-    model->setData(model->index(d->index, TogMegFileModel::ColA), true, TogMegFileModel::SpeechRole);
+    QModelIndex mi = model->index(d->index, TogMegFileModel::ColA);
+    model->setData(mi, true, TogMegFileModel::SpeechRole);
     d->index++;
 
     return entry;

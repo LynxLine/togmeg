@@ -14,8 +14,6 @@ public:
     bool isLastFailed;
     QTimeLine * timeLine;
     ControllerDataEntry currentEntry;
-    
-    QPointer<SpeechChannelBase> speech;
 };
 
 /*!
@@ -25,9 +23,8 @@ StudyTaskController::StudyTaskController(TogMegFileModel * parent)
 :TaskController(parent)
 {
     d = new Private;
-    d->speech = SpeechChannelBase::Create(this);
 
-    d->timeLine = new QTimeLine(1000, this);
+    d->timeLine = new QTimeLine(3000, this);
     d->timeLine->setCurveShape(QTimeLine::LinearCurve);
     d->timeLine->setFrameRange(0,100);
     d->timeLine->setLoopCount(1);
@@ -46,7 +43,7 @@ StudyTaskController::~StudyTaskController()
 
 bool StudyTaskController::hasNext()
 {
-    int nextIndex = 0;
+    int nextIndex = 1;
     while ( nextIndex < model->rowCount() ) {
         QModelIndex i = model->index(nextIndex, TogMegFileModel::ColQ);
         QString question = model->data(i).toString();
@@ -61,8 +58,8 @@ ControllerDataEntry StudyTaskController::next()
     QString question;
     while ( question.isEmpty() ) {
         if (!d->isLastFailed)
-            d->index = rand() % model->rowCount();
-        QModelIndex i = model->index(d->index, TogMegFileModel::ColQ);
+            d->index = rand() % (model->rowCount()-1);
+        QModelIndex i = model->index(d->index+1, TogMegFileModel::ColQ);
         question = model->data(i).toString();
     }
 
@@ -78,6 +75,9 @@ ControllerDataEntry StudyTaskController::next()
 
     entry.startTime = 0;
     entry.totalTime = 5000 + typingTime;
+
+    QModelIndex mi = model->index(d->index, TogMegFileModel::ColQ);
+    model->setData(mi, true, TogMegFileModel::SpeechRole);
 
     d->currentEntry = entry;
  
@@ -117,9 +117,10 @@ void StudyTaskController::processAnswer(int usedTime, QString answer)
             }
         }
     }
-    
-    QString text = "  "+d->currentEntry.answer+"  ";
-    d->speech->start(text);
+
+    QModelIndex mi = model->index(d->index, TogMegFileModel::ColA);
+    model->setData(mi, true, TogMegFileModel::SpeechRole);
+
     d->timeLine->setCurrentTime(0);
     d->timeLine->start();
 }

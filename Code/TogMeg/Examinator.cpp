@@ -54,7 +54,7 @@ void Examinator::start(Examinator::Mode mode)
 {
     d->mode = mode;
 
-    if ( mode == Playing ) d->controller = new PlayTaskController( d->model );
+    if      ( mode == Playing ) d->controller = new PlayTaskController( d->model );
     else if ( mode == Studying ) d->controller = new StudyTaskController( d->model );
 
     connect(d->controller, SIGNAL(requestNextQuestion()),

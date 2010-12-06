@@ -196,8 +196,6 @@ void TogMegFileEdit::editNextItemUsingMode()
 
 void TogMegFileEdit::editNextItem()
 {
-    qDebug() << "editNextItem()";
-
     if ( !currentIndex().isValid() ) return;
     int nextRow = currentIndex().row();
     if ( currentIndex().column() == TogMegFileModel::ColQ) {
