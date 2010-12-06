@@ -2,7 +2,7 @@
 #ifndef QUESTIONWIDGET_H
 #define QUESTIONWIDGET_H
 
-#include "roundedgradientwidget.h"
+#include "RoundedGradientWidget.h"
 
 /*!
  * \class QuestionWidget

@@ -1,6 +1,6 @@
 
 #include <QtGui>
-#include "roundedlineedit.h"
+#include "RoundedLineEdit.h"
 
 class RoundedLineEdit::Private {
 public:

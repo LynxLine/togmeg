@@ -1,7 +1,7 @@
 
 #include <QtGui>
 #include "TogMegWindow.h"
-#include "timelinewidget.h"
+#include "TimelineWidget.h"
 
 #include "AppStyles.h"
 

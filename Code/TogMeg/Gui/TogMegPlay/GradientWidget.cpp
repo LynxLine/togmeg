@@ -1,6 +1,6 @@
 
 #include <QtGui>
-#include "gradientwidget.h"
+#include "GradientWidget.h"
 
 class GradientWidget::Private {
 public:

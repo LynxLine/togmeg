@@ -1,6 +1,6 @@
 
 #include <QtCore>
-#include "examinator.h"
+#include "Examinator.h"
 
 #include "TogMegFileModel.h"
 

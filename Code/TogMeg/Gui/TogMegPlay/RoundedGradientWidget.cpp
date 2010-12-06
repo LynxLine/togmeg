@@ -1,6 +1,6 @@
 
 #include <QtGui>
-#include "roundedgradientwidget.h"
+#include "RoundedGradientWidget.h"
 
 class RoundedGradientWidget::Private {
 public:

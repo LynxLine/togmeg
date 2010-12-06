@@ -2,11 +2,11 @@
 #include <QtGui>
 #include <QtCore>
 
-#include "pixmapbutton.h"
-#include "examinewidget.h"
-#include "questionwidget.h"
-#include "answerwidget.h"
-#include "examinator.h"
+#include "PixmapButton.h"
+#include "ExamineWidget.h"
+#include "QuestionWidget.h"
+#include "AnswerWidget.h"
+#include "Examinator.h"
 #include "TogMegWindow.h"
 
 class ExamineWidget::Private

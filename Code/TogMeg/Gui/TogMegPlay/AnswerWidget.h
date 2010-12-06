@@ -2,8 +2,8 @@
 #ifndef ANSWERWIDGET_H
 #define ANSWERWIDGET_H
 
-#include "examinator.h"
-#include "roundedgradientwidget.h"
+#include "Examinator.h"
+#include "RoundedGradientWidget.h"
 
 /*!
  * \class AnswerWidget

@@ -1,6 +1,6 @@
 
 #include <QtGui>
-#include "answerwidget.h"
+#include "AnswerWidget.h"
 #include "TogMegWindow.h"
 
 class AnswerWidget::Private {

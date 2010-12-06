@@ -3,7 +3,7 @@
 #define EXAMINEWIDGET_H
 
 #include <QWidget>
-#include "examinator.h"
+#include "Examinator.h"
 
 class ExamineWidget : public QWidget
 {
