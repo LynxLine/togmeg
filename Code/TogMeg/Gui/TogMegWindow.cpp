@@ -136,7 +136,7 @@ void TogMegWindow::createActions()
     BaseWindow::createActions();
     
     //setAction("NewStudy", new )
-	setAction("Add" , new QAction (QIcon(":/images/icons/Add.png"), tr("&Add Row"), this));
+    setAction("Add" , new QAction(tr("&Add Row"), this));
     setAction("Swap", new QAction(tr("Swap QA"), this));
 
     setAction("Play"  , new QAction (QIcon(":/images/icons/Play.png"   ), tr("&Play"), this));
@@ -154,6 +154,7 @@ void TogMegWindow::createActions()
     actionGroup("NextBy")->addAction(action("NextByCells"));
     action("NextByRows")->setChecked(true);
     
+    action("Add")->setShortcut(QKeySequence("Alt+Down"));
     action("Swap")->setShortcut(QKeySequence("Ctrl+U"));
 
     setAction("About"         , new QAction (tr("&About"), this));
@@ -465,7 +466,7 @@ void TogMegWindow::newFile()
     
     setViewMode(TogMegWindow::TaskEditorMode);
     d->editor->setFocus();
-    d->editor->setCurrentIndex(d->editor->model()->index(0,0));
+    d->editor->setCurrentIndex(d->editor->model()->index(1,0));
 
     if (project()->isModified())
         saveAsFile();

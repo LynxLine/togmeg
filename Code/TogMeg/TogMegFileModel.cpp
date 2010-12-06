@@ -164,7 +164,7 @@ QModelIndex TogMegFileModel::addNewEntry()
     d->entries << entry;
     endInsertRows();
 
-    return index( d->entries.count()-1,1 );
+    return index( d->entries.count(),1 );
 }
 
 void TogMegFileModel::removeEntry(QModelIndex index)

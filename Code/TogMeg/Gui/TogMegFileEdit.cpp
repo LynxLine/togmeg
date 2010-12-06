@@ -86,6 +86,7 @@ TogMegFileEdit::TogMegFileEdit(TogMegFileModel * model, QWidget * parent)
     header()->setResizeMode(2, QHeaderView::Stretch);
     
     connect(model, SIGNAL(modelAboutToBeReset()), this, SLOT(modelAboutToBeReset()));
+    toFirstRow();
 }
 
 TogMegFileModel * TogMegFileEdit::studyTaskModel() const
@@ -122,7 +123,7 @@ void TogMegFileEdit::activateContextMenu(const QPoint & pos)
 void TogMegFileEdit::toFirstRow()
 {
     if ( d->model->rowCount() ) {
-        QModelIndex index = model()->index(0, TogMegFileModel::ColQ);
+        QModelIndex index = model()->index(1, TogMegFileModel::ColQ);
         QMetaObject::invokeMethod(this, "setCurrentIndex", Qt::QueuedConnection, Q_ARG(QModelIndex, index));
     }
 }
@@ -466,8 +467,7 @@ QWidget * TaskEditorItemDelegate::createEditor(QWidget * parent, const QStyleOpt
     else if (i.row() == 0) {
         QComboBox * cb = new QComboBox(parent);
         cb->setFont(AppStyles::systemFont());
-        //cb->setAttribute(Qt::WA_MacShowFocusRect, false);
-        //cb->setAttribute(Qt::WA_MacSmallSize);
+        connect(cb, SIGNAL(currentIndexChanged(int)), this, SLOT(editNextItem()));
         return cb;
     }
 
@@ -512,6 +512,7 @@ void TaskEditorItemDelegate::setEditorData(QWidget * editor, const QModelIndex &
         if (!cb) return;
 
         cb->clear();
+        cb->blockSignals(true);
 
         QVariantMap vm = v.toMap();
         QString current = i.data(Qt::DisplayRole).toString();
@@ -528,6 +529,8 @@ void TaskEditorItemDelegate::setEditorData(QWidget * editor, const QModelIndex &
 
         if (!currentData.isNull())
             cb->setCurrentIndex(cb->findData(currentData));
+
+        cb->blockSignals(false);
     }
 }
 
