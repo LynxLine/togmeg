@@ -58,20 +58,20 @@ ControllerDataEntry StudyTaskController::next()
     QString question;
     while ( question.isEmpty() ) {
         if (!d->isLastFailed)
-            d->index = rand() % (model->rowCount()-1);
-        QModelIndex i = model->index(d->index+1, TogMegFileModel::ColQ);
+            d->index = rand() % (model->rowCount()-1) +1;
+        QModelIndex i = model->index(d->index, TogMegFileModel::ColQ);
         question = model->data(i).toString();
     }
 
     ControllerDataEntry entry;
 
-    entry.answer = model->data( model->index(d->index, TogMegFileModel::ColA) ).toString();
-    entry.question = model->data( model->index(d->index, TogMegFileModel::ColQ) ).toString();
+    entry.a = model->data( model->index(d->index, TogMegFileModel::ColA) ).toString();
+    entry.q = model->data( model->index(d->index, TogMegFileModel::ColQ) ).toString();
 
     int typingSpeed = app::typingSpeed(); //symbols in minute
     if ( typingSpeed <= 0 ) typingSpeed = 60;
 
-    int typingTime = entry.answer.length() *1000 *60 /typingSpeed;
+    int typingTime = entry.a.length() *1000 *60 /typingSpeed;
 
     entry.startTime = 0;
     entry.totalTime = 5000 + typingTime;
@@ -95,17 +95,17 @@ void StudyTaskController::processAnswer(int usedTime, QString answer)
         return;
     }
 
-    if ( d->currentEntry.answer != answer.toLower().simplified() ) {
+    if ( d->currentEntry.a != answer.toLower().simplified() ) {
         d->isLastFailed = !d->isLastFailed;
 
         emit indicateMismatching();
-        d->timeLine->setDuration( 1000 );
+        d->timeLine->setDuration( 2000 ); // timeline to end of speech
     }
     else {
         d->isLastFailed = false;
 
         emit indicateMatching();
-        d->timeLine->setDuration( 300 );
+        d->timeLine->setDuration( 2000 ); // timeline to end of speech
 
         //commit stats
         QList<int> times = eventTimeMap.keys();

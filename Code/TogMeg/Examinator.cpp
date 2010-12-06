@@ -114,8 +114,8 @@ void Examinator::prepareNextQuestion()
     }
 
     ControllerDataEntry entry = d->controller->next();
-    emit currentQuestionChanged( entry.question );
-    emit currentAnswerChanged( entry.answer );
+    emit currentQuestionChanged( entry.q );
+    emit currentAnswerChanged( entry.a );
 
     setState(Processing);
     d->userAnswer.clear();

@@ -60,8 +60,8 @@ ControllerDataEntry PlayTaskController::next()
 
     ControllerDataEntry entry;
 
-    entry.answer = model->index(d->index, TogMegFileModel::ColA).data().toString();
-    entry.question = model->index(d->index, TogMegFileModel::ColQ).data().toString();
+    entry.a = model->index(d->index, TogMegFileModel::ColA).data().toString();
+    entry.q = model->index(d->index, TogMegFileModel::ColQ).data().toString();
 
     entry.totalTime = 5000; //temp
     entry.startTime = 0; //temp

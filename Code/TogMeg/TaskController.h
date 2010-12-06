@@ -11,8 +11,9 @@ public:
     ControllerDataEntry():startTime(0),totalTime(0) {;}
     bool isNull();
 
-    QString question;
-    QString answer;
+    QString q;
+    QString a;
+
     int startTime; //msecs
     int totalTime; //msecs
 };

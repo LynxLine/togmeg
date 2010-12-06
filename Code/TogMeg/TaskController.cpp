@@ -19,7 +19,7 @@ TaskController::~TaskController()
 }
 
 bool ControllerDataEntry::isNull() {
-    return question.isEmpty() && answer.isEmpty() && totalTime == 0;
+    return q.isEmpty() && a.isEmpty() && totalTime == 0;
 }
 
 void TaskController::collectUserEvent(int msecs, int eventType)

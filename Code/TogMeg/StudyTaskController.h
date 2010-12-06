@@ -2,7 +2,7 @@
 #ifndef STUDYTASKCONTROLLER_H
 #define STUDYTASKCONTROLLER_H
 
-#include "taskcontroller.h"
+#include "TaskController.h"
 
 /*!
  * \class StudyTaskController

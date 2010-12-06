@@ -2,7 +2,7 @@
 #ifndef PLAYTASKCONTROLLER_H
 #define PLAYTASKCONTROLLER_H
 
-#include "taskcontroller.h"
+#include "TaskController.h"
 
 /*!
  * \class PlayTaskController
