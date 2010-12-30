@@ -1,6 +1,6 @@
 
 #include <QtGui>
-#include "SpeechChannelBase.h"
+#include "QtSpeech.h"
 
 #include "TogMegFileModel.h"
 #include "PlayTaskController.h"

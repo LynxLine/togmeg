@@ -1,7 +1,7 @@
 
 #include <QtXml>
 #include <QtCore>
-#include "SpeechChannelBase.h"
+#include <QtSpeech>
 
 #include "TogMeg.h"
 #include "TogMegFileModel.h"
@@ -13,8 +13,8 @@ public:
     QList<StudyDataEntry> entries;
     bool isModified;
     QString filePath;
-    QPointer<SpeechChannelBase> speechQ;
-    QPointer<SpeechChannelBase> speechA;
+    QPointer<QtSpeech> speechQ;
+    QPointer<QtSpeech> speechA;
     QVariant id_speechQ;
     QVariant id_speechA;
     QString name_speechQ;
@@ -29,8 +29,8 @@ TogMegFileModel::TogMegFileModel(QObject * parent)
 {
     d = new Private;
     d->isModified = false;
-    d->speechQ = SpeechChannelBase::Create(this);
-    d->speechA = SpeechChannelBase::Create(this);
+    d->speechQ = QtSpeech::Create(this);
+    d->speechA = QtSpeech::Create(this);
     addNewEntry();
 }
 

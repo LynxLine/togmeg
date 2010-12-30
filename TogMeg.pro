@@ -2,8 +2,8 @@
 unix:TEMPLATE = app
 win32:TEMPLATE = vcapp
 
-unix:TARGET = TogMeg
-win32:TARGET = ../TogMeg
+#unix:TARGET = TogMeg
+#win32:TARGET = ../TogMeg
 
 CONFIG += qt
 CONFIG += warn_on
@@ -11,6 +11,7 @@ CONFIG += debug_and_release
 CONFIG += precompile_header
 
 QT += gui xml
+CONFIG += speech
 
 HEADERS += Code/stable.h
 PRECOMPILED_HEADER = Code/stable.h
@@ -21,6 +22,7 @@ RCC_DIR = ./build/GeneratedFiles
 
 include(Code/Utils/Utils.pri)
 include(Code/TogMeg/TogMeg.pri)
+include(Code/Utils/QtSpeech/QtSpeech.pri)
 
 RESOURCES += images.qrc
 
@@ -30,13 +32,6 @@ win32 {
     DEFINES += _CRT_NONSTDC_NO_DEPRECATE
 }
 
-#!debug_and_release|build_pass {
-#    CONFIG(debug, debug|release) {
-#        TARGET = $$member(TARGET, 0)d
-#        CONFIG += console
-#    }
-#}
-
 macx {
     ICON = Resources/TogMeg.icns
     LIBS += -framework CoreFoundation -lz
@@ -44,7 +39,7 @@ macx {
     QMAKE_INFO_PLIST = Resources/TogMeg.plist
 }
 
-macx-g++ {
+macx-g++1 {
     # section for batch building
     # from command line on mac osx.
     QMAKE_MACOSX_DEPLOYMENT_TARGET=10.5
@@ -141,6 +136,7 @@ macx-g++ {
                                 @executable_path/../Frameworks/QtGui.framework/Versions/4/QtGui \
                                 $${BUNDLETARGET}/Contents/plugins/imageformats/libqico.dylib; \
                 \
+                rm -rf `find TogMeg.app -name "*_debug"`; \
                 echo "Ok"
         }
         else {
