@@ -50,15 +50,44 @@ bool TogMegFileModel::loadTabFile(QString filePath)
     beginResetModel();
     d->entries.clear();
     d->filePath = filePath;
-    
+    bool speechLine = true;
+
     while (!f.atEnd()) {
         QString line = QString::fromUtf8(f.readLine());
         QStringList args = line.split("\t");
         if (args.count() <2) continue;
         
+        static const QString speechPref = "speech:";
+        QString argQ = args[0].simplified();
+        QString argA = args[1].simplified();
+
+        if (speechLine) {
+            bool used = false;
+            if (argQ.startsWith(speechPref)) {
+                d->id_speechQ = argQ.mid(speechPref.length());
+                d->speechQ->setVoice(d->id_speechQ);
+                if (d->id_speechQ.isNull())
+                    d->name_speechQ.clear();
+                else d->name_speechQ = d->speechQ->voiceName();
+                used = true;
+            }
+
+            if (argA.startsWith(speechPref)) {
+                d->id_speechA = argA.mid(speechPref.length());
+                d->speechA->setVoice(d->id_speechA);
+                if (d->id_speechA.isNull())
+                    d->name_speechA.clear();
+                else d->name_speechA = d->speechA->voiceName();
+                used = true;
+            }
+
+            speechLine = false;
+            if (used) continue;
+        }
+
         StudyDataEntry entry;
-        entry.question = args[0].simplified();
-        entry.answer   = args[1].simplified();
+        entry.question = argQ;
+        entry.answer   = argA;
         d->entries << entry;
     }
     
@@ -106,6 +135,10 @@ bool TogMegFileModel::saveTabFile(QString filePath)
 {
     QFile f(filePath);
     if (f.open(QIODevice::WriteOnly)) {
+        QString line = "speech:"+d->id_speechQ.toString()+"\t"+
+                        "speech:"+d->id_speechA.toString()+"\n";
+        f.write(line.toUtf8());
+
         foreach (StudyDataEntry entry, d->entries) {
             if (entry.question.isEmpty() && entry.answer.isEmpty())
                 continue;
@@ -280,8 +313,20 @@ bool TogMegFileModel::setData(const QModelIndex & i, const QVariant & v, int rol
     }
 
     if (role == Qt::DisplayRole || role == Qt::EditRole) {
-        if ( i.column() == ColQ ) d->entries[ i.row()-1 ].question = v.toString();
-        if ( i.column() == ColA ) d->entries[ i.row()-1 ].answer   = v.toString();
+        bool change = false;
+        StudyDataEntry & e = d->entries[ i.row()-1 ];
+        if ( i.column() == ColQ ) {
+            if (e.question != v.toString()) {
+                e.question = v.toString();
+                change = true;
+            }
+        }
+        if ( i.column() == ColA ) {
+            if (e.answer != v.toString()) {
+                e.answer = v.toString();
+                change = true;
+            }
+        }
 
         //analize last row
         QModelIndex lastQ = index( rowCount()-1, ColQ);
@@ -291,8 +336,8 @@ bool TogMegFileModel::setData(const QModelIndex & i, const QVariant & v, int rol
             addNewEntry();
         }
 
-        emit dataChanged(i,i);
-        return true;
+        if (change) emit dataChanged(i,i);
+        return change;
     }
 
     else if (role == SpeechRole) {
