@@ -7,8 +7,8 @@
 class StudyDataEntry 
 {
 public:
-    QString question;
-    QString answer;
+    QString q;
+    QString a;
 };
 
 class TogMegFileModel : public QAbstractListModel

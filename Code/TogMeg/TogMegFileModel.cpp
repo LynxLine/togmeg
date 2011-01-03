@@ -86,8 +86,8 @@ bool TogMegFileModel::loadTabFile(QString filePath)
         }
 
         StudyDataEntry entry;
-        entry.question = argQ;
-        entry.answer   = argA;
+        entry.q = argQ;
+        entry.a   = argA;
         d->entries << entry;
     }
     
@@ -117,8 +117,8 @@ bool TogMegFileModel::loadXmlFile(QString filePath)
         QDomElement answerEl   = n.firstChildElement("answer");
         
         StudyDataEntry entry;
-        entry.question = questionEl.firstChild().toText().data();
-        entry.answer   = answerEl.firstChild().toText().data();
+        entry.q = questionEl.firstChild().toText().data();
+        entry.a   = answerEl.firstChild().toText().data();
         
         d->entries << entry;
         
@@ -140,10 +140,10 @@ bool TogMegFileModel::saveTabFile(QString filePath)
         f.write(line.toUtf8());
 
         foreach (StudyDataEntry entry, d->entries) {
-            if (entry.question.isEmpty() && entry.answer.isEmpty())
+            if (entry.q.isEmpty() && entry.a.isEmpty())
                 continue;
             
-            QString line = entry.question+"\t"+entry.answer+"\n";
+            QString line = entry.q+"\t"+entry.a+"\n";
             f.write(line.toUtf8());
         }
         
@@ -170,13 +170,13 @@ bool TogMegFileModel::saveXmlFile(QString filePath)
             QDomElement questionEl = doc.createElement("question");
             entryEl.appendChild(questionEl);
             
-            QDomText questionTextEl = doc.createTextNode( entry.question );
+            QDomText questionTextEl = doc.createTextNode( entry.q );
             questionEl.appendChild(questionTextEl);
             
             QDomElement answerEl = doc.createElement("answer");
             entryEl.appendChild(answerEl);
             
-            QDomText answerTextEl = doc.createTextNode( entry.answer );
+            QDomText answerTextEl = doc.createTextNode( entry.a );
             answerEl.appendChild(answerTextEl);
         }
         
@@ -217,7 +217,7 @@ void TogMegFileModel::swapQA(QModelIndex mi)
 
     int i = mi.row()-1;
 
-    qSwap(d->entries[i].answer, d->entries[i].question);
+    qSwap(d->entries[i].a, d->entries[i].q);
     emit dataChanged(index(i,0), index(i, ColumnCount));
 }
 
@@ -268,8 +268,8 @@ QVariant TogMegFileModel::data(const QModelIndex & i, int role) const
     else {
         if (role == Qt::DisplayRole || role == Qt::EditRole) {
             if ( i.column() == ColId) return QString("  %1 ").arg(i.row());
-            if ( i.column() == ColQ ) return d->entries[ i.row()-1 ].question;
-            if ( i.column() == ColA ) return d->entries[ i.row()-1 ].answer;
+            if ( i.column() == ColQ ) return d->entries[ i.row()-1 ].q;
+            if ( i.column() == ColA ) return d->entries[ i.row()-1 ].a;
         }
     }
 
@@ -316,14 +316,14 @@ bool TogMegFileModel::setData(const QModelIndex & i, const QVariant & v, int rol
         bool change = false;
         StudyDataEntry & e = d->entries[ i.row()-1 ];
         if ( i.column() == ColQ ) {
-            if (e.question != v.toString()) {
-                e.question = v.toString();
+            if (e.q != v.toString()) {
+                e.q = v.toString();
                 change = true;
             }
         }
         if ( i.column() == ColA ) {
-            if (e.answer != v.toString()) {
-                e.answer = v.toString();
+            if (e.a != v.toString()) {
+                e.a = v.toString();
                 change = true;
             }
         }
@@ -341,8 +341,8 @@ bool TogMegFileModel::setData(const QModelIndex & i, const QVariant & v, int rol
     }
 
     else if (role == SpeechRole) {
-        if ( i.column() == ColQ ) d->speechQ->say(d->entries[ i.row()-1 ].question);
-        if ( i.column() == ColA ) d->speechA->say(d->entries[ i.row()-1 ].answer);
+        if ( i.column() == ColQ ) d->speechQ->say(d->entries[ i.row()-1 ].q);
+        if ( i.column() == ColA ) d->speechA->say(d->entries[ i.row()-1 ].a);
     }
 
     return false;
