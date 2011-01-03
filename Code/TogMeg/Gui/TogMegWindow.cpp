@@ -477,13 +477,16 @@ bool TogMegWindow::openFile(QString path)
     if (project()->isModified()) {
         QString fileName = project()->fileName();
         if (fileName.isEmpty()) {
-            if (!allowToClose())
+            if (!allowToClose()) {
+                metaObject()->invokeMethod(d->filesView, "clearSelection", Qt::QueuedConnection);
                 return false;
+            }
         }
         else
             saveFile();
     }
 
+    project()->setModified(false);
     return BaseWindow::openFile(path);
 }
 

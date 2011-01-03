@@ -9,7 +9,6 @@
 class TogMegFileModel::Private
 {
 public:
-    static TogMegFileModel * instance;
     QList<StudyDataEntry> entries;
     bool isModified;
     QString filePath;
@@ -297,8 +296,8 @@ bool TogMegFileModel::setData(const QModelIndex & i, const QVariant & v, int rol
     }
 
     else if (role == SpeechRole) {
-        if ( i.column() == ColQ ) d->speechQ->start(d->entries[ i.row()-1 ].question);
-        if ( i.column() == ColA ) d->speechA->start(d->entries[ i.row()-1 ].answer);
+        if ( i.column() == ColQ ) d->speechQ->say(d->entries[ i.row()-1 ].question);
+        if ( i.column() == ColA ) d->speechA->say(d->entries[ i.row()-1 ].answer);
     }
 
     return false;

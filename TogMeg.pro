@@ -22,7 +22,7 @@ RCC_DIR = ./build/GeneratedFiles
 
 include(Code/Utils/Utils.pri)
 include(Code/TogMeg/TogMeg.pri)
-include(Code/Utils/QtSpeech/QtSpeech.pri)
+include(Code/QtSpeech/QtSpeech.pri)
 
 RESOURCES += images.qrc
 
