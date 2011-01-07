@@ -401,7 +401,7 @@ QSize TaskEditorItemDelegate::sizeHint(const QStyleOptionViewItem & o, const QMo
     return s; 
 }
 
-void TaskEditorItemDelegate::paint(QPainter * p, const QStyleOptionViewItem & o, const QModelIndex & index) const
+void TaskEditorItemDelegate::paint(QPainter * p, const QStyleOptionViewItem & o, const QModelIndex & i) const
 {
     p->save();
 
@@ -409,11 +409,18 @@ void TaskEditorItemDelegate::paint(QPainter * p, const QStyleOptionViewItem & o,
     QPixmap pm;
     QRect drect;
 
-    QVariant value = index.data(Qt::DecorationRole);
-    if (value.isValid()) {
-        if (value.type() == QVariant::Pixmap) {
-            pm = qvariant_cast<QPixmap>(value);
+    QVariant v = i.data(Qt::DecorationRole);
+    if (v.isValid()) {
+        if (v.type() == QVariant::Pixmap) {
+            pm = v.value<QPixmap>();
             drect = QRect(QPoint(o.rect.x(), o.rect.y()), pm.size());
+        }
+        else if (v.type() == QVariant::Icon) {
+            qDebug() << "ic";
+            QIcon ic = v.value<QIcon>();
+            int h = o.rect.height()-6;
+            pm = ic.pixmap(h,h);
+            drect = QRect(QPoint(o.rect.x()+3, o.rect.y()+3), pm.size());
         }
     }
     p->drawPixmap(drect, pm);
@@ -426,14 +433,19 @@ void TaskEditorItemDelegate::paint(QPainter * p, const QStyleOptionViewItem & o,
         p->setPen(o.palette.color(cg, QPalette::HighlightedText));
     else  p->setPen(o.palette.color(cg, QPalette::Text));
 
-    int margin =4;
+    int margin =6;
     QRect r = o.rect;
-    r.adjust(drect.width()+margin,0, -margin,0);
+    if (drect.width())
+        r.adjust(drect.width()+margin,0, -margin,0);
 
-    p->setFont( o.font );
-    QString text = index.data(Qt::DisplayRole).toString();
+    v = i.data(Qt::FontRole);
+    if (v.isValid())
+        p->setFont(v.value<QFont>());
+    else p->setFont( o.font );
+
+    QString text = i.data(Qt::DisplayRole).toString();
     text = o.fontMetrics.elidedText(text, Qt::ElideRight, r.width());
-    p->drawText( r, o.displayAlignment | index.data(Qt::TextAlignmentRole).toInt(), text);
+    p->drawText( r, o.displayAlignment | i.data(Qt::TextAlignmentRole).toInt(), text);
 
     p->restore();
 }

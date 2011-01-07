@@ -8,7 +8,7 @@
 class FileNavigationView::Private {
 public:
     QPointer<FileNavigationModel> model;
-    QPointer<FileNavigationViewDelegate> delegate;
+    //QPointer<FileNavigationViewDelegate> delegate;
     QModelIndex prevUnderMouse;
 };
 
@@ -40,8 +40,8 @@ FileNavigationView::FileNavigationView(QWidget * parent)
     setAutoFillBackground(true);
     setPalette(p);
 
-    d->delegate = new FileNavigationViewDelegate(this);
-    setItemDelegate(d->delegate);
+    //d->delegate = new FileNavigationViewDelegate(this);
+    //setItemDelegate(d->delegate);
 }
 
 FileNavigationView::~FileNavigationView()
@@ -56,8 +56,10 @@ void FileNavigationView::setModel(FileNavigationModel * m)
     header()->setResizeMode(FileNavigationModel::ColName, QHeaderView::Stretch);
     header()->setResizeMode(FileNavigationModel::ColLinks, QHeaderView::ResizeToContents);
 
-    connect(selectionModel(), SIGNAL(currentChanged(const QModelIndex &, const QModelIndex &)),
+    connect(this, SIGNAL(doubleClicked(QModelIndex)),
             this, SLOT(activateItem(const QModelIndex &)));
+    connect(selectionModel(), SIGNAL(currentChanged(const QModelIndex &, const QModelIndex &)),
+            this, SLOT(selectItem(const QModelIndex &)));
 }
 
 void FileNavigationView::showEvent(QShowEvent * se)
@@ -87,6 +89,54 @@ void FileNavigationView::keyReleaseEvent(QKeyEvent * ke)
     ke->accept();
 }
 
+void FileNavigationView::addItem()
+{
+    FileNavigationModel * m = dynamic_cast<FileNavigationModel *>(model());
+    if (!m) return;
+
+    QString path = m->path();
+    QDir dir(path);
+
+    uint i=0;
+    QString folder;
+    do {
+        i++;
+        folder = tr("Group %1").arg(i,3,10,QChar('0'));
+    }
+    while(dir.exists(folder));
+
+    dir.mkdir(folder);
+    m->reload();
+
+    for (int row=0; row< m->rowCount(); row++) {
+        QModelIndex mi = m->index(row,0);
+        QString f = mi.data().toString();
+        if (f==folder) {
+            clearSelection();
+            setCurrentIndex(mi);
+            break;
+        }
+    }
+}
+
+void FileNavigationView::removeItem()
+{
+
+}
+
+void FileNavigationView::selectItem(const QModelIndex & i)
+{
+    if (!i.isValid()) return;
+    if (!model()) return;
+
+    FileNavigationModel * m = dynamic_cast<FileNavigationModel *>(model());
+    if (!m) return;
+
+    QFileInfo * fi = m->fileInfo(i);
+    if (!fi->isDir())
+        emit openFileRequest(fi->absoluteFilePath());
+}
+
 void FileNavigationView::activateItem(const QModelIndex & i)
 {
     if (!i.isValid()) return;
@@ -100,25 +150,23 @@ void FileNavigationView::activateItem(const QModelIndex & i)
         QString fileName = i.data().toString();
         return m->loadPathContent( m->path()+fileName );
     }
-    
-    emit openFileRequest(fi->absoluteFilePath());
 }
 
 void FileNavigationView::leaveEvent(QEvent * e)
 {
     QTreeView::leaveEvent(e);
- 
+ /*
     if (!d->model) return;
    
     d->delegate->mousePos = QPoint(-1,-1);
     if (d->prevUnderMouse.isValid())
-        update(d->prevUnderMouse);
+        update(d->prevUnderMouse);*/
 }
 
 void FileNavigationView::mouseMoveEvent(QMouseEvent * me)
 {
     QTreeView::mouseMoveEvent(me);
-
+/*
     if (!d->model) return;
 
     d->delegate->mousePos = me->pos();
@@ -128,13 +176,13 @@ void FileNavigationView::mouseMoveEvent(QMouseEvent * me)
     QModelIndex mi = indexAt(me->pos());
     if (!mi.isValid()) return;
     update(mi);
-    d->prevUnderMouse = mi;
+    d->prevUnderMouse = mi;*/
 }
 
 void FileNavigationView::mousePressEvent(QMouseEvent * me)
 {
     QTreeView::mousePressEvent(me);
-
+/*
     if (!d->model) return;
 
     QModelIndex mi = indexAt(me->pos());
@@ -149,7 +197,7 @@ void FileNavigationView::mousePressEvent(QMouseEvent * me)
         if (fi->isDir()) filePath += "/";
         
         emit filterLinksByFilePath(filePath);
-    }
+    }*/
 }
 
 void FileNavigationView::resizeEvent(QResizeEvent * re)

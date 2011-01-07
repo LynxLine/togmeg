@@ -416,6 +416,9 @@ QDockWidget * TogMegWindow::filesDock() const
         tb_del->setPixmapDown(EmbPixmap("RemoveButtonSmallPressed"));
         tb_del->setPixmapOff(EmbPixmap("RemoveButtonSmallOff"));
         
+        connect(tb_add, SIGNAL(clicked()), d->filesView, SLOT(addItem()));
+        connect(tb_del, SIGNAL(clicked()), d->filesView, SLOT(removeItem()));
+
         buttonsLayout->addWidget(tb_add);
         buttonsLayout->addWidget(tb_del);
         buttonsLayout->addItem(new QSpacerItem(10,10,QSizePolicy::MinimumExpanding, QSizePolicy::Minimum));

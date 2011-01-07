@@ -6,6 +6,8 @@
 #include "TogMeg.h"
 #include "TogMegFileModel.h"
 
+#include "IconSet.h"
+
 class TogMegFileModel::Private
 {
 public:
@@ -113,12 +115,12 @@ bool TogMegFileModel::loadXmlFile(QString filePath)
     QDomElement el = doc.documentElement();
     QDomNode n = el.firstChild();
     while (!n.isNull()) {
-        QDomElement questionEl = n.firstChildElement("question");
-        QDomElement answerEl   = n.firstChildElement("answer");
+        QDomElement e_q = n.firstChildElement("question");
+        QDomElement e_a   = n.firstChildElement("answer");
         
         StudyDataEntry entry;
-        entry.q = questionEl.firstChild().toText().data();
-        entry.a   = answerEl.firstChild().toText().data();
+        entry.q = e_q.firstChild().toText().data();
+        entry.a   = e_a.firstChild().toText().data();
         
         d->entries << entry;
         
@@ -264,6 +266,12 @@ QVariant TogMegFileModel::data(const QModelIndex & i, int role) const
                 return d->name_speechA;
             }
         }
+        else if (role == Qt::DecorationRole && (
+                     i.column() == ColQ ||
+                     i.column() == ColA)) {
+            QIcon ic(":/images/icons/Microphone.png");
+            return ic;
+        }
     }
     else {
         if (role == Qt::DisplayRole || role == Qt::EditRole) {
@@ -273,8 +281,10 @@ QVariant TogMegFileModel::data(const QModelIndex & i, int role) const
         }
     }
 
-    if (role == Qt::TextAlignmentRole && i.column() == ColId) {
-        return int(Qt::AlignRight | Qt::AlignVCenter);
+    if (role == Qt::TextAlignmentRole) {
+        if (i.column() == ColId) return int(Qt::AlignRight | Qt::AlignVCenter);
+        if (i.column() == ColQ) return int(Qt::AlignCenter);
+        if (i.column() == ColA) return int(Qt::AlignCenter);
     }
 
     if (role == Qt::FontRole && i.row() == 0) {

@@ -29,6 +29,9 @@ protected:
     virtual void mousePressEvent(QMouseEvent * me);
     
 private slots:
+    void addItem();
+    void removeItem();
+    void selectItem(const QModelIndex &);
     void activateItem(const QModelIndex &);
 
 private:
