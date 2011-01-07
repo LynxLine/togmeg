@@ -57,5 +57,6 @@ int main( int argc, char ** argv )
 void initResources()
 {
     //init images
+    Q_INIT_RESOURCE(Icons);
     Q_INIT_RESOURCE(images);
 }

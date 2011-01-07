@@ -24,6 +24,7 @@ include(Code/Utils/Utils.pri)
 include(Code/TogMeg/TogMeg.pri)
 include(Code/QtSpeech/QtSpeech.pri)
 
+RESOURCES += Icons.qrc
 RESOURCES += images.qrc
 
 win32 {

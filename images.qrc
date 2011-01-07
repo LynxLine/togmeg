@@ -1,18 +1,10 @@
 <RCC>
     <qresource prefix="/">
         <file>images/crammero.ico</file>
-        <file>images/icons/Play.png</file>
-        <file>images/icons/Stop.png</file>
-        <file>images/icons/Add.png</file>
-        <file>images/icons/Remove.png</file>
-        <file>images/icons/Record.png</file>
-        <file>images/icons/Microphone.png</file>
         <file>images/bg-question-mark.png</file>
         <file>images/button-play.png</file>
         <file>images/button-play-pressed.png</file>
         <file>images/button-pause.png</file>
         <file>images/button-pause-pressed.png</file>
-        <file>images/icons/Arrows-Hor.png</file>
-        <file>images/icons/Arrows-Ver.png</file>
     </qresource>
 </RCC>

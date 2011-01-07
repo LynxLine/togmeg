@@ -269,8 +269,7 @@ QVariant TogMegFileModel::data(const QModelIndex & i, int role) const
         else if (role == Qt::DecorationRole && (
                      i.column() == ColQ ||
                      i.column() == ColA)) {
-            QIcon ic(":/images/icons/Microphone.png");
-            return ic;
+            return EmbIcon("Microphone");
         }
     }
     else {
@@ -371,8 +370,10 @@ QVariant TogMegFileModel::headerData(int section, Qt::Orientation orientation, i
             return tr("Answer");
     }
 
-    if (role == Qt::TextAlignmentRole && section == ColId) {
-        return Qt::AlignRight;
+    if (role == Qt::TextAlignmentRole) {
+        if (section == ColId) return int(Qt::AlignRight | Qt::AlignVCenter);
+        if (section == ColQ) return int(Qt::AlignCenter);
+        if (section == ColA) return int(Qt::AlignCenter);
     }
 
     return QVariant();

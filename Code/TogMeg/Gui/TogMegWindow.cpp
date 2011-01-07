@@ -139,12 +139,12 @@ void TogMegWindow::createActions()
     setAction("Add" , new QAction(tr("&Add Row"), this));
     setAction("Swap", new QAction(tr("Swap QA"), this));
 
-    setAction("Play"  , new QAction (QIcon(":/images/icons/Play.png"   ), tr("&Play"), this));
-    setAction("Study" , new QAction (QIcon(":/images/icons/Record.png" ), tr("&Study"), this));
-    setAction("Stop"  , new QAction (QIcon(":/images/icons/Stop.png"   ), tr("&Stop"), this));
+    setAction("Play"  , new QAction (EmbIcon("Play"   ), tr("&Play"), this));
+    setAction("Study" , new QAction (EmbIcon("Record" ), tr("&Study"), this));
+    setAction("Stop"  , new QAction (EmbIcon("Stop"   ), tr("&Stop"), this));
 
-    setAction("NextByRows"  , new QAction(QIcon(":/images/icons/Arrows-Ver.png"), tr("By Rows"), this));
-    setAction("NextByCells"  , new QAction(QIcon(":/images/icons/Arrows-Hor.png"), tr("By Cells"), this));
+    setAction("NextByRows"  ,  new QAction(EmbIcon("Arrows-Ver"), tr("By Rows"), this));
+    setAction("NextByCells"  , new QAction(EmbIcon("Arrows-Hor"), tr("By Cells"), this));
     action("NextByRows")->setCheckable(true);
     action("NextByCells")->setCheckable(true);
     

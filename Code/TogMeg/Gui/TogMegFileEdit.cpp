@@ -416,7 +416,6 @@ void TaskEditorItemDelegate::paint(QPainter * p, const QStyleOptionViewItem & o,
             drect = QRect(QPoint(o.rect.x(), o.rect.y()), pm.size());
         }
         else if (v.type() == QVariant::Icon) {
-            qDebug() << "ic";
             QIcon ic = v.value<QIcon>();
             int h = o.rect.height()-6;
             pm = ic.pixmap(h,h);
