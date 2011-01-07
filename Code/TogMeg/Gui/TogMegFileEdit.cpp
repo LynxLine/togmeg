@@ -67,6 +67,8 @@ TogMegFileEdit::TogMegFileEdit(TogMegFileModel * model, QWidget * parent)
 
     d->delegate = new TaskEditorItemDelegate(this);
     connect(d->delegate, SIGNAL(returnPressed()), this, SLOT(editNextItemUsingMode()));
+    connect(d->delegate, SIGNAL(gotoAboveItem()), this, SLOT(editAboveItem()));
+    connect(d->delegate, SIGNAL(gotoBelowItem()), this, SLOT(editBelowItem()));
     setItemDelegate( d->delegate );
 
     setContextMenuPolicy(Qt::CustomContextMenu);
@@ -211,6 +213,28 @@ void TogMegFileEdit::editNextItem()
     }
 }
 
+void TogMegFileEdit::editAboveItem()
+{
+    if ( !currentIndex().isValid() ) return;
+    int row = currentIndex().row() -1;
+    int col = currentIndex().column();
+    if (row <1) return;
+
+    QModelIndex next = model()->index( row, col );
+    setCurrentIndex(next);
+}
+
+void TogMegFileEdit::editBelowItem()
+{
+    if ( !currentIndex().isValid() ) return;
+    int row = currentIndex().row() +1;
+    int col = currentIndex().column();
+    if (row > model()->rowCount()-1) return;
+
+    QModelIndex next = model()->index( row, col );
+    setCurrentIndex(next);
+}
+
 void TogMegFileEdit::editPreviousItem()
 {
     if ( !currentIndex().isValid() ) return;
@@ -313,7 +337,10 @@ void TogMegFileEdit::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
         }
 
         if (alternate) {
-            if (index.row() & 1) {
+            if (index.row() == 0) {
+                fill = QColor(225,255,225);
+            }
+            else if (index.row() & 1) {
                 opt.features |= QStyleOptionViewItemV2::Alternate;
                 fill = opt.palette.brush(QPalette::AlternateBase);
             } else {
@@ -419,7 +446,9 @@ void TaskEditorItemDelegate::paint(QPainter * p, const QStyleOptionViewItem & o,
             QIcon ic = v.value<QIcon>();
             int h = o.rect.height()-6;
             pm = ic.pixmap(h,h);
-            drect = QRect(QPoint(o.rect.x()+3, o.rect.y()+3), pm.size());
+            drect = QRect(QPoint(o.rect.width()-h,
+                                 o.rect.y()+3),
+                          pm.size());
         }
     }
     p->drawPixmap(drect, pm);
@@ -453,7 +482,7 @@ QWidget * TaskEditorItemDelegate::createEditor(QWidget * parent, const QStyleOpt
 {
     Q_UNUSED(o);
     if (i.row() > 0) {
-        QLineEdit * le = new TaskItemEditor(parent);
+        TaskItemEditor * le = new TaskItemEditor(parent);
         //le->setStyle( &app::cleanStyle );
         le->setFrame(false);
         {
@@ -469,7 +498,12 @@ QWidget * TaskEditorItemDelegate::createEditor(QWidget * parent, const QStyleOpt
         parent->setFocusProxy(le);
         registerEditor(le);
 
+        le->setNoAbove(i.row() <= 1);
+        le->setNoBelow(i.row() >= i.model()->rowCount()-1);
+
         connect(le, SIGNAL(editNextItem()), this, SLOT(editNextItem()));
+        connect(le, SIGNAL(editAboveItem()), this, SLOT(editAboveItem()));
+        connect(le, SIGNAL(editBelowItem()), this, SLOT(editBelowItem()));
         connect(le, SIGNAL(editPreviousItem()), this, SLOT(editPreviousItem()));
         return le;
     }
@@ -567,6 +601,26 @@ void TaskEditorItemDelegate::editNextItem()
     emit closeEditor(editor, QAbstractItemDelegate::EditNextItem);
 }
 
+void TaskEditorItemDelegate::editAboveItem()
+{
+    QWidget * editor = ::qobject_cast<QWidget*>(sender());
+    if (!editor) return;
+
+    emit commitData(editor);
+    emit closeEditor(editor, QAbstractItemDelegate::NoHint);
+    emit gotoAboveItem();
+}
+
+void TaskEditorItemDelegate::editBelowItem()
+{
+    QWidget * editor = ::qobject_cast<QWidget*>(sender());
+    if (!editor) return;
+
+    emit commitData(editor);
+    emit closeEditor(editor, QAbstractItemDelegate::NoHint);
+    emit gotoBelowItem();
+}
+
 void TaskEditorItemDelegate::editPreviousItem()
 {
     QWidget * editor = ::qobject_cast<QWidget*>(sender());
@@ -576,11 +630,24 @@ void TaskEditorItemDelegate::editPreviousItem()
     emit closeEditor(editor, QAbstractItemDelegate::EditPreviousItem);
 }
 
+void TaskItemEditor::setNoAbove(bool f)
+{
+    noAbove = f;
+}
+
+void TaskItemEditor::setNoBelow(bool f)
+{
+    noBelow = f;
+}
+
 void TaskItemEditor::keyPressEvent(QKeyEvent * ke)
 {
     QLineEdit::keyPressEvent(ke);
 
-    if ( !selectedText().isEmpty() || ke->modifiers() )
+    if ( !selectedText().isEmpty() ||
+            ke->modifiers() & Qt::AltModifier ||
+            ke->modifiers() & Qt::ShiftModifier ||
+            ke->modifiers() & Qt::ControlModifier)
         return;
 
     if ( cursorPosition() == 0 && ke->key() == Qt::Key_Left)
@@ -588,4 +655,10 @@ void TaskItemEditor::keyPressEvent(QKeyEvent * ke)
 
     if ( cursorPosition() == text().length() && ke->key() == Qt::Key_Right)
         emit editNextItem();
+
+    if (ke->key() == Qt::Key_Up && !noAbove)
+        emit editAboveItem();
+
+    if (ke->key() == Qt::Key_Down && !noBelow)
+        emit editBelowItem();
 }

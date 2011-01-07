@@ -258,19 +258,20 @@ QVariant TogMegFileModel::data(const QModelIndex & i, int role) const
         else if (role == Qt::DisplayRole) {
             if ( i.column() == ColQ) {
                 if (d->name_speechQ.isEmpty())
-                    return tr("Please choose voice...");
+                    return tr("Choose questioning voice...");
                 return d->name_speechQ;
             }
             if ( i.column() == ColA) {
                 if (d->name_speechA.isEmpty())
-                    return tr("Please choose voice...");
+                    return tr("Choose answering voice...");
                 return d->name_speechA;
             }
         }
-        else if (role == Qt::DecorationRole && (
-                     i.column() == ColQ ||
-                     i.column() == ColA)) {
+        else if (role == Qt::DecorationRole && i.column() == ColId) {
             return EmbIcon("Microphone");
+        }
+        else if (role == Qt::BackgroundRole) {
+            return QColor(235,255,235);
         }
     }
     else {

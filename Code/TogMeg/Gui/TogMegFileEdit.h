@@ -45,6 +45,8 @@ protected:
 
 protected slots:
     void editNextItem();
+    void editAboveItem();
+    void editBelowItem();
     void editPreviousItem();
     void editNextItemUsingMode();
     void closeEditor(QWidget * editor, QAbstractItemDelegate::EndEditHint hint);
@@ -74,8 +76,14 @@ public:
     virtual void setEditorData(QWidget * editor, const QModelIndex & i) const;
     virtual void setModelData(QWidget * editor, QAbstractItemModel * m, const QModelIndex & i) const;
 
+signals:
+    void gotoAboveItem();
+    void gotoBelowItem();
+
 private slots:
     void editNextItem();
+    void editAboveItem();
+    void editBelowItem();
     void editPreviousItem();
 
 };
@@ -86,14 +94,22 @@ class TaskItemEditor : public QLineEdit
 {
 Q_OBJECT
 public:
-    TaskItemEditor(QWidget * parent = 0L):QLineEdit(parent) {setAlignment(Qt::AlignCenter);}
+    TaskItemEditor(QWidget * parent = 0L)
+        :QLineEdit(parent), noAbove(false), noBelow(false)
+    {setAlignment(Qt::AlignCenter);}
+
+    void setNoAbove(bool);
+    void setNoBelow(bool);
 
 signals:
     void editNextItem();
+    void editAboveItem();
+    void editBelowItem();
     void editPreviousItem();
 
 protected:
     virtual void keyPressEvent(QKeyEvent * ke);
+    bool noAbove, noBelow;
 };
 
 #endif // TASKEDITORVIEW_H
