@@ -86,7 +86,7 @@ class TaskItemEditor : public QLineEdit
 {
 Q_OBJECT
 public:
-    TaskItemEditor(QWidget * parent = 0L):QLineEdit(parent) {;}
+    TaskItemEditor(QWidget * parent = 0L):QLineEdit(parent) {setAlignment(Qt::AlignCenter);}
 
 signals:
     void editNextItem();

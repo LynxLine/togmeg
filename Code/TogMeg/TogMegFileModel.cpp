@@ -193,12 +193,12 @@ bool TogMegFileModel::saveXmlFile(QString filePath)
 
 QModelIndex TogMegFileModel::addNewEntry()
 {
-    beginInsertRows(QModelIndex(), d->entries.count(), d->entries.count());
+    beginInsertRows(QModelIndex(), rowCount(), rowCount());
     StudyDataEntry entry;
     d->entries << entry;
     endInsertRows();
 
-    return index( d->entries.count(),1 );
+    return index(rowCount()-1, ColQ);
 }
 
 void TogMegFileModel::removeEntry(QModelIndex index)
@@ -206,9 +206,10 @@ void TogMegFileModel::removeEntry(QModelIndex index)
     if ( !index.isValid() ) return;
     if ( index.row() < 0 || index.row() >= d->entries.count() ) return;
 
-    int i = index.row();
-    beginRemoveRows(QModelIndex(), i, i);
-    d->entries.removeAt(i);
+    int row = index.row();
+    int idx = row-1;
+    beginRemoveRows(QModelIndex(), row, row);
+    d->entries.removeAt(idx);
     endRemoveRows();
 }
 
