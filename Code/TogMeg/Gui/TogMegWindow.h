@@ -1,6 +1,6 @@
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef TogMegWindow_H
+#define TogMegWindow_H
 
 #include <QAction>
 #include "BaseWindow.h"
@@ -70,4 +70,4 @@ private:
 
 };
 
-#endif // MAINWINDOW_H
+#endif // TogMegWindow_H
