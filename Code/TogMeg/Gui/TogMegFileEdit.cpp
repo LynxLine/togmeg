@@ -240,7 +240,7 @@ void TogMegFileEdit::editPreviousItem()
     if ( !currentIndex().isValid() ) return;
     int previousRow = currentIndex().row();
     if ( currentIndex().column() == TogMegFileModel::ColQ) {
-        if (previousRow > 0)
+        if (previousRow > 1)
             previousRow--;
 
         QModelIndex previous = model()->index( previousRow, TogMegFileModel::ColA );
@@ -530,13 +530,15 @@ void TaskEditorItemDelegate::updateEditorGeometry(QWidget * editor, const QStyle
         }
     }
 
+    int m = 1;
     QRect r = o.rect;
     if (i.row() >0) {
-        r.adjust(drect.width()+2,2, -2,-2);
+        r.adjust(drect.width()+m,m, -m,-m);
+        if (i.column()) r.adjust(0,0,-1,0);
         editor->setGeometry(r);
     }
     else {
-        r.adjust(0,0,0,-2);
+        r.adjust(0,0,0,-m);
         editor->setGeometry(r);
     }
 }
