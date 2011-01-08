@@ -459,7 +459,12 @@ void TaskEditorItemDelegate::paint(QPainter * p, const QStyleOptionViewItem & o,
     
     if (o.state & QStyle::State_Selected) 
         p->setPen(o.palette.color(cg, QPalette::HighlightedText));
-    else  p->setPen(o.palette.color(cg, QPalette::Text));
+    else {
+        v = i.data(Qt::ForegroundRole);
+        if (v.isValid())
+            p->setPen(v.value<QColor>());
+        else p->setPen(o.palette.color(cg, QPalette::Text));
+    }
 
     int margin =6;
     QRect r = o.rect;

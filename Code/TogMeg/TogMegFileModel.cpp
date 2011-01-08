@@ -282,6 +282,10 @@ QVariant TogMegFileModel::data(const QModelIndex & i, int role) const
         }
     }
 
+    if (role == Qt::ForegroundRole) {
+        if (i.column() == ColId) return QColor(128,128,128);
+    }
+
     if (role == Qt::TextAlignmentRole) {
         if (i.column() == ColId) return int(Qt::AlignRight | Qt::AlignVCenter);
         if (i.column() == ColQ) return int(Qt::AlignCenter);
