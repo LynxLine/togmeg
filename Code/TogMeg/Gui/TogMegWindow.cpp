@@ -57,12 +57,12 @@ TogMegWindow::TogMegWindow(TogMegProject * proj, QWidget * parent, Qt::WFlags fl
     
     setWindowTitle("TogMeg");
     
-	createActions();
+    filesDock();
+    createActions();
     connectActions();
     createMenuBar();
     createToolBar();
     updateFileMenu();
-    filesDock();
 
 	statusBar()->hide();
     
@@ -135,7 +135,9 @@ void TogMegWindow::createActions()
 {
     BaseWindow::createActions();
     
-    //setAction("NewStudy", new )
+    setAction("toolbar/New",    new QAction(EmbIcon("Add"), tr("File"), this));
+    setAction("toolbar/Folder", new QAction(EmbIcon("Folder"), tr("Group"), this));
+    setAction("toolbar/Remove", new QAction(EmbIcon("Remove"), tr("Remove"), this));
     setAction("Add" , new QAction(tr("&Add Row"), this));
     setAction("Swap", new QAction(tr("Swap QA"), this));
 
@@ -157,9 +159,9 @@ void TogMegWindow::createActions()
     action("Add")->setShortcut(QKeySequence("Alt+Down"));
     action("Swap")->setShortcut(QKeySequence("Ctrl+U"));
 
-    setAction("About"         , new QAction (tr("&About"), this));
-    setAction("Help"          , new QAction (tr("TogMeg &Help"), this));
-    setAction("CheckUpdates" , new QAction (tr("Check for Updates Now"), this));
+    setAction("About"        , new QAction(tr("&About"), this));
+    setAction("Help"         , new QAction(tr("TogMeg &Help"), this));
+    setAction("CheckUpdates" , new QAction(tr("Check for Updates Now"), this));
 
     setActionGroup("Play", new QActionGroup(this));
     actionGroup("Play")->setExclusive(false);
@@ -192,19 +194,22 @@ void TogMegWindow::createMenuBar()
 void TogMegWindow::createToolBar()
 {
 	QToolBar * toolBar = addToolBar(tr("Toolbar"));
-    
+    toolBar->addAction( action("toolbar/New") );
+    toolBar->addAction( action("toolbar/Folder") );
+    toolBar->addAction( action("toolbar/Remove") );
+
     d->toolBarLeftSpacer = new QWidget;
+    d->toolBarLeftSpacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
     d->toolBarLeftSpacer->setFixedHeight(0);
     toolBar->addWidget(d->toolBarLeftSpacer);
 
-    toolBar->addAction( action("NextByRows") );
-	toolBar->addAction( action("NextByCells") );
-
+    /*
     QWidget * sp1 = new QWidget;
     sp1->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
     sp1->setFixedWidth(40);
     sp1->setFixedHeight(0);
     toolBar->addWidget(sp1);
+    */
     
 	toolBar->addAction( action("Play") );
 	toolBar->addAction( action("Study") );
@@ -214,6 +219,9 @@ void TogMegWindow::createToolBar()
     sp_exp->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
     sp_exp->setFixedHeight(0);
     toolBar->addWidget(sp_exp);
+
+    toolBar->addAction( action("NextByRows") );
+    toolBar->addAction( action("NextByCells") );
 
     toolBar->setIconSize(QSize(24, 24));
     toolBar->setMovable(false);
@@ -232,6 +240,10 @@ void TogMegWindow::connectActions()
 {
     connect( action("Help"),   SIGNAL(triggered()), this, SLOT(openHelp()));
     connect( action("About"),  SIGNAL(triggered()), this, SLOT(openAbout()));
+
+    connect( action("toolbar/New"),    SIGNAL(triggered()), this, SLOT(newFile()));
+    connect( action("toolbar/Folder"), SIGNAL(triggered()), d->filesView, SLOT(addItem()));
+    connect( action("toolbar/Remove"), SIGNAL(triggered()), d->filesView, SLOT(removeItem()));
 
     connect( action("Add"),    SIGNAL(triggered()), this, SLOT(newEntry()));
     connect( action("Swap"),    SIGNAL(triggered()), this, SLOT(swapQA()));
@@ -398,31 +410,6 @@ QDockWidget * TogMegWindow::filesDock() const
         
         filesLayout->addWidget(d->filesView);
         
-        QHBoxLayout * buttonsLayout = new QHBoxLayout;
-        buttonsLayout->setSpacing(2);
-        buttonsLayout->setMargin(2);
-        filesLayout->addLayout(buttonsLayout);
-        
-        PixmapButton * tb_add = new PixmapButton;
-        PixmapButton * tb_del = new PixmapButton;
-        
-        tb_add->setPixmap(EmbPixmap("AddButtonSmall"));
-        tb_add->setPixmapHl(EmbPixmap("AddButtonSmall"));
-        tb_add->setPixmapDown(EmbPixmap("AddButtonSmallPressed"));
-        tb_add->setPixmapOff(EmbPixmap("AddButtonSmallOff"));
-        
-        tb_del->setPixmap(EmbPixmap("RemoveButtonSmall"));
-        tb_del->setPixmapHl(EmbPixmap("RemoveButtonSmall"));
-        tb_del->setPixmapDown(EmbPixmap("RemoveButtonSmallPressed"));
-        tb_del->setPixmapOff(EmbPixmap("RemoveButtonSmallOff"));
-        
-        connect(tb_add, SIGNAL(clicked()), d->filesView, SLOT(addItem()));
-        connect(tb_del, SIGNAL(clicked()), d->filesView, SLOT(removeItem()));
-
-        buttonsLayout->addWidget(tb_add);
-        buttonsLayout->addWidget(tb_del);
-        buttonsLayout->addItem(new QSpacerItem(10,10,QSizePolicy::MinimumExpanding, QSizePolicy::Minimum));
-        
         d->filesDock = new QDockWidget(d->instance);
         d->filesDock->setMinimumWidth(200);
         d->filesDock->setWidget(filesWidget);
@@ -438,9 +425,9 @@ QDockWidget * TogMegWindow::filesDock() const
     return d->filesDock;
 }
 
-void TogMegWindow::adjustSpacerInToolBar(int w)
+void TogMegWindow::adjustSpacerInToolBar(int /*w*/)
 {
-    d->toolBarLeftSpacer->setFixedWidth(w);
+    //d->toolBarLeftSpacer->setFixedWidth(w -160);
 }
 
 void TogMegWindow::setNextByRows()

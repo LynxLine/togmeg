@@ -14,7 +14,6 @@ class FileNavigationModel : public QAbstractListModel
 public:
     enum Columns {
         ColName = 0,
-        ColLinks,
         ColCount,
     };
     

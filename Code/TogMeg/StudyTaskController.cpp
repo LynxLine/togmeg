@@ -1,6 +1,5 @@
 
 #include <QtGui>
-#include "QtSpeech.h"
 
 #include "TogMeg.h"
 #include "TogMegFileModel.h"

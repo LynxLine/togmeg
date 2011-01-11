@@ -1,5 +1,6 @@
 
 #include <QtXml>
+#include <QtGui>
 #include <QtCore>
 #include <QtSpeech>
 
@@ -30,8 +31,13 @@ TogMegFileModel::TogMegFileModel(QObject * parent)
 {
     d = new Private;
     d->isModified = false;
-    d->speechQ = QtSpeech::Create(this);
-    d->speechA = QtSpeech::Create(this);
+    try {
+        d->speechQ = QtSpeech::Create(this);
+        d->speechA = QtSpeech::Create(this);
+    }
+    catch (QtSpeech::Error & e) {
+        qDebug() << e.msg;
+    }
     addNewEntry();
 }
 

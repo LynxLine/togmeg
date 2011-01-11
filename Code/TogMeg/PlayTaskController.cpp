@@ -1,6 +1,5 @@
 
 #include <QtGui>
-#include "QtSpeech.h"
 
 #include "TogMegFileModel.h"
 #include "PlayTaskController.h"

@@ -66,11 +66,6 @@ QVariant FileNavigationModel::data(const QModelIndex & i, int role) const
                 fileName = fileName.left(fileName.length()-4);
             return fileName;
         }
-        else if ( i.column() == ColLinks ) {
-            //int linkCount = 0;
-            //return linkCount;
-            return QVariant();
-        }
     }
     
     if (role == Qt::DecorationRole) {
@@ -86,9 +81,6 @@ QVariant FileNavigationModel::data(const QModelIndex & i, int role) const
     
     if (role == Qt::TextAlignmentRole && i.column() == ColName) {
         return int(Qt::AlignLeft | Qt::AlignVCenter);
-    }
-    else if (role == Qt::TextAlignmentRole && i.column() == ColLinks) {
-        return int(Qt::AlignHCenter | Qt::AlignVCenter);
     }
     
     return QVariant();
@@ -187,11 +179,76 @@ void FileNavigationModel::loadPathContent(const QString & p)
     QDir dir(rootPath()+path());
     QStringList nameFilters;
     nameFilters << "*.tab" << "*.xml";
-    d->entries = dir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name | QDir::DirsFirst);
-    d->entries += dir.entryInfoList(nameFilters, QDir::Files | QDir::NoDotAndDotDot, QDir::Name | QDir::DirsFirst);
+
+    QFileInfoList entries;
+    entries = dir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name | QDir::DirsFirst);
+    entries += dir.entryInfoList(nameFilters, QDir::Files | QDir::NoDotAndDotDot, QDir::Name | QDir::DirsFirst);
+
     if (!path().isEmpty())
-        d->entries.prepend(QFileInfo(rootPath()+".."));
+        entries.prepend(QFileInfo(rootPath()+".."));
+
+    /*
+    d->entries = entries;
     reset();
+     */
+
+    bool in_add = false;
+    bool in_rem = false;
+    QFileInfoList::iterator n_it = entries.begin();
+    QFileInfoList::iterator o_it = d->entries.begin();
+    while(n_it != entries.end() || o_it != d->entries.end()) {
+
+        //if (n_it != entries.end()) qDebug() << (*n_it).fileName(); else qDebug() << "n_it - end";
+        //if (o_it != d->entries.end()) qDebug() << (*o_it).fileName(); else qDebug() << "o_it - end";
+
+        if (n_it != entries.end() &&
+            o_it != d->entries.end() &&
+            *n_it == *o_it) {
+            n_it++;
+            o_it++;
+            //if (in_add) {endInsertRows();in_add = false;}
+            //if (in_rem) {endRemoveRows();in_rem = false;}
+        }
+        else {
+            if (o_it == d->entries.end()) {
+                int idx = o_it - d->entries.begin();
+                beginInsertRows(QModelIndex(), idx,idx);
+                o_it = d->entries.insert(o_it, *n_it);
+                endInsertRows();
+
+                o_it++;
+                n_it++;
+            }
+            else if (n_it == entries.end()) {
+                int idx = o_it - d->entries.begin();
+                beginRemoveRows(QModelIndex(), idx,idx);
+                o_it = d->entries.erase(o_it);
+                endRemoveRows();
+            }
+            else if ((*n_it).fileName() < (*o_it).fileName()) {
+                int idx = o_it - d->entries.begin();
+                beginInsertRows(QModelIndex(), idx,idx);
+                o_it = d->entries.insert(o_it, *n_it);
+                endInsertRows();
+
+                o_it++;
+                n_it++;
+            }
+            else if ((*n_it).fileName() > (*o_it).fileName()) {
+                int idx = o_it - d->entries.begin();
+                beginRemoveRows(QModelIndex(), idx,idx);
+                o_it = d->entries.erase(o_it);
+                endRemoveRows();
+            }
+            else {
+                *(o_it) = *(n_it);
+
+                //int idx = o_it - d->entries.begin();
+                //emit dataChanged(index(idx,0), index(idx,columnCount()-1));
+            }
+        }
+    }
+    //reset();
 
     if (d->watcher.files().count())
         d->watcher.removePaths( d->watcher.files() );
