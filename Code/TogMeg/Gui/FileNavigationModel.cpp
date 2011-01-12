@@ -8,7 +8,8 @@ class FileNavigationModel::Private {
 public:
     QString rootPath;
     QString path;
-    QFileInfoList entries;
+    QFileInfoList dirs;
+    QFileInfoList files;
     QFileSystemWatcher watcher;
     QFileIconProvider iconProvider;
 };
@@ -35,7 +36,7 @@ FileNavigationModel::~FileNavigationModel()
 Qt::ItemFlags FileNavigationModel::flags(const QModelIndex &index) const 
 {
     if ( !index.isValid() ) return Qt::ItemIsDropEnabled;
-    if ( index.row() < 0 || index.row() >= d->entries.count() ) return Qt::ItemIsDropEnabled;
+    if ( index.row() < 0 || index.row() >= rowCount() ) return Qt::ItemIsDropEnabled;
     if ( index.column() == ColName && index.data().toString() == "..")
         return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
     
@@ -45,7 +46,7 @@ Qt::ItemFlags FileNavigationModel::flags(const QModelIndex &index) const
 int FileNavigationModel::rowCount(const QModelIndex & parent) const
 {
     Q_UNUSED(parent);
-    return d->entries.count();
+    return d->dirs.count()+d->files.count();
 }
 
 int FileNavigationModel::columnCount(const QModelIndex & parent) const
@@ -57,21 +58,25 @@ int FileNavigationModel::columnCount(const QModelIndex & parent) const
 QVariant FileNavigationModel::data(const QModelIndex & i, int role) const
 {
     if ( !i.isValid() ) return QVariant();
-    if ( i.row() < 0 || i.row() >= d->entries.count() ) return QVariant();
+    if ( i.row() < 0 || i.row() >= rowCount() ) return QVariant();
     
     if (role == Qt::DisplayRole || role == Qt::EditRole) {
         if ( i.column() == ColName ) {
-            QString fileName = d->entries[ i.row() ].fileName();
-            if (fileName.endsWith(".tab", Qt::CaseInsensitive))
-                fileName = fileName.left(fileName.length()-4);
-            return fileName;
+            QString n = i.row() < d->dirs.count() ?
+                        d->dirs[i.row()].fileName() :
+                        d->files[i.row()-d->dirs.count()].fileName();
+
+            if (n.endsWith(".tab", Qt::CaseInsensitive))
+                n = n.left(n.length()-4);
+
+            return n;
         }
     }
     
     if (role == Qt::DecorationRole) {
         if ( i.column() == ColName )
-            if (d->entries[ i.row() ].isDir())
-                return d->iconProvider.icon( d->entries[ i.row() ].filePath() );
+            if (i.row() < d->dirs.count())
+                return d->iconProvider.icon( d->dirs[ i.row() ].filePath() );
             else {
                 QPixmap pm(16,16);
                 pm.fill(QColor(0,0,0, 0));
@@ -83,25 +88,37 @@ QVariant FileNavigationModel::data(const QModelIndex & i, int role) const
         return int(Qt::AlignLeft | Qt::AlignVCenter);
     }
     
+    if (role == AbsFilePathRole) {
+        return i.row() < d->dirs.count() ?
+               d->dirs[i.row()].absoluteFilePath() :
+               d->files[i.row()-d->dirs.count()].absoluteFilePath();
+
+    }
+
     return QVariant();
 }
 
 bool FileNavigationModel::setData(const QModelIndex & i, const QVariant & value, int role)
 {
     if ( !i.isValid() ) return false;
-    if ( i.row() < 0 || i.row() >= d->entries.count() ) return false;
+    if ( i.row() < 0 || i.row() >= rowCount() ) return false;
     
     if (role == Qt::DisplayRole || role == Qt::EditRole) {
         if (i.column() == ColName) {
-            QString newName = value.toString();
-            if (d->entries[i.row()].isFile() && !newName.endsWith(".tab"))
-                newName += ".tab";
+            QString n = value.toString();
+
+            if (i.row() >= d->dirs.count() &&
+                !n.endsWith(".tab"))
+                n += ".tab";
             
-            QFile f(d->entries[i.row()].absoluteFilePath());
-            bool ok = f.rename(newName);
+            QFile f(i.data(AbsFilePathRole).toString());
+            bool ok = f.rename(n);
             if (!ok) return false;
 
-            d->entries[i.row()].setFile(f);
+            if (i.row() < d->dirs.count())
+                d->dirs[i.row()].setFile(f);
+            else d->files[i.row()-d->dirs.count()].setFile(f);
+
             emit dataChanged(i,i);
             return true;
         }
@@ -125,7 +142,9 @@ QVariant FileNavigationModel::headerData(int section, Qt::Orientation orientatio
 QFileInfo * FileNavigationModel::fileInfo(const QModelIndex & i) const
 {
     if (!i.isValid()) return 0L;
-    return &d->entries[i.row()];
+    if (i.row() < d->dirs.count())
+        return &d->dirs[i.row()];
+    else return &d->files[i.row()-d->dirs.count()];
 }
 
 QString FileNavigationModel::rootPath() const
@@ -146,7 +165,7 @@ void FileNavigationModel::reload()
 void FileNavigationModel::setRootPath(const QString & path)
 {
     if (path.isEmpty()) {
-        d->entries.clear();
+        d->files.clear();
         d->rootPath.clear();
         d->path.clear();
         reset();
@@ -158,6 +177,62 @@ void FileNavigationModel::setRootPath(const QString & path)
         d->rootPath += "/";
     
     loadPathContent(QString::null);
+}
+
+void FileNavigationModel::syncSortedItems(QFileInfoList & oldItems,
+                                          QFileInfoList & newItems, int shift)
+{
+    int idx = 0;
+    QFileInfoList::iterator n_it = newItems.begin();
+    QFileInfoList::iterator o_it = oldItems.begin();
+    while(n_it != newItems.end() ||
+          o_it != oldItems.end()) {
+
+        if (n_it != newItems.end() &&
+            o_it != oldItems.end() &&
+            *n_it == *o_it) {
+            n_it++;
+            o_it++;
+            idx++;
+        }
+        else {
+            if (o_it == oldItems.end()) {
+                beginInsertRows(QModelIndex(), idx+shift, idx+shift);
+                o_it = oldItems.insert(o_it, *n_it);
+                endInsertRows();
+
+                o_it++;
+                n_it++;
+                idx++;
+            }
+            else if (n_it == newItems.end()) {
+                beginRemoveRows(QModelIndex(), idx+shift,idx+shift);
+                o_it = oldItems.erase(o_it);
+                endRemoveRows();
+            }
+            else if ((*n_it).fileName() < (*o_it).fileName()) {
+                beginInsertRows(QModelIndex(), idx+shift,idx+shift);
+                o_it = oldItems.insert(o_it, *n_it);
+                endInsertRows();
+
+                o_it++;
+                n_it++;
+                idx++;
+            }
+            else if ((*n_it).fileName() > (*o_it).fileName()) {
+                beginRemoveRows(QModelIndex(), idx+shift,idx+shift);
+                o_it = oldItems.erase(o_it);
+                endRemoveRows();
+            }
+            else {
+                *(o_it) = *(n_it);
+                emit dataChanged(index(idx+shift,0), index(idx+shift,columnCount()-1));
+                n_it++;
+                o_it++;
+                idx++;
+            }
+        }
+    }
 }
 
 void FileNavigationModel::loadPathContent(const QString & p)
@@ -180,75 +255,15 @@ void FileNavigationModel::loadPathContent(const QString & p)
     QStringList nameFilters;
     nameFilters << "*.tab" << "*.xml";
 
-    QFileInfoList entries;
-    entries = dir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name | QDir::DirsFirst);
-    entries += dir.entryInfoList(nameFilters, QDir::Files | QDir::NoDotAndDotDot, QDir::Name | QDir::DirsFirst);
+    QFileInfoList dirs, files;
+    dirs = dir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name | QDir::DirsFirst);
+    files = dir.entryInfoList(nameFilters, QDir::Files | QDir::NoDotAndDotDot, QDir::Name | QDir::DirsFirst);
 
     if (!path().isEmpty())
-        entries.prepend(QFileInfo(rootPath()+".."));
+        dirs.prepend(QFileInfo(rootPath()+".."));
 
-    /*
-    d->entries = entries;
-    reset();
-     */
-
-    bool in_add = false;
-    bool in_rem = false;
-    QFileInfoList::iterator n_it = entries.begin();
-    QFileInfoList::iterator o_it = d->entries.begin();
-    while(n_it != entries.end() || o_it != d->entries.end()) {
-
-        //if (n_it != entries.end()) qDebug() << (*n_it).fileName(); else qDebug() << "n_it - end";
-        //if (o_it != d->entries.end()) qDebug() << (*o_it).fileName(); else qDebug() << "o_it - end";
-
-        if (n_it != entries.end() &&
-            o_it != d->entries.end() &&
-            *n_it == *o_it) {
-            n_it++;
-            o_it++;
-            //if (in_add) {endInsertRows();in_add = false;}
-            //if (in_rem) {endRemoveRows();in_rem = false;}
-        }
-        else {
-            if (o_it == d->entries.end()) {
-                int idx = o_it - d->entries.begin();
-                beginInsertRows(QModelIndex(), idx,idx);
-                o_it = d->entries.insert(o_it, *n_it);
-                endInsertRows();
-
-                o_it++;
-                n_it++;
-            }
-            else if (n_it == entries.end()) {
-                int idx = o_it - d->entries.begin();
-                beginRemoveRows(QModelIndex(), idx,idx);
-                o_it = d->entries.erase(o_it);
-                endRemoveRows();
-            }
-            else if ((*n_it).fileName() < (*o_it).fileName()) {
-                int idx = o_it - d->entries.begin();
-                beginInsertRows(QModelIndex(), idx,idx);
-                o_it = d->entries.insert(o_it, *n_it);
-                endInsertRows();
-
-                o_it++;
-                n_it++;
-            }
-            else if ((*n_it).fileName() > (*o_it).fileName()) {
-                int idx = o_it - d->entries.begin();
-                beginRemoveRows(QModelIndex(), idx,idx);
-                o_it = d->entries.erase(o_it);
-                endRemoveRows();
-            }
-            else {
-                *(o_it) = *(n_it);
-
-                //int idx = o_it - d->entries.begin();
-                //emit dataChanged(index(idx,0), index(idx,columnCount()-1));
-            }
-        }
-    }
-    //reset();
+    syncSortedItems(d->dirs, dirs, 0);
+    syncSortedItems(d->files, files, d->dirs.count());
 
     if (d->watcher.files().count())
         d->watcher.removePaths( d->watcher.files() );

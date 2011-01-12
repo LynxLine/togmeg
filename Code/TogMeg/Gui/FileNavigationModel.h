@@ -16,6 +16,9 @@ public:
         ColName = 0,
         ColCount,
     };
+    enum Roles {
+        AbsFilePathRole = Qt::UserRole,
+    };
     
     FileNavigationModel(QObject * parent);
     virtual ~FileNavigationModel();
@@ -38,6 +41,10 @@ public slots:
     void setRootPath(const QString &);
     void loadPathContent(const QString &);
     
+private:
+    void syncSortedItems(QFileInfoList & oldItems,
+                         QFileInfoList & newItems, int shift);
+
 private:
     class Private;
     Private * d;
