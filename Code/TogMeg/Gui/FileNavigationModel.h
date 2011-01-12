@@ -35,7 +35,11 @@ public:
     
     QString rootPath() const;
     QString path() const;
-    
+
+signals:
+    void aboutToLoad();
+    void loaded();
+
 public slots:
     void reload();
     void setRootPath(const QString &);

@@ -249,7 +249,13 @@ void FileNavigationModel::loadPathContent(const QString & p)
     if (!fp.startsWith(rootPath()))
         return;
     
-    d->path = fp.mid(rootPath().length());
+    bool reload = true;
+    QString new_path = fp.mid(rootPath().length());
+    if (d->path != new_path) {
+        emit aboutToLoad();
+        reload = false;
+    }
+    d->path = new_path;
 
     QDir dir(rootPath()+path());
     QStringList nameFilters;
@@ -265,10 +271,13 @@ void FileNavigationModel::loadPathContent(const QString & p)
     syncSortedItems(d->dirs, dirs, 0);
     syncSortedItems(d->files, files, d->dirs.count());
 
+    if (!reload)
+        emit loaded();
+
     if (d->watcher.files().count())
         d->watcher.removePaths( d->watcher.files() );
     if (d->watcher.directories().count())
         d->watcher.removePaths( d->watcher.directories() );
     
-    d->watcher.addPath(rootPath()+path());
+    d->watcher.addPath(rootPath()+path());    
 }

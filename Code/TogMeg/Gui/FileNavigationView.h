@@ -30,6 +30,8 @@ private slots:
     void removeItem();
     void selectItem(const QModelIndex &);
     void activateItem(const QModelIndex &);
+    void m_aboutToLoad();
+    void m_loaded();
 
 private:
     class Private;

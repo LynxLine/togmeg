@@ -51,6 +51,8 @@ void FileNavigationView::setModel(FileNavigationModel * m)
     QTreeView::setModel(m);
     header()->setResizeMode(FileNavigationModel::ColName, QHeaderView::Stretch);
 
+    connect(m, SIGNAL(aboutToLoad()), this, SLOT(m_aboutToLoad()));
+    connect(m, SIGNAL(loaded()), this, SLOT(m_loaded()));
     connect(this, SIGNAL(doubleClicked(QModelIndex)),
             this, SLOT(activateItem(const QModelIndex &)));
     connect(selectionModel(), SIGNAL(currentChanged(const QModelIndex &, const QModelIndex &)),
@@ -152,3 +154,15 @@ void FileNavigationView::resizeEvent(QResizeEvent * re)
     QTreeView::resizeEvent(re);
     emit widthChanged(re->size().width());
 }
+
+void FileNavigationView::m_aboutToLoad()
+{
+    setCurrentIndex(QModelIndex());
+}
+
+void FileNavigationView::m_loaded()
+{
+    if (model()->rowCount())
+        setCurrentIndex(model()->index(0,0));
+}
+
