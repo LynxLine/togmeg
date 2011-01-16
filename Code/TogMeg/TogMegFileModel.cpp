@@ -9,10 +9,17 @@
 
 #include "IconSet.h"
 
+class QA
+{
+public:
+    QString q;
+    QString a;
+};
+
 class TogMegFileModel::Private
 {
 public:
-    QList<StudyDataEntry> entries;
+    QList<QA> qas;
     bool isModified;
     QString filePath;
     QPointer<QtSpeech> speechQ;
@@ -56,7 +63,7 @@ bool TogMegFileModel::loadTabFile(QString filePath)
         return false;
 
     beginResetModel();
-    d->entries.clear();
+    d->qas.clear();
     d->filePath = filePath;
     bool speechLine = true;
 
@@ -93,10 +100,10 @@ bool TogMegFileModel::loadTabFile(QString filePath)
             if (used) continue;
         }
 
-        StudyDataEntry entry;
+        QA entry;
         entry.q = argQ;
         entry.a   = argA;
-        d->entries << entry;
+        d->qas << entry;
     }
     
     endResetModel();
@@ -112,7 +119,7 @@ bool TogMegFileModel::loadXmlFile(QString filePath)
         return false;
     
     beginResetModel();
-    d->entries.clear();
+    d->qas.clear();
     d->filePath = filePath;
 
     QDomDocument doc;
@@ -122,13 +129,13 @@ bool TogMegFileModel::loadXmlFile(QString filePath)
     QDomNode n = el.firstChild();
     while (!n.isNull()) {
         QDomElement e_q = n.firstChildElement("question");
-        QDomElement e_a   = n.firstChildElement("answer");
+        QDomElement e_a = n.firstChildElement("answer");
         
-        StudyDataEntry entry;
+        QA entry;
         entry.q = e_q.firstChild().toText().data();
         entry.a   = e_a.firstChild().toText().data();
         
-        d->entries << entry;
+        d->qas << entry;
         
         n = n.nextSibling();
     }
@@ -144,10 +151,10 @@ bool TogMegFileModel::saveTabFile(QString filePath)
     QFile f(filePath);
     if (f.open(QIODevice::WriteOnly)) {
         QString line = "speech:"+d->id_speechQ.toString()+"\t"+
-                        "speech:"+d->id_speechA.toString()+"\n";
+                       "speech:"+d->id_speechA.toString()+"\n";
         f.write(line.toUtf8());
 
-        foreach (StudyDataEntry entry, d->entries) {
+        foreach (QA entry, d->qas) {
             if (entry.q.isEmpty() && entry.a.isEmpty())
                 continue;
             
@@ -171,7 +178,7 @@ bool TogMegFileModel::saveXmlFile(QString filePath)
         QDomElement docEl = doc.createElement("content");
         doc.appendChild(docEl);
         
-        foreach (StudyDataEntry entry, d->entries) {
+        foreach (QA entry, d->qas) {
             QDomElement entryEl = doc.createElement("studyentry");
             docEl.appendChild(entryEl);
             
@@ -200,8 +207,8 @@ bool TogMegFileModel::saveXmlFile(QString filePath)
 QModelIndex TogMegFileModel::addNewEntry()
 {
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
-    StudyDataEntry entry;
-    d->entries << entry;
+    QA entry;
+    d->qas << entry;
     endInsertRows();
 
     return index(rowCount()-1, ColQ);
@@ -210,39 +217,39 @@ QModelIndex TogMegFileModel::addNewEntry()
 void TogMegFileModel::removeEntry(QModelIndex index)
 {
     if ( !index.isValid() ) return;
-    if ( index.row() < 0 || index.row() >= d->entries.count() ) return;
+    if ( index.row() < 0 || index.row() >= d->qas.count() ) return;
 
     int row = index.row();
     int idx = row-1;
     beginRemoveRows(QModelIndex(), row, row);
-    d->entries.removeAt(idx);
+    d->qas.removeAt(idx);
     endRemoveRows();
 }
 
 void TogMegFileModel::swapQA(QModelIndex mi)
 {
     if ( !mi.isValid() ) return;
-    if ( mi.row() < 0 || mi.row() >= d->entries.count() ) return;
+    if ( mi.row() < 0 || mi.row() >= d->qas.count() ) return;
 
     int i = mi.row()-1;
 
-    qSwap(d->entries[i].a, d->entries[i].q);
+    qSwap(d->qas[i].a, d->qas[i].q);
     emit dataChanged(index(i,0), index(i, ColumnCount));
 }
 
 void TogMegFileModel::clear()
 {
     beginResetModel();
-    d->entries.clear();
-    StudyDataEntry entry;
-    d->entries << entry;
+    d->qas.clear();
+    QA entry;
+    d->qas << entry;
     endResetModel();
 }
 
 int TogMegFileModel::rowCount(const QModelIndex & parent) const
 {
     Q_UNUSED(parent);
-    return d->entries.count()+1;
+    return d->qas.count()+1;
 }
 
 int TogMegFileModel::columnCount(const QModelIndex & parent) const
@@ -254,7 +261,7 @@ int TogMegFileModel::columnCount(const QModelIndex & parent) const
 QVariant TogMegFileModel::data(const QModelIndex & i, int role) const
 {
     if ( !i.isValid() ) return QVariant();
-    if ( i.row() < 0 || i.row() > d->entries.count() ) return QVariant();
+    if ( i.row() < 0 || i.row() > d->qas.count() ) return QVariant();
 
     if ( i.row() == 0 ) {
         if (role == Qt::EditRole) {
@@ -273,7 +280,7 @@ QVariant TogMegFileModel::data(const QModelIndex & i, int role) const
                 return d->name_speechA;
             }
         }
-        else if (role == Qt::DecorationRole && i.column() == ColId) {
+        else if (role == Qt::DecorationRole && i.column() == ColN) {
             return EmbIcon("Microphone");
         }
         else if (role == Qt::BackgroundRole) {
@@ -282,18 +289,18 @@ QVariant TogMegFileModel::data(const QModelIndex & i, int role) const
     }
     else {
         if (role == Qt::DisplayRole || role == Qt::EditRole) {
-            if ( i.column() == ColId) return QString("  %1 ").arg(i.row());
-            if ( i.column() == ColQ ) return d->entries[ i.row()-1 ].q;
-            if ( i.column() == ColA ) return d->entries[ i.row()-1 ].a;
+            if ( i.column() == ColN) return QString("  %1 ").arg(i.row());
+            if ( i.column() == ColQ ) return d->qas[ i.row()-1 ].q;
+            if ( i.column() == ColA ) return d->qas[ i.row()-1 ].a;
         }
     }
 
     if (role == Qt::ForegroundRole) {
-        if (i.column() == ColId) return QColor(128,128,128);
+        if (i.column() == ColN) return QColor(128,128,128);
     }
 
     if (role == Qt::TextAlignmentRole) {
-        if (i.column() == ColId) return int(Qt::AlignRight | Qt::AlignVCenter);
+        if (i.column() == ColN) return int(Qt::AlignRight | Qt::AlignVCenter);
         if (i.column() == ColQ) return int(Qt::AlignCenter);
         if (i.column() == ColA) return int(Qt::AlignCenter);
     }
@@ -310,7 +317,7 @@ QVariant TogMegFileModel::data(const QModelIndex & i, int role) const
 bool TogMegFileModel::setData(const QModelIndex & i, const QVariant & v, int role)
 {
     if ( !i.isValid() ) return false;
-    if ( i.row() < 0 || i.row() > d->entries.count() ) return false;
+    if ( i.row() < 0 || i.row() > d->qas.count() ) return false;
 
     if (i.row() == 0) {
         if ( i.column() == ColQ) {
@@ -335,7 +342,7 @@ bool TogMegFileModel::setData(const QModelIndex & i, const QVariant & v, int rol
 
     if (role == Qt::DisplayRole || role == Qt::EditRole) {
         bool change = false;
-        StudyDataEntry & e = d->entries[ i.row()-1 ];
+        QA & e = d->qas[ i.row()-1 ];
         if ( i.column() == ColQ ) {
             if (e.q != v.toString()) {
                 e.q = v.toString();
@@ -362,8 +369,8 @@ bool TogMegFileModel::setData(const QModelIndex & i, const QVariant & v, int rol
     }
 
     else if (role == SpeechRole) {
-        if ( i.column() == ColQ ) d->speechQ->say(d->entries[ i.row()-1 ].q);
-        if ( i.column() == ColA ) d->speechA->say(d->entries[ i.row()-1 ].a);
+        if ( i.column() == ColQ ) d->speechQ->say(d->qas[ i.row()-1 ].q);
+        if ( i.column() == ColA ) d->speechA->say(d->qas[ i.row()-1 ].a);
     }
 
     return false;
@@ -374,7 +381,7 @@ QVariant TogMegFileModel::headerData(int section, Qt::Orientation orientation, i
     Q_UNUSED(orientation);
 
     if (role == Qt::DisplayRole) {
-        if ( section == ColId)
+        if ( section == ColN)
             return tr("#");
         else if ( section == ColQ)
             return tr("Question");
@@ -383,7 +390,7 @@ QVariant TogMegFileModel::headerData(int section, Qt::Orientation orientation, i
     }
 
     if (role == Qt::TextAlignmentRole) {
-        if (section == ColId) return int(Qt::AlignRight | Qt::AlignVCenter);
+        if (section == ColN) return int(Qt::AlignRight | Qt::AlignVCenter);
         if (section == ColQ) return int(Qt::AlignCenter);
         if (section == ColA) return int(Qt::AlignCenter);
     }
@@ -394,9 +401,9 @@ QVariant TogMegFileModel::headerData(int section, Qt::Orientation orientation, i
 Qt::ItemFlags TogMegFileModel::flags(const QModelIndex &index) const 
 {
     if ( !index.isValid() ) return Qt::ItemIsDropEnabled;
-    if ( index.row() < 0 || index.row() > d->entries.count() ) return Qt::ItemIsDropEnabled;
+    if ( index.row() < 0 || index.row() > d->qas.count() ) return Qt::ItemIsDropEnabled;
 
-    if ( index.column() == ColId ) return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+    if ( index.column() == ColN ) return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
 }
 

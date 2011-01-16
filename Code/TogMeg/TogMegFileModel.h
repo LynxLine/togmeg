@@ -4,20 +4,13 @@
 
 #include <QAbstractListModel>
 
-class StudyDataEntry 
-{
-public:
-    QString q;
-    QString a;
-};
-
 class TogMegFileModel : public QAbstractListModel
 {
 Q_OBJECT
 
 public:
     enum Columns {
-        ColId = 0,
+        ColN = 0,
         ColQ,
         ColA,
         ColumnCount
