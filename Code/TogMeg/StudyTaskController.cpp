@@ -1,5 +1,6 @@
 
 #include <QtGui>
+#include <ctime>
 
 #include "TogMeg.h"
 #include "TogMegFileModel.h"
@@ -7,9 +8,11 @@
 
 class StudyTaskController::Private {
 public:
-    Private():index(0),isLastFailed(false) {;}
+    Private():idx(0),isLastFailed(false) {;}
 
-    int index;
+    int idx;
+    std::vector<int> sequence;
+
     bool isLastFailed;
     QTimeLine * timeLine;
     ControllerDataEntry currentEntry;
@@ -18,10 +21,50 @@ public:
 /*!
  * Creates the object.
  */
-StudyTaskController::StudyTaskController(TogMegFileModel * parent)
-:TaskController(parent)
+StudyTaskController::StudyTaskController(TogMegFileModel * m)
+:TaskController(m)
 {
     d = new Private;
+
+    std::vector<int> idxs;
+    srand(unsigned(time(NULL)));
+
+    //take all
+    for (int i =1; i< model->rowCount(); i++) {
+        QModelIndex mi = model->index(i, TogMegFileModel::ColQ);
+        QString q = model->data(mi).toString();
+        if (!q.isEmpty())
+            idxs.push_back(i);
+    }
+
+    std::random_shuffle(idxs.begin(), idxs.end());
+
+    //make filler for last serie
+    std::vector<int> last = idxs;
+    std::random_shuffle(last.begin(), last.end());
+    if (last.size() >12) {
+        std::vector<int> temp = last;
+        last.assign(temp.begin(), temp.begin()+12);
+    }
+
+    //make series of 12
+    for (int s =0; s< int(idxs.size())/12 +1; s++) {
+        std::vector<int> sub;
+        int to = (s+1)*12;
+        sub.assign(idxs.begin()+s*12, idxs.begin()+(to <= idxs.size() ? to : idxs.size()));
+        if (sub.size() <12) {
+            sub.insert(sub.end(), last.begin(), last.end());
+            if (sub.size() >12) {
+                std::vector<int> temp = sub;
+                sub.assign(temp.begin(), temp.begin()+12);
+            }
+        }
+
+        for (int i =0; i< 3; i++) {
+            std::random_shuffle(sub.begin(), sub.end());
+            d->sequence.insert(d->sequence.end(), sub.begin(), sub.end());
+        }
+    }
 
     d->timeLine = new QTimeLine(3000, this);
     d->timeLine->setCurveShape(QTimeLine::LinearCurve);
@@ -40,47 +83,42 @@ StudyTaskController::~StudyTaskController()
     delete d;
 }
 
+/*! Check that at least one question is available
+    in model. Iterate through all items O(n)
+  */
 bool StudyTaskController::hasNext()
 {
-    int nextIndex = 1;
-    while ( nextIndex < model->rowCount() ) {
-        QModelIndex i = model->index(nextIndex, TogMegFileModel::ColQ);
-        QString question = model->data(i).toString();
-        if ( !question.isEmpty() ) break;
-        nextIndex++;
-    }
-    return nextIndex < model->rowCount();
+    return !d->sequence.empty();
 }
 
 ControllerDataEntry StudyTaskController::next()
 {
-    QString question;
-    while ( question.isEmpty() ) {
-        if (!d->isLastFailed)
-            d->index = rand() % (model->rowCount()-1) +1;
-        QModelIndex i = model->index(d->index, TogMegFileModel::ColQ);
-        question = model->data(i).toString();
+    QString q;
+    if (!d->isLastFailed) {
+        d->idx = d->sequence.back();
+        d->sequence.pop_back();
     }
 
-    ControllerDataEntry entry;
+    ControllerDataEntry e;
 
-    entry.a = model->data( model->index(d->index, TogMegFileModel::ColA) ).toString();
-    entry.q = model->data( model->index(d->index, TogMegFileModel::ColQ) ).toString();
+    QModelIndex miq = model->index(d->idx, TogMegFileModel::ColQ);
+    QModelIndex mia = model->index(d->idx, TogMegFileModel::ColA);
+
+    e.a = model->data(mia).toString();
+    e.q = model->data(miq).toString();
 
     int typingSpeed = app::typingSpeed(); //symbols in minute
     if ( typingSpeed <= 0 ) typingSpeed = 60;
 
-    int typingTime = entry.a.length() *1000 *60 /typingSpeed;
+    int typingTime = e.a.length() *1000 *60 /typingSpeed;
 
-    entry.startTime = 0;
-    entry.totalTime = 5000 + typingTime;
+    e.startTime = 0;
+    e.totalTime = 5000 + typingTime;
 
-    QModelIndex mi = model->index(d->index, TogMegFileModel::ColQ);
-    model->setData(mi, true, TogMegFileModel::SpeechRole);
+    model->setData(miq, true, TogMegFileModel::SpeechRole);
 
-    d->currentEntry = entry;
- 
-    return entry;
+    d->currentEntry = e;
+    return e;
 }
 
 void StudyTaskController::processAnswer(int usedTime, QString answer)
@@ -117,7 +155,7 @@ void StudyTaskController::processAnswer(int usedTime, QString answer)
         }
     }
 
-    QModelIndex mi = model->index(d->index, TogMegFileModel::ColA);
+    QModelIndex mi = model->index(d->idx, TogMegFileModel::ColA);
     model->setData(mi, true, TogMegFileModel::SpeechRole);
 
     d->timeLine->setCurrentTime(0);
