@@ -2,8 +2,8 @@
 #ifndef FILENAVIGATIONMODEL_H
 #define FILENAVIGATIONMODEL_H
 
+#include <QFileInfo>
 #include <QAbstractListModel>
-class QFileInfo;
 
 /*!
  \class FileNavigationModel
