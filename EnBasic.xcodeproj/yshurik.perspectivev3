@@ -297,8 +297,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>19</integer>
-									<integer>13</integer>
+									<integer>11</integer>
+									<integer>10</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -336,7 +336,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>CF2E09CC11F114E500A41F8E</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>WordListController.m</string>
+								<string>EnBasic_Prefix.pch</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -344,11 +344,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>CF2E09CD11F114E500A41F8E</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>WordListController.m</string>
+										<string>EnBasic_Prefix.pch</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>CF383B8E11F64150008DC4A2</string>
+										<string>CF383B9B11F851B9008DC4A2</string>
 										<key>history</key>
 										<array>
 											<string>CFB7719B11F63B2F007CA1B2</string>
@@ -359,7 +359,8 @@
 											<string>CFB771D711F63EAB007CA1B2</string>
 											<string>CFB771D811F63EAB007CA1B2</string>
 											<string>CFB771D911F63EAB007CA1B2</string>
-											<string>CFB771DC11F63F97007CA1B2</string>
+											<string>CF383B9911F851B9008DC4A2</string>
+											<string>CF383B9A11F851B9008DC4A2</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -659,7 +660,7 @@
 	<key>StatusbarIsVisible</key>
 	<true/>
 	<key>TimeStamp</key>
-	<real>301351248.22463697</real>
+	<real>301486521.72170001</real>
 	<key>ToolbarConfigUserDefaultsMinorVersion</key>
 	<string>2</string>
 	<key>ToolbarDisplayMode</key>
@@ -676,6 +677,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>1C530D5B069F1CE1000CFCEE</string>
 		<string>/Users/yshurik/Work/LynxLine/EnBasic/EnBasic.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -1052,7 +1054,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C530D5B069F1CE1000CFCEE</string>
-				<string>CFB771DD11F63F97007CA1B2</string>
+				<string>CF383B9C11F851B9008DC4A2</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>
