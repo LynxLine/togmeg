@@ -1,0 +1,38 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource>
+        <file>images/alesson.ico</file>
+
+        <file>images/actions/add.png</file>
+        <file>images/actions/edit.png</file>
+        <file>images/actions/remove.png</file>
+
+        <file>images/red-box/top.png</file>
+        <file>images/red-box/left.png</file>
+        <file>images/red-box/right.png</file>
+        <file>images/red-box/bottom.png</file>
+        <file>images/red-box/top-left.png</file>
+        <file>images/red-box/top-right.png</file>
+        <file>images/red-box/bottom-left.png</file>
+        <file>images/red-box/bottom-right.png</file>
+
+        <file>images/yellow-box/top.png</file>
+        <file>images/yellow-box/left.png</file>
+        <file>images/yellow-box/right.png</file>
+        <file>images/yellow-box/bottom.png</file>
+        <file>images/yellow-box/top-left.png</file>
+        <file>images/yellow-box/top-right.png</file>
+        <file>images/yellow-box/bottom-left.png</file>
+        <file>images/yellow-box/bottom-right.png</file>
+
+        <file>images/yellow-small-box/top.png</file>
+        <file>images/yellow-small-box/left.png</file>
+        <file>images/yellow-small-box/right.png</file>
+        <file>images/yellow-small-box/bottom.png</file>
+        <file>images/yellow-small-box/top-left.png</file>
+        <file>images/yellow-small-box/top-right.png</file>
+        <file>images/yellow-small-box/bottom-left.png</file>
+        <file>images/yellow-small-box/bottom-right.png</file>
+
+    </qresource>
+</RCC>
+
