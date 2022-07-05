@@ -3,7 +3,9 @@ TogMeg is simple application to make the process of studying new words of foreig
 
 ## Screenshots
  
+![screen1](Doc/mzl.ekgpbjin.800x500-75.jpg?raw=true)
 
+![screen2](Doc/mzl.uqizzfza.800x500-75.jpg?raw=true)
 
 ## Usage
 TogMeg is the application that simplify the learning process of new words by repeating them, forcing users to type in correct spelling and same time hearing correct pronunciation of new words. Also if you have installed voice for questions you make bindings of your native phonetic structures with learning languages. Some people prefer to hear only foreign language  words for better immersion – it just depends what is the best way you perceive information.
