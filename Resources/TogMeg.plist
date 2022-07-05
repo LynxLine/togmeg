@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>tab</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>cra</string>
+			<key>CFBundleTypeName</key>
+			<string>Tab delimited File</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+		</dict>
+	</array>
+	<key>CFBundleExecutable</key>
+	<string>@EXECUTABLE@</string>
+	<key>CFBundleGetInfoString</key>
+	<string>TogMeg 1.0, Copyright © 2009, LynxLine.</string>
+	<key>CFBundleIconFile</key>
+	<string>@ICON@</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.lynxline.togmeg</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>TogMeg</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>Crammero 1.0</string>
+	<key>CFBundleSignature</key>
+	<string>PSPI</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>10.4</string>
+	<key>LSRequiresCarbon</key>
+	<true/>
+</dict>
+</plist>
