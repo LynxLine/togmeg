@@ -1,0 +1,14 @@
+<RCC>
+<qresource prefix="/">
+<file>Icons/Play.png</file>
+<file>Icons/Stop.png</file>
+<file>Icons/Add.png</file>
+<file>Icons/Remove.png</file>
+<file>Icons/Record.png</file>
+<file>Icons/Microphone.png</file>
+<file>Icons/Arrows-Hor.png</file>
+<file>Icons/Arrows-Ver.png</file>
+<file>Icons/Folder.png</file>
+<file>Icons/TogMeg.png</file>
+</qresource>
+</RCC>

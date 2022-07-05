@@ -1,0 +1,53 @@
+<RCC>
+
+    <qresource prefix="/" >
+        <file>Pixmaps/AddButtonSmall.png</file>
+        <file>Pixmaps/AddButtonSmallOff.png</file>
+        <file>Pixmaps/AddButtonSmallPressed.png</file>
+        <file>Pixmaps/AnchorButtonSmall.png</file>
+        <file>Pixmaps/AnchorButtonSmallActive.png</file>
+        <file>Pixmaps/AnchorButtonSmallOff.png</file>
+        <file>Pixmaps/AnchorButtonSmallPressed.png</file>
+        <file>Pixmaps/CloseButtonSmall.png</file>
+        <file>Pixmaps/CloseButtonSmallPressed.png</file>
+        <file>Pixmaps/CloseIcon.png</file>
+        <file>Pixmaps/DockRightButtonSmall.png</file>
+        <file>Pixmaps/DockRightButtonSmallPressed.png</file>
+        <file>Pixmaps/DownButtonSmall.png</file>
+        <file>Pixmaps/DownButtonSmallOff.png</file>
+        <file>Pixmaps/DownButtonSmallPressed.png</file>
+        <file>Pixmaps/DropDownHoverSmall.png</file>
+        <file>Pixmaps/DropDownSelectedHoverSmall.png</file>
+        <file>Pixmaps/DropDownSelectedSmall.png</file>
+        <file>Pixmaps/DropDownSmall.png</file>
+        <file>Pixmaps/ExecuteSmall.png</file>
+        <file>Pixmaps/HeaderAddColumn.png</file>
+        <file>Pixmaps/HeaderCollapse.png</file>
+        <file>Pixmaps/HeaderDropDown.png</file>
+        <file>Pixmaps/InfoTip.png</file>
+        <file>Pixmaps/LeftButtonSmall.png</file>
+        <file>Pixmaps/LeftButtonSmallOff.png</file>
+        <file>Pixmaps/LeftButtonSmallPressed.png</file>
+        <file>Pixmaps/MoveLocationSmall.png</file>
+        <file>Pixmaps/MoveLocationSmallPressed.png</file>
+        <file>Pixmaps/OpenLocationHoverSmall.png</file>
+        <file>Pixmaps/OpenLocationSelectedHoverSmall.png</file>
+        <file>Pixmaps/OpenLocationSelectedSmall.png</file>
+        <file>Pixmaps/OpenLocationSmall.png</file>
+        <file>Pixmaps/RemoveButtonSmall.png</file>
+        <file>Pixmaps/RemoveButtonSmallOff.png</file>
+        <file>Pixmaps/RemoveButtonSmallPressed.png</file>
+        <file>Pixmaps/RightButtonSmall.png</file>
+        <file>Pixmaps/RightButtonSmallOff.png</file>
+        <file>Pixmaps/RightButtonSmallPressed.png</file>
+        <file>Pixmaps/SearchOptionsDropDown.png</file>
+        <file>Pixmaps/Target.png</file>
+        <file>Pixmaps/UpButtonSmall.png</file>
+        <file>Pixmaps/UpButtonSmallOff.png</file>
+        <file>Pixmaps/UpButtonSmallPressed.png</file>
+        <file>Pixmaps/UpdateHoverSmall.png</file>
+        <file>Pixmaps/UpdateSmall.png</file>
+        <file>Pixmaps/WindowButtonSmall.png</file>
+        <file>Pixmaps/WindowButtonSmallPressed.png</file>
+    </qresource>
+</RCC>

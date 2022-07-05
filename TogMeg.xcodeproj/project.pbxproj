@@ -1,0 +1,1166 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		03BB82B4D302A779D9A9F387 /* AnswerWidget.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = CF01D4F3A62F31847B38A583 /* AnswerWidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		04CD14FC3F75FFBEF0026A01 /* XML_Reader.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = EF8AF9B15656266E9808EB61 /* XML_Reader.cpp */; settings = {ATTRIBUTES = (); }; };
+		079BDFD545F7D956DD1B9A4F /* GroupingProxyModel.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = C50B858EF6F9CFD6AA580498 /* GroupingProxyModel.cpp */; settings = {ATTRIBUTES = (); }; };
+		09735F9B98F38691640D2F54 /* moc_PlayController.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 45E7B5D2B47977BB9DD14010 /* moc_PlayController.cpp */; settings = {ATTRIBUTES = (); }; };
+		09CEB2F8D2AF0BAD0EE03338 /* DecoratedItemDelegate.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 9E0A22F12A05DD5F88D02BDC /* DecoratedItemDelegate.cpp */; settings = {ATTRIBUTES = (); }; };
+		0A1164D69D31BB73847E6ED4 /* FilterLineEdit.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = FB715C7C08E3F190487EB892 /* FilterLineEdit.cpp */; settings = {ATTRIBUTES = (); }; };
+		0ABC5FEBA869F6B203F1FFF8 /* qrc_PixmapButton.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 77C43223FF3B196591E16B07 /* qrc_PixmapButton.cpp */; settings = {ATTRIBUTES = (); }; };
+		1109E410FCD3D945014BB90D /* PlayController.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 76F4FCBC7640B4D0393D13B4 /* PlayController.cpp */; settings = {ATTRIBUTES = (); }; };
+		13C61BAC1E99EF8C91EAA9FA /* moc_BaseProject.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 56EA78D1BCD776E939125685 /* moc_BaseProject.cpp */; settings = {ATTRIBUTES = (); }; };
+		18105366B2D1D79480A1DA50 /* moc_PixmapButton.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = B45E8E3A947FBE9F87A0424F /* moc_PixmapButton.cpp */; settings = {ATTRIBUTES = (); }; };
+		1D73E5FEA5E8F388136FF6A8 /* moc_TogMegProject.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = E0F2C629B8DAEDFA29AB3437 /* moc_TogMegProject.cpp */; settings = {ATTRIBUTES = (); }; };
+		24A17AC9B2DDD5981D9D0C19 /* moc_UngroupProxyModel.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 83CEA9A215DFD46B32B038BC /* moc_UngroupProxyModel.cpp */; settings = {ATTRIBUTES = (); }; };
+		2630A6A0CB3406328ECC28AE /* Main.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 9149B31A79440E7006338786 /* Main.cpp */; settings = {ATTRIBUTES = (); }; };
+		27AA5C1245D8522D97C3314E /* moc_GradientWidget.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 075853EDF9E91697FB365E69 /* moc_GradientWidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		27FB658754F8316AF865E914 /* QtGui.framework in Frameworks & Libraries */ = {isa = PBXBuildFile; fileRef = EF34030FE9242F6DC1EA56E3 /* QtGui.framework */; };
+		340B6A3DBDCDA1A50FA08F69 /* ColumnSelectorButton.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = B17B5F6EEF6C985DE4583014 /* ColumnSelectorButton.cpp */; settings = {ATTRIBUTES = (); }; };
+		3AA89556485B1E90E33F7CFE /* Resources/Examples/Study Norwegian in Bundle Copy [BUNDLE_EXAMPLES] */ = {isa = PBXBuildFile; fileRef = AD69283750F8570F1F39D8EA /* Resources/Examples/Study Norwegian */; };
+		3E47E57E7B0F676E66A681B9 /* QAEditor.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = C0D42FBBCE024BEDA2C6BF36 /* QAEditor.cpp */; settings = {ATTRIBUTES = (); }; };
+		3E85290063FF6D3A78864F38 /* TogMegProject.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 8EAD6FB7328064CD964CE8D4 /* TogMegProject.cpp */; settings = {ATTRIBUTES = (); }; };
+		3F319A203EEDA6256B4BFE30 /* FlowLayout.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = C9620439031ADB46199DCB92 /* FlowLayout.cpp */; settings = {ATTRIBUTES = (); }; };
+		3FCFA6AF7299278BE18C6C19 /* IconSet.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = DAA375781B81A2A66E6803D1 /* IconSet.cpp */; settings = {ATTRIBUTES = (); }; };
+		41B8FD47C1704B9CE2FE107D /* FileNavigationView.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 64FFF52A3EBDC165D670AB80 /* FileNavigationView.cpp */; settings = {ATTRIBUTES = (); }; };
+		41F49A91E250FABCA872222E /* moc_BaseWindow.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = B1DF0581F3E4B8CC8B7C0E0A /* moc_BaseWindow.cpp */; settings = {ATTRIBUTES = (); }; };
+		490EC026741A0B7B64922F36 /* StudyController.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 843B11C15B9C15D6A041B5F9 /* StudyController.cpp */; settings = {ATTRIBUTES = (); }; };
+		49238F43DDEAE2836D7EC337 /* QtCore.framework in Frameworks & Libraries */ = {isa = PBXBuildFile; fileRef = 09A37845C97FAD8139487D32 /* QtCore.framework */; };
+		4B657F6C0810A50507C0D921 /* moc_LabelWithProgress.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 3B93F3B26A1AC3E5CB8B6895 /* moc_LabelWithProgress.cpp */; settings = {ATTRIBUTES = (); }; };
+		4BEB3F18F104C1A0BDFACF7D /* TimeLineWidget.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = D2CFA5998032B5ED5C5D025D /* TimeLineWidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		4C2A69BF198B02AE37B92F3B /* XML_Util.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 9B1552D8138DF8CCD31578CA /* XML_Util.cpp */; settings = {ATTRIBUTES = (); }; };
+		51D4DBF7CB8537BE86EBD055 /* AppKit.framework in Frameworks & Libraries */ = {isa = PBXBuildFile; fileRef = 821416211D63F190AAAD016A /* AppKit.framework */; };
+		51D5BA5E71CCE5DBE7F96E64 /* QtXml.framework in Frameworks & Libraries */ = {isa = PBXBuildFile; fileRef = FD5D6BFE940FC25FB5680D18 /* QtXml.framework */; };
+		5300150C916C41AEFE900DED /* moc_FileNavigationView.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = F09F2F2830776CB440D032F2 /* moc_FileNavigationView.cpp */; settings = {ATTRIBUTES = (); }; };
+		5381A0F93E9883061E144226 /* moc_LineEditWithProgress.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = DE923D48184882ABE44ECD73 /* moc_LineEditWithProgress.cpp */; settings = {ATTRIBUTES = (); }; };
+		5C12E26B2423016008573F88 /* RoundedLineEdit.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = A7C10956454DCA877BDD9F26 /* RoundedLineEdit.cpp */; settings = {ATTRIBUTES = (); }; };
+		60639314C0B69D4DC4D4E9FA /* moc_HelpButton.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 4DB19B104BD58721DF3C0001 /* moc_HelpButton.cpp */; settings = {ATTRIBUTES = (); }; };
+		6590BCC7081C9268902223FE /* QtSpeechMac.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = F94B159AFE97B3DDC4D93625 /* QtSpeechMac.cpp */; settings = {ATTRIBUTES = (); }; };
+		68A2F8CF3A430E4F013B18E3 /* HelpButton.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 83D7F7ECDFF087E2B5D5FACB /* HelpButton.cpp */; settings = {ATTRIBUTES = (); }; };
+		6A18819F6D2C81A55136E804 /* moc_FilterLineEdit.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = B1BC19F03BBC87028CBEE158 /* moc_FilterLineEdit.cpp */; settings = {ATTRIBUTES = (); }; };
+		6F03406171B47985CB26190C /* moc_TogMeg.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 99D7289CFC7623F1E9A55F54 /* moc_TogMeg.cpp */; settings = {ATTRIBUTES = (); }; };
+		707854F58338A491AAA7DA05 /* VHeader.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 99A76D3582B7C1A9151EEB40 /* VHeader.cpp */; settings = {ATTRIBUTES = (); }; };
+		70F8F36E0AE75665684A6ED2 /* moc_QtSpeech.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = DC65D1BECB1F172C1D5630CE /* moc_QtSpeech.cpp */; settings = {ATTRIBUTES = (); }; };
+		74D9B4725E866AB6175962A3 /* LineEditWithProgress.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = A4A2351C775FDB89D8259828 /* LineEditWithProgress.cpp */; settings = {ATTRIBUTES = (); }; };
+		769615B7828EE57B47575ECD /* FileNavigationModel.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 92B5F46E00276230022DE332 /* FileNavigationModel.cpp */; settings = {ATTRIBUTES = (); }; };
+		77EC093F1EC07104142E8EFA /* moc_TaskController.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 253D2E69B4FDC3335A6D184C /* moc_TaskController.cpp */; settings = {ATTRIBUTES = (); }; };
+		7862286547F181DEC34CFF52 /* Examinator.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 0B3E12D369452734570D0571 /* Examinator.cpp */; settings = {ATTRIBUTES = (); }; };
+		787C04F6851EA69238D7CC8B /* qrc_Images.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = AF2735BCB4E8C1B14C36F43E /* qrc_Images.cpp */; settings = {ATTRIBUTES = (); }; };
+		79B186B45D9C3BF7721CC175 /* moc_VHeader.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 95578F80B9FAD696CF9EB0AB /* moc_VHeader.cpp */; settings = {ATTRIBUTES = (); }; };
+		79C9FCAEC6F3428E37B351A8 /* moc_GroupingProxyModel.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = B3C9BBD94AA94839A46E4380 /* moc_GroupingProxyModel.cpp */; settings = {ATTRIBUTES = (); }; };
+		7CE9111E5F7A02AD292C2A00 /* PixmapButton.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = E34C7753A6FDCC896EDB0BF4 /* PixmapButton.cpp */; settings = {ATTRIBUTES = (); }; };
+		7DDAEFFE6BCCBEC74432CA30 /* moc_QtSpeechMac.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 5391D954477AAF3073219603 /* moc_QtSpeechMac.cpp */; settings = {ATTRIBUTES = (); }; };
+		82C8944C2BF2B23B0CDEB3C6 /* moc_QADelegate.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = E87C379DC4D49A2DFC90C13D /* moc_QADelegate.cpp */; settings = {ATTRIBUTES = (); }; };
+		8D2A4D5A553B92F9DAE2F3DE /* AppStyles.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 9848C7460887C2B46B831112 /* AppStyles.cpp */; settings = {ATTRIBUTES = (); }; };
+		8D49BF09C338BE1B760A5B3E /* moc_RoundedLineEdit.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 3F8FF8EE9E8B7388C1BBFE61 /* moc_RoundedLineEdit.cpp */; settings = {ATTRIBUTES = (); }; };
+		91FA88D0480D9C601550F6DD /* rijndael.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = C5FC4EF0F19E9F33CCCF2AA7 /* rijndael.cpp */; settings = {ATTRIBUTES = (); }; };
+		935EDAE77945545F876C642E /* moc_Examinator.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = D977E873B834C316C8978AA0 /* moc_Examinator.cpp */; settings = {ATTRIBUTES = (); }; };
+		9873DF645377F6DB4BD73AC6 /* moc_FileNavigationModel.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = BE82FEA9E9C52931D3F80F3F /* moc_FileNavigationModel.cpp */; settings = {ATTRIBUTES = (); }; };
+		9A134E412A6FB6240C965236 /* TogMegWindow.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = F7E6F13CDD8292330062F4A7 /* TogMegWindow.cpp */; settings = {ATTRIBUTES = (); }; };
+		9BB52DAE6BC3F418D14A6BB4 /* QtSpeech.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 9EB25E61A6F78F3DE4C20C9C /* QtSpeech.cpp */; settings = {ATTRIBUTES = (); }; };
+		A3AAE604BED3C55E8CED1C36 /* qgetopt.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = FF13BD782589054E58DF8886 /* qgetopt.cpp */; settings = {ATTRIBUTES = (); }; };
+		A442DA5C90B66B71E9F9ACF2 /* ProgressBar.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 89E72349669641FB9F675025 /* ProgressBar.cpp */; settings = {ATTRIBUTES = (); }; };
+		A47FDFCC734050CAAC5E043A /* TogMeg.icns in Bundle Resources */ = {isa = PBXBuildFile; fileRef = 275550ED056B036193ABB870 /* TogMeg.icns */; settings = {ATTRIBUTES = (); }; };
+		A4EAC77647935F86EB4EA8F8 /* moc_StudyController.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = FEF5CFF2FDA18E6DA3F0306E /* moc_StudyController.cpp */; settings = {ATTRIBUTES = (); }; };
+		A7BF76C327E8E8D371570468 /* moc_QAEditor.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = A9BABEDE4DC8A9EACA94FACE /* moc_QAEditor.cpp */; settings = {ATTRIBUTES = (); }; };
+		AFC8D705CF8FF7878AA3265A /* CoreFoundation.framework in Frameworks & Libraries */ = {isa = PBXBuildFile; fileRef = 2B9F5257240B5626E8434A44 /* CoreFoundation.framework */; };
+		B2CDA6D2359C9D1CE839A037 /* QuestionWidget.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 70FB3601228485561D72D54F /* QuestionWidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		B7F6196DFB48F2C42B5ADB6E /* TogMeg.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 80F5F4D2855EBD6C3D0D9C18 /* TogMeg.cpp */; settings = {ATTRIBUTES = (); }; };
+		B8C8204E1D62B0C5E5FFFEFF /* moc_ExamineWidget.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 3F7691EB4D9C088B1C7075F1 /* moc_ExamineWidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		B9DDA2C7750D460C200ABD57 /* QADelegate.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = CF9174454B39C49FBBF65C71 /* QADelegate.cpp */; settings = {ATTRIBUTES = (); }; };
+		BB5E50781BD15C501311DE40 /* moc_AnswerWidget.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 2208158667816A9786A01A53 /* moc_AnswerWidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		C8FD4A1AAA37CF2CA2824CCF /* Carbon.framework in Frameworks & Libraries */ = {isa = PBXBuildFile; fileRef = DA138F75C9F545CDAE7FB264 /* Carbon.framework */; };
+		CE2D20CFF9EA176B7D2C6156 /* QAModel.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 04BE6811460F94B0133A6F59 /* QAModel.cpp */; settings = {ATTRIBUTES = (); }; };
+		CF931F5E13AEA92200D5D888 /* TogMeg.app in Project Copy */ = {isa = PBXBuildFile; fileRef = CF931F5B13AEA92200D5D888 /* TogMeg.app */; };
+		CF93258A13AEB23400D5D888 /* QtCore.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CF93258913AEB23400D5D888 /* QtCore.framework */; };
+		CF93258C13AEB23400D5D888 /* QtGui.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CF93258B13AEB23400D5D888 /* QtGui.framework */; };
+		CF93258E13AEB23400D5D888 /* QtXml.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CF93258D13AEB23400D5D888 /* QtXml.framework */; };
+		D114838D14450BE598EA0E64 /* UngroupProxyModel.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 147C8C88C42E1EF6BA3D0423 /* UngroupProxyModel.cpp */; settings = {ATTRIBUTES = (); }; };
+		D1AA6057E063CC9A2ADF119B /* moc_TimeLineWidget.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = C38AB4CDBB4EABA01ABD10EE /* moc_TimeLineWidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		DFDF0C6B196A21C5FDFE921C /* moc_QAModel.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 5325195F484A9F2D1CEFD351 /* moc_QAModel.cpp */; settings = {ATTRIBUTES = (); }; };
+		E58E1C79C4EBBCE1734AFBF6 /* qrc_Icons.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 22BF0DF400F7F22B14553C87 /* qrc_Icons.cpp */; settings = {ATTRIBUTES = (); }; };
+		E5F9621A3577FD7CC7F96735 /* BaseWindow.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 13883F319F47882285B563D7 /* BaseWindow.cpp */; settings = {ATTRIBUTES = (); }; };
+		E64B26EAA5655A79ABA44664 /* MiscUtils.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 9EB31ED4B9ADB6933DF9BD32 /* MiscUtils.cpp */; settings = {ATTRIBUTES = (); }; };
+		E69B33E7252E79EB3DCD5581 /* moc_ColumnSelectorButton.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = F70384203983B6E48683C67A /* moc_ColumnSelectorButton.cpp */; settings = {ATTRIBUTES = (); }; };
+		EA4E3A375D873624467D6778 /* GradientWidget.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 0AD13378D0DCCCF2290CCBD0 /* GradientWidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		ED3F730088B9FA4FD2B52C7C /* ExamineWidget.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 6A7E516AA4EDAAD6631231BA /* ExamineWidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		F0545D9C4E7FE9AC7C93E71A /* moc_TogMegWindow.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 4FD25B169A073D80621FA7F1 /* moc_TogMegWindow.cpp */; settings = {ATTRIBUTES = (); }; };
+		F1E92AD6F974BBC4441FE55F /* LabelWithProgress.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 9E7F1CAB2991DF30BDEF31EB /* LabelWithProgress.cpp */; settings = {ATTRIBUTES = (); }; };
+		F2A19971F29E2CCC37DDA9D8 /* BaseProject.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 41D1D03E78F2D19AD4DB2B7A /* BaseProject.cpp */; settings = {ATTRIBUTES = (); }; };
+		F63DC6C0FE2C310623C87C70 /* moc_ProgressBar.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 985E9ACF56B85CA99C100D68 /* moc_ProgressBar.cpp */; settings = {ATTRIBUTES = (); }; };
+		FA553159A2E7448BB8A7D345 /* TaskController.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = 99AB4036B88DEC239ADB48B8 /* TaskController.cpp */; settings = {ATTRIBUTES = (); }; };
+		FBDD364093DF70B0C17AF876 /* moc_QuestionWidget.cpp in Build Sources */ = {isa = PBXBuildFile; fileRef = C99AD08B3978CBBE8084B28A /* moc_QuestionWidget.cpp */; settings = {ATTRIBUTES = (); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		72075DFC8AC02F2E9E28351A /* Bundle Copy [BUNDLE_EXAMPLES] */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Resources/Examples;
+			dstSubfolderSpec = 1;
+			files = (
+				3AA89556485B1E90E33F7CFE /* Resources/Examples/Study Norwegian in Bundle Copy [BUNDLE_EXAMPLES] */,
+			);
+			name = "Bundle Copy [BUNDLE_EXAMPLES]";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF931FB713AEAFFA00D5D888 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CF93258A13AEB23400D5D888 /* QtCore.framework in CopyFiles */,
+				CF93258C13AEB23400D5D888 /* QtGui.framework in CopyFiles */,
+				CF93258E13AEB23400D5D888 /* QtXml.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFFFDE1313B8B09700522A78 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6069D5A5DA8AA28EDB8B3C6 /* Project Copy */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /Users/yshurik/Work/LynxLine/TogMeg;
+			dstSubfolderSpec = 0;
+			files = (
+				CF931F5E13AEA92200D5D888 /* TogMeg.app in Project Copy */,
+			);
+			name = "Project Copy";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		00569DCB57FDA6FA312428F7 /* rijndael.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = rijndael.h; path = Code/Utils/rijndael.h; sourceTree = "<group>"; };
+		0224D0FAC0697228FD50EF99 /* QAModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = QAModel.h; path = Code/TogMeg/QAModel.h; sourceTree = "<group>"; };
+		04BE6811460F94B0133A6F59 /* QAModel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = QAModel.cpp; path = Code/TogMeg/QAModel.cpp; sourceTree = "<group>"; };
+		075853EDF9E91697FB365E69 /* moc_GradientWidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_GradientWidget.cpp; path = build/GeneratedFiles/moc_GradientWidget.cpp; sourceTree = "<group>"; };
+		087EE0320A18799C3C7D20C5 /* HelpButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HelpButton.h; path = Code/Utils/HelpButton.h; sourceTree = "<group>"; };
+		09A37845C97FAD8139487D32 /* QtCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtCore.framework; path = "/usr/local/Trolltech/Qt-4.7.3/lib/QtCore.framework"; sourceTree = "<absolute>"; };
+		0AD13378D0DCCCF2290CCBD0 /* GradientWidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = GradientWidget.cpp; path = Code/TogMeg/Player/GradientWidget.cpp; sourceTree = "<group>"; };
+		0B3E12D369452734570D0571 /* Examinator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Examinator.cpp; path = Code/TogMeg/Examinator.cpp; sourceTree = "<group>"; };
+		0B60C69C34F1F3D8C5208B71 /* BaseWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BaseWindow.h; path = Code/Utils/BaseWindow.h; sourceTree = "<group>"; };
+		0C4DDF2D928B8E2CB6C80F39 /* LineEditWithProgress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LineEditWithProgress.h; path = Code/Utils/LineEditWithProgress.h; sourceTree = "<group>"; };
+		0D8C927F661FE7EB86A32913 /* GradientWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GradientWidget.h; path = Code/TogMeg/Player/GradientWidget.h; sourceTree = "<group>"; };
+		103564C84E1B56AD3508F412 /* Icons.qrc */ = {isa = PBXFileReference; lastKnownFileType = text; name = Icons.qrc; path = Graphics/Icons.qrc; sourceTree = "<group>"; };
+		112889D3B1CD5236268F4C4C /* TogMegWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TogMegWindow.h; path = Code/TogMeg/Gui/TogMegWindow.h; sourceTree = "<group>"; };
+		13883F319F47882285B563D7 /* BaseWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BaseWindow.cpp; path = Code/Utils/BaseWindow.cpp; sourceTree = "<group>"; };
+		147C8C88C42E1EF6BA3D0423 /* UngroupProxyModel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = UngroupProxyModel.cpp; path = Code/Utils/UngroupProxyModel.cpp; sourceTree = "<group>"; };
+		1520DC7A3D386B8827DF1680 /* ProgressBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ProgressBar.h; path = Code/Utils/ProgressBar.h; sourceTree = "<group>"; };
+		187DC9CB057ED539374A202A /* TogMeg.pro */ = {isa = PBXFileReference; lastKnownFileType = text; path = TogMeg.pro; sourceTree = "<group>"; };
+		1BCCDBA197ABEE08553AA61E /* PixmapButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PixmapButton.h; path = Code/Utils/PixmapButton/PixmapButton.h; sourceTree = "<group>"; };
+		1D027D806F0669408C225395 /* BaseProject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BaseProject.h; path = Code/Utils/BaseProject.h; sourceTree = "<group>"; };
+		2208158667816A9786A01A53 /* moc_AnswerWidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_AnswerWidget.cpp; path = build/GeneratedFiles/moc_AnswerWidget.cpp; sourceTree = "<group>"; };
+		22BF0DF400F7F22B14553C87 /* qrc_Icons.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qrc_Icons.cpp; path = build/GeneratedFiles/qrc_Icons.cpp; sourceTree = "<group>"; };
+		2460532A932D954921964187 /* UngroupProxyModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UngroupProxyModel.h; path = Code/Utils/UngroupProxyModel.h; sourceTree = "<group>"; };
+		253D2E69B4FDC3335A6D184C /* moc_TaskController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_TaskController.cpp; path = build/GeneratedFiles/moc_TaskController.cpp; sourceTree = "<group>"; };
+		275550ED056B036193ABB870 /* TogMeg.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = TogMeg.icns; path = Resources/TogMeg.icns; sourceTree = "<group>"; };
+		2B5DB08F76CEA2FA14A94081 /* LabelWithProgress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LabelWithProgress.h; path = Code/Utils/LabelWithProgress.h; sourceTree = "<group>"; };
+		2B9F5257240B5626E8434A44 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
+		2CD6A4859FCA62720E16B505 /* PlayController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PlayController.h; path = Code/TogMeg/PlayController.h; sourceTree = "<group>"; };
+		363FD9C452408C5F0522F60F /* IconSet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IconSet.h; path = Code/Utils/IconSet.h; sourceTree = "<group>"; };
+		3822C95FBEE13EA448FD30B2 /* GroupingProxyModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GroupingProxyModel.h; path = Code/Utils/GroupingProxyModel.h; sourceTree = "<group>"; };
+		3B93F3B26A1AC3E5CB8B6895 /* moc_LabelWithProgress.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_LabelWithProgress.cpp; path = build/GeneratedFiles/moc_LabelWithProgress.cpp; sourceTree = "<group>"; };
+		3F7691EB4D9C088B1C7075F1 /* moc_ExamineWidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_ExamineWidget.cpp; path = build/GeneratedFiles/moc_ExamineWidget.cpp; sourceTree = "<group>"; };
+		3F8FF8EE9E8B7388C1BBFE61 /* moc_RoundedLineEdit.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_RoundedLineEdit.cpp; path = build/GeneratedFiles/moc_RoundedLineEdit.cpp; sourceTree = "<group>"; };
+		41D1D03E78F2D19AD4DB2B7A /* BaseProject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BaseProject.cpp; path = Code/Utils/BaseProject.cpp; sourceTree = "<group>"; };
+		45E7B5D2B47977BB9DD14010 /* moc_PlayController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_PlayController.cpp; path = build/GeneratedFiles/moc_PlayController.cpp; sourceTree = "<group>"; };
+		4DB19B104BD58721DF3C0001 /* moc_HelpButton.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_HelpButton.cpp; path = build/GeneratedFiles/moc_HelpButton.cpp; sourceTree = "<group>"; };
+		4F25C7604A0D9EE3FA46F4C2 /* VHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VHeader.h; path = Code/TogMeg/Editor/VHeader.h; sourceTree = "<group>"; };
+		4FD25B169A073D80621FA7F1 /* moc_TogMegWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_TogMegWindow.cpp; path = build/GeneratedFiles/moc_TogMegWindow.cpp; sourceTree = "<group>"; };
+		50CB97464DD1628FEF02909F /* TogMeg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TogMeg.h; path = Code/TogMeg/TogMeg.h; sourceTree = "<group>"; };
+		5325195F484A9F2D1CEFD351 /* moc_QAModel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_QAModel.cpp; path = build/GeneratedFiles/moc_QAModel.cpp; sourceTree = "<group>"; };
+		5391D954477AAF3073219603 /* moc_QtSpeechMac.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_QtSpeechMac.cpp; path = build/GeneratedFiles/moc_QtSpeechMac.cpp; sourceTree = "<group>"; };
+		56EA78D1BCD776E939125685 /* moc_BaseProject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_BaseProject.cpp; path = build/GeneratedFiles/moc_BaseProject.cpp; sourceTree = "<group>"; };
+		59BD972D95BF95E99A989801 /* ExamineWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ExamineWidget.h; path = Code/TogMeg/Player/ExamineWidget.h; sourceTree = "<group>"; };
+		626F0DD72B78515C80D83C49 /* QAEditor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = QAEditor.h; path = Code/TogMeg/Editor/QAEditor.h; sourceTree = "<group>"; };
+		63A1B60BEEF6EC8BE71263F6 /* FilterLineEdit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FilterLineEdit.h; path = Code/Utils/FilterLineEdit.h; sourceTree = "<group>"; };
+		64FFF52A3EBDC165D670AB80 /* FileNavigationView.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = FileNavigationView.cpp; path = Code/TogMeg/Gui/FileNavigationView.cpp; sourceTree = "<group>"; };
+		66F2677CDC5F0983F81704B7 /* ColumnSelectorButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ColumnSelectorButton.h; path = Code/Utils/ColumnSelectorButton.h; sourceTree = "<group>"; };
+		6A7E516AA4EDAAD6631231BA /* ExamineWidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ExamineWidget.cpp; path = Code/TogMeg/Player/ExamineWidget.cpp; sourceTree = "<group>"; };
+		70FB3601228485561D72D54F /* QuestionWidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = QuestionWidget.cpp; path = Code/TogMeg/Player/QuestionWidget.cpp; sourceTree = "<group>"; };
+		71268E4388A03750AC28574A /* FlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FlowLayout.h; path = Code/Utils/FlowLayout.h; sourceTree = "<group>"; };
+		742A6496F8F62A1FB80C084B /* AnswerWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AnswerWidget.h; path = Code/TogMeg/Player/AnswerWidget.h; sourceTree = "<group>"; };
+		76DBBDD371519183121EC6B8 /* FileNavigationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FileNavigationView.h; path = Code/TogMeg/Gui/FileNavigationView.h; sourceTree = "<group>"; };
+		76F4FCBC7640B4D0393D13B4 /* PlayController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PlayController.cpp; path = Code/TogMeg/PlayController.cpp; sourceTree = "<group>"; };
+		7776757916107D81A7B534DF /* StudyController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = StudyController.h; path = Code/TogMeg/StudyController.h; sourceTree = "<group>"; };
+		77C43223FF3B196591E16B07 /* qrc_PixmapButton.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qrc_PixmapButton.cpp; path = build/GeneratedFiles/qrc_PixmapButton.cpp; sourceTree = "<group>"; };
+		7BF30AF3694BA957D8416E16 /* TogMegProject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TogMegProject.h; path = Code/TogMeg/TogMegProject.h; sourceTree = "<group>"; };
+		80F5F4D2855EBD6C3D0D9C18 /* TogMeg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TogMeg.cpp; path = Code/TogMeg/TogMeg.cpp; sourceTree = "<group>"; };
+		821416211D63F190AAAD016A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		83CEA9A215DFD46B32B038BC /* moc_UngroupProxyModel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_UngroupProxyModel.cpp; path = build/GeneratedFiles/moc_UngroupProxyModel.cpp; sourceTree = "<group>"; };
+		83D7F7ECDFF087E2B5D5FACB /* HelpButton.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = HelpButton.cpp; path = Code/Utils/HelpButton.cpp; sourceTree = "<group>"; };
+		843B11C15B9C15D6A041B5F9 /* StudyController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = StudyController.cpp; path = Code/TogMeg/StudyController.cpp; sourceTree = "<group>"; };
+		8644084B444D7DCC643455AF /* XML_Reader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XML_Reader.h; path = Code/Utils/XML_Reader.h; sourceTree = "<group>"; };
+		89E72349669641FB9F675025 /* ProgressBar.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ProgressBar.cpp; path = Code/Utils/ProgressBar.cpp; sourceTree = "<group>"; };
+		8A5FF04F7792DF51E79A7051 /* QuestionWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = QuestionWidget.h; path = Code/TogMeg/Player/QuestionWidget.h; sourceTree = "<group>"; };
+		8EAD6FB7328064CD964CE8D4 /* TogMegProject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TogMegProject.cpp; path = Code/TogMeg/TogMegProject.cpp; sourceTree = "<group>"; };
+		90BF89C2082E73719354A073 /* AppStyles.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppStyles.h; path = Code/Utils/AppStyles.h; sourceTree = "<group>"; };
+		9149B31A79440E7006338786 /* Main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Main.cpp; path = Code/TogMeg/Gui/Main.cpp; sourceTree = "<group>"; };
+		92B5F46E00276230022DE332 /* FileNavigationModel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = FileNavigationModel.cpp; path = Code/TogMeg/Gui/FileNavigationModel.cpp; sourceTree = "<group>"; };
+		95578F80B9FAD696CF9EB0AB /* moc_VHeader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_VHeader.cpp; path = build/GeneratedFiles/moc_VHeader.cpp; sourceTree = "<group>"; };
+		9848C7460887C2B46B831112 /* AppStyles.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AppStyles.cpp; path = Code/Utils/AppStyles.cpp; sourceTree = "<group>"; };
+		985E9ACF56B85CA99C100D68 /* moc_ProgressBar.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_ProgressBar.cpp; path = build/GeneratedFiles/moc_ProgressBar.cpp; sourceTree = "<group>"; };
+		99A76D3582B7C1A9151EEB40 /* VHeader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = VHeader.cpp; path = Code/TogMeg/Editor/VHeader.cpp; sourceTree = "<group>"; };
+		99AB4036B88DEC239ADB48B8 /* TaskController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TaskController.cpp; path = Code/TogMeg/TaskController.cpp; sourceTree = "<group>"; };
+		99D7289CFC7623F1E9A55F54 /* moc_TogMeg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_TogMeg.cpp; path = build/GeneratedFiles/moc_TogMeg.cpp; sourceTree = "<group>"; };
+		9B1552D8138DF8CCD31578CA /* XML_Util.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = XML_Util.cpp; path = Code/Utils/XML_Util.cpp; sourceTree = "<group>"; };
+		9BB629E2245408657A9E0083 /* RoundedLineEdit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RoundedLineEdit.h; path = Code/TogMeg/Player/RoundedLineEdit.h; sourceTree = "<group>"; };
+		9CC5BCA77763FB03C2C14799 /* TimeLineWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TimeLineWidget.h; path = Code/TogMeg/Player/TimeLineWidget.h; sourceTree = "<group>"; };
+		9D726E5DEC5AAD82787E937A /* FileNavigationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FileNavigationModel.h; path = Code/TogMeg/Gui/FileNavigationModel.h; sourceTree = "<group>"; };
+		9E0A22F12A05DD5F88D02BDC /* DecoratedItemDelegate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = DecoratedItemDelegate.cpp; path = Code/Utils/DecoratedItemDelegate.cpp; sourceTree = "<group>"; };
+		9E7F1CAB2991DF30BDEF31EB /* LabelWithProgress.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = LabelWithProgress.cpp; path = Code/Utils/LabelWithProgress.cpp; sourceTree = "<group>"; };
+		9EB25E61A6F78F3DE4C20C9C /* QtSpeech.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = QtSpeech.cpp; path = Code/QtSpeech/QtSpeech.cpp; sourceTree = "<group>"; };
+		9EB31ED4B9ADB6933DF9BD32 /* MiscUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MiscUtils.cpp; path = Code/Utils/MiscUtils.cpp; sourceTree = "<group>"; };
+		A1CCAE4B910B4EF49E634EFB /* DecoratedItemDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DecoratedItemDelegate.h; path = Code/Utils/DecoratedItemDelegate.h; sourceTree = "<group>"; };
+		A23646C8CD56C550F962ABC8 /* qgetopt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qgetopt.h; path = Code/Utils/qgetopt.h; sourceTree = "<group>"; };
+		A4A2351C775FDB89D8259828 /* LineEditWithProgress.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = LineEditWithProgress.cpp; path = Code/Utils/LineEditWithProgress.cpp; sourceTree = "<group>"; };
+		A6FFFEDEFF69BEFD45DD2BEB /* QtSpeechMac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = QtSpeechMac.h; path = Code/QtSpeech/QtSpeechMac.h; sourceTree = "<group>"; };
+		A7C10956454DCA877BDD9F26 /* RoundedLineEdit.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = RoundedLineEdit.cpp; path = Code/TogMeg/Player/RoundedLineEdit.cpp; sourceTree = "<group>"; };
+		A95DCD16DA7253AE959FDB64 /* stable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = stable.h; path = Code/stable.h; sourceTree = "<group>"; };
+		A9BABEDE4DC8A9EACA94FACE /* moc_QAEditor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_QAEditor.cpp; path = build/GeneratedFiles/moc_QAEditor.cpp; sourceTree = "<group>"; };
+		AD69283750F8570F1F39D8EA /* Resources/Examples/Study Norwegian */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Resources/Examples/Study Norwegian"; sourceTree = "<group>"; };
+		ADD7B4179ECA47716DD10122 /* MiscUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MiscUtils.h; path = Code/Utils/MiscUtils.h; sourceTree = "<group>"; };
+		AF2735BCB4E8C1B14C36F43E /* qrc_Images.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qrc_Images.cpp; path = build/GeneratedFiles/qrc_Images.cpp; sourceTree = "<group>"; };
+		B17B5F6EEF6C985DE4583014 /* ColumnSelectorButton.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ColumnSelectorButton.cpp; path = Code/Utils/ColumnSelectorButton.cpp; sourceTree = "<group>"; };
+		B1BC19F03BBC87028CBEE158 /* moc_FilterLineEdit.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_FilterLineEdit.cpp; path = build/GeneratedFiles/moc_FilterLineEdit.cpp; sourceTree = "<group>"; };
+		B1DF0581F3E4B8CC8B7C0E0A /* moc_BaseWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_BaseWindow.cpp; path = build/GeneratedFiles/moc_BaseWindow.cpp; sourceTree = "<group>"; };
+		B3C9BBD94AA94839A46E4380 /* moc_GroupingProxyModel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_GroupingProxyModel.cpp; path = build/GeneratedFiles/moc_GroupingProxyModel.cpp; sourceTree = "<group>"; };
+		B45E8E3A947FBE9F87A0424F /* moc_PixmapButton.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_PixmapButton.cpp; path = build/GeneratedFiles/moc_PixmapButton.cpp; sourceTree = "<group>"; };
+		BE82FEA9E9C52931D3F80F3F /* moc_FileNavigationModel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_FileNavigationModel.cpp; path = build/GeneratedFiles/moc_FileNavigationModel.cpp; sourceTree = "<group>"; };
+		BF09C14A0FF932CA1526B838 /* QtSpeech.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = QtSpeech.h; path = Code/QtSpeech/QtSpeech.h; sourceTree = "<group>"; };
+		C0D42FBBCE024BEDA2C6BF36 /* QAEditor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = QAEditor.cpp; path = Code/TogMeg/Editor/QAEditor.cpp; sourceTree = "<group>"; };
+		C38AB4CDBB4EABA01ABD10EE /* moc_TimeLineWidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_TimeLineWidget.cpp; path = build/GeneratedFiles/moc_TimeLineWidget.cpp; sourceTree = "<group>"; };
+		C50B858EF6F9CFD6AA580498 /* GroupingProxyModel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = GroupingProxyModel.cpp; path = Code/Utils/GroupingProxyModel.cpp; sourceTree = "<group>"; };
+		C51FDC6A2258E223E3A9AABC /* TaskController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TaskController.h; path = Code/TogMeg/TaskController.h; sourceTree = "<group>"; };
+		C5FC4EF0F19E9F33CCCF2AA7 /* rijndael.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = rijndael.cpp; path = Code/Utils/rijndael.cpp; sourceTree = "<group>"; };
+		C9620439031ADB46199DCB92 /* FlowLayout.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = FlowLayout.cpp; path = Code/Utils/FlowLayout.cpp; sourceTree = "<group>"; };
+		C99AD08B3978CBBE8084B28A /* moc_QuestionWidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_QuestionWidget.cpp; path = build/GeneratedFiles/moc_QuestionWidget.cpp; sourceTree = "<group>"; };
+		CF01D4F3A62F31847B38A583 /* AnswerWidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AnswerWidget.cpp; path = Code/TogMeg/Player/AnswerWidget.cpp; sourceTree = "<group>"; };
+		CF9174454B39C49FBBF65C71 /* QADelegate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = QADelegate.cpp; path = Code/TogMeg/Editor/QADelegate.cpp; sourceTree = "<group>"; };
+		CF931F5B13AEA92200D5D888 /* TogMeg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TogMeg.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF93258913AEB23400D5D888 /* QtCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtCore.framework; path = Frameworks/QtCore.framework; sourceTree = "<group>"; };
+		CF93258B13AEB23400D5D888 /* QtGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtGui.framework; path = Frameworks/QtGui.framework; sourceTree = "<group>"; };
+		CF93258D13AEB23400D5D888 /* QtXml.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtXml.framework; path = Frameworks/QtXml.framework; sourceTree = "<group>"; };
+		D2C9A71D32F202E70B932223 /* PixmapButton.qrc */ = {isa = PBXFileReference; lastKnownFileType = text; name = PixmapButton.qrc; path = Code/Utils/PixmapButton/PixmapButton.qrc; sourceTree = "<group>"; };
+		D2CFA5998032B5ED5C5D025D /* TimeLineWidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TimeLineWidget.cpp; path = Code/TogMeg/Player/TimeLineWidget.cpp; sourceTree = "<group>"; };
+		D4FB4F3354B8A4C74896492B /* XML_Handler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XML_Handler.h; path = Code/Utils/XML_Handler.h; sourceTree = "<group>"; };
+		D727E3DFF1B25AD07E4084B1 /* XML_Util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XML_Util.h; path = Code/Utils/XML_Util.h; sourceTree = "<group>"; };
+		D977E873B834C316C8978AA0 /* moc_Examinator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_Examinator.cpp; path = build/GeneratedFiles/moc_Examinator.cpp; sourceTree = "<group>"; };
+		DA138F75C9F545CDAE7FB264 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		DAA375781B81A2A66E6803D1 /* IconSet.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = IconSet.cpp; path = Code/Utils/IconSet.cpp; sourceTree = "<group>"; };
+		DC65D1BECB1F172C1D5630CE /* moc_QtSpeech.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_QtSpeech.cpp; path = build/GeneratedFiles/moc_QtSpeech.cpp; sourceTree = "<group>"; };
+		DE923D48184882ABE44ECD73 /* moc_LineEditWithProgress.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_LineEditWithProgress.cpp; path = build/GeneratedFiles/moc_LineEditWithProgress.cpp; sourceTree = "<group>"; };
+		E0F2C629B8DAEDFA29AB3437 /* moc_TogMegProject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_TogMegProject.cpp; path = build/GeneratedFiles/moc_TogMegProject.cpp; sourceTree = "<group>"; };
+		E34C7753A6FDCC896EDB0BF4 /* PixmapButton.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PixmapButton.cpp; path = Code/Utils/PixmapButton/PixmapButton.cpp; sourceTree = "<group>"; };
+		E666DC715F7AD00626FEC160 /* Images.qrc */ = {isa = PBXFileReference; lastKnownFileType = text; name = Images.qrc; path = Graphics/Images.qrc; sourceTree = "<group>"; };
+		E87C379DC4D49A2DFC90C13D /* moc_QADelegate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_QADelegate.cpp; path = build/GeneratedFiles/moc_QADelegate.cpp; sourceTree = "<group>"; };
+		EF34030FE9242F6DC1EA56E3 /* QtGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtGui.framework; path = "/usr/local/Trolltech/Qt-4.7.3/lib/QtGui.framework"; sourceTree = "<absolute>"; };
+		EF8AF9B15656266E9808EB61 /* XML_Reader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = XML_Reader.cpp; path = Code/Utils/XML_Reader.cpp; sourceTree = "<group>"; };
+		F085543EDBAF83C1AF191788 /* Examinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Examinator.h; path = Code/TogMeg/Examinator.h; sourceTree = "<group>"; };
+		F09F2F2830776CB440D032F2 /* moc_FileNavigationView.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_FileNavigationView.cpp; path = build/GeneratedFiles/moc_FileNavigationView.cpp; sourceTree = "<group>"; };
+		F70384203983B6E48683C67A /* moc_ColumnSelectorButton.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_ColumnSelectorButton.cpp; path = build/GeneratedFiles/moc_ColumnSelectorButton.cpp; sourceTree = "<group>"; };
+		F7E6F13CDD8292330062F4A7 /* TogMegWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TogMegWindow.cpp; path = Code/TogMeg/Gui/TogMegWindow.cpp; sourceTree = "<group>"; };
+		F94B159AFE97B3DDC4D93625 /* QtSpeechMac.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = QtSpeechMac.cpp; path = Code/QtSpeech/QtSpeechMac.cpp; sourceTree = "<group>"; };
+		FB715C7C08E3F190487EB892 /* FilterLineEdit.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = FilterLineEdit.cpp; path = Code/Utils/FilterLineEdit.cpp; sourceTree = "<group>"; };
+		FCCB04648DEF5B32A2292235 /* QADelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = QADelegate.h; path = Code/TogMeg/Editor/QADelegate.h; sourceTree = "<group>"; };
+		FD5D6BFE940FC25FB5680D18 /* QtXml.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtXml.framework; path = "/usr/local/Trolltech/Qt-4.7.3/lib/QtXml.framework"; sourceTree = "<absolute>"; };
+		FEF5CFF2FDA18E6DA3F0306E /* moc_StudyController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_StudyController.cpp; path = build/GeneratedFiles/moc_StudyController.cpp; sourceTree = "<group>"; };
+		FF13BD782589054E58DF8886 /* qgetopt.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qgetopt.cpp; path = Code/Utils/qgetopt.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2A1043669E6E5A7426EA502A /* Frameworks & Libraries */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AFC8D705CF8FF7878AA3265A /* CoreFoundation.framework in Frameworks & Libraries */,
+				51D4DBF7CB8537BE86EBD055 /* AppKit.framework in Frameworks & Libraries */,
+				C8FD4A1AAA37CF2CA2824CCF /* Carbon.framework in Frameworks & Libraries */,
+				51D5BA5E71CCE5DBE7F96E64 /* QtXml.framework in Frameworks & Libraries */,
+				49238F43DDEAE2836D7EC337 /* QtCore.framework in Frameworks & Libraries */,
+				27FB658754F8316AF865E914 /* QtGui.framework in Frameworks & Libraries */,
+			);
+			name = "Frameworks & Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00E15F23B279CE10AF64F03C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				275550ED056B036193ABB870 /* TogMeg.icns */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		05596AB53D8D521C69802C27 /* TogMeg */ = {
+			isa = PBXGroup;
+			children = (
+				FB61758D0F0FDA4BA867C3D5 /* Sources */,
+				46E892BBB6BB6952967E0561 /* Temporary Sources */,
+				883D7615C4D2DE3FA1218F12 /* Headers */,
+				7CABE3C80E79AD2B307756D2 /* Sources [qmake] */,
+				52C235EBF1C9B07808119459 /* Sources [RCC] */,
+				ED1E82605DD74B483AF3C982 /* External Frameworks and Libraries */,
+				C90923F6A2E654060C34742C /* Source [bundle data] */,
+				CF931F5C13AEA92200D5D888 /* Products */,
+				CF93258913AEB23400D5D888 /* QtCore.framework */,
+				CF93258B13AEB23400D5D888 /* QtGui.framework */,
+				CF93258D13AEB23400D5D888 /* QtXml.framework */,
+			);
+			name = TogMeg;
+			sourceTree = "<group>";
+		};
+		0D79763A9F4B79A168A230E5 /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				99A76D3582B7C1A9151EEB40 /* VHeader.cpp */,
+				C0D42FBBCE024BEDA2C6BF36 /* QAEditor.cpp */,
+				CF9174454B39C49FBBF65C71 /* QADelegate.cpp */,
+			);
+			name = Editor;
+			sourceTree = "<group>";
+		};
+		109B38AA1E8E29070BAD6B0B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				FF13BD782589054E58DF8886 /* qgetopt.cpp */,
+				C5FC4EF0F19E9F33CCCF2AA7 /* rijndael.cpp */,
+				9B1552D8138DF8CCD31578CA /* XML_Util.cpp */,
+				EF8AF9B15656266E9808EB61 /* XML_Reader.cpp */,
+				41D1D03E78F2D19AD4DB2B7A /* BaseProject.cpp */,
+				9EB31ED4B9ADB6933DF9BD32 /* MiscUtils.cpp */,
+				13ADC9048D56EB532DF32AAD /* PixmapButton */,
+				DAA375781B81A2A66E6803D1 /* IconSet.cpp */,
+				9848C7460887C2B46B831112 /* AppStyles.cpp */,
+				83D7F7ECDFF087E2B5D5FACB /* HelpButton.cpp */,
+				C9620439031ADB46199DCB92 /* FlowLayout.cpp */,
+				FB715C7C08E3F190487EB892 /* FilterLineEdit.cpp */,
+				9E7F1CAB2991DF30BDEF31EB /* LabelWithProgress.cpp */,
+				A4A2351C775FDB89D8259828 /* LineEditWithProgress.cpp */,
+				B17B5F6EEF6C985DE4583014 /* ColumnSelectorButton.cpp */,
+				9E0A22F12A05DD5F88D02BDC /* DecoratedItemDelegate.cpp */,
+				C50B858EF6F9CFD6AA580498 /* GroupingProxyModel.cpp */,
+				147C8C88C42E1EF6BA3D0423 /* UngroupProxyModel.cpp */,
+				89E72349669641FB9F675025 /* ProgressBar.cpp */,
+				13883F319F47882285B563D7 /* BaseWindow.cpp */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		13ADC9048D56EB532DF32AAD /* PixmapButton */ = {
+			isa = PBXGroup;
+			children = (
+				E34C7753A6FDCC896EDB0BF4 /* PixmapButton.cpp */,
+			);
+			name = PixmapButton;
+			sourceTree = "<group>";
+		};
+		162E48209171E33357B40352 /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				103564C84E1B56AD3508F412 /* Icons.qrc */,
+				E666DC715F7AD00626FEC160 /* Images.qrc */,
+			);
+			name = Graphics;
+			sourceTree = "<group>";
+		};
+		1A08F13E7F16A8B8A692B932 /* build */ = {
+			isa = PBXGroup;
+			children = (
+				7DE9A9F7306EC0C11B6D52A6 /* GeneratedFiles */,
+			);
+			name = build;
+			sourceTree = "<group>";
+		};
+		1B76C82F55071C16B21C5316 /* Code */ = {
+			isa = PBXGroup;
+			children = (
+				A95DCD16DA7253AE959FDB64 /* stable.h */,
+				24BED2FB8A84069B84545E10 /* Utils */,
+				31D8418249FA1642DA96DF8B /* TogMeg */,
+				59F7AB6EDEDE57C2AC26F064 /* QtSpeech */,
+			);
+			name = Code;
+			sourceTree = "<group>";
+		};
+		24BED2FB8A84069B84545E10 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A23646C8CD56C550F962ABC8 /* qgetopt.h */,
+				00569DCB57FDA6FA312428F7 /* rijndael.h */,
+				D727E3DFF1B25AD07E4084B1 /* XML_Util.h */,
+				8644084B444D7DCC643455AF /* XML_Reader.h */,
+				D4FB4F3354B8A4C74896492B /* XML_Handler.h */,
+				1D027D806F0669408C225395 /* BaseProject.h */,
+				ADD7B4179ECA47716DD10122 /* MiscUtils.h */,
+				50D0F87867ED12215D89D8A6 /* PixmapButton */,
+				363FD9C452408C5F0522F60F /* IconSet.h */,
+				90BF89C2082E73719354A073 /* AppStyles.h */,
+				087EE0320A18799C3C7D20C5 /* HelpButton.h */,
+				71268E4388A03750AC28574A /* FlowLayout.h */,
+				63A1B60BEEF6EC8BE71263F6 /* FilterLineEdit.h */,
+				2B5DB08F76CEA2FA14A94081 /* LabelWithProgress.h */,
+				0C4DDF2D928B8E2CB6C80F39 /* LineEditWithProgress.h */,
+				66F2677CDC5F0983F81704B7 /* ColumnSelectorButton.h */,
+				A1CCAE4B910B4EF49E634EFB /* DecoratedItemDelegate.h */,
+				3822C95FBEE13EA448FD30B2 /* GroupingProxyModel.h */,
+				2460532A932D954921964187 /* UngroupProxyModel.h */,
+				1520DC7A3D386B8827DF1680 /* ProgressBar.h */,
+				0B60C69C34F1F3D8C5208B71 /* BaseWindow.h */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		2A45EA9814E0DDE7FD023A03 /* PixmapButton */ = {
+			isa = PBXGroup;
+			children = (
+				D2C9A71D32F202E70B932223 /* PixmapButton.qrc */,
+			);
+			name = PixmapButton;
+			sourceTree = "<group>";
+		};
+		31D8418249FA1642DA96DF8B /* TogMeg */ = {
+			isa = PBXGroup;
+			children = (
+				50CB97464DD1628FEF02909F /* TogMeg.h */,
+				7BF30AF3694BA957D8416E16 /* TogMegProject.h */,
+				0224D0FAC0697228FD50EF99 /* QAModel.h */,
+				F085543EDBAF83C1AF191788 /* Examinator.h */,
+				C51FDC6A2258E223E3A9AABC /* TaskController.h */,
+				2CD6A4859FCA62720E16B505 /* PlayController.h */,
+				7776757916107D81A7B534DF /* StudyController.h */,
+				DF5FBC4A35386890DD28699B /* Gui */,
+				D2284B6123FD6661E2A01E2D /* Editor */,
+				93BB3B206268E9CF405097EC /* Player */,
+			);
+			name = TogMeg;
+			sourceTree = "<group>";
+		};
+		46E892BBB6BB6952967E0561 /* Temporary Sources */ = {
+			isa = PBXGroup;
+			children = (
+				1A08F13E7F16A8B8A692B932 /* build */,
+			);
+			name = "Temporary Sources";
+			sourceTree = "<group>";
+		};
+		50D0F87867ED12215D89D8A6 /* PixmapButton */ = {
+			isa = PBXGroup;
+			children = (
+				1BCCDBA197ABEE08553AA61E /* PixmapButton.h */,
+			);
+			name = PixmapButton;
+			sourceTree = "<group>";
+		};
+		52C235EBF1C9B07808119459 /* Sources [RCC] */ = {
+			isa = PBXGroup;
+			children = (
+				5B7589801E0C9F2FBC822E44 /* Code */,
+				162E48209171E33357B40352 /* Graphics */,
+			);
+			name = "Sources [RCC]";
+			sourceTree = "<group>";
+		};
+		55B065E9755C86FBB0883AB8 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2A45EA9814E0DDE7FD023A03 /* PixmapButton */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		59F7AB6EDEDE57C2AC26F064 /* QtSpeech */ = {
+			isa = PBXGroup;
+			children = (
+				BF09C14A0FF932CA1526B838 /* QtSpeech.h */,
+				A6FFFEDEFF69BEFD45DD2BEB /* QtSpeechMac.h */,
+			);
+			name = QtSpeech;
+			sourceTree = "<group>";
+		};
+		5B7589801E0C9F2FBC822E44 /* Code */ = {
+			isa = PBXGroup;
+			children = (
+				55B065E9755C86FBB0883AB8 /* Utils */,
+			);
+			name = Code;
+			sourceTree = "<group>";
+		};
+		61560C61FA073063BFAD5BE4 /* Gui */ = {
+			isa = PBXGroup;
+			children = (
+				9149B31A79440E7006338786 /* Main.cpp */,
+				F7E6F13CDD8292330062F4A7 /* TogMegWindow.cpp */,
+				64FFF52A3EBDC165D670AB80 /* FileNavigationView.cpp */,
+				92B5F46E00276230022DE332 /* FileNavigationModel.cpp */,
+			);
+			name = Gui;
+			sourceTree = "<group>";
+		};
+		6E8778E7B2E3400560B1F7AB /* TogMeg */ = {
+			isa = PBXGroup;
+			children = (
+				80F5F4D2855EBD6C3D0D9C18 /* TogMeg.cpp */,
+				8EAD6FB7328064CD964CE8D4 /* TogMegProject.cpp */,
+				04BE6811460F94B0133A6F59 /* QAModel.cpp */,
+				0B3E12D369452734570D0571 /* Examinator.cpp */,
+				99AB4036B88DEC239ADB48B8 /* TaskController.cpp */,
+				76F4FCBC7640B4D0393D13B4 /* PlayController.cpp */,
+				843B11C15B9C15D6A041B5F9 /* StudyController.cpp */,
+				61560C61FA073063BFAD5BE4 /* Gui */,
+				0D79763A9F4B79A168A230E5 /* Editor */,
+				DA5619214B5AAB6415F87C67 /* Player */,
+			);
+			name = TogMeg;
+			sourceTree = "<group>";
+		};
+		7CABE3C80E79AD2B307756D2 /* Sources [qmake] */ = {
+			isa = PBXGroup;
+			children = (
+				187DC9CB057ED539374A202A /* TogMeg.pro */,
+			);
+			name = "Sources [qmake]";
+			sourceTree = "<group>";
+		};
+		7DE9A9F7306EC0C11B6D52A6 /* GeneratedFiles */ = {
+			isa = PBXGroup;
+			children = (
+				56EA78D1BCD776E939125685 /* moc_BaseProject.cpp */,
+				B45E8E3A947FBE9F87A0424F /* moc_PixmapButton.cpp */,
+				4DB19B104BD58721DF3C0001 /* moc_HelpButton.cpp */,
+				B1BC19F03BBC87028CBEE158 /* moc_FilterLineEdit.cpp */,
+				3B93F3B26A1AC3E5CB8B6895 /* moc_LabelWithProgress.cpp */,
+				DE923D48184882ABE44ECD73 /* moc_LineEditWithProgress.cpp */,
+				F70384203983B6E48683C67A /* moc_ColumnSelectorButton.cpp */,
+				B3C9BBD94AA94839A46E4380 /* moc_GroupingProxyModel.cpp */,
+				83CEA9A215DFD46B32B038BC /* moc_UngroupProxyModel.cpp */,
+				985E9ACF56B85CA99C100D68 /* moc_ProgressBar.cpp */,
+				B1DF0581F3E4B8CC8B7C0E0A /* moc_BaseWindow.cpp */,
+				99D7289CFC7623F1E9A55F54 /* moc_TogMeg.cpp */,
+				E0F2C629B8DAEDFA29AB3437 /* moc_TogMegProject.cpp */,
+				5325195F484A9F2D1CEFD351 /* moc_QAModel.cpp */,
+				D977E873B834C316C8978AA0 /* moc_Examinator.cpp */,
+				253D2E69B4FDC3335A6D184C /* moc_TaskController.cpp */,
+				45E7B5D2B47977BB9DD14010 /* moc_PlayController.cpp */,
+				FEF5CFF2FDA18E6DA3F0306E /* moc_StudyController.cpp */,
+				4FD25B169A073D80621FA7F1 /* moc_TogMegWindow.cpp */,
+				F09F2F2830776CB440D032F2 /* moc_FileNavigationView.cpp */,
+				BE82FEA9E9C52931D3F80F3F /* moc_FileNavigationModel.cpp */,
+				95578F80B9FAD696CF9EB0AB /* moc_VHeader.cpp */,
+				A9BABEDE4DC8A9EACA94FACE /* moc_QAEditor.cpp */,
+				E87C379DC4D49A2DFC90C13D /* moc_QADelegate.cpp */,
+				C38AB4CDBB4EABA01ABD10EE /* moc_TimeLineWidget.cpp */,
+				3F7691EB4D9C088B1C7075F1 /* moc_ExamineWidget.cpp */,
+				C99AD08B3978CBBE8084B28A /* moc_QuestionWidget.cpp */,
+				2208158667816A9786A01A53 /* moc_AnswerWidget.cpp */,
+				3F8FF8EE9E8B7388C1BBFE61 /* moc_RoundedLineEdit.cpp */,
+				075853EDF9E91697FB365E69 /* moc_GradientWidget.cpp */,
+				DC65D1BECB1F172C1D5630CE /* moc_QtSpeech.cpp */,
+				5391D954477AAF3073219603 /* moc_QtSpeechMac.cpp */,
+				77C43223FF3B196591E16B07 /* qrc_PixmapButton.cpp */,
+				22BF0DF400F7F22B14553C87 /* qrc_Icons.cpp */,
+				AF2735BCB4E8C1B14C36F43E /* qrc_Images.cpp */,
+			);
+			name = GeneratedFiles;
+			sourceTree = "<group>";
+		};
+		883D7615C4D2DE3FA1218F12 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				1B76C82F55071C16B21C5316 /* Code */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		93BB3B206268E9CF405097EC /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				9CC5BCA77763FB03C2C14799 /* TimeLineWidget.h */,
+				59BD972D95BF95E99A989801 /* ExamineWidget.h */,
+				8A5FF04F7792DF51E79A7051 /* QuestionWidget.h */,
+				742A6496F8F62A1FB80C084B /* AnswerWidget.h */,
+				9BB629E2245408657A9E0083 /* RoundedLineEdit.h */,
+				0D8C927F661FE7EB86A32913 /* GradientWidget.h */,
+			);
+			name = Player;
+			sourceTree = "<group>";
+		};
+		C32F50D838D77FD1B6844146 /* QtSpeech */ = {
+			isa = PBXGroup;
+			children = (
+				9EB25E61A6F78F3DE4C20C9C /* QtSpeech.cpp */,
+				F94B159AFE97B3DDC4D93625 /* QtSpeechMac.cpp */,
+			);
+			name = QtSpeech;
+			sourceTree = "<group>";
+		};
+		C90923F6A2E654060C34742C /* Source [bundle data] */ = {
+			isa = PBXGroup;
+			children = (
+				AD69283750F8570F1F39D8EA /* Resources/Examples/Study Norwegian */,
+			);
+			name = "Source [bundle data]";
+			sourceTree = "<group>";
+		};
+		CF931F5C13AEA92200D5D888 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CF931F5B13AEA92200D5D888 /* TogMeg.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D2284B6123FD6661E2A01E2D /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				4F25C7604A0D9EE3FA46F4C2 /* VHeader.h */,
+				626F0DD72B78515C80D83C49 /* QAEditor.h */,
+				FCCB04648DEF5B32A2292235 /* QADelegate.h */,
+			);
+			name = Editor;
+			sourceTree = "<group>";
+		};
+		DA5619214B5AAB6415F87C67 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				D2CFA5998032B5ED5C5D025D /* TimeLineWidget.cpp */,
+				6A7E516AA4EDAAD6631231BA /* ExamineWidget.cpp */,
+				70FB3601228485561D72D54F /* QuestionWidget.cpp */,
+				CF01D4F3A62F31847B38A583 /* AnswerWidget.cpp */,
+				A7C10956454DCA877BDD9F26 /* RoundedLineEdit.cpp */,
+				0AD13378D0DCCCF2290CCBD0 /* GradientWidget.cpp */,
+			);
+			name = Player;
+			sourceTree = "<group>";
+		};
+		DF5FBC4A35386890DD28699B /* Gui */ = {
+			isa = PBXGroup;
+			children = (
+				112889D3B1CD5236268F4C4C /* TogMegWindow.h */,
+				76DBBDD371519183121EC6B8 /* FileNavigationView.h */,
+				9D726E5DEC5AAD82787E937A /* FileNavigationModel.h */,
+			);
+			name = Gui;
+			sourceTree = "<group>";
+		};
+		E291AC1F6E502715AAEAEC6D /* Code */ = {
+			isa = PBXGroup;
+			children = (
+				109B38AA1E8E29070BAD6B0B /* Utils */,
+				6E8778E7B2E3400560B1F7AB /* TogMeg */,
+				C32F50D838D77FD1B6844146 /* QtSpeech */,
+			);
+			name = Code;
+			sourceTree = "<group>";
+		};
+		ED1E82605DD74B483AF3C982 /* External Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				2B9F5257240B5626E8434A44 /* CoreFoundation.framework */,
+				821416211D63F190AAAD016A /* AppKit.framework */,
+				DA138F75C9F545CDAE7FB264 /* Carbon.framework */,
+				FD5D6BFE940FC25FB5680D18 /* QtXml.framework */,
+				09A37845C97FAD8139487D32 /* QtCore.framework */,
+				EF34030FE9242F6DC1EA56E3 /* QtGui.framework */,
+			);
+			name = "External Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		FB61758D0F0FDA4BA867C3D5 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				E291AC1F6E502715AAEAEC6D /* Code */,
+				00E15F23B279CE10AF64F03C /* Resources */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		77500E24F3325CE125C6F92E /* TogMeg */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF931F7813AEA98000D5D888 /* Build configuration list for PBXNativeTarget "TogMeg" */;
+			buildPhases = (
+				D7BA7D76DAB5DD13389D6332 /* Qt Qmake */,
+				A0A52A2ADF7A1E2A99738674 /* Qt Preprocessors */,
+				F6069D5A5DA8AA28EDB8B3C6 /* Project Copy */,
+				CF931FB713AEAFFA00D5D888 /* CopyFiles */,
+				72075DFC8AC02F2E9E28351A /* Bundle Copy [BUNDLE_EXAMPLES] */,
+				C29B8785722055ED95EF7B57 /* Build Sources */,
+				2A1043669E6E5A7426EA502A /* Frameworks & Libraries */,
+				3787F99312C85FF0073FD7BA /* Bundle Resources */,
+				CFFFDE1313B8B09700522A78 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TogMeg;
+			productName = TogMeg;
+			productReference = CF931F5B13AEA92200D5D888 /* TogMeg.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		91B15E841AA80083484172DE /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 2A951308CDB28F104D0A4BD2 /* Build configuration list for PBXProject "TogMeg" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 05596AB53D8D521C69802C27 /* TogMeg */;
+			productRefGroup = CF931F5C13AEA92200D5D888 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				77500E24F3325CE125C6F92E /* TogMeg */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3787F99312C85FF0073FD7BA /* Bundle Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A47FDFCC734050CAAC5E043A /* TogMeg.icns in Bundle Resources */,
+			);
+			name = "Bundle Resources";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A0A52A2ADF7A1E2A99738674 /* Qt Preprocessors */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "Qt Preprocessors";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/yshurik/Work/LynxLine/TogMeg -f 'TogMeg.xcodeproj/qt_preprocess.mak'";
+		};
+		D7BA7D76DAB5DD13389D6332 /* Qt Qmake */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "Qt Qmake";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/yshurik/Work/LynxLine/TogMeg -f 'TogMeg.xcodeproj/qt_makeqmake.mak'";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C29B8785722055ED95EF7B57 /* Build Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3AAE604BED3C55E8CED1C36 /* qgetopt.cpp in Build Sources */,
+				91FA88D0480D9C601550F6DD /* rijndael.cpp in Build Sources */,
+				4C2A69BF198B02AE37B92F3B /* XML_Util.cpp in Build Sources */,
+				04CD14FC3F75FFBEF0026A01 /* XML_Reader.cpp in Build Sources */,
+				F2A19971F29E2CCC37DDA9D8 /* BaseProject.cpp in Build Sources */,
+				E64B26EAA5655A79ABA44664 /* MiscUtils.cpp in Build Sources */,
+				7CE9111E5F7A02AD292C2A00 /* PixmapButton.cpp in Build Sources */,
+				3FCFA6AF7299278BE18C6C19 /* IconSet.cpp in Build Sources */,
+				8D2A4D5A553B92F9DAE2F3DE /* AppStyles.cpp in Build Sources */,
+				68A2F8CF3A430E4F013B18E3 /* HelpButton.cpp in Build Sources */,
+				3F319A203EEDA6256B4BFE30 /* FlowLayout.cpp in Build Sources */,
+				0A1164D69D31BB73847E6ED4 /* FilterLineEdit.cpp in Build Sources */,
+				F1E92AD6F974BBC4441FE55F /* LabelWithProgress.cpp in Build Sources */,
+				74D9B4725E866AB6175962A3 /* LineEditWithProgress.cpp in Build Sources */,
+				340B6A3DBDCDA1A50FA08F69 /* ColumnSelectorButton.cpp in Build Sources */,
+				09CEB2F8D2AF0BAD0EE03338 /* DecoratedItemDelegate.cpp in Build Sources */,
+				079BDFD545F7D956DD1B9A4F /* GroupingProxyModel.cpp in Build Sources */,
+				D114838D14450BE598EA0E64 /* UngroupProxyModel.cpp in Build Sources */,
+				A442DA5C90B66B71E9F9ACF2 /* ProgressBar.cpp in Build Sources */,
+				E5F9621A3577FD7CC7F96735 /* BaseWindow.cpp in Build Sources */,
+				B7F6196DFB48F2C42B5ADB6E /* TogMeg.cpp in Build Sources */,
+				3E85290063FF6D3A78864F38 /* TogMegProject.cpp in Build Sources */,
+				CE2D20CFF9EA176B7D2C6156 /* QAModel.cpp in Build Sources */,
+				7862286547F181DEC34CFF52 /* Examinator.cpp in Build Sources */,
+				FA553159A2E7448BB8A7D345 /* TaskController.cpp in Build Sources */,
+				1109E410FCD3D945014BB90D /* PlayController.cpp in Build Sources */,
+				490EC026741A0B7B64922F36 /* StudyController.cpp in Build Sources */,
+				2630A6A0CB3406328ECC28AE /* Main.cpp in Build Sources */,
+				9A134E412A6FB6240C965236 /* TogMegWindow.cpp in Build Sources */,
+				41B8FD47C1704B9CE2FE107D /* FileNavigationView.cpp in Build Sources */,
+				769615B7828EE57B47575ECD /* FileNavigationModel.cpp in Build Sources */,
+				707854F58338A491AAA7DA05 /* VHeader.cpp in Build Sources */,
+				3E47E57E7B0F676E66A681B9 /* QAEditor.cpp in Build Sources */,
+				B9DDA2C7750D460C200ABD57 /* QADelegate.cpp in Build Sources */,
+				4BEB3F18F104C1A0BDFACF7D /* TimeLineWidget.cpp in Build Sources */,
+				ED3F730088B9FA4FD2B52C7C /* ExamineWidget.cpp in Build Sources */,
+				B2CDA6D2359C9D1CE839A037 /* QuestionWidget.cpp in Build Sources */,
+				03BB82B4D302A779D9A9F387 /* AnswerWidget.cpp in Build Sources */,
+				5C12E26B2423016008573F88 /* RoundedLineEdit.cpp in Build Sources */,
+				EA4E3A375D873624467D6778 /* GradientWidget.cpp in Build Sources */,
+				9BB52DAE6BC3F418D14A6BB4 /* QtSpeech.cpp in Build Sources */,
+				6590BCC7081C9268902223FE /* QtSpeechMac.cpp in Build Sources */,
+				13C61BAC1E99EF8C91EAA9FA /* moc_BaseProject.cpp in Build Sources */,
+				18105366B2D1D79480A1DA50 /* moc_PixmapButton.cpp in Build Sources */,
+				60639314C0B69D4DC4D4E9FA /* moc_HelpButton.cpp in Build Sources */,
+				6A18819F6D2C81A55136E804 /* moc_FilterLineEdit.cpp in Build Sources */,
+				4B657F6C0810A50507C0D921 /* moc_LabelWithProgress.cpp in Build Sources */,
+				5381A0F93E9883061E144226 /* moc_LineEditWithProgress.cpp in Build Sources */,
+				E69B33E7252E79EB3DCD5581 /* moc_ColumnSelectorButton.cpp in Build Sources */,
+				79C9FCAEC6F3428E37B351A8 /* moc_GroupingProxyModel.cpp in Build Sources */,
+				24A17AC9B2DDD5981D9D0C19 /* moc_UngroupProxyModel.cpp in Build Sources */,
+				F63DC6C0FE2C310623C87C70 /* moc_ProgressBar.cpp in Build Sources */,
+				41F49A91E250FABCA872222E /* moc_BaseWindow.cpp in Build Sources */,
+				6F03406171B47985CB26190C /* moc_TogMeg.cpp in Build Sources */,
+				1D73E5FEA5E8F388136FF6A8 /* moc_TogMegProject.cpp in Build Sources */,
+				DFDF0C6B196A21C5FDFE921C /* moc_QAModel.cpp in Build Sources */,
+				935EDAE77945545F876C642E /* moc_Examinator.cpp in Build Sources */,
+				77EC093F1EC07104142E8EFA /* moc_TaskController.cpp in Build Sources */,
+				09735F9B98F38691640D2F54 /* moc_PlayController.cpp in Build Sources */,
+				A4EAC77647935F86EB4EA8F8 /* moc_StudyController.cpp in Build Sources */,
+				F0545D9C4E7FE9AC7C93E71A /* moc_TogMegWindow.cpp in Build Sources */,
+				5300150C916C41AEFE900DED /* moc_FileNavigationView.cpp in Build Sources */,
+				9873DF645377F6DB4BD73AC6 /* moc_FileNavigationModel.cpp in Build Sources */,
+				79B186B45D9C3BF7721CC175 /* moc_VHeader.cpp in Build Sources */,
+				A7BF76C327E8E8D371570468 /* moc_QAEditor.cpp in Build Sources */,
+				82C8944C2BF2B23B0CDEB3C6 /* moc_QADelegate.cpp in Build Sources */,
+				D1AA6057E063CC9A2ADF119B /* moc_TimeLineWidget.cpp in Build Sources */,
+				B8C8204E1D62B0C5E5FFFEFF /* moc_ExamineWidget.cpp in Build Sources */,
+				FBDD364093DF70B0C17AF876 /* moc_QuestionWidget.cpp in Build Sources */,
+				BB5E50781BD15C501311DE40 /* moc_AnswerWidget.cpp in Build Sources */,
+				8D49BF09C338BE1B760A5B3E /* moc_RoundedLineEdit.cpp in Build Sources */,
+				27AA5C1245D8522D97C3314E /* moc_GradientWidget.cpp in Build Sources */,
+				70F8F36E0AE75665684A6ED2 /* moc_QtSpeech.cpp in Build Sources */,
+				7DDAEFFE6BCCBEC74432CA30 /* moc_QtSpeechMac.cpp in Build Sources */,
+				0ABC5FEBA869F6B203F1FFF8 /* qrc_PixmapButton.cpp in Build Sources */,
+				E58E1C79C4EBBCE1734AFBF6 /* qrc_Icons.cpp in Build Sources */,
+				787C04F6851EA69238D7CC8B /* qrc_Images.cpp in Build Sources */,
+			);
+			name = "Build Sources";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		8DB1DD96F65B1BF1FFC506E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Oleksandr Iakovliev";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+			};
+			name = Debug;
+		};
+		95E1EB2E5DDD587BE5B3E548 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Oleksandr Iakovliev";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				SDKROOT = macosx10.5;
+			};
+			name = Release;
+		};
+		CF931F6213AEA92200D5D888 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = i386;
+				BUILD_ROOT = /Users/yshurik/Work/LynxLine/TogMeg;
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1.0;
+				DYLIB_CURRENT_VERSION = 1.0.0;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Code/stable.h;
+				HEADER_SEARCH_PATHS = (
+					"/usr/local/Trolltech/Qt-4.7.3/lib/QtCore.framework/Versions/4/Headers",
+					"/usr/local/Trolltech/Qt-4.7.3/include/QtCore",
+					"/usr/local/Trolltech/Qt-4.7.3/lib/QtGui.framework/Versions/4/Headers",
+					"/usr/local/Trolltech/Qt-4.7.3/include/QtGui",
+					"/usr/local/Trolltech/Qt-4.7.3/lib/QtXml.framework/Versions/4/Headers",
+					"/usr/local/Trolltech/Qt-4.7.3/include/QtXml",
+					"/usr/local/Trolltech/Qt-4.7.3/include",
+					Code/Utils,
+					Code/Utils/PixmapButton,
+					Code/TogMeg,
+					Code/TogMeg/Gui,
+					Code/TogMeg/Editor,
+					Code/TogMeg/Player,
+					Code/QtSpeech,
+					build/GeneratedFiles,
+					/usr/local/include,
+					/System/Library/Frameworks/CarbonCore.framework/Headers,
+					"/usr/local/Trolltech/Qt-4.7.3/mkspecs/macx-xcode",
+				);
+				INFOPLIST_FILE = Info.plist;
+				LEXFLAGS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"/usr/local/Trolltech/Qt-4.7.3/lib",
+					/System/Library/Frameworks/,
+					"/usr/local/Trolltech/Qt-4.7.3/lib",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				OTHER_CFLAGS = (
+					"-pipe",
+					"-g",
+					"-Wall",
+					"-W",
+					"-DQT_XML_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB",
+					"-DQT_SHARED",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-pipe",
+					"-m32",
+					"-g",
+					"-Wall",
+					"-W",
+					"-DQT_XML_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB",
+					"-DQT_SHARED",
+				);
+				OTHER_LDFLAGS = (
+					"-headerpad_max_install_names",
+					"-m32",
+					"-L/usr/local/Trolltech/Qt-4.7.3/lib",
+					"-F/usr/local/Trolltech/Qt-4.7.3/lib",
+					"-lz",
+					"-L/usr/local/Trolltech/Qt-4.7.3/lib",
+					"-F/usr/local/Trolltech/Qt-4.7.3/lib",
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = TogMeg;
+				SDKROOT = macosx10.7;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "";
+				YACCFLAGS = "-d";
+			};
+			name = Debug;
+		};
+		CF931F6313AEA92200D5D888 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = i386;
+				BUILD_ROOT = /Users/yshurik/Work/LynxLine/TogMeg;
+				COPY_PHASE_STRIP = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1.0;
+				DYLIB_CURRENT_VERSION = 1.0.0;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Code/stable.h;
+				HEADER_SEARCH_PATHS = (
+					"/usr/local/Trolltech/Qt-4.7.3/lib/QtCore.framework/Versions/4/Headers",
+					"/usr/local/Trolltech/Qt-4.7.3/include/QtCore",
+					"/usr/local/Trolltech/Qt-4.7.3/lib/QtGui.framework/Versions/4/Headers",
+					"/usr/local/Trolltech/Qt-4.7.3/include/QtGui",
+					"/usr/local/Trolltech/Qt-4.7.3/lib/QtXml.framework/Versions/4/Headers",
+					"/usr/local/Trolltech/Qt-4.7.3/include/QtXml",
+					"/usr/local/Trolltech/Qt-4.7.3/include",
+					Code/Utils,
+					Code/Utils/PixmapButton,
+					Code/TogMeg,
+					Code/TogMeg/Gui,
+					Code/TogMeg/Editor,
+					Code/TogMeg/Player,
+					Code/QtSpeech,
+					build/GeneratedFiles,
+					/usr/local/include,
+					/System/Library/Frameworks/CarbonCore.framework/Headers,
+					"/usr/local/Trolltech/Qt-4.7.3/mkspecs/macx-xcode",
+				);
+				INFOPLIST_FILE = Info.plist;
+				LEXFLAGS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"/usr/local/Trolltech/Qt-4.7.3/lib",
+					/System/Library/Frameworks/,
+					"/usr/local/Trolltech/Qt-4.7.3/lib",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				OTHER_CFLAGS = (
+					"-pipe",
+					"-g",
+					"-Wall",
+					"-W",
+					"-DQT_XML_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB",
+					"-DQT_SHARED",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-pipe",
+					"-m32",
+					"-g",
+					"-Wall",
+					"-W",
+					"-DQT_XML_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB",
+					"-DQT_SHARED",
+				);
+				OTHER_LDFLAGS = (
+					"-headerpad_max_install_names",
+					"-m32",
+					"-L/usr/local/Trolltech/Qt-4.7.3/lib",
+					"-F/usr/local/Trolltech/Qt-4.7.3/lib",
+					"-lz",
+					"-L/usr/local/Trolltech/Qt-4.7.3/lib",
+					"-F/usr/local/Trolltech/Qt-4.7.3/lib",
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = TogMeg;
+				SDKROOT = macosx10.7;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "";
+				YACCFLAGS = "-d";
+			};
+			name = Release;
+		};
+		CF931F6413AEA92200D5D888 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = i386;
+				BUILD_ROOT = /Users/yshurik/Work/LynxLine/TogMeg;
+				DYLIB_COMPATIBILITY_VERSION = 1.0;
+				DYLIB_CURRENT_VERSION = 1.0.0;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Code/stable.h;
+				HEADER_SEARCH_PATHS = (
+					"/usr/local/Trolltech/Qt-4.7.3/lib/QtCore.framework/Versions/4/Headers",
+					"/usr/local/Trolltech/Qt-4.7.3/include/QtCore",
+					"/usr/local/Trolltech/Qt-4.7.3/lib/QtGui.framework/Versions/4/Headers",
+					"/usr/local/Trolltech/Qt-4.7.3/include/QtGui",
+					"/usr/local/Trolltech/Qt-4.7.3/lib/QtXml.framework/Versions/4/Headers",
+					"/usr/local/Trolltech/Qt-4.7.3/include/QtXml",
+					"/usr/local/Trolltech/Qt-4.7.3/include",
+					Code/Utils,
+					Code/Utils/PixmapButton,
+					Code/TogMeg,
+					Code/TogMeg/Gui,
+					Code/TogMeg/Editor,
+					Code/TogMeg/Player,
+					Code/QtSpeech,
+					build/GeneratedFiles,
+					/usr/local/include,
+					/System/Library/Frameworks/CarbonCore.framework/Headers,
+					"/usr/local/Trolltech/Qt-4.7.3/mkspecs/macx-xcode",
+				);
+				INFOPLIST_FILE = Info.plist;
+				LEXFLAGS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"/usr/local/Trolltech/Qt-4.7.3/lib",
+					/System/Library/Frameworks/,
+					"/usr/local/Trolltech/Qt-4.7.3/lib",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				OTHER_CFLAGS = (
+					"-pipe",
+					"-g",
+					"-Wall",
+					"-W",
+					"-DQT_XML_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB",
+					"-DQT_SHARED",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-pipe",
+					"-m32",
+					"-g",
+					"-Wall",
+					"-W",
+					"-DQT_XML_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB",
+					"-DQT_SHARED",
+				);
+				OTHER_LDFLAGS = (
+					"-headerpad_max_install_names",
+					"-m32",
+					"-L/usr/local/Trolltech/Qt-4.7.3/lib",
+					"-F/usr/local/Trolltech/Qt-4.7.3/lib",
+					"-lz",
+					"-L/usr/local/Trolltech/Qt-4.7.3/lib",
+					"-F/usr/local/Trolltech/Qt-4.7.3/lib",
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = TogMeg;
+				SDKROOT = macosx10.7;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "";
+				YACCFLAGS = "-d";
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2A951308CDB28F104D0A4BD2 /* Build configuration list for PBXProject "TogMeg" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8DB1DD96F65B1BF1FFC506E0 /* Debug */,
+				95E1EB2E5DDD587BE5B3E548 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF931F7813AEA98000D5D888 /* Build configuration list for PBXNativeTarget "TogMeg" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF931F6213AEA92200D5D888 /* Debug */,
+				CF931F6313AEA92200D5D888 /* Release */,
+				CF931F6413AEA92200D5D888 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 91B15E841AA80083484172DE /* Project object */;
+}

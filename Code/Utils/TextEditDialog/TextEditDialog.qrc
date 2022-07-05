@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/" >
+        <file>Icons/AlignTextLeft.png</file>
+        <file>Icons/AlignTextRight.png</file>
+        <file>Icons/AlignTextCenter.png</file>
+        <file>Icons/AlignTextJustify.png</file>
+        <file>Icons/AlignTextTop.png</file>
+        <file>Icons/AlignTextBottom.png</file>
+        <file>Icons/AlignTextVCenter.png</file>
+        <file>Icons/Bold.png</file>
+        <file>Icons/CreateList.png</file>
+        <file>Icons/FormatPainter.png</file>
+        <file>Icons/Indent.png</file>
+        <file>Icons/Italic.png</file>
+        <file>Icons/SubScript.png</file>
+        <file>Icons/SuperScript.png</file>
+        <file>Icons/Underline.png</file>
+        <file>Icons/Unindent.png</file>
+    </qresource>
+</RCC>
